@@ -224,8 +224,11 @@
     fetch(sheetUrl)
         .then(response => response.text())
         .then(data => {
-            const lines = data.split('\n').map(line => line.split(','));
-            const headers = lines[0];
+            //const lines = data.split('\n').map(line => line.split(','));
+            const lines = data.split('\n').map(line => line.split(',').map(cell => cell.trim())); // Trim each cell
+            const headers = lines[0].map(header => header.trim()); // Trim headers
+
+           // const headers = lines[0];
             const weatherData = lines.slice(1);
             console.log('Headers:', headers);
 
