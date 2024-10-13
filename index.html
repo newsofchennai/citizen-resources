@@ -219,54 +219,66 @@
         let marker;
 
         function fetchWeatherData(localityId, lat, lng, localityName) {
-            // Fetch weather details using the locality ID
-            fetch(`https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data?locality_id=${localityId}`, {
-                headers: {
-                    'x-zomato-api-key': '55abc5f7a49d22d0fd8c36afa3000d38'
+    // Fetch weather details from Google Sheets
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqfyE_XRXqR4-BpXCIugoXIz0cvvjHc2RE1KSQ-RKE6Tp2q8wxzjrLEopjFwZaz47kfiZXmM0BjHbi/pub?gid=0&single=true&output=csv';
+    
+    fetch(sheetUrl)
+        .then(response => response.text())
+        .then(data => {
+            // Parse CSV data
+            const lines = data.split('\n').map(line => line.split(','));
+            const headers = lines[0]; // First line as header
+            const weatherData = lines.slice(1); // Remaining lines as data
+
+            // Find the data for the selected locality
+            const localityIndex = headers.indexOf('Locality');
+            const temperatureIndex = headers.indexOf('Temperature (°C)');
+            const humidityIndex = headers.indexOf('Humidity (%)');
+            const windSpeedIndex = headers.indexOf('Wind Speed (m/s)');
+            const rainIntensityIndex = headers.indexOf('Rain Intensity (mm/h)');
+            const rainAccumulationIndex = headers.indexOf('Rain Accumulation (mm)');
+
+            let found = false;
+            for (const row of weatherData) {
+                if (row[localityIndex] === localityId) {
+                    found = true;
+
+                    // Create a popup with only temperature
+                    const popupContent = `
+                        <b>${localityName}</b><br>
+                        Temperature: ${row[temperatureIndex]}°C
+                    `;
+
+                    marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
+
+                    // Display weather details in the sidebar
+                    const weatherContent = `
+                        <div class="weather-content">
+                            <i class="fas fa-thermometer-half"></i> Temperature: <span style="margin-right: 15px;">${row[temperatureIndex]}°C</span><br><br>
+                            <i class="fas fa-tint"></i> Humidity: <span style="margin-right: 15px;">${row[humidityIndex]}%</span><br><br>
+                            <i class="fas fa-wind"></i> Wind Speed: <span style="margin-right: 15px;">${row[windSpeedIndex]} m/s</span><br><br>
+                            <i class="fas fa-cloud-rain"></i> Rain Intensity: <span style="margin-right: 15px;">${row[rainIntensityIndex]} mm/h</span><br><br>
+                            <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: <span style="margin-right: 15px;">${row[rainAccumulationIndex]} mm</span>
+                        </div>
+                    `;
+                    document.getElementById('weatherContent').innerHTML = weatherContent;
+
+                    // Update the selected location
+                    document.getElementById('selectedLocation').innerText = localityName;
+                    break; // Exit the loop after finding the locality
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const weather = data.locality_weather_data;
+            }
 
-                // Create a popup with temperature, rain intensity, and accumulation
-                const popupContent = `
-                    <b>${localityName}</b><br>
-                    Rain Intensity: ${weather.rain_intensity} mm/h<br>
-                    Rain Accumulation: ${weather.rain_accumulation} mm
-                `;
+            if (!found) {
+                document.getElementById('weatherContent').innerHTML = 'Locality not found in the data.';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            document.getElementById('weatherContent').innerHTML = 'Failed to retrieve weather data.';
+        });
+    }
 
-                marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
-
-                // Display weather details in the sidebar
-                const weatherContent = `
-                    <div class="weather-content">
-                        <i class="fas fa-thermometer-half"></i> Temperature: ${weather.temperature}°C<br><br>
-                        <i class="fas fa-tint"></i> Humidity: ${weather.humidity}%<br><br>
-                        <i class="fas fa-wind"></i> Wind Speed: ${weather.wind_speed} m/s<br><br>
-                        <i class="fas fa-cloud-rain"></i> Rain Intensity: ${weather.rain_intensity} mm/h<br><br>
-                        <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: ${weather.rain_accumulation} mm
-                    </div>
-                `;
-                document.getElementById('weatherContent').innerHTML = weatherContent;
-                document.getElementById('selectedLocality').textContent = localityName;
-
-                // Center the map on the selected locality
-                map.setView([lat, lng], 13);
-                if (marker) {
-                    map.removeLayer(marker); // Remove the previous marker if it exists
-                }
-                marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
-
-                // Show weather details and map
-                document.getElementById('weatherDetails').style.display = 'block';
-                document.getElementById('map').style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-                document.getElementById('weatherContent').innerHTML = 'Error fetching weather data.';
-            });
-        }
 
         // Event listener for locality selection
         document.getElementById('localitySelect').addEventListener('change', function() {
