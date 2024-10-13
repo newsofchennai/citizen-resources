@@ -227,6 +227,7 @@
             const lines = data.split('\n').map(line => line.split(','));
             const headers = lines[0];
             const weatherData = lines.slice(1);
+            console.log('Headers:', headers);
 
             const localityIndex = headers.indexOf('Locality');
             const temperatureIndex = headers.indexOf('Temperature (°C)');
