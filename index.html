@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News of Chennai - Citizen Resources</title>
+    <meta name="author" content="Archana Ashok">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="News of Chennai is a citizen service to help Chennai with credible and verified information in times of need | 100% fact-checked | No ads, no promotions, no affiliations.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            padding: 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: rgb(0, 74, 173);
+            border: none;
+            border-radius: 15px;
+        }
+
+        .button:hover {
+            background-color: rgb(0, 74, 173);
+        }
+
+        .button:active {
+            background-color: rgb(0, 74, 173);
+            ; box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .weather-details {
+            padding: 20px;
+            border-left: 1px solid #dee2e6;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white; /* Text color */
+            border-radius: 8px;
+            position: relative; /* Adjust position for smaller screens */
+            z-index: 1000; /* Ensure it's above the map */
+            height: 400px;
+            width: 100%;
+        }
+        .dropdown-container {
+            text-align: center; /* Center align the dropdown */
+        }
+        .weather-content {
+            margin: 10px 0; /* Add spacing */
+        }
+
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        /* Responsive design */
+        @media (min-width: 992px) { /* Laptop view */
+            .details-container {
+                display: flex; /* Use flexbox for layout */
+            }
+            .weather-details {
+                width: 300px; /* Fixed width for weather details */
+                margin-right: 20px; /* Spacing from the map */
+            }
+        }
+        
+        @media (max-width: 991px) { /* Mobile and tablet view */
+            .details-container {
+                display: block; /* Stack elements */
+                margin-bottom: 20px; /* Space between sections */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <img src='NOC2024.png' alt="Banner" style="width: 95%; height: auto; padding: 1rem;" />
+    </div>
+    <center>
+    <button onclick="window.open('https://newsofchennai.github.io/tnelection2024/helplines','_blank')" id="helplines" class="button">Chennai Rains Verified Helplines</button>
+        <br><br>
+    <div>
+        <input class="lead mb-3 text-center" onclick="window.open('https://nitter.privacydev.net/i/lists/1485637743447539727','_blank')" style="align:center;font-size:12px;font-family: Arial, Helvetica, sans-serif;" type="button" value="Forecast from Weather Bloggers" target="_blank"> 
+        <input class="lead mb-3 text-center" onclick="window.open('https://newsofchennai.tumblr.com/','_blank')" style="align:center;font-size:12px;font-family: Arial, Helvetica, sans-serif;" type="button" value="Real Time Updates from NewsofChennai" target="_blank"> 
+        <input class="lead mb-3 text-center" onclick="window.open(https://cdn.s3waas.gov.in/s330ef30b64204a3088a26bc2e6ecf7602/uploads/2018/11/2018112967.pdf','_blank')" style="align:center;font-size:12px;font-family: Arial, Helvetica, sans-serif;" type="button" value="Do’s and Don’t during Floods" target="_blank"> 
+    </div>
+    </center>
+    <div class="container">
+        <h5 class="text-center" style="color: crimson; font-weight: bold;">Select nearest area to you find out live local weather with amount of rainfall ↓</h5>
+        <div class="mb-3 dropdown-container">
+            <label for="localitySelect" class="form-label"></label>
+            <select class="form-select" id="localitySelect" aria-label="Select locality">
+                <option selected>Choose a locality</option>
+                <option value="ZWL001210" data-lat="13.032366" data-lng="80.257625">Alwarpet</option>
+                <option value="ZWL007209" data-lat="13.117566" data-lng="80.146667">Ambattur</option>
+                <option value="ZWL003967" data-lat="13.086884" data-lng="80.206602">Anna Nagar</option>
+                <option value="ZWL007059" data-lat="13.022680" data-lng="80.200286">Ashok Nagar</option>
+                <option value="ZWL008876" data-lat="13.125301" data-lng="80.069776">Avadi</option>
+                <option value="ZWL003387" data-lat="13.080772" data-lng="80.248018">Kilpauk</option>
+                <option value="ZWL008548" data-lat="13.014886" data-lng="80.152455">Mugalivakkam</option>
+                <option value="ZWL001141" data-lat="12.841923" data-lng="80.209025">Navallur</option>
+                <option value="ZWL005190" data-lat="13.060471" data-lng="80.255887">Nungambakkam</option>
+                <option value="ZWL004297" data-lat="12.973055" data-lng="80.151271">Pallavaram</option>
+                <option value="ZWL008996" data-lat="13.121741" data-lng="80.225058">Perambur</option>
+                <option value="ZWL007176" data-lat="13.052763" data-lng="80.090763">Poonamallee</option>
+                <option value="ZWL006053" data-lat="13.048069" data-lng="80.158163">Porur</option>
+                <option value="ZWL006789" data-lat="12.799983" data-lng="80.029865">Potheri</option>
+                <option value="ZWL001398" data-lat="13.191443" data-lng="80.181225">Redhills</option>
+                <option value="ZWL006232" data-lat="13.136635" data-lng="80.289535">Royapuram</option>
+                <option value="ZWL007171" data-lat="12.916570" data-lng="80.134348">Selaiyur</option>
+                <option value="ZWL004233" data-lat="12.921608" data-lng="80.233727">Sholinganallur</option>
+                <option value="ZWL001516" data-lat="13.026256" data-lng="80.228120">T.Nagar</option>
+                <option value="ZWL001701" data-lat="12.934834" data-lng="80.101824">Tambaram</option>
+                <option value="ZWL006329" data-lat="12.863785" data-lng="79.947886">Thandalam</option>                
+                <option value="ZWL004882" data-lat="12.878957" data-lng="80.070307">Urapakkam</option>
+                <option value="ZWL004431" data-lat="13.065160" data-lng="80.207917">Vadapalani</option>
+                <option value="ZWL006156" data-lat="12.989300" data-lng="80.199988">Velachery</option>
+            </select>
+        </div>
+
+        <div class="details-container">
+            <div class="weather-details" id="weatherDetails">
+                <h3>Weather Details for <span id="selectedLocality"></span></h3><hr>
+                <div id="weatherContent">Please select a locality</div>
+            </div>
+
+            <div class="col-lg-8 col-md-12">
+                <div id="map"></div>
+            </div>
+        </div>
+        <!-- Scroll Up Button -->
+        <button id="scrollUpBtn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([13.080772, 80.248018], 13); // Default center (hidden initially)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        let marker;
+
+        function fetchWeatherData(localityId, lat, lng, localityName) {
+            // Fetch weather details using the locality ID
+            fetch(`https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data?locality_id=${localityId}`, {
+                headers: {
+                    'x-zomato-api-key': 'c044867e1c0ef86e26df0c44411624d0'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const weather = data.locality_weather_data;
+
+                // Create a popup with temperature, rain intensity, and accumulation
+                const popupContent = `
+                    <b>${localityName}</b><br>
+                    Rain Intensity: ${weather.rain_intensity} mm/h<br>
+                    Rain Accumulation: ${weather.rain_accumulation} mm
+                `;
+
+                marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
+
+                // Display weather details in the sidebar
+                const weatherContent = `
+                    <div class="weather-content">
+                        <i class="fas fa-thermometer-half"></i> Temperature: ${weather.temperature}°C<br><br>
+                        <i class="fas fa-tint"></i> Humidity: ${weather.humidity}%<br><br>
+                        <i class="fas fa-wind"></i> Wind Speed: ${weather.wind_speed} m/s<br><br>
+                        <i class="fas fa-cloud-rain"></i> Rain Intensity: ${weather.rain_intensity} mm/h<br><br>
+                        <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: ${weather.rain_accumulation} mm
+                    </div>
+                `;
+                document.getElementById('weatherContent').innerHTML = weatherContent;
+                document.getElementById('selectedLocality').textContent = localityName;
+
+                // Center the map on the selected locality
+                map.setView([lat, lng], 13);
+                if (marker) {
+                    map.removeLayer(marker); // Remove the previous marker if it exists
+                }
+                marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
+
+                // Show weather details and map
+                document.getElementById('weatherDetails').style.display = 'block';
+                document.getElementById('map').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+                document.getElementById('weatherContent').innerHTML = 'Error fetching weather data.';
+            });
+        }
+
+        // Event listener for locality selection
+        document.getElementById('localitySelect').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const localityId = selectedOption.value;
+            const lat = selectedOption.getAttribute('data-lat');
+            const lng = selectedOption.getAttribute('data-lng');
+            const localityName = selectedOption.textContent;
+
+            if (localityId === 'Choose a locality') {
+                // Hide map and weather details
+                document.getElementById('weatherDetails').style.display = 'none';
+                document.getElementById('map').style.display = 'none';
+            } else {
+                fetchWeatherData(localityId, lat, lng, localityName);
+            }
+        });
+
+        // Remove default Kilpauk selection on page load
+        window.onload = function() {
+            document.getElementById('map').style.display = 'none'; // Hide map initially
+            document.getElementById('weatherDetails').style.display = 'none'; // Hide weather details initially
+        };
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show scroll-up button on scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+            100) {
+                document.getElementById('scrollUpBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollUpBtn').style.display = 'none';
+            }
+        };
+    </script>
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p>Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai</p>
+        <p>This microsite is made by News of Chennai - A Citizen Service - Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a> & <a href="https://twitter.com/newsofchennai">Twitter</a> for verified updates.
+    </footer>
+</body>
+</html>
