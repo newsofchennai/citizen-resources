@@ -243,7 +243,11 @@
             for (const row of weatherData) {
                 if (row[localityIndex] === localityId) {
                     found = true;
-                    const popupContent = `<b>${localityName}</b><br>Temperature: ${row[temperatureIndex]}°C`;
+const popupContent = `
+    <b>${localityName}</b><br>
+    Rain Intensity: ${row[rainIntensityIndex]} mm/h<br>
+    Rain Accumulation: ${row[rainAccumulationIndex]} mm
+`;
 
                     marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
 
