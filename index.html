@@ -15,8 +15,8 @@
         }
         .button {
             display: inline-block;
-            padding: 5px 10px;
-            font-size: 12px;
+            padding: 10px 20px; /* Increased padding for bigger buttons */
+            font-size: 16px; /* Increased font size */
             cursor: pointer;
             text-align: center;
             text-decoration: none;
@@ -25,17 +25,25 @@
             background-color: rgb(0, 74, 173);
             border: none;
             border-radius: 15px;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
         }
 
         .button:hover {
-            background-color: rgb(0, 74, 173);
+            background-color: rgb(0, 62, 150); /* Slightly darker shade on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Box shadow for hover effect */
         }
 
         .button:active {
             background-color: rgb(0, 74, 173);
-            ; box-shadow: 0 5px #666;
-            transform: translateY(4px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Box shadow when active */
+            transform: translateY(2px); /* Slight move down effect when clicked */
         }
+
+        /* Specific styling for the helplines button */
+        #helplines {
+            box-shadow: 0 4px 8px rgba(248, 2, 2, 0.899);
+        }
+
         #map {
             height: 400px;
             width: 100%;
@@ -44,7 +52,6 @@
             padding: 20px;
             border-left: 1px solid #dee2e6;
             background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             color: white; /* Text color */
             border-radius: 8px;
             position: relative; /* Adjust position for smaller screens */
@@ -91,28 +98,73 @@
                 margin-bottom: 20px; /* Space between sections */
             }
         }
+        @media (min-width: 768px) { /* Adjust the breakpoint as needed */
+            .button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            .banner-img {
+                width: 80%; /* Set the desired width for desktop view */
+                max-width: 800px; /* Optional: Set a max width */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="text-center">
-        <img src='NOC2024.png' alt="Banner" style="width: 95%; height: auto; padding: 1rem;" />
+        <a href="index.html">
+            <img src="NOC2024.png" alt="Banner" class="img-fluid banner-img" />
+        </a>
     </div>
     <center>
-    <a href="helplines.html" target="_blank"><button id="helplines" class="button">Chennai Rains Verified Helplines</button></a>
-        <br><br>
-    <div>
-        <input class="lead mb-3 text-center" onclick="window.open('https://nitter.privacydev.net/i/lists/1485637743447539727','_blank')" style="align:center;font-size:12px;font-family: Arial, Helvetica, sans-serif;" type="button" value="Forecast from Weather Bloggers" target="_blank"> 
-        <input class="lead mb-3 text-center" onclick="window.open('https://newsofchennai.tumblr.com/','_blank')" style="align:center;font-size:12px;font-family: Arial, Helvetica, sans-serif;" type="button" value="Real Time Updates from NewsofChennai" target="_blank"> 
-        <input class="lead mb-3 text-center" onclick="window.open('https://cdn.s3waas.gov.in/s330ef30b64204a3088a26bc2e6ecf7602/uploads/2018/11/2018112967.pdf', '_blank')" style="text-align: center; font-size: 12px; font-family: Arial, Helvetica, sans-serif;" 
-       type="button" value="Do’s and Don’t during Floods">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p style="font-size: 18px; font-weight: bold;" class="mb-4">
+                News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. All information is 100% verified and fact-checked.
+            </p>
+    
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 mb-2"> <!-- Full width on mobile, half on larger screens -->
+                    <a href="helplines.html" target="_blank" class="btn btn-primary w-100" style="font-size: 18px;">
+                        <i class="fa-solid fa-phone"></i> Chennai Rains Verified Helplines
+                    </a>
+                </div>
+                <div class="col-12 col-md-6"> <!-- Full width on mobile, half on larger screens -->
+                    <a href="medical.html" target="_blank" class="btn btn-primary w-100" style="font-size: 18px;">
+                        <i class="fa-solid fa-briefcase-medical"></i> Medical Emergency
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+               
+    <div class="container text-center">
+        <div class="row">
+            <!-- <div class="col-12 col-md-4"> 
+                <a href="medical.html" target="_blank" class="btn btn-secondary mb-3 w-100" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+                    <i class="fa-solid fa-briefcase-medical"></i> Medical Helplines
+                </a>
+            </div> -->
+            <div class="col-12 col-md-6">
+                <button class="btn btn-secondary mb-3 w-100" onclick="window.open('https://newsofchennai.tumblr.com/', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+                    <i class="fa-solid fa-tower-broadcast"></i> Real Time Updates from NewofChennai
+                </button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button class="btn btn-secondary mb-3 w-100" onclick="window.open('https://cdn.s3waas.gov.in/s330ef30b64204a3088a26bc2e6ecf7602/uploads/2018/11/2018112967.pdf', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+                    <i class="fa-solid fa-list"></i> Do’s and Don’t during Floods
+                </button>
+            </div>
+        </div>
     </div>
     </center>
+    <hr>
     <div class="container">
-        <h5 class="text-center" style="color: crimson; font-weight: bold;">Select nearest area to you find out live local weather with amount of rainfall ↓</h5>
+        <p class="text-center" style="font-size: 22px;color:black;font-weight:bold";>Select nearest area to you find out live local weather with amount of rainfall ↓</p>
         <div class="mb-3 dropdown-container">
             <label for="localitySelect" class="form-label"></label>
             <select class="form-select" id="localitySelect" aria-label="Select locality">
-                <option selected>Choose a locality</option>
+                <option selected>Choose your nearest area</option>
                 <option value="ZWL001210" data-lat="13.032366" data-lng="80.257625">Alwarpet</option>
                 <option value="ZWL007209" data-lat="13.117566" data-lng="80.146667">Ambattur</option>
                 <option value="ZWL003967" data-lat="13.086884" data-lng="80.206602">Anna Nagar</option>
@@ -254,10 +306,10 @@
             }
         };
     </script>
-    <footer class="text-center mt-5" style="font-size: 12px;">
+    <footer class="text-center mt-5" style="font-size: 14px;">
         <hr>
-        <p>Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai</p>
-        <p>This microsite is made by News of Chennai - A Citizen Service - Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a> & <a href="https://twitter.com/newsofchennai">Twitter</a> for verified updates.
+        <p>News of Chennai is a Citizen Service | Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai | Join the <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a>. <br>Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me  </p>
     </footer>
 </body>
 </html>
+
