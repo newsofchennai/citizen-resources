@@ -17,15 +17,16 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
         }
         th, td {
             padding: 12px;
-            border: 1px solid black;
-        }
-        th {
             text-align: left;
         }
-        thead{
+        th {
             background-color: #f8f8f8;
         }
         a {
@@ -63,6 +64,19 @@
                 max-width: 800px; /* Optional: Set a max width */
             }
         }
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            th, td {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            th, td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -84,7 +98,7 @@
 
     <p>In case of Chennai Rains Helplines, <a href="helplines.html">click here</a></p>
 
-    <table class="table">
+    <table>
         <thead>
             <tr>
                 <th>Helpline</th>
@@ -140,12 +154,6 @@
         </tbody>
     </table>
     <p style="font-size: 12px;font-style: italic;text-align: left;">*Last updated: This list was collated and verified by News of Chennai on Oct 14 2:00 PM</p>
-
-    <h3>Contact via Phone or WhatsApp</h3>
-    <p>
-        <i class="fa fa-phone"></i> Call: <a href="tel:+911234567890">+91 12345 67890</a><br>
-        <i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/911234567890" target="_blank">+91 12345 67890</a>
-    </p>
 </center>
 </div>
 
