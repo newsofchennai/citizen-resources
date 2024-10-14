@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Zone Tables Accordion</title>
     <style>
-        /* Custom styles */
-        /* .accordion-button:not(.collapsed) {
-            background-color: #007bff;
-            color: white;
-        } */
-
         .accordion-button {
             display: flex;
             justify-content: space-between;
@@ -44,6 +38,11 @@
                 max-width: 800px; /* Optional: Set a max width */
             }
         }
+        @media screen and (max-width: 480px) {
+            .table {
+                font-size: 6px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -60,7 +59,9 @@
             <i class="fas fa-home" style="margin-right: 8px;"></i>HOME
         </a>
         
-    <h2>Chennai Councillors Contact</h2></center>
+    <h2 style="font-size: 22px;font-weight:bold;color: black;">Chennai Councillors Contact</h2>
+    <p>To know your zone and ward - <a href="know-you-ward.html">Click here</a></p>
+</center>
     <div class="accordion" id="zoneAccordion">
         <!--Zone 1-->
         <div class="card">
@@ -72,121 +73,121 @@
                     </button>
                 </h2>
             </div>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#zoneAccordion">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#zoneAccordion">
                 <div class="card-body">
                     <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Ward No</th>
-                                <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>M. Sivakumar</td>
-                                <td><a href="tel:9445467001">9445467001</a></td>
-                                <td><a href="tel:9445727777">9445727777</a></td>
-                                <td>ward001@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>S. Gomathi Santhosh Kumar</td>
-                                <td><a href="tel:9445467002">9445467002</a></td>
-                                <td><a href="tel:8056161161">8056161161</a></td>
-                                <td>ward002@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>B. Tamilarasan</td>
-                                <td><a href="tel:9445467003">9445467003</a></td>
-                                <td><a href="tel:9884303000">9884303000</a></td>
-                                <td>ward003@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>R. Jayaraman</td>
-                                <td><a href="tel:9445467004">9445467004</a></td>
-                                <td><a href="tel:9840823517">9840823517</a></td>
-                                <td>ward004@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>K.P. Chokkalingam</td>
-                                <td><a href="tel:9445467005">9445467005</a></td>
-                                <td><a href="tel:9444203333">9444203333</a></td>
-                                <td>ward005@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>M. Samuel Diraviam</td>
-                                <td><a href="tel:9445467006">9445467006</a></td>
-                                <td><a href="tel:9841233335">9841233335</a></td>
-                                <td>ward006@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>K. Karthik</td>
-                                <td><a href="tel:9445467007">9445467007</a></td>
-                                <td><a href="tel:9962541122">9962541122</a></td>
-                                <td>ward007@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>V. Rajakumari</td>
-                                <td><a href="tel:9445467008">9445467008</a></td>
-                                <td><a href="tel:7401117889">7401117889</a></td>
-                                <td>ward008@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Uma Saravanan</td>
-                                <td><a href="tel:9445467009">9445467009</a></td>
-                                <td><a href="tel:7200905993">7200905993</a></td>
-                                <td>ward009@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>T.M. Thaniarasu</td>
-                                <td><a href="tel:9445467010">9445467010</a></td>
-                                <td><a href="tel:9941441508">9941441508</a></td>
-                                <td>ward010@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>Saranya Kalaivanan</td>
-                                <td><a href="tel:9445467011">9445467011</a></td>
-                                <td><a href="tel:9884279999">9884279999</a></td>
-                                <td>ward011@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>V. Kaviganesan</td>
-                                <td><a href="tel:9445467012">9445467012</a></td>
-                                <td><a href="tel:9884630696">9884630696</a></td>
-                                <td>ward012@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>R. Susila</td>
-                                <td><a href="tel:9445467013">9445467013</a></td>
-                                <td><a href="tel:9840715034">9840715034</a></td>
-                                <td>ward013@chennaicorporation.gov.in</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>C. Banumathi Chanthru</td>
-                                <td><a href="tel:9445467014">9445467014</a></td>
-                                <td><a href="tel:9840337783">9840337783</a></td>
-                                <td>ward014@chennaicorporation.gov.in</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Ward No</th>
+                                    <th>Name</th>
+                                    <th>Official</th>
+                                    <th>Personal</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>M. Sivakumar</td>
+                                    <td><a href="tel:9445467001">9445467001</a></td>
+                                    <td><a href="tel:9445727777">9445727777</a></td>
+                                    <td>ward001@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>S. Gomathi Santhosh Kumar</td>
+                                    <td><a href="tel:9445467002">9445467002</a></td>
+                                    <td><a href="tel:8056161161">8056161161</a></td>
+                                    <td>ward002@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>B. Tamilarasan</td>
+                                    <td><a href="tel:9445467003">9445467003</a></td>
+                                    <td><a href="tel:9884303000">9884303000</a></td>
+                                    <td>ward003@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>R. Jayaraman</td>
+                                    <td><a href="tel:9445467004">9445467004</a></td>
+                                    <td><a href="tel:9840823517">9840823517</a></td>
+                                    <td>ward004@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>K.P. Chokkalingam</td>
+                                    <td><a href="tel:9445467005">9445467005</a></td>
+                                    <td><a href="tel:9444203333">9444203333</a></td>
+                                    <td>ward005@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>M. Samuel Diraviam</td>
+                                    <td><a href="tel:9445467006">9445467006</a></td>
+                                    <td><a href="tel:9841233335">9841233335</a></td>
+                                    <td>ward006@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>K. Karthik</td>
+                                    <td><a href="tel:9445467007">9445467007</a></td>
+                                    <td><a href="tel:9962541122">9962541122</a></td>
+                                    <td>ward007@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>V. Rajakumari</td>
+                                    <td><a href="tel:9445467008">9445467008</a></td>
+                                    <td><a href="tel:7401117889">7401117889</a></td>
+                                    <td>ward008@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Uma Saravanan</td>
+                                    <td><a href="tel:9445467009">9445467009</a></td>
+                                    <td><a href="tel:7200905993">7200905993</a></td>
+                                    <td>ward009@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>T.M. Thaniarasu</td>
+                                    <td><a href="tel:9445467010">9445467010</a></td>
+                                    <td><a href="tel:9941441508">9941441508</a></td>
+                                    <td>ward010@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Saranya Kalaivanan</td>
+                                    <td><a href="tel:9445467011">9445467011</a></td>
+                                    <td><a href="tel:9884279999">9884279999</a></td>
+                                    <td>ward011@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>V. Kaviganesan</td>
+                                    <td><a href="tel:9445467012">9445467012</a></td>
+                                    <td><a href="tel:9884630696">9884630696</a></td>
+                                    <td>ward012@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>R. Susila</td>
+                                    <td><a href="tel:9445467013">9445467013</a></td>
+                                    <td><a href="tel:9840715034">9840715034</a></td>
+                                    <td>ward013@chennaicorporation.gov.in</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>C. Banumathi Chanthru</td>
+                                    <td><a href="tel:9445467014">9445467014</a></td>
+                                    <td><a href="tel:9840337783">9840337783</a></td>
+                                    <td>ward014@chennaicorporation.gov.in</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>        
@@ -202,13 +203,15 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -270,7 +273,7 @@
                                 <td>ward022@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -286,13 +289,14 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -375,7 +379,7 @@
                                 <td>ward033@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -391,13 +395,14 @@
             </div>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -508,7 +513,7 @@
                                 <td>ward048@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -525,13 +530,14 @@
             </div>
             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -642,7 +648,7 @@
                                 <td>ward063@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -658,13 +664,14 @@
             </div>
             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -775,7 +782,7 @@
                                 <td>ward078@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -791,13 +798,14 @@
             </div>
             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -908,7 +916,7 @@
                                 <td>ward093@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -924,13 +932,14 @@
             </div>
             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1041,7 +1050,7 @@
                                 <td>ward108@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1057,13 +1066,14 @@
             </div>
             <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1195,7 +1205,7 @@
                                 <td>ward126@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1211,13 +1221,14 @@
             </div>
             <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1335,7 +1346,7 @@
                                 <td>ward142@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1351,13 +1362,14 @@
             </div>
             <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1454,7 +1466,7 @@
                                 <td>ward155@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1470,13 +1482,14 @@
             </div>
             <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1566,7 +1579,7 @@
                                 <td>ward167@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1582,13 +1595,14 @@
             </div>
             <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1685,7 +1699,7 @@
                                 <td>ward180@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1701,13 +1715,14 @@
             </div>
             <div id="collapseFourteen" class="collapse" aria-labelledby="headingFourteen" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1783,7 +1798,7 @@
                                 <td>ward190@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
@@ -1799,13 +1814,14 @@
             </div>
             <div id="collapseFifteen" class="collapse" aria-labelledby="headingFifteen" data-parent="#zoneAccordion">
                 <div class="card-body">
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Ward No</th>
                                 <th>Name</th>
-                                <th>Phone 1</th>
-                                <th>Phone 2</th>
+                                <th>Official</th>
+                                <th>Personal</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -1881,7 +1897,7 @@
                                 <td>ward200@chennaicorporation.gov.in</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table></div>
                 </div>
             </div>
         </div>
