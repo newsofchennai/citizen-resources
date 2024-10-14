@@ -216,12 +216,12 @@
         <div class="details-container">
             <div class="weather-details" id="weatherDetails">
                 <h3>Weather Details for <span id="selectedLocality"></span></h3><hr>
+                <p id="disclaimer" style="font-size: 12px;font-style: italic;">Weather data is updated every hour from the area weather station.</p>
                 <div id="weatherContent">Please select a locality</div>
             </div>
 
             <div class="col-lg-8 col-md-12">
                 <div id="map"></div>
-                <p id="disclaimer" style="font-size: 12px;">*The data is refreshed every one hour</p>
             </div>
         </div>
         <!-- Scroll Up Button -->
@@ -279,7 +279,7 @@
                         <i class="fas fa-tint"></i> Humidity: <span style="margin-right: 15px;">${row[humidityIndex]}%</span><br><br>
                         <i class="fas fa-wind"></i> Wind Speed: <span style="margin-right: 15px;">${row[windSpeedIndex]} m/s</span><br><br>
                         <i class="fas fa-cloud-rain"></i> Rain Intensity: <span style="margin-right: 15px;">${row[rainIntensityIndex]} mm/h</span><br><br>
-                        <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: <span style="margin-right: 15px;">${row[rainAccumulationIndex]} mm</span>
+                        <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: <span style="margin-right: 15px;">${row[rainAccumulationIndex]} mm</span><br><br>
                     </div>
                 `;
                 document.getElementById('weatherContent').innerHTML = weatherContent;
