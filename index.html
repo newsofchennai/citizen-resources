@@ -82,6 +82,20 @@
             font-size: 18px;
             z-index: 999;
         }
+        .ticker-tape {
+            background-color: white; /* Background for contrast */
+            color: red; /* Red text for alert */
+            padding: 10px 0;
+            font-size: 12px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            white-space: nowrap;
+        }
+
+
         /* Responsive design */
         @media (min-width: 992px) { /* Laptop view */
             .details-container {
@@ -116,6 +130,13 @@
         <a href="index.html">
             <img src="NOC2024.png" alt="Banner" class="img-fluid banner-img" />
         </a>
+    </div>
+    <div class="ticker-tape">
+        <marquee class="ticker-content" behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+            IMD has forecast a Red Alert for Chennai on Oct 16 (Red Alert = extremely heavy rainfall exceeding 204.5 mm within 24 hours) |
+            Rain holiday for schools and colleges on Oct 15, WFH advisory for private IT firms from Oct 15 to Oct 18 |
+            Follow @newsofchennai on social media for verified and reliable updates, zero spam.
+        </marquee>
     </div>
     <center>
     <div class="container">
@@ -267,7 +288,6 @@
                     found = true;
             const popupContent = `
     <b>${localityName}</b><br>
-    Rain Intensity: ${row[rainIntensityIndex]} mm/h<br>
     Rain Accumulation: ${row[rainAccumulationIndex]} mm
 `;
 
@@ -278,7 +298,6 @@
                         <i class="fas fa-thermometer-half"></i> Temperature: <span style="margin-right: 15px;">${row[temperatureIndex]}°C</span><br><br>
                         <i class="fas fa-tint"></i> Humidity: <span style="margin-right: 15px;">${row[humidityIndex]}%</span><br><br>
                         <i class="fas fa-wind"></i> Wind Speed: <span style="margin-right: 15px;">${row[windSpeedIndex]} m/s</span><br><br>
-                        <i class="fas fa-cloud-rain"></i> Rain Intensity: <span style="margin-right: 15px;">${row[rainIntensityIndex]} mm/h</span><br><br>
                         <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: <span style="margin-right: 15px;">${row[rainAccumulationIndex]} mm</span><br><br>
                     </div>
                 `;
