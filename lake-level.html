@@ -41,6 +41,7 @@
         }
         .date-info {
             font-size: 14px;
+            font-weight: bold;
         }
         .water-levels {
             display: flex;
@@ -154,7 +155,8 @@
                     <p>Current Level: <span id="current-level">9.13</span> %</p>
                 </div>
                 <div class="date-info">
-                    *As observed on: <span id="current-date"></span>
+                    <!-- *As observed on: <span id="current-date"></span> -->
+                    Lake Storage As On - <a href="https://cmwssb.tn.gov.in/lake-level?date=14-10-2024"><span id="current-date"></span></a>
                 </div>    
             </center>
         </div>
@@ -188,7 +190,7 @@
         }
 
         // Set current date
-        const currentDate = new Date().toLocaleDateString();
+        const currentDate = '14/10/2024';//new Date().toLocaleDateString();
         document.getElementById('current-date').textContent = currentDate;
 
         // Update water levels on page load
