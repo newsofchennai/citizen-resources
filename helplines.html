@@ -165,18 +165,19 @@
             <p>Ward-wise councillors - <a href="councillor-contact.html">Contact numbers</a></p>
             <hr>
             <p style="margin-bottom: 0;">Designated IAS officers - 
-                <a href="#" onclick="openPopup()">Contact numbers</a>
+                <a href="#" onclick="openIasPopup()">Contact numbers</a>
             </p>
         </div>
         
     </center>
-    <div id="popupModal" style="display:none;">
+    <!-- IAS officers numbers-->
+    <div id="IASpopupModal" style="display:none;">
         <div class="modal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);">
             <div class="modal-dialog" style="position:relative;width:80%;max-width:800px;margin:5% auto;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">IAS Officers in-charge <br> Chennai Rains</h5>
-                        <button type="button" class="close-btn" onclick="closePopup()">✖</button>
+                        <button type="button" class="close-btn" onclick="closeIasPopup()">✖</button>
                     </div>
                     <div class="modal-body">
                         <table>
@@ -283,12 +284,116 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="close-btn" onclick="closePopup()">✖</button>
+                            <button type="button" class="close-btn" onclick="closeIasPopup()">✖</button>
                         </div>
                     </div>
                 </div>
             </div>
     </div>
+    <!-- Electricity helpline numbers -->
+    <div id="EBpopupModal" style="display:none;">
+        <div class="modal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);">
+            <div class="modal-dialog" style="position:relative;width:80%;max-width:800px;margin:5% auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nodal Officers Contact Information</h5>
+                        <button type="button" class="close-btn" onclick="closeEbPopup()">✖</button>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Zone</th>
+                                    <th>Nodal Officer</th>
+                                    <th>Mobile</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Zone I <br>Thiruvottriyur</td>
+                                    <td>Er. Jagadish Kumar, Executive Engineer/O&M/Tondiarpet</td>
+                                    <td><a href="tel:9445850889">9445850889</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone II <br>Manali</td>
+                                    <td>Er. Rengaraj, Executive Engineer/O&M/Vyasarpadi</td>
+                                    <td><a href="tel:9445850871">9445850871</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone III <br>Madhavaram</td>
+                                    <td>Er. SoundharRajan, Executive Engineer/O&M/Avadi</td>
+                                    <td><a href="tel:9445850344">9445850344</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone IV <br>Tondiarpet</td>
+                                    <td>Er. R. Suja, Executive Engineer/General/CEDC/North</td>
+                                    <td><a href="tel:9445850900">9445850900</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone V <br>Royapuram</td>
+                                    <td>Er. Premkumar, Executive Engineer/O&M/Annasalai</td>
+                                    <td><a href="tel:9445850686">9445850686</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone VI <br>Thiru.Vi.Ka Nagar</td>
+                                    <td>Er. C. Jayachandran, Superintending Engineer/CEDC/North</td>
+                                    <td><a href="tel:9445850909">9445850909</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone VII <br>Ambattur</td>
+                                    <td>Er. Malaivendhan, Executive Engineer/O&M/Ambattur</td>
+                                    <td><a href="tel:9445850311">9445850311</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone VIII <br>Anna Nagar</td>
+                                    <td>Er. Anbarasu, Executive Engineer/O&M/Anna Nagar</td>
+                                    <td><a href="tel:9445850286">9445850286</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone IX <br>Teynampet</td>
+                                    <td>Er. Udayakumar, Executive Engineer/O&M/Mylapore</td>
+                                    <td><a href="tel:9445850717">9445850717</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone X <br>Kodambakkam</td>
+                                    <td>Er. Venkatesan, Executive Engineer/O&M/T. Nagar</td>
+                                    <td><a href="tel:9445850727">9445850727</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XI <br>Valasaravakkam</td>
+                                    <td>Er. Velmurugan, Executive Engineer/O&M/K.K. Nagar</td>
+                                    <td><a href="tel:9445850202">9445850202</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XII <br>Alandur</td>
+                                    <td>Er. Naresh Babu, Executive Engineer/O&M/Guindy</td>
+                                    <td><a href="tel:9445850179">9445850179</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XIII <br>Adyar</td>
+                                    <td>Er. Ramu, Executive Engineer/O&M/Adyar</td>
+                                    <td><a href="tel:9445850555">9445850555</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XIV <br>Perungudi</td>
+                                    <td>Er. M. Balasubramanian, Executive Engineer/O&M/Sholinganallur</td>
+                                    <td><a href="tel:9500659827">9500659827</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XV <br>Sholinganallur</td>
+                                    <td>Er. Premkumar, Executive Engineer/O&M/IT Corridor</td>
+                                    <td><a href="tel:9445850164">9445850164</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-btn" onclick="closeEbPopup()">✖</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
     <!-- Table with helpline numbers -->
     <table>
         <thead>
@@ -336,7 +441,7 @@
             <tr>
                 <td>Electricity / Power (TANGEDCO)</td>
                 <td>
-                    <a href="tel:9498794987">9498794987</a> | 
+                    <a href="tel:9498794987">9498794987</a> | <a href="#" onclick="openEbPopup()">Zone-wise Helpline</a> |
                     <a href="https://ccms.tangedco.org/tangedco-public/" target="_blank">Register Online</a>
                 </td>
                 <td>Report power failure or hazardous power situations</td>
@@ -409,7 +514,7 @@
             </tr>
         </tbody>
     </table>
-    <p style="font-size: 12px;font-style: italic;">*Last updated: This list was collated and verified by News of Chennai on Oct 15 12:40 PM</p>
+    <p style="font-size: 12px;font-style: italic;">*Last updated: This list was collated and verified by News of Chennai on Oct 15 04:05 PM</p>
     </div>
     
     <!-- Scroll to Top Button -->
@@ -420,13 +525,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function openPopup() {
-            document.getElementById("popupModal").style.display = "block";
+        function openIasPopup() {
+            document.getElementById("IASpopupModal").style.display = "block";
         }
         
-        function closePopup() {
-            document.getElementById("popupModal").style.display = "none";
+        function closeIasPopup() {
+            document.getElementById("IASpopupModal").style.display = "none";
         }
+        function openEbPopup() {
+            document.getElementById("EBpopupModal").style.display = "block";
+        }
+        
+        function closeEbPopup() {
+            document.getElementById("EBpopupModal").style.display = "none";
+        }        
     
         // Scroll to Top Functionality
         window.onscroll = function() {
