@@ -134,25 +134,25 @@
                 <div class="dropdown">
                     <label for="reservoir-select">Select Reservoir:</label>
                     <select id="reservoir-select">
-                        <option value="CHEMBARAMBAKKAM" data-current="36.19">CHEMBARAMBAKKAM</option>
-                        <option value="CHOLAVARAM" data-current="18.50">CHOLAVARAM</option>                    
-                        <option value="KANNANKOTTAI THERVOY KANDIGAI" data-current="61.80">KANNANKOTTAI THERVOY KANDIGAI</option>
-                        <option value="POONDI" data-current="14.08">POONDI</option>
-                        <option value="PUZHAL" data-current="72.48">PUZHAL</option>
-                        <option value="VEERANAM" data-current="70.93">VEERANAM</option>
+                        <option value="CHEMBARAMBAKKAM" data-current="36.65">CHEMBARAMBAKKAM</option>
+                        <option value="CHOLAVARAM" data-current="19.52">CHOLAVARAM</option>                    
+                        <option value="KANNANKOTTAI THERVOY KANDIGAI" data-current="62.60">KANNANKOTTAI THERVOY KANDIGAI</option>
+                        <option value="POONDI" data-current="15.20">POONDI</option>
+                        <option value="PUZHAL" data-current="73.24">PUZHAL</option>
+                        <option value="VEERANAM" data-current="85.57">VEERANAM</option>
                     </select>
                 </div>
             </div>
             <!-- Single tank for selected reservoir -->
             <center>
                 <div class="water-level">
-                    <h6>Storage Level (100%)</h6>
+                    <h4>Storage Level (100%)</h4>
                     <div class="water-container">
                         <div class="water" id="water-level">
                             <div class="water-wave"></div> <!-- Subtle wave animation -->
                         </div>
                     </div>
-                    <p>Current Level: <br><span id="current-level">9.13</span>%</p>
+                    <p>Current Level: <span id="current-level">9.13</span> %</p>
                 </div>
                 <div class="date-info">
                     <!-- *As observed on: <span id="current-date"></span> -->
@@ -190,7 +190,7 @@
         }
 
         // Set current date
-        const currentDate = '17/10/2024';//new Date().toLocaleDateString();
+        const currentDate = '18/10/2024';//new Date().toLocaleDateString();
         document.getElementById('current-date').textContent = currentDate;
 
         // Update water levels on page load
