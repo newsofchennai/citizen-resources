@@ -237,7 +237,7 @@
         <div class="details-container">
             <div class="weather-details" id="weatherDetails">
                 <h3>Weather Details for <span id="selectedLocality"></span></h3><hr>
-                <p id="disclaimer" style="font-size: 12px;font-style: italic;">Weather data is updated every hour from the local weather station.</p>
+                <p id="disclaimer" style="font-size: 12px;font-style: italic;">Weather data is updated every 15mins from the local weather station.</p>
                 <div id="weatherContent">Please select a locality</div>
             </div>
 
@@ -262,7 +262,8 @@
         let marker;
 
         function fetchWeatherData(localityId, lat, lng, localityName) {
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqfyE_XRXqR4-BpXCIugoXIz0cvvjHc2RE1KSQ-RKE6Tp2q8wxzjrLEopjFwZaz47kfiZXmM0BjHbi/pub?gid=0&single=true&output=csv';
+    //const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqfyE_XRXqR4-BpXCIugoXIz0cvvjHc2RE1KSQ-RKE6Tp2q8wxzjrLEopjFwZaz47kfiZXmM0BjHbi/pub?gid=0&single=true&output=csv';
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
     fetch(sheetUrl)
         .then(response => response.text())
