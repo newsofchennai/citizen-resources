@@ -282,15 +282,16 @@
             const windSpeedIndex = headers.indexOf('Wind Speed (m/s)');
             const rainIntensityIndex = headers.indexOf('Rain Intensity (mm/h)');
             const rainAccumulationIndex = headers.indexOf('Rain Accumulation (mm)');
+            const lastFetched = headers.indexOf('Last Fetched');
 
             let found = false;
             for (const row of weatherData) {
                 if (row[localityIndex] === localityId) {
                     found = true;
             const popupContent = `
-    <b>${localityName}</b><br>
-    Rain Accumulation: ${row[rainAccumulationIndex]} mm
-`;
+                <b>${localityName}</b><br>
+                Rain Accumulation: ${row[rainAccumulationIndex]} mm
+            `;
 
                 marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
 
