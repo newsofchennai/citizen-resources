@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chennai Rains - Resources</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -26,9 +27,9 @@
             padding: 12px;
             text-align: left;
         }
-        th {
+        /* th {
             background-color: #f8f8f8;
-        }
+        } */
         a {
             text-decoration: none;
             color: #007bff;
@@ -76,8 +77,35 @@
                 font-size: 0.8em;
                 padding: 8px;
             }
+            #tamil-button {
+                font-size: 13px;
+            }
+        }
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
         }
     </style>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
 
@@ -85,18 +113,33 @@
     <div class="container">
         <div class="text-center">
             <a href="index.html">
-                <img src="NOC2024.png" alt="Banner" class="img-fluid banner-img" />
+                <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
             </a>
+            <!-- Top Ribbon -->
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="resources-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+            </div>
         </div>
-        <center>
-            <a href="index.html" style="text-decoration: none; font-size: 14px;">
-                <i class="fas fa-home" style="margin-right: 8px;"></i>HOME
-            </a>
-    
+        <hr>
+    <center>
     <!-- Main Content -->
-    <h2>Chennai Rains - Resources</h2>
+    <h2>City Resources</h2>
 
-    <p><a href="helplines.html">Click Here - Chennai Rains Helplines</a></p>
+    <p><a href="helplines.html">Click Here - Verified Helplines</a></p>
+    
+    <!-- Button for Tamil -->
+    
+
     <div class="col-12 col-md-4">
         <button class="btn btn-secondary mb-3 w-100" onclick="window.open('NDMA-NoC.pdf', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
             <i class="fa-solid fa-list"></i> Do’s and Don’t during Floods
@@ -135,7 +178,7 @@
             </tr>
             <tr>
                 <td>Chennai Lake Levels</td>
-                <td><a href="lake-level.html">Click Here</a></td>
+                <td><a href="https://cmwssb.tn.gov.in/lake-level" target="_blank">Click Here</a></td>
                 <td>Water Levels of Lakes in and Around Chennai.</td>
             </tr>
             <tr>
@@ -158,7 +201,7 @@
             </tr>
         </tbody>
     </table>
-    <p style="font-size: 12px;font-style: italic;text-align: left;">*Last updated: This list was collated and verified by News of Chennai on Oct 25 11:35 PM</p>
+    <p style="font-size: 12px;font-style: italic;text-align: left;">*Last updated: This list was collated and verified by News of Chennai on October 28 01:15 AM</p>
 </center>
 </div>
 
@@ -179,23 +222,22 @@
     <button id="scrollTopBtn" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </button>
-
     <script>
-        // Scroll to top function
-        function scrollToTop() {
-            window.scrollTo({top: 0, behavior: 'smooth'});
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Show button when scrolling down 200px
+    window.onscroll = function() {
+        const btn = document.getElementById('scrollTopBtn');
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
         }
-
-        // Show button when scrolling down 200px
-        window.onscroll = function() {
-            const btn = document.getElementById('scrollTopBtn');
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                btn.style.display = "block";
-            } else {
-                btn.style.display = "none";
-            }
-        };
+    };
     </script>
-
+    <script src="script.js"></script>
 </body>
 </html>

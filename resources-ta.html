@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>சென்னை மழை - வளங்கள</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        /* th {
+            background-color: #f8f8f8;
+        } */
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .fa-phone, .fa-whatsapp {
+            margin-right: 5px;
+        }
+        /* Scroll to top button */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+        #scrollTopBtn:hover {
+            background-color: #0056b3;
+        }
+        @media (min-width: 768px) { /* Adjust the breakpoint as needed */
+            .banner-img {
+                width: 80%; /* Set the desired width for desktop view */
+                max-width: 800px; /* Optional: Set a max width */
+            }
+        }
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            th, td {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            th, td {
+                font-size: 0.5em;
+                padding: 8px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Banner Image -->
+    <div class="container">
+        <div class="text-center">
+            <a href="index-ta.html">
+                <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <!-- Top Ribbon -->
+            <div class="top-ribbon">
+                <a href="index-ta.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="resources.html" class="btn icon-circle" style="white-space: nowrap;">English Version</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+            </div>
+        </div>
+        <hr>
+        <center>
+            
+    <!-- Main Content -->
+    <h2>நகர ஆதாரங்கள்</h2>
+
+    <p><a href="helplines-ta.html">இங்கே கிளிக் செய்யவும் - உதவி எண்கள்</a></p>
+    <div class="col-12 col-md-4">
+        <button class="btn btn-secondary mb-3 w-100" onclick="window.open('NDMA-NoC.pdf', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+            <i class="fa-solid fa-list"></i> வெள்ளத்தின் போது செய்ய வேண்டியவை மற்றும் செய்யக்கூடாதவை
+        </button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>வளம்</th>
+                <th>இணைப்பு</th>
+                <th>விளக்கம்</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>சென்னை மண்டல வானிலை மையம் (IMD)</td>
+                <td><a href="https://mausam.imd.gov.in/chennai/" target="_blank">இங்கே கிளிக் செய்யவும்</a></td>
+                <td>சென்னை மற்றும் தமிழகத்தின் பிற மாவட்டங்களுக்கான அதிகாரப்பூர்வ IMD எச்சரிக்கைகள் மற்றும் முன்னறிவிப்புகள்.</td>
+            </tr>
+            <tr>
+                <td>தனிப்பட்ட வானிலை முன்னறிவிப்பாளர்கள் / பதிவர்கள்</td>
+                <td>
+                    <a href="https://x.com/praddy06" target="_blank">TN வெதர்மேன்</a><br>
+                    <a href="https://x.com/ChennaiRains" target="_blank">சென்னை மழை</a><br>
+                    <a href="https://x.com/chennaiweather" target="_blank">சென்னை வானிலை</a>
+                </td>
+                <td>சென்னையில் இருந்து நம்பகமான வானிலை கண்காணிப்பாளர்கள், பல ஆண்டுகளாக வானிலை தரவுகளை விளக்குகிறார்கள்.                </td>
+            </tr>
+            <tr>
+                <td>தமிழ்நாடு எச்சரிக்கை App</td>
+                <td>
+                    <a href="https://play.google.com/store/apps/details?id=int_.rimes.tnsmart&hl=en_IN&pli=1" target="_blank">Android</a> | 
+                    <a href="https://apps.apple.com/in/app/tn-alert/id1559849577" target="_blank">iOS</a>
+                </td>
+                <td>மழைக்காலத் தயார்நிலைக்கான தமிழ்நாடு அரசாங்கத்தின் அதிகாரப்பூர்வ பயன்பாடு.
+                </td>
+            </tr>
+            <tr>
+                <td>சென்னை ஏரி நிலைகள்</td>
+                <td><a href="https://cmwssb.tn.gov.in/lake-level" target="_blank">இங்கே கிளிக் செய்யவும்</a></td>
+                <td>சென்னை மற்றும் அதை சுற்றியுள்ள ஏரிகளின் நீர்மட்டம்.</td>
+            </tr>
+            <tr>
+                <td>சென்னை கேர்ஸ்</td>
+                <td>
+                    <a href="https://x.com/ChennaiCares" target="_blank">X இல் பின்தொடரவும்</a> | 
+                    <a href="https://chennaicarescrr.wordpress.com/contact/" target="_blank">இணையதளம்</a>
+                </td>
+                <td>நெருக்கடி மீட்பு மற்றும் நிவாரணம் (CSR குழு) பத்திரிகையாளர்கள் மற்றும் தன்னார்வலர்களால் நிர்வாகிக்கப்படுகிறது.                </td>
+            </tr>
+            <tr>
+                <td>பத்திரிக்கையாளர்கள் சென்னை மழை அறிவிப்புகளைப் பின்தொடர வேண்டும்	</td>
+                <td>
+                    <a href="https://x.com/omjasvinMD" target="_blank">ஓம்ஜஸ்வின் TOI</a> | 
+                    <a href="https://x.com/padmajaTOI" target="_blank">பத்மஜா TOI</a> | 
+                    <a href="https://x.com/Swedha_RK" target="_blank">ஸ்வேதா DT Next </a> | 
+                    <a href="https://x.com/aishravi64?s=21" target="_blank">ஐஸ்வர்யா TH</a>
+                </td>
+                <td>சென்னையைச் சேர்ந்த பத்திரிக்கையாளர்கள், குடிமைப் பிரச்சனைகள் மற்றும் நகரின் மழை குறித்த நிகழ்நேர அறிவிப்புகளை வழங்குகிறார்கள்.</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="font-size: 12px;font-style: italic;text-align: left;">*கடைசியாக புதுப்பிக்கப்பட்டது: அக்டோபர் 28 01:15 AM அன்று சென்னை நியூஸ் மூலம் இந்தப் பட்டியல் தொகுக்கப்பட்டு சரிபார்க்கப்பட்டது.</p>
+</center>
+</div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p> <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+            <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+            <a href="https://x.com/newsofchennai">Twitter</a>, 
+            <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+            <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - 
+            newsofchennai@pm.me <br>
+            News of Chennai, 2020 முதல் செயல்பட்டு வரும் குடிமக்கள் சேவையாகும், இது தேவைப்படும் நேரங்களில் குடிமக்களுக்கு நம்பகமான மற்றும் சரிபார்க்கப்பட்ட தகவல்களை வழங்குகிறது.
+        </p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script>
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    
+        // Show button when scrolling down 200px
+        window.onscroll = function() {
+            const btn = document.getElementById('scrollTopBtn');
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

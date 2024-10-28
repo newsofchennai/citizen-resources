@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Chennai Councillors Contact</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+
     <style>
         .accordion-button {
             display: flex;
@@ -43,25 +45,60 @@
                 font-size: 10px;
             }
         }
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
     </style>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <!-- Banner Image -->
-    <div class="container">
-        <div class="text-center">
-            <a href="index.html">
-                <img src="NOC2024.png" alt="Banner" class="img-fluid banner-img" />
-            </a>
-        </div>
-        <center>
-        <a href="index.html" style="text-decoration: none; font-size: 14px;">
-            <i class="fas fa-home" style="margin-right: 8px;"></i>HOME
+    <div class="text-center">
+        <a href="index.html">
+            <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
         </a>
-        
+        <!-- Top Ribbon -->
+        <div class="top-ribbon">
+            <a href="index.html" class="btn icon-circle" aria-label="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="councillor-contact-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+            </a>
+            <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i id="theme-icon" class="fas fa-moon"></i>
+            </button>
+            
+            <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+        </div>
+    </div>
+    <hr>
+    <center>    
     <h2 style="font-size: 22px;font-weight:bold;color: black;">Chennai Councillors Contact</h2>
     <p>To know your zone and ward - <a href="know-you-ward.html">Click here</a></p>
-</center>
+    </center>
     <div class="accordion" id="zoneAccordion">
         <!--Zone 1-->
         <div class="card">
@@ -1946,5 +1983,6 @@
         }
     };
 </script>
+<script src="script.js"></script>
 </body>
 </html>

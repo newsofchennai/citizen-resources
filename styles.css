@@ -1,0 +1,67 @@
+.top-ribbon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    justify-content: space-around;
+}
+/* Dark Mode styles */
+body.dark-mode {
+    background-color: #333;
+    color: #f1f1f1;
+}
+
+.dark-mode h2, .dark-mode p, .dark-mode label {
+    color: #f1f1f1;
+}
+
+.dark-mode .water-container {
+    background-color: #555;
+    border-color: #444;
+}
+
+.dark-mode .social-icons a {
+    color: #f1f1f1;
+}
+
+.dark-mode .water {
+    background-color: #0044cc;
+}
+
+.dark-mode .water-wave {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.dark-mode .icon-circle {
+    background-color: #555;
+}
+
+.dark-mode .btn {
+    background-color: #444;
+    color: #f1f1f1;
+}
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:  #013aae;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+/* Responsive styles for icons */
+@media (max-width: 600px) {
+    .icon-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 14px; /* Smaller icon size for mobile */
+    }
+}
+hr {
+    margin : 10px 0;
+}

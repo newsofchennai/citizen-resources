@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>சென்னை - காற்றின் தரம்</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }       
+        #map-container {
+            height: 400px;
+        }
+        .aqi-pluck-card {
+            position: relative;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            font-size: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 10; /* Ensure it stays below the popup */
+        }
+        .aqi-pluck-card::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 10px;
+            background-color: white;
+            border: 1px solid black;
+        }
+        .good { background-color: #009966; color: white;}
+        .moderate { background-color: #ffde33; }
+        .unhealthy-sensitive { background-color: #ff9933; }
+        .unhealthy { background-color: #cc0033; color: white}
+        .very-unhealthy { background-color: #660099; color: white}
+        .hazardous { background-color: #7e0023; color: white}
+
+        .popup-content {
+            text-align: center;
+            font-size: 8px;
+            padding: 5px; /* Reduced padding */
+            margin: 0; /* No extra margin */
+            border-radius: 5px;
+            line-height: 1.2; /* Tighter line spacing */
+        }
+
+        .popup-content p {
+            margin: 0; /* Remove margin around paragraph */
+        }
+
+        .popup-content.good { background-color: #009966; color: white; }
+        .popup-content.moderate { background-color: #ffde33; color: black; }
+        .popup-content.unhealthy-sensitive { background-color: #ff9933; color: black; }
+        .popup-content.unhealthy { background-color: #cc0033; color: white; }
+        .popup-content.very-unhealthy { background-color: #660099; color: white; }
+        .popup-content.hazardous { background-color: #7e0023; color: white; }
+        
+        .aqi-box {
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            color: black;
+        }
+        .aqi-table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+        }
+        .column {
+            width: 48%;
+        }
+        .aqi-table {
+            width: 100%;
+            margin-top: 20px;
+            font-size: small;
+        }
+        .aqi-info{
+            border: 2px solid whitesmoke;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+        .leaflet-popup-content {
+            width: 60px;
+            margin: 5px 5px;
+            line-height: 1;
+        }
+        
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        @media (max-width: 600px) {
+            .two-column {
+                flex-direction: column;
+            }
+            .column {
+                width: 100%;
+            }
+            .table-bordered {
+                font-size: 9px;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 800px;">
+    <div class="text-center">
+        <a href="index.html">
+            <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+        </a>
+         <!-- Top Ribbon -->
+        <div class="top-ribbon">
+            <!-- <div class="left-options"> -->
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>                
+                <a href="air-quality.html" class="btn icon-circle" style="white-space: nowrap;">English Version</i> <!--<i class="fa fa-language" aria-hidden="true"></i>-->
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+               <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a>
+             </div> -->
+        </div>
+    </div>
+    <hr>
+    <center><strong><h5>சென்னை - காற்றின் தரம்</h5></strong>
+        <div style="font-size: 13px; font-weight: bold; padding: 5px; border-radius: 10px; box-shadow: 0px 4px 6px #6c757d; max-width: 650px; margin: 10px auto; text-align: center;">
+            <label for="station-select">
+        உங்கள் அருகிலுள்ள பகுதியைத் தேர்ந்தெடுக்கவும் ↓
+        </label></div></center>
+    <select id="station-select" class="form-control w-lg-50 w-sm-100">
+        <!-- <option value="">உங்கள் அருகிலுள்ள இடத்தை தேர்வு செய்யவும்</option> -->
+        <option value="H13740">அரும்பாக்கம்</option>
+        <option value="H12431">ஆலந்தூர்</option>
+        <option value="H14701">செங்கல்பட்டு</option>
+        <option value="H8185">மணலி</option>
+        <option value="H11859">மணலி கிராமம்</option>
+        <option value="H13739">கொடுங்கையூர்</option>
+        <option value="H13738">பெருங்குடி</option>
+        <option value="H13737">ராயபுரம்</option>
+        <option value="H7023">தேனாம்பேட்டை</option>
+        <option value="H11279">வேளச்சேரி</option>
+    </select>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="aqi-info" style="display: none;">
+                <div id="aqi-details"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="map-container"></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <h5 style="text-decoration:underline;font-size: 13px;">காற்றின் தரம் மற்றும் மாசு அளவீடு பற்றி:</h5>
+            <table class="aqi-table table table-bordered" style="padding: 10px;">
+                <tbody>
+                    <tr class="good">
+                        <td>0 - 50</td>
+                        <td>நல்லது</td>
+                        <td>காற்றின் தரம் திருப்திகரமாக இருப்பதாகக் கருதப்படுகிறது, மேலும் காற்று மாசுபாடு சிறிய அல்லது எந்த ஆபத்தையும் ஏற்படுத்தாது</td>
+                    </tr>
+                    <tr class="moderate">
+                        <td>51 - 100</td>
+                        <td>மிதமான</td>
+                        <td>காற்றின் தரம் ஏற்றுக்கொள்ளத்தக்கது; இருப்பினும், சில மாசுபாடுகளுக்கு, காற்று மாசுபாட்டிற்கு வழக்கத்திற்கு மாறாக உணர்திறன் கொண்ட மிகக் குறைந்த எண்ணிக்கையிலான மக்களுக்கு மிதமான உடல்நலக் கவலை இருக்கலாம்.</td>
+                    </tr>
+                    <tr class="unhealthy-sensitive">
+                        <td>101 - 150</td>
+                        <td>உணர்திறன் கொண்ட குழுக்களுக்கு ஆரோக்கியமற்றது</td>
+                        <td>உணர்திறன் கொண்ட குழுக்களின் உறுப்பினர்கள் உடல்நல பாதிப்புகளை அனுபவிக்கலாம். பொதுமக்களுக்கு பாதிப்பு ஏற்பட வாய்ப்பில்லை.</td>
+                    </tr>
+                    <tr class="unhealthy">
+                        <td>151 - 200</td>
+                        <td>ஆரோக்கியமற்றது</td>
+                        <td>ஒவ்வொருவரும் உடல்நல பாதிப்புகளை அனுபவிக்க ஆரம்பிக்கலாம்; உணர்திறன் கொண்ட குழுக்களின் உறுப்பினர்கள் மிகவும் கடுமையான உடல்நல பாதிப்புகளை அனுபவிக்கலாம்</td>
+                    </tr>
+                    <tr class="very-unhealthy">
+                        <td>201 - 300</td>
+                        <td>மிகவும் ஆரோக்கியமற்றது</td>
+                        <td>அவசரகால நிலைமைகள் பற்றிய சுகாதார எச்சரிக்கைகள். ஒட்டுமொத்த மக்களும் பாதிக்கப்பட வாய்ப்பு அதிகம்.</td>
+                    </tr>
+                    <tr class="hazardous">
+                        <td>300+</td>
+                        <td>அபாயகரமானது</td>
+                        <td>சுகாதார எச்சரிக்கை: அனைவரும் மிகவும் தீவிரமான உடல்நல பாதிப்புகளை சந்திக்கலாம்</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div>தரவு பெறப்பட்டது <a href="https://aqicn.org/city/chennai//us-consulate/">சென்னை - காற்றின் தரம் குறியீடு (AQI)</a></div>
+    
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    const apiKey = '9eaa5b53392b2983fdc8e5e67bc0c7fdc28e38fd';
+    const baseApiUrl = 'https://api.waqi.info/feed/@';
+    const stationUrls = {
+        "H13740": `${baseApiUrl}H13740/?token=${apiKey}`,
+        "H12431": `${baseApiUrl}H12431/?token=${apiKey}`,
+        "H14701": `${baseApiUrl}H14701/?token=${apiKey}`,
+        "H7023": `${baseApiUrl}H7023/?token=${apiKey}`,
+        "H11279": `${baseApiUrl}H11279/?token=${apiKey}`,
+        "H8185": `${baseApiUrl}H8185/?token=${apiKey}`,
+        "H11859": `${baseApiUrl}H11859/?token=${apiKey}`,
+        "H13739": `${baseApiUrl}H13739/?token=${apiKey}`,
+        "H13737": `${baseApiUrl}H13737/?token=${apiKey}`,
+        "H13738": `${baseApiUrl}H13738/?token=${apiKey}`,
+    };
+    const coordinates = {
+        "H13740": { name: "அரும்பாக்கம்", coords: [13.0827, 80.2707] },
+        "H12431": { name: "ஆலந்தூர்", coords: [12.9762, 80.2214] },
+        "H14701": { name: "செங்கல்பட்டு", coords: [12.6876, 79.9776] },
+        "H7023": { name: "தேனாம்பேட்டை", coords: [13.0604, 80.2548] },
+        "H8185": { name: "மணலி", coords: [13.1687, 80.2666] },
+        "H11859": { name: "மணலி கிராமம்", coords: [13.1744, 80.2593] },
+        "H13739": { name: "கொடுங்கையூர்", coords: [13.1303, 80.2426] },
+        "H13737": { name: "ராயபுரம்", coords: [13.0939, 80.2935] },
+        "H13738": { name: "பெருங்குடி", coords:[12.9223, 80.2306] }, 
+        "H11279": { name: "வேளச்சேரி", coords: [12.9698, 80.2235] },
+    };
+    const cityTranslations = {
+        "Arumbakkam": "அரும்பாக்கம்",
+        "Alandur Bus Depot": "ஆலந்தூர்",
+        "Crescent University": "செங்கல்பட்டு",
+        "Manali": "மணலி",
+        "Manali Village": "மணலி கிராமம்",
+        "Kodungaiyur": "கொடுங்கையூர்",
+        "Perungudi": "பெருங்குடி",
+        "Royapuram": "ராயபுரம்",
+        "Chennai US Consulate": "தேனாம்பேட்டை",
+        "Velachery Res. Area": "வேளச்சேரி"
+    };
+
+    //const map = L.map('map-container').fitBounds(Object.values(coordinates).map(loc => loc.coords));
+    const map = L.map('map-container').fitBounds(
+        Object.values(coordinates).map(loc => loc.coords), 
+        { paddingTopLeft: [40, 35] } // Adjust the second value to scroll lower
+    );
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    function getAQIClass(aqi) {
+        if (aqi <= 50) return "good";
+        else if (aqi <= 100) return "moderate";
+        else if (aqi <= 150) return "unhealthy-sensitive";
+        else if (aqi <= 200) return "unhealthy";
+        else if (aqi <= 300) return "very-unhealthy";
+        else return "hazardous";
+    }
+
+    async function loadAQIForAllStations() {
+        for (const stationId in coordinates) {
+            const apiUrl = `${baseApiUrl}${stationId}/?token=${apiKey}`;
+            const location = coordinates[stationId];
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    const pm25 = data.data.iaqi.pm25?.v || 'N/A';
+                    const aqiClass = getAQIClass(pm25);
+                    const aqiMarkerHtml = `
+                        <div class="aqi-pluck-card ${aqiClass}" onclick="showAQIInfo('${location.name}', '${pm25}')">
+                            <div>${pm25}</div>
+                        </div>
+                    `;
+
+                    const aqiIcon = L.divIcon({
+                        html: aqiMarkerHtml,
+                        className: 'aqi-icon',
+                        iconSize: [100, 60]
+                    });
+
+                    L.marker(location.coords, { icon: aqiIcon })
+                        .addTo(map)
+                        .on('click', () => showAQIInfo(location, pm25, aqiClass));
+                } else {
+                    console.error(`Failed to fetch AQI data for station ${stationId}`);
+                }
+            } catch (error) {
+                console.error(`Error fetching AQI data for station ${stationId}:`, error);
+            }
+        }
+    }
+
+    function showAQIInfo(location, aqi, aqiClass) {
+    // Create the popup content with area name and AQI level
+    const popupContent = `
+        <div class="popup-content ${aqiClass}">
+            <p>${location.name}</p>
+            <p>AQI நிலை: <strong>${aqi}</strong></p>
+        </div>
+    `;
+
+    // Display the popup at the marker location
+    L.popup({ 
+        closeButton: true,        
+        offset: [-20, -20]  // Offset the popup 20 pixels upwards
+    })
+        .setLatLng(location.coords)
+        .setContent(popupContent)
+        .openOn(map);
+    }
+
+    function initializeMap() {
+        map = L.map('map-container').setView([13.0827, 80.2707], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+    }
+
+    async function fetchAQIData(stationId) {
+        const response = await fetch(stationUrls[stationId]);
+        const data = await response.json();
+        return data.data;
+    }
+
+    document.getElementById("station-select").addEventListener("change", async function () {
+        const selectedStationId = this.value;
+        if (selectedStationId) {
+            const aqiData = await fetchAQIData(selectedStationId);
+            const { aqi, time, iaqi } = aqiData;
+            const lastUpdated = new Date(time.s).toLocaleString();
+            const cityName = aqiData.city.name.split(',')[0]; // Extract city name up to the first comma
+            const tamilCityName = cityTranslations[cityName] || cityName;
+            const healthStatus = getHealthStatus(aqi);
+
+            const pm25 = aqiData.iaqi.pm25 ? aqiData.iaqi.pm25.v : 'N/A';
+            const pm10 = aqiData.iaqi.pm10 ? aqiData.iaqi.pm10.v : 'N/A';
+
+            // Show AQI details
+            const aqiDetails = document.getElementById("aqi-details");
+            aqiDetails.innerHTML = `
+                <strong> <h4 style="text-decoration:underline;">${tamilCityName}</h4></strong>
+                <div class="aqi-box ${getAQIClass(aqi)}">AQI நிலை : ${aqi} | ${healthStatus}</div><br>
+                <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
+                <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
+                <div>கடைசியாக புதுப்பிக்கப்பட்டது: ${lastUpdated}</div></strong>
+            `;
+            document.querySelector(".aqi-info").style.display = "block";
+
+            // Show map
+            document.getElementById("map-container").style.display = "block";
+            map.setView(coordinates[selectedStationId], 13);
+            L.marker(coordinates[selectedStationId]).addTo(map)
+                .bindPopup(`<strong>${aqiData.city.name.split(',')[0]}</strong><br>AQI: ${aqi}`)
+                .openPopup();
+        } else {
+            document.querySelector(".aqi-info").style.display = "none";
+            document.getElementById("map-container").style.display = "none"; // Hide map if no selection
+        }
+    });
+    function getHealthStatus(aqiValue) {
+        if (aqiValue <= 50) return 'நல்லது';
+        if (aqiValue <= 100) return 'மிதமான';
+        if (aqiValue <= 150) return 'உணர்திறன் கொண்ட குழுக்களுக்கு ஆரோக்கியமற்றது';
+        if (aqiValue <= 200) return 'ஆரோக்கியமற்றது';
+        if (aqiValue <= 300) return 'மிகவும் ஆரோக்கியமற்றது';
+        return 'அபாயகரமானது';
+    }
+    function getAQIClass(aqi) {
+        if (aqi <= 50) return 'good';
+        if (aqi <= 100) return 'moderate';
+        if (aqi <= 150) return 'unhealthy-sensitive';
+        if (aqi <= 200) return 'unhealthy';
+        if (aqi <= 300) return 'very-unhealthy';
+        return 'hazardous';
+    }
+
+    // Trigger fetching AQI data for Teynampet on page load
+    document.addEventListener("DOMContentLoaded", async () => {
+    const defaultStationId = "H7023"; // Teynampet ID
+    document.getElementById("station-select").value = defaultStationId; // Set the dropdown to Teynampet
+    const aqiData = await fetchAQIData(defaultStationId);
+    const { aqi, time, iaqi } = aqiData;
+    const lastUpdated = new Date(time.s).toLocaleString();
+    const cityName = aqiData.city.name.split(',')[0]; // Extract city name up to the first comma
+    const tamilCityName = cityTranslations[cityName] || cityName;
+    const healthStatus = getHealthStatus(aqi);
+
+    const pm25 = iaqi.pm25 ? iaqi.pm25.v : 'N/A';
+    const pm10 = iaqi.pm10 ? iaqi.pm10.v : 'N/A';
+
+    // Show AQI details
+    const aqiDetails = document.getElementById("aqi-details");
+    aqiDetails.innerHTML = `
+        <strong> <h4 style="text-decoration:underline;">${tamilCityName}</h4></strong>
+        <div class="aqi-box ${getAQIClass(aqi)}">AQI நிலை : ${aqi} | ${healthStatus}</div><br>
+        <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
+        <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
+        <div>கடைசியாக புதுப்பிக்கப்பட்டது: ${lastUpdated}</div></strong>
+    `;
+    document.querySelector(".aqi-info").style.display = "block";
+    });
+    // End of Trigger fetching AQI data for Teynampet on page load
+
+    loadAQIForAllStations();
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show scroll-up button on scroll
+    window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+            100) {
+                document.getElementById('scrollUpBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollUpBtn').style.display = 'none';
+            }
+        };
+    </script>
+    <script src="script.js"></script>
+    <!-- Footer -->
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p> <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+            <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+            <a href="https://x.com/newsofchennai">Twitter</a>, 
+            <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+            <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - 
+            newsofchennai@pm.me <br>
+            News of Chennai, 2020 முதல் செயல்பட்டு வரும் குடிமக்கள் சேவையாகும், இது தேவைப்படும் நேரங்களில் குடிமக்களுக்கு நம்பகமான மற்றும் சரிபார்க்கப்பட்ட தகவல்களை வழங்குகிறது.
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Lake Levels</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 5px;
+        }
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        /* Grid layout for dropdown and date */
+        .reservoir-details {
+            display: grid;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        .dropdown label {
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .dropdown select {
+            padding: 10px;
+            border-radius: 10px;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .date-info {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .water-levels {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .water-level {
+            margin: 10px;
+            width: 200px; /* Fixed width for larger screens */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .water-container {
+            position: relative;
+            height: 150px;
+            width: 40%;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            transition: height 1s;
+            background-color: #007bff; /* Blue color for water */
+        }
+        /* Subtle wave animation affecting only the top */
+        .water-wave {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 200%;
+            height: 20px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5), transparent);
+            opacity: 0.6;
+            animation: wave 2s infinite linear;
+        }
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 600px;
+            }
+            .reservoir-details {
+                margin-bottom: 20px;
+            }
+            .water-level {
+                width: 50%; /* Full width for mobile */
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+        @media (min-width: 768px) {
+            .banner-img {
+                width: 80%; /* Set the desired width for desktop view */
+                max-width: 800px; /* Optional: Set a max width */
+            }
+        }
+
+        /* Dark Mode styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #f1f1f1;
+        }
+
+        .dark-mode h2, .dark-mode p, .dark-mode label {
+            color: #f1f1f1;
+        }
+
+        .dark-mode .water-container {
+            background-color: #555;
+            border-color: #444;
+        }
+
+        .dark-mode .social-icons a {
+            color: #f1f1f1;
+        }
+
+        .dark-mode .water {
+            background-color: #0044cc;
+        }
+
+        .dark-mode .water-wave {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .dark-mode .icon-circle {
+            background-color: #555;
+        }
+
+        .dark-mode .btn {
+            background-color: #444;
+            color: #f1f1f1;
+        }
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color:  #013aae;
+            font-size: 20px;
+            transition: background-color 0.3s;
+        }
+
+        /* Responsive styles for icons */
+        @media (max-width: 600px) {
+            .icon-circle {
+                width: 30px;
+                height: 30px;
+                font-size: 14px; /* Smaller icon size for mobile */
+            }
+        }
+        hr {
+            margin : 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <div class="text-center">
+                <a href="index.html">
+                    <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+                </a>
+                 <!-- Top Ribbon -->
+                <div class="top-ribbon">
+                    <!-- <div class="left-options"> -->
+                        <a href="index-ta.html" class="btn icon-circle" aria-label="Home">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="lake-level.html" class="btn icon-circle" style="white-space: nowrap;">English Version</i>
+                        </a>
+                        <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                            <i id="theme-icon" class="fas fa-moon"></i>
+                        </button>
+                        
+                        <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+            <hr>            
+            <h2>சென்னை ஏரியின் நிலை</h2>
+
+            <!-- Dropdown for selecting reservoir -->
+            <div class="reservoir-details">
+                <div class="dropdown">
+                    <label for="reservoir-select">ஏரியைத் தேர்வுசெய்க:</label>
+                    <select id="reservoir-select">
+                        <option value="CHEMBARAMBAKKAM" data-current="39.53">செம்பரம்பாக்கம்</option>
+                        <option value="CHOLAVARAM" data-current="12.86">சோழவரம்</option>
+                        <option value="KANNANKOTTAI THERVOY KANDIGAI" data-current="63.40">கன்னாங்கோட்டை தேர்வாய் கந்திகை</option>
+                        <option value="POONDI" data-current="14.61">பூண்டி</option>
+                        <option value="PUZHAL" data-current="76.09">புழல்</option>
+                        <option value="VEERANAM" data-current="75.09">வீராணம்</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Water level for the selected reservoir -->
+            <center>
+                <div class="water-level">
+                    <p>சேமிப்பு நிலை (100%)</p>
+                    <div class="water-container">
+                        <div class="water" id="water-level">
+                            <div class="water-wave"></div> <!-- Subtle wave animation -->
+                        </div>
+                    </div>
+                    <h6>தற்போதைய நிலை: <br><span id="current-level">9.13</span>%</h6>
+                </div>
+                <div class="date-info">
+                    <!-- *As observed on: <span id="current-date"></span> -->
+                    ஏரியின் நிலை - <a href="https://cmwssb.tn.gov.in/lake-level"><span id="current-date"></span></a> தேதியன்று
+                </div>
+            </center>
+
+            <!-- Footer -->
+            <footer class="text-center mt-5" style="font-size: 12px;">
+                <hr>
+                <p>
+                    <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+                    <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+                    <a href="https://x.com/newsofchennai">Twitter</a>, 
+                    <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+                    <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - 
+                    newsofchennai@pm.me <br>
+                    News of Chennai, 2020 முதல் செயல்பட்டு வரும் குடிமக்கள் சேவையாகும், இது தேவைப்படும் நேரங்களில் குடிமக்களுக்கு நம்பகமான மற்றும் சரிபார்க்கப்பட்ட தகவல்களை வழங்குகிறது.
+                </p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+    // Update the water level based on the selected reservoir
+    const selectElement = document.getElementById('reservoir-select');
+    const currentLevelElement = document.getElementById('current-level');
+    const waterLevelElement = document.getElementById('water-level');
+
+    selectElement.addEventListener('change', function() {
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const currentLevel = selectedOption.getAttribute('data-current');
+        currentLevelElement.textContent = currentLevel;
+
+        // Adjust water level height according to the percentage
+        const waterHeight = `${currentLevel}%`;
+        waterLevelElement.style.height = waterHeight;
+    });
+
+    // Set initial values on page load
+    window.onload = function() {
+        const initialOption = selectElement.options[selectElement.selectedIndex];
+        const currentLevel = initialOption.getAttribute('data-current');
+        currentLevelElement.textContent = currentLevel;
+
+        // Adjust water level height according to the percentage
+        const waterHeight = `${currentLevel}%`;
+        waterLevelElement.style.height = waterHeight;
+
+        // Set the current date
+        const date = new Date();
+        //const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`; // if value is updated on current date
+        const formattedDate = '25-10-2024' //if data is past date
+        document.getElementById('current-date').textContent = formattedDate;
+    };
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+

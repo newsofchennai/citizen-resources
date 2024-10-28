@@ -122,18 +122,43 @@
                 max-width: 800px; /* Optional: Set a max width */
             }
         }
+        body h5 {
+            color: darkblue;
+        }
+        body.dark-mode h5 {
+            color: white;
+        }
     </style>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
     <div class="text-center">
-        <a href="index.html">
-            <img src="NOC2024.png" alt="Banner" class="img-fluid banner-img" />
+        <a href="#">
+            <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
         </a>
+         <!-- Top Ribbon -->
+        <div class="top-ribbon">
+            <!-- <div class="left-options"> -->
+                <a href="#" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>                
+                <a href="index-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+            <!-- </div> -->
+        </div>
     </div>
+    <hr>
+    <center>
     <!-- <div class="ticker-tape">
         <marquee class="ticker-content" behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">Depression is weakening and running parallel to the city coast, Chennai may experience moderate rain, with occasional heavy downpours till Oct 17</marquee>
     </div> -->
-    <center>
+    
     <div class="container">
         <div class="text-center mb-4">
             <!-- <p style="font-size: 12px; font-weight: bold;" class="mb-4">
@@ -141,18 +166,28 @@
             </p> -->
     
             <div class="row justify-content-center">
-                <div class="col-12 col-md-4 mb-2"> <!-- Full width on mobile, half on larger screens -->
-                    <a href="helplines.html" target="" class="btn btn-primary w-100" style="font-size: 18px;">
-                        <i class="fa-solid fa-phone"></i> Chennai - Verified Helplines
+                <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
+                    <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
+                        <a href="helplines.html" target="" class="btn btn-primary w-100 me-1" style="font-size: 12px;background-color: darkblue;">
+                            <i class="fa-solid fa-phone"></i> Verified Helplines
+                        </a>
+                        <a href="resources.html" target="" class="btn btn-primary w-100 ms-1" style="font-size: 12px;background-color: darkblue;">
+                            <i class="fa-solid fa-user-shield"></i> City Resources
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- Full width on mobile, half on larger screens -->
+                    <a href="helplines.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
+                        <i class="fa-solid fa-phone"></i> Verified Helplines
                     </a>
                 </div>
-                <div class="col-12 col-md-4 mb-2"> <!-- Full width on mobile, half on larger screens -->
-                    <a href="resources.html" target="" class="btn btn-primary w-100" style="font-size: 18px;">
-                        <i class="fa-solid fa-user-shield"></i> Chennai - Resources
+                <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- Full width on mobile, half on larger screens -->
+                    <a href="resources.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
+                        <i class="fa-solid fa-user-shield"></i> City Resources
                     </a>
                 </div>
                 <div class="col-12 col-md-4"> <!-- Full width on mobile, half on larger screens -->
-                    <a href="medical-emergency.html" target="" class="btn btn-danger w-100" style="font-size: 18px;">
+                    <a href="medical-emergency.html" target="" class="btn btn-danger w-100" style="font-size: 14px;background-color: darkred;">
                         <i class="fa-solid fa-briefcase-medical"></i> Medical Emergency
                     </a>
                 </div>
@@ -162,25 +197,30 @@
                
     <div class="container text-center">
         <div class="row">
-            <div class="col-12 col-md-4"> 
+            <!-- <div class="col-12 col-md-4"> 
                 <button class="btn btn-secondary mb-3 w-100" onclick="window.open('https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
                     <i class="fas fa-cloud-sun-rain"></i> Chennai NowCast - IMD Bulletin
                 </button>
+            </div> -->
+            <div class="col-12 col-md-4"> 
+                <a href="air-quality.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+                    <i class="fa-solid fa-smog"></i> Chennai Air Quality
+                </button></a>
             </div>
             <div class="col-12 col-md-4">
-                <a href="lake-level.html"><button class="btn btn-secondary mb-3 w-100" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+                <a href="lake-level.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
                     <i class="fas fa-water"></i> Chennai Lake Levels
                 </button></a>
             </div>
             <div class="col-12 col-md-4">
-                <button class="btn btn-secondary mb-3 w-100" onclick="window.open('https://newsofchennai.tumblr.com/', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
-                    <i class="fa-solid fa-tower-broadcast"></i> Real Time Updates - News of Chennai
+                <button class="btn btn-secondary mb-2 w-100" onclick="window.open('https://newsofchennai.tumblr.com/', '_blank')" style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+                    <i class="fa-solid fa-tower-broadcast"></i> News of Chennai Updates
                 </button>
             </div>
         </div>
-    </div>
-    </center>
+    </div>    
     <hr>
+    <h5><i class="fas fa-cloud-sun-rain"></i> Real Time Chennai Weather</h5></center>
     <div class="container">
         <p class="text-center" style="
         font-size: 14px;
@@ -193,7 +233,7 @@
         max-width: 650px;
         margin: 20px auto;
     ">
-        Select the nearest area to you to find out live local weather with the amount of rainfall ↓
+        Select the nearest area to you to find out live local weather ↓
     </p>
        <center> <div class="mb-3 dropdown-container" style="max-width: 600px;">
             <label for="localitySelect" class="form-label"></label>
@@ -237,7 +277,7 @@
         <div class="details-container">
             <div class="weather-details" id="weatherDetails">
                 <h3>Weather Details for <span id="selectedLocality"></span></h3><hr>
-                <p id="disclaimer" style="font-size: 12px;font-style: italic;">Weather data is updated every 15mins from the local weather station.</p>
+                <p id="disclaimer" style="font-size: 12px;font-style: italic;">Weather data is updated every hour from the local weather station.</p>
                 <div id="weatherContent">Please select a locality</div>
             </div>
 
@@ -262,8 +302,8 @@
         let marker;
 
         function fetchWeatherData(localityId, lat, lng, localityName) {
-    //const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqfyE_XRXqR4-BpXCIugoXIz0cvvjHc2RE1KSQ-RKE6Tp2q8wxzjrLEopjFwZaz47kfiZXmM0BjHbi/pub?gid=0&single=true&output=csv';
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
+
 
     fetch(sheetUrl)
         .then(response => response.text())
@@ -289,9 +329,9 @@
                 if (row[localityIndex] === localityId) {
                     found = true;
             const popupContent = `
-                <b>${localityName}</b><br>
-                Rain Accumulation: ${row[rainAccumulationIndex]} mm
-            `;
+    <b>${localityName}</b><br>
+    Rain Accumulation: ${row[rainAccumulationIndex]} mm
+`;
 
                 marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
 
@@ -301,7 +341,8 @@
                         <i class="fas fa-tint"></i> Humidity: <span style="margin-right: 15px;">${row[humidityIndex]}%</span><br><br>
                         <i class="fas fa-wind"></i> Wind Speed: <span style="margin-right: 15px;">${row[windSpeedIndex]} m/s</span><br><br>
                         <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: <span style="margin-right: 15px;">${row[rainAccumulationIndex]} mm</span><br><br>
-                        <i class="far fa-clock"></i> Weather details as of: <span style="margin-right: 15px;">${row[lastFetched]}</span>
+                        <i class="far fa-clock"></i> Last Updated: <span style="margin-right: 15px;">${row[lastFetched]}</span>
+
                     </div>
                 `;
                 document.getElementById('weatherContent').innerHTML = weatherContent;
@@ -367,6 +408,7 @@
             }
         };
     </script>
+    <script src="script.js"></script>
     <footer class="text-center mt-5" style="font-size: 14px;">
         <hr>
         <p>Join the <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me <br> News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. <br> Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</p>
