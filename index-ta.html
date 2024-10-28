@@ -283,7 +283,7 @@
         <div class="details-container">
             <div class="weather-details" id="weatherDetails">
                 <h4><span id="selectedLocality"></span> பகுதியில் வானிலை விவரங்கள்</h4><hr>
-                <p id="disclaimer" style="font-size: 12px; font-style: italic;">வானிலை தகவல் ஒவ்வொரு மணிநேரத்திற்கும் மாறுகிறது மற்றும் உள்ளூர் வானிலை மையத்திலிருந்து பெறப்படுகிறது.</p>
+                <p id="disclaimer" style="font-size: 12px; font-style: italic;">வானிலை தகவல் ஒவ்வொரு 15 நிமிடங்களுக்கு உள்ளூர் வானிலை மையத்திலிருந்து பெறப்படுகிறது.</p>
                 <div id="weatherContent">தயவுசெய்து ஒரு பகுதியைத் தேர்ந்தெடுக்கவும்</div>
             </div>
     
@@ -410,23 +410,6 @@
                 document.getElementById('scrollUpBtn').style.display = 'none';
             }
         };
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-
-        themeToggle.addEventListener('click', () => {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
-
-            // Toggle icon based on dark mode state
-            if (body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon'); // Remove moon icon
-                themeIcon.classList.add('fa-sun');     // Add sun icon for light mode
-            } else {
-                themeIcon.classList.remove('fa-sun');  // Remove sun icon
-                themeIcon.classList.add('fa-moon');     // Add moon icon for dark mode
-            }
-        });
     </script>
     <script src="script.js"></script>
     <footer class="text-center mt-5" style="font-size: 12px;">
