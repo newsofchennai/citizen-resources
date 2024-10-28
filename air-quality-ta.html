@@ -127,6 +127,11 @@
                 font-size: 9px;
             }
         }
+        #station-select {            
+            box-shadow: 0 0 10px rgb(0, 74, 173);
+            border: 1px solid #007bff;
+            transition: box-shadow 0.3s ease;
+        }
     </style>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link href="styles.css" rel="stylesheet">
@@ -156,9 +161,9 @@
     </div>
     <hr>
     <center><strong><h5>சென்னை - காற்றின் தரம்</h5></strong>
-        <div style="font-size: 13px; font-weight: bold; padding: 5px; border-radius: 10px; box-shadow: 0px 4px 6px #6c757d; max-width: 650px; margin: 10px auto; text-align: center;">
-            <label for="station-select">
-        உங்கள் அருகிலுள்ள பகுதியைத் தேர்ந்தெடுக்கவும் ↓
+        <!-- <div style="font-size: 13px; font-weight: bold; padding: 5px; border-radius: 10px; box-shadow: 0px 4px 6px #6c757d; max-width: 650px; margin: 10px auto; text-align: center;"> -->
+          <div style="font-size: 13px;">  <label for="station-select">
+        உங்கள் அருகிலுள்ள பகுதியைத் தேர்ந்தெடுக்கவும் <i class="fa-solid fa-arrow-down"></i></label>
         </label></div></center>
     <select id="station-select" class="form-control w-lg-50 w-sm-100">
         <!-- <option value="">உங்கள் அருகிலுள்ள இடத்தை தேர்வு செய்யவும்</option> -->
