@@ -14,8 +14,10 @@ NewsofChennai is a citizen service that has been functioning since 2020, providi
 
 ### v2 (Oct 27, 2024)
 - **Tamil Version Included**: A Tamil version of the website has been added to cater to a wider audience.
+- **Header Ribbon Added**: A header ribbon for easy toggling of home, language, and dark/light mode has been implemented for improved user experience.
 
 ## Features
 - User-friendly interface
 - Regional-language support
-- Verified all-in-one site for city services and news updates
+- Easy navigation to various city services and news updates
+- Quick access to toggle between home, languages, and themes
