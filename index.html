@@ -12,6 +12,9 @@
     <style>
         body {
             padding: 5px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
         .button {
             display: inline-block;
@@ -153,6 +156,12 @@
             <!-- </div> -->
         </div>
     </div>
+    <!-- Rotating Globe Icon with Date and Time -->
+    <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
     <hr>
     <center>
     <!-- <div class="ticker-tape">
@@ -186,6 +195,16 @@
                         <i class="fa-solid fa-user-shield"></i> City Resources
                     </a>
                 </div>
+                <!-- <div class="col-12 col-md-4 mb-2">  Full width on mobile, half on larger screens 
+                    <a href="help-line.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
+                        <i class="fa-regular fa-address-book"></i> Helplines
+                    </a>
+                </div>
+                <div class="col-12 col-md-4 mb-2"> Full width on mobile, half on larger screens 
+                    <a href="actions.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
+                        <i class="fa-regular fa-address-book"></i> Actions
+                    </a>
+                </div> -->
                 <div class="col-12 col-md-4"> <!-- Full width on mobile, half on larger screens -->
                     <a href="medical-emergency.html" target="" class="btn btn-danger w-100" style="font-size: 14px;background-color: darkred;">
                         <i class="fa-solid fa-briefcase-medical"></i> Medical Emergency
@@ -294,6 +313,7 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        //map
         const map = L.map('map').setView([13.080772, 80.248018], 13); // Default center (hidden initially)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
