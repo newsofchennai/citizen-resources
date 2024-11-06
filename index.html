@@ -143,6 +143,82 @@
         body.dark-mode h5 {
             color: white;
         }
+
+
+        .rain-info {
+            margin: 20px;
+        }
+
+        .info-icon {
+        /* color: #007BFF; */
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .rainfall-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .rainfall-table th, .rainfall-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .rainfall-table th {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .rainfall-table th, .rainfall-table td {
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+
+        .dark-mode table, .dark-mode .rainfall-table th {
+            background-color: black;
+        }
+        .dark-mode .modal-content h2 , .dark-mode .modal-content .close{
+            color: black;
+        }
+
     </style>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -368,10 +444,81 @@
         <button id="scrollUpBtn" onclick="scrollToTop()">
             <i class="fas fa-arrow-up"></i>
         </button>
+
+        <!-- Modal Structure -->
+        <div id="rainInfoModal" class="modal">
+            <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Rainfall Classification Details</h2>
+            <table class="rainfall-table">
+                <thead>
+                <tr>
+                    <th>Rainfall Amount (mm)</th>
+                    <th>Category</th>
+                </tr>
+                </thead>
+                <tbody id="rainfall-category-table">
+                <!-- Table rows will be generated dynamically by JavaScript -->
+                </tbody>
+            </table>
+            </div>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+    // Open the modal
+    function openModal() {
+        document.getElementById("rainInfoModal").style.display = "flex";
+        populateRainfallTable();
+    }
+
+    // Close the modal
+    function closeModal() {
+        document.getElementById("rainInfoModal").style.display = "none";
+    }
+
+    // Populate the rainfall category table
+    function populateRainfallTable() {
+        const table = document.getElementById("rainfall-category-table");
+        table.innerHTML = ""; // Clear existing rows
+
+        const categories = [
+            { range: "0 mm", label: "No Rain" },
+            { range: "0.1 - 2.4 mm", label: "Very Light Rain" },
+            { range: "2.5 - 7.5 mm", label: "Light Rain" },
+            { range: "7.6 - 35.5 mm", label: "Moderate Rain" },
+            { range: "35.6 - 64.4 mm", label: "Rather Heavy Rain" },
+            { range: "64.5 - 115.5 mm", label: "Heavy Rain" },
+            { range: "115.6 - 204.4 mm", label: "Very Heavy Rain" },
+            { range: "204.5+ mm", label: "Extreme Rainfall" },
+        ];
+
+        categories.forEach(category => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${category.range}</td><td>${category.label}</td>`;
+            table.appendChild(row);
+        });
+    }
+
+    // Example function for categorizing rainfall amount
+    function getRainfallCategory(rainAmount) {
+    if (isNaN(rainAmount)) return "No data available";
+    if (rainAmount === 0) return "No Rain";
+    if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
+    if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
+    if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
+    if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
+    if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
+    if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
+    return "Extreme Rainfall"; // for cases above 204.4 mm
+    }
+
+    // Sample data for rain accumulation and category
+    const rainAccumulation = 15; // Example rain amount in mm
+    const rainfallCategory = getRainfallCategory(rainAccumulation);
+
+
     //map
     const map = L.map('map').setView([13.080772, 80.248018], 13); // Default center (hidden initially)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -433,7 +580,7 @@
                         const weatherContent = `
                             <div class="weather-content">
                                 <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;Temperature: ${row[temperatureIndex]}°C</span><br><br>                            
-                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory}</strong><br><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong><br><br>
                                 <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[humidityIndex]}%</span><br>
                                 <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;Wind Speed: ${row[windSpeedIndex]} m/s</span><br><br>
                                 <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;Last Updated: ${row[lastFetchedIndex]}</span>
