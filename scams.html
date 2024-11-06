@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ongoing Scams</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        @media (max-width: 600px) {
+            .table td, .table th {
+                font-size: 12px;
+                padding: 1.5px;
+            }
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="scams-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+
+        <center>
+            <strong><h4>Ongoing Scams</h4></strong>
+            <div class="alert" style="background-color: #e8e8e8;">
+                <p style="color: darkred;">If it sounds too good to be true, it is a scam. Stay skeptical!</p>
+                <p><a href="https://cybercrime.gov.in/Webform/Crime_AuthoLogin.aspx?rnt=5">Report Financial Cyber Crime</a> or Call <a href="tel:1930">1930</a> | TN Cyber Crime Grievance Officer - Call <a href="tel:04429580300">04429580300</a></p>
+            </div>
+        </center>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Scam Type</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>News Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TRAI Call Blocking</td>
+                        <td>On going</td>
+                        <td>The Telecom Regulatory Authority of India (TRAI) has warned mobile users about fraudulent calls threatening disconnection of their numbers. TRAI clarified that it does not block or disconnect numbers, and these calls are illegal. Do not press any number while in the call.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/gadgets-news/trai-warns-users-against-fraud-calls-threatening-mobile-number-disconnection/articleshow/105240298.cms" target="_blank">Times of India</a>                        </td>
+                    </tr>
+                    <tr>
+                        <td>Digital Arrest</td>
+                        <td>On going</td>
+                        <td>Victims receive calls claiming they are involved in illegal activities and must pay money to avoid arrest. This scam has been particularly prevalent, with significant financial losses reported.</td>
+                        <td><a href="https://economictimes.indiatimes.com/news/india/digital-arrest-scam-how-cybercriminals-use-fear-to-empty-your-bank-account/articleshow/114836839.cms?from=mdr" target="_blank">Economic Times</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Voice Cloning</td>
+                        <td>On going</td>
+                        <td>Scammers are now using AI to replicate voices, leading to phone calls that sound like a distressed relative or friend. Victims are urged to quickly send large amounts of money to assist their loved ones.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/technology/tech-news/this-is-what-makes-online-trading-scams-most-dangerous-in-2024/articleshow/110364850.cms" target="_blank">Times of India</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Courier Scam</td>
+                        <td>On going</td>
+                        <td>Fraudsters impersonate courier firms or police to steal money, claiming that a consignment contains illegal items and asking victims to transfer money to resolve the issue.</td>
+                        <td><a href="https://www.thehindu.com/news/cities/chennai/in-five-months-over-1300-cases-of-fedex-fraud-reported-across-tn/article68203698.ece" target="_blank">The Hindu</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SBI / HDFC Reward Scam</td>
+                        <td>On going</td>
+                        <td>Fraudsters send fake messages and emails about SBI / HDFC Reward Points, making them look legitimate. These messages create urgency by claiming points are about to expire and include links to update bank details.</td>
+                        <td><a href="https://www.businesstoday.in/personal-finance/news/story/sbi-reward-scam-tamil-nadu-police-issues-advisory-on-new-cyber-scam-after-73-cases-436651-2024-07-10" target="_blank">Business Today</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Scholarship Scam</td>
+                        <td>New</td>
+                        <td>The scammer, knowing the student's personal details, claims he/she won a scholarship and asked for her UPI ID. After sending a small amount to build trust, they had their scan a QR code, allowing them to withdraw all money.</td>
+                        <td><a href="https://www.newindianexpress.com/states/tamil-nadu/2024/Oct/18/new-scholarship-scam-targets-parents-of-tamil-nadu-school-students" target="_blank">New Indian Express</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pensioners Scam</td>
+                        <td>New</td>
+                        <td>Fraudsters have been impersonating government representatives to trick individuals into revealing their personal financial information by claiming to assist with pension services.</td>
+                        <td><a href="https://www.thehindu.com/news/cities/chennai/tn-cybercrime-police-warn-public-about-scam-targeting-pensioners/article68795021.ece" target="_blank">The Hindu</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>UPI Autopay Scam</td>
+                        <td>On going</td>
+                        <td>Fraudsters are decoding your UPI ID to send fake payment requests. While the requests appear genuine, they are initiated by scammers. You might end up paying for a fraudster's Netflix account instead of your own.</td>
+                        <td><a href="https://economictimes.indiatimes.com/wealth/save/new-upi-scam-alert-upi-autopay-set-up-request-could-swindle-money-out-of-your-account-if-you-are-not-careful/articleshow/112584562.cms?from=mdr" target="_blank">Economic Times</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kaun Banega Crorepati (KBC)</td>
+                        <td>New</td>
+                        <td>Under the guise of winning crores or lakhs from KBC, fraudsters trick victims into paying "multiple tax obligations" to access the funds. They use the prime minister's image on fake documents.</td>
+                        <td><a href="https://www.indiatvnews.com/news/india/kaun-banega-crorepapati-tamil-nadu-man-duped-of-rs-2-91-lakh-in-fake-kbc-prize-scam-cbi-registers-complaint-latest-updates-2024-10-27-959074" target="_blank">India TV</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>E-commerce Scam</td>
+                        <td>On going</td>
+                        <td>Victims receive emails or messages that appear legitimate but lead to fake websites (e-commerce) designed to steal personal information and bank details.</td>
+                        <td><a href="https://www.thehindu.com/news/cities/chennai/cyber-crime-wing-alerts-public-about-new-fraud-in-name-of-e-commerce-company/article67295393.ece" target="_blank">The Hindu</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>X Complaint Scam</td>
+                        <td>New</td>
+                        <td>Beware of social media replies to your complaints, as they may be from fraudsters; While social media is a quick way to address issues, fraudsters are impersonating brands.</td>
+                        <td><a href="https://economictimes.indiatimes.com/wealth/save/two-people-were-scammed-of-lakhs-due-to-complaining-about-missing-items-in-online-purchase-order/articleshow/113339436.cms?from=mdr" target="_blank">Economic Times</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fake Online Trading</td>
+                        <td>On going</td>
+                        <td>Scammers lure victims with promises of high returns on investments through fake trading apps. Victims deposit money but are unable to withdraw their "earnings."</td>
+                        <td><a href="https://www.thehindu.com/news/cities/chennai/cyber-crime-police-issue-advisory-on-new-online-trading-scam/article67824428.ece" target="_blank">The Hindu</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fake Investment</td>
+                        <td>On going</td>
+                        <td>Victims are offered easy money for simple tasks like rating companies online, but are then asked to invest more money under false pretenses of earning returns.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/city/chennai/money-doubling-scam-defrauds-over-40-investors-of-crores/articleshow/111298604.cms" target="_blank">Times of India</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fake Job Offers</td>
+                        <td>On going</td>
+                        <td>Scammers post fake job listings on social media, requesting personal information or upfront payments for training or equipment, leading to financial loss and identity theft.</td>
+                        <td><a href="https://www.thehindu.com/news/national/tamil-nadu/state-government-warns-against-fake-overseas-job-offers/article68217741.ece" target="_blank">The Hindu</a></td>
+                    </tr>
+                    <tr>
+                        <td>Romance Scam</td>
+                        <td>On going</td>
+                        <td>Fraudsters create fake profiles on dating sites to build relationships and eventually ask for money under various pretenses, often leading to emotional and financial exploitation.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/city/chennai/with-online-dating-scamsters-using-ai-theres-no-happy-ending/articleshow/111495324.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>Land Scam</td>
+                        <td>On going</td>
+                        <td>Victims are tricked into buying properties on government land from a builder who unlawfully sold them, leaving residents in legal limbo and facing potential eviction.</td>
+                        <td><a href="https://www.newindianexpress.com/states/tamil-nadu/2024/Feb/05/land-scam-6-yrs-on-450-families-await-justice-in-tamil-nadu-2530725.html" target="_blank">New Indian Express</a></td>
+                    </tr>
+                    <tr>
+                        <td>Loan Scam</td>
+                        <td>On going</td>
+                        <td>Scammers offer quick loans with low interest rates, but victims are required to pay fees upfront and end up with no funds and financial loss.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/city/chennai/tamil-nadu-cops-zero-in-on-loan-scam-masterminds/articleshow/96953064.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>E-commerce Scam</td>
+                        <td>On going</td>
+                        <td>Victims receive emails or messages that appear legitimate but lead to fake websites (e-commerce) designed to steal personal information and bank details.</td>
+                        <td><a href="https://www.thehindu.com/news/cities/chennai/cyber-crime-wing-alerts-public-about-new-fraud-in-name-of-e-commerce-company/article67295393.ece" target="_blank">The Hindu</a></td>
+                    </tr>
+                    <tr>
+                        <td>Cryptocurrency Scams</td>
+                        <td>On going</td>
+                        <td>Victims are lured into investing in fake cryptocurrency schemes promising high returns but end up losing their investment entirely when the scammers disappear with their funds.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/technology/tech-news/this-is-what-makes-online-trading-scams-most-dangerous-in-2024/articleshow/110364850.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>Fake Charity Scams</td>
+                        <td>On going</td>
+                        <td>Scammers pose as charitable organizations during disasters or crises, soliciting donations that never reach those in need, exploiting people's goodwill for personal gain.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/technology/tech-news/this-is-what-makes-online-trading-scams-most-dangerous-in-2024/articleshow/110364850.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>Tech Support Scams</td>
+                        <td>On going</td>
+                        <td>Victims receive calls claiming there is an issue with their computer or software, leading them to provide remote access or pay for unnecessary services that do not resolve any actual problems.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/technology/tech-news/this-is-what-makes-online-trading-scams-most-dangerous-in-2024/articleshow/110364850.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>Insurance Fraud</td>
+                        <td>On going</td>
+                        <td>Scammers offer fake insurance policies that promise high returns but do not provide any actual coverage or benefits, leading victims to lose their premiums without any compensation.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/technology/tech-news/this-is-what-makes-online-trading-scams-most-dangerous-in-2024/articleshow/110364850.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>Rental Scams</td>
+                        <td>On going</td>
+                        <td>Fraudsters post fake rental listings online, collecting deposits from multiple victims for properties they do not own or manage, leaving renters without housing and out of pocket for deposits paid.</td>
+                        <td><a href="https://timesofindia.indiatimes.com/technology/tech-news/this-is-what-makes-online-trading-scams-most-dangerous-in-2024/articleshow/110364850.cms" target="_blank">Times of India</a></td>
+                    </tr>
+                    <tr>
+                        <td>Email Spoofing Scam</td>
+                        <td>On going</td>
+                        <td>Victims (in business domain) lose money after receiving a spoofed email that appeared to be from a legitimate supplier, tricking them into transferring funds to a fraudulent account.</td>
+                        <td><a href="https://www.indiatoday.in/technology/news/story/chennai-businessman-duped-of-rs-2-crore-after-getting-spoofed-email-2613251-2024-10-08" target="_blank">India Today</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <button id="scrollUpBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <footer class="text-center mt-5" style="font-size: 14px;">
+        <hr>
+        <p>Join the <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me <br> News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. <br> <!-- Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</p> -->
+    </footer>
+</div>
+
+<script>
+    // Scroll-up button functionality
+    const scrollUpBtn = document.getElementById("scrollUpBtn");
+    window.onscroll = function() {
+        if (window.scrollY > 200) scrollUpBtn.style.display = "block";
+        else scrollUpBtn.style.display = "none";
+    };
+    scrollUpBtn.onclick = function() { window.scrollTo({top: 0, behavior: 'smooth'}); };
+</script>
+<script src="script.js"></script>
+</body>
+</html>

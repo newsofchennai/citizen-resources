@@ -67,6 +67,10 @@
         }
         .weather-content {
             margin: 10px 0; /* Add spacing */
+            text-align: left;
+        }
+        .weather-content span {
+            font-size:12px;
         }
 
         /* Scroll-up button styles */
@@ -125,6 +129,14 @@
                 max-width: 800px; /* Optional: Set a max width */
             }
         }
+        @media (max-width: 600px) {
+            .weather-content span {
+                font-size:16px;
+            }
+            .weather-details {
+                height :350px;
+            }
+        }
         body h5 {
             color: darkblue;
         }
@@ -176,42 +188,88 @@
             </p> -->
     
             <div class="row justify-content-center">
-                <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
-                    <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
-                        <a href="helplines.html" target="" class="btn btn-primary w-100 me-1" style="font-size: 12px;background-color: darkblue;">
-                            <i class="fa-solid fa-phone"></i> Verified Helplines
+                <!-- Mobile view: Rain Helpline and Rain Resources in 1 row -->
+                <div class="col-12 d-md-none mb-2">
+                    <div class="d-flex justify-content-between">
+                        <a href="helplines.html" class="btn w-100 me-1" style="font-size: 12px;background-color: #06065D;color: white;">
+                            <i class="fa-solid fa-cloud-rain"></i> Rain Helplines
                         </a>
-                        <a href="resources.html" target="" class="btn btn-primary w-100 ms-1" style="font-size: 12px;background-color: darkblue;">
-                            <i class="fa-solid fa-user-shield"></i> City Resources
+                        <a href="resources.html" class="btn w-100 ms-1" style="font-size: 12px;background-color: #06065D;color: white;">
+                            <i class="fa-solid fa-user-shield"></i> Rain Resources
                         </a>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- Full width on mobile, half on larger screens -->
-                    <a href="helplines.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
-                        <i class="fa-solid fa-phone"></i> Verified Helplines
-                    </a>
-                </div>
-                <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- Full width on mobile, half on larger screens -->
-                    <a href="resources.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
-                        <i class="fa-solid fa-user-shield"></i> City Resources
-                    </a>
-                </div>
-                <!-- <div class="col-12 col-md-4 mb-2">  Full width on mobile, half on larger screens 
-                    <a href="help-line.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
-                        <i class="fa-regular fa-address-book"></i> Helplines
-                    </a>
-                </div>
-                <div class="col-12 col-md-4 mb-2"> Full width on mobile, half on larger screens 
-                    <a href="actions.html" target="" class="btn btn-primary w-100" style="font-size: 14px;background-color: darkblue;">
-                        <i class="fa-regular fa-address-book"></i> Actions
-                    </a>
-                </div> -->
-                <div class="col-12 col-md-4"> <!-- Full width on mobile, half on larger screens -->
-                    <a href="medical-emergency.html" target="" class="btn btn-danger w-100" style="font-size: 14px;background-color: darkred;">
+            
+                <!-- Mobile view: Medical in a row -->
+                <div class="col-12 d-md-none mb-2">
+                    <a href="medical-emergency.html" class="btn btn-danger w-100" style="font-size: 14px;background-color: darkred;">
                         <i class="fa-solid fa-briefcase-medical"></i> Medical Emergency
                     </a>
                 </div>
-            </div>
+            
+                <!-- Mobile view: Verified Helplines and Take Action in 1 row -->
+                <!-- <div class="col-12 d-md-none mb-2">
+                    <div class="d-flex justify-content-between">
+                        <a href="help-line.html" class="btn w-100 me-1" style="font-size: 12px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-phone"></i> Verified Helplines
+                        </a>
+                        <a href="actions.html" class="btn w-100 ms-1" style="font-size: 12px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-location-crosshairs"></i> Take Action
+                        </a>
+                    </div>
+                </div>-->
+
+                <!-- Mobile view: Transport and Ongoing Scams in 1 row -->
+                <div class="col-12 d-md-none mb-2">
+                    <div class="d-flex justify-content-between">
+                        <a href="transport-travel.html" class="btn w-100 me-1" style="font-size: 12px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-compass"></i> Transport + Travel
+                        </a>
+                        <a href="scams.html" class="btn w-100 ms-1" style="font-size: 12px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-skull-crossbones"></i> Ongoing Scams
+                        </a>
+                    </div>
+                </div>
+            
+                <!-- Desktop view: Rain Helpline, Rain Resources, Medical in 1 row -->
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="helplines.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
+                        <i class="fa-solid fa-cloud-rain"></i> Rain Helplines
+                    </a>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="resources.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
+                        <i class="fa-solid fa-user-shield"></i> Rain Resources
+                    </a>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="medical-emergency.html" class="btn btn-danger w-100" style="font-size: 14px;background-color: darkred;">
+                        <i class="fa-solid fa-briefcase-medical"></i> Medical Emergency
+                    </a>
+                </div>
+            
+                <!-- Desktop view: Verified Helplines, Take Action, Transport, Ongoing Scams in 1 row -->
+                <!-- <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="help-line.html" class="btn w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                        <i class="fa-solid fa-phone"></i> Verified Helplines
+                    </a>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="actions.html" class="btn w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                        <i class="fa-solid fa-location-crosshairs"></i> Take Action
+                    </a>
+                </div> -->
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="transport-travel.html" class="btn w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                        <i class="fa-solid fa-compass"></i> Transport + Travel
+                    </a>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="scams.html" class="btn w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                        <i class="fa-solid fa-skull-crossbones"></i> Ongoing Scams
+                    </a>
+                </div>
+            </div>            
         </div>
     </div>
                
@@ -314,114 +372,125 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        //map
-        const map = L.map('map').setView([13.080772, 80.248018], 13); // Default center (hidden initially)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+    //map
+    const map = L.map('map').setView([13.080772, 80.248018], 13); // Default center (hidden initially)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
 
-        let marker;
+    let marker;
 
-        function fetchWeatherData(localityId, lat, lng, localityName) {
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
-
-
-    fetch(sheetUrl)
-        .then(response => response.text())
-        .then(data => {
-            //const lines = data.split('\n').map(line => line.split(','));
-            const lines = data.split('\n').map(line => line.split(',').map(cell => cell.trim())); // Trim each cell
-            const headers = lines[0].map(header => header.trim()); // Trim headers
-
-           // const headers = lines[0];
-            const weatherData = lines.slice(1);
-            console.log('Headers:', headers);
-
-            const localityIndex = headers.indexOf('Locality');
-            const temperatureIndex = headers.indexOf('Temperature (°C)');
-            const humidityIndex = headers.indexOf('Humidity (%)');
-            const windSpeedIndex = headers.indexOf('Wind Speed (m/s)');
-            const rainIntensityIndex = headers.indexOf('Rain Intensity (mm/h)');
-            const rainAccumulationIndex = headers.indexOf('Rain Accumulation (mm)');
-            const lastFetched = headers.indexOf('Last Fetched');
-
-            let found = false;
-            for (const row of weatherData) {
-                if (row[localityIndex] === localityId) {
-                    found = true;
-            const popupContent = `
-    <b>${localityName}</b><br>
-    Rain Accumulation: ${row[rainAccumulationIndex]} mm
-`;
-
-                marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
-
-                const weatherContent = `
-                    <div class="weather-content">
-                        <i class="fas fa-thermometer-half"></i> Temperature: <span style="margin-right: 15px;">${row[temperatureIndex]}°C</span><br><br>
-                        <i class="fas fa-tint"></i> Humidity: <span style="margin-right: 15px;">${row[humidityIndex]}%</span><br><br>
-                        <i class="fas fa-wind"></i> Wind Speed: <span style="margin-right: 15px;">${row[windSpeedIndex]} m/s</span><br><br>
-                        <i class="fas fa-cloud-showers-heavy"></i> Rain Accumulation: <span style="margin-right: 15px;">${row[rainAccumulationIndex]} mm</span><br><br>
-                        <i class="far fa-clock"></i> Last Updated: <span style="margin-right: 15px;">${row[lastFetched]}</span>
-
-                    </div>
-                `;
-                document.getElementById('weatherContent').innerHTML = weatherContent;
-
-                // Corrected this line
-                document.getElementById('selectedLocality').innerText = localityName;
-                break;
-            }
-        }
-
-            if (!found) {
-                document.getElementById('weatherContent').innerHTML = 'Locality not found in the data.';
-            }
-
-            // Show weather details and map
-            document.getElementById('weatherDetails').style.display = 'block';
-            document.getElementById('map').style.display = 'block';
-            document.getElementById('disclaimer').style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error fetching weather data:', error);
-            document.getElementById('weatherContent').innerHTML = 'Failed to retrieve weather data.';
-        });
+    // Helper function to classify rainfall according to IMD standards
+    function getRainfallCategory(rainAmount) {
+        if (isNaN(rainAmount)) return "No data available";
+        if (rainAmount === 0) return "No Rain";
+        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
+        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
+        if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
+        if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
+        if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
+        if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
+        return "Extreme Rainfall"; // for cases above 204.4 mm
     }
 
-        // Event listener for locality selection
-        document.getElementById('localitySelect').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const localityId = selectedOption.value;
-            const lat = selectedOption.getAttribute('data-lat');
-            const lng = selectedOption.getAttribute('data-lng');
-            const localityName = selectedOption.textContent;
+    function fetchWeatherData(localityId, lat, lng, localityName) {
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
-            if (localityId === 'Choose a locality') {
-                // Hide map and weather details
-                document.getElementById('weatherDetails').style.display = 'none';
-                document.getElementById('map').style.display = 'none';
-                document.getElementById('disclaimer').style.display = 'none';
-            } else {
-                fetchWeatherData(localityId, lat, lng, localityName);
-            }
-        });
+        fetch(sheetUrl)
+            .then(response => response.text())
+            .then(data => {
+                const lines = data.split('\n').map(line => line.split(',').map(cell => cell.trim()));
+                const headers = lines[0];
+                const weatherData = lines.slice(1);
 
-        // Remove default Kilpauk selection on page load
-        window.onload = function() {
-            document.getElementById('map').style.display = 'none'; // Hide map initially
-            document.getElementById('weatherDetails').style.display = 'none'; // Hide weather details initially
-            document.getElementById('disclaimer').style.display = 'none'; // hide disclaimer initially
-        };
+                const localityIndex = headers.indexOf('Locality');
+                const temperatureIndex = headers.indexOf('Temperature (°C)');
+                const humidityIndex = headers.indexOf('Humidity (%)');
+                const windSpeedIndex = headers.indexOf('Wind Speed (m/s)');
+                const rainIntensityIndex = headers.indexOf('Rain Intensity (mm/h)');
+                const rainAccumulationIndex = headers.indexOf('Rain Accumulation (mm)');
+                const lastFetchedIndex = headers.indexOf('Last Fetched');
 
-        // Scroll to top function
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                let found = false;
+                for (const row of weatherData) {
+                    if (row[localityIndex] === localityId) {
+                        found = true;
+                        const rainAccumulation = parseFloat(row[rainAccumulationIndex]);
+                        const rainfallCategory = getRainfallCategory(rainAccumulation);
+
+                        const lastFetchedDate = row[lastFetchedIndex].split(' ')[0]; // Splits at the space and takes the first part
+
+
+                        const popupContent = `
+                            <b>${localityName}</b><br>
+                            Rain Accumulation: ${rainAccumulation} mm
+                        `;
+
+                        marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent).openPopup();
+    //<span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;Rain Accumulation: ${rainAccumulation} mm</span><br>
+    //${lastFetchedDate}
+                        const weatherContent = `
+                            <div class="weather-content">
+                                <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;Temperature: ${row[temperatureIndex]}°C</span><br><br>                            
+                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory}</strong><br><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[humidityIndex]}%</span><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;Wind Speed: ${row[windSpeedIndex]} m/s</span><br><br>
+                                <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;Last Updated: ${row[lastFetchedIndex]}</span>
+                            </div>
+                        `;
+                        document.getElementById('weatherContent').innerHTML = weatherContent;
+
+                        document.getElementById('selectedLocality').innerText = localityName;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    document.getElementById('weatherContent').innerHTML = 'Locality not found in the data.';
+                }
+
+                document.getElementById('weatherDetails').style.display = 'block';
+                document.getElementById('map').style.display = 'block';
+                document.getElementById('disclaimer').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+                document.getElementById('weatherContent').innerHTML = 'Failed to retrieve weather data.';
+            });
+    }
+
+    // Event listener for locality selection
+    document.getElementById('localitySelect').addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const localityId = selectedOption.value;
+        const lat = selectedOption.getAttribute('data-lat');
+        const lng = selectedOption.getAttribute('data-lng');
+        const localityName = selectedOption.textContent;
+
+        if (localityId === 'Choose a locality') {
+            document.getElementById('weatherDetails').style.display = 'none';
+            document.getElementById('map').style.display = 'none';
+            document.getElementById('disclaimer').style.display = 'none';
+        } else {
+            fetchWeatherData(localityId, lat, lng, localityName);
         }
+    });
 
-        // Show scroll-up button on scroll
-        window.onscroll = function() {
+    // Remove default Kilpauk selection on page load
+    window.onload = function() {
+        document.getElementById('map').style.display = 'none';
+        document.getElementById('weatherDetails').style.display = 'none';
+        document.getElementById('disclaimer').style.display = 'none';
+    };
+
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show scroll-up button on scroll
+    window.onscroll = function() {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
             100) {
                 document.getElementById('scrollUpBtn').style.display = 'block';

@@ -78,6 +78,9 @@
         h3, h2{
             font-size: 1.2rem;
         }
+        .card-body {
+            padding: 0;
+        }
     </style>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -107,7 +110,7 @@
         <div>
             <img class="rotating-globe" src="globe.gif" 
                  alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
-            <span class="date-time" id="date-time"></span>
+            <span class="date-time" id="date-time-tamil"></span>
         </div> 
         <hr>
 
@@ -115,7 +118,83 @@
         <div class="content">
             <p style="font-size: 22px;font-weight:bold;text-align: center;"> மருத்துவ அவசர உதவி எண்கள்
             </p>
-            <div class="table-responsive">
+            <div class="card-body">
+                <a href="tel:108" class="btn btn-danger btn-block mb-2 ">
+                    <i class="fa-solid fa-square-phone mr-2"></i> 108 ஆம்புலன்ஸை அழைக்கவும்
+                </a>
+                <a href="tel:104" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> 104 தமிழக மருத்துவ உதவி
+                </a>
+               <!-- <a href="tel:04428194630" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> செயிண்ட் ஜான்ஸ் ஆம்புலன்ஸ் அழைக்கவும்
+                </a>                 -->
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:1066" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> அப்பல்லோ மருத்துவமனை
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:044-46242424" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> குளோபல் மருத்துவமனை
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:105757" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> செட்டிநாடு மருத்துவமனை
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:044-49334933" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> எம்ஜிஎம் மலர் மருத்துவமனை
+                        </a>
+                    </div>
+                </div>
+                <hr>
+                <div style="font-size: 14px; line-height: 1.6;text-align: left;">
+                    <p><strong>அரசு மருத்துவமனைகள்</strong></p>
+                    <ul style="padding-left: 20px; list-style-position: outside;">
+                        <li>அரசு பொது மருத்துவமனை | <a href="tel:04425305000">04425305000</a></li>
+                        <li>அரசு கில்பாக் மருத்துவமனை | <a href="tel:04428364951">04428364951</a></li>
+                        <li>அரசு ராயப்பேட்டை மருத்துவமனை | <a href="tel:04428483051">04428483051</a></li>
+                        <li>அரசு ஸ்டான்லி மருத்துவமனை | <a href="tel:04425281347">04425281347</a></li>
+                        <li>பெண்களுக்கான கஸ்தூர்பா மருத்துவமனை | <a href="tel:04428545449">04428545449</a></li>
+                        <li>குழந்தைகளுக்கான மருத்துவக் கழகம் | <a href="tel:04428191135">04428191135</a></li>
+                        <li>பெண்கள் மற்றும் குழந்தைகளுக்கான அரசு மருத்துவமனை | <a href="tel:04428191982">04428191982</a></li>
+                    </ul>                    
+                </div>
+                <hr>
+                <button type="button" class="btn alt alert-dark w-100 btn-custom" style="text-align: center;font-size: 14px;">
+                    <p><strong>வானூர்தி ஆம்புலன்ஸ் சேவைகள்</strong></p>
+                    <span>இயக்கத்திற்கு 2 - 12 மணிநேரம் ஆகும் | கிடைக்கும் நிலை மற்றும் வானிலை சார்ந்தது</span>
+                </button><br><br>
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="https://wa.me/9710940000" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-helicopter" aria-hidden="true"></i> ஏரோ கேர்
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="https://wa.me/9701111156" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-helicopter" aria-hidden="true"></i> ஐசாட்டி
+                        </a>
+                    </div>
+                </div>
+                <div style="font-size: 14px; line-height: 1.6;text-align: left;">
+                    <p><strong>ஆம்புலன்ஸ்களின் வகைகள்</strong></p>
+                    <ul style="padding-left: 20px; list-style-position: outside;">
+                        <li>நோயாளி பரிமாற்ற ஆம்புலன்ஸ்</li>
+                        <li>அடிப்படை உயிர்காக்கும் ஆம்புலன்ஸ்</li>
+                        <li>மேம்பட்ட உயிர்காக்கும் ஆம்புலன்ஸ்</li>
+                        <li>வானூர்தி ஆம்புலன்ஸ் (ஹெலிகாப்டர் / விமானம்)</li>
+                    </ul>
+                </div>
+                <hr>
+                <!-- <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:05 PM</p>    -->
+            </div> 
+            <!-- <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -182,8 +261,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <p style="font-size: 12px;font-style: italic;">*கடைசியாக புதுப்பிக்கப்பட்டது: அக்டோபர் 28 01:15 AM அன்று சென்னை நியூஸ் மூலம் இந்தப் பட்டியல் தொகுக்கப்பட்டு சரிபார்க்கப்பட்டது.</p>
-            </div>
+                
+            </div> -->
+            <p style="text-align: left; font-size: 12px;font-style: italic;">*கடைசியாக புதுப்பிக்கப்பட்டது: அக்டோபர் 28 01:15 AM அன்று சென்னை நியூஸ் மூலம் இந்தப் பட்டியல் தொகுக்கப்பட்டு சரிபார்க்கப்பட்டது.</p>
         </div>
 
         <!-- CPR Information Section -->

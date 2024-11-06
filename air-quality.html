@@ -128,7 +128,7 @@
                 font-size: 12px;
             }
         }
-        #station-select {            
+        #station-select , #aqi , #hours {            
             box-shadow: 0 0 10px rgb(0, 74, 173);
             border: 1px solid #007bff;
             transition: box-shadow 0.3s ease;
@@ -188,15 +188,29 @@
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <div class="aqi-info">
+            <div class="aqi-info text-left">
                 <div id="aqi-details"></div>
             </div>
+            <!-- Add input fields for AQI and Hours Exposed -->
+            <!-- <div class="calculator text-left">
+                <input id="aqi" type="number" class="form-control" placeholder="Enter AQI | PM2.5 Value" oninput="restrictDigits(this, 3); calculateCigarettes()">
+                <br>
+                <input id="hours" type="number" class="form-control" placeholder="Enter Hours Exposed" oninput="restrictDigits(this, 2); calculateCigarettes()">
+                <br>
+                <div id="result" style="text-align: center; color: red;"></div>
+                
+            </div>                             -->
+            <div class="text-left"><small><em>AQI to Cigarette Data is calculated based on <a href="https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/">Berkley’s research</a></em></small></div><br>
         </div>
-
+        
         <div class="col-md-6">
             <div id="map-container"></div>
         </div>
     </div>
+
+    <!-- Display AQI Details -->
+    <div id="aqi-details"></div>
+
     <hr>
     <div class="row">
         <div class="col-12">
@@ -262,6 +276,62 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
+    // Define AQI to PM25 conversion table
+    const AQITablePM25 = {
+    concentrations: [
+        { min: 0, max: 15.5, index: { min: 0, max: 50 } },
+        { min: 15.5, max: 40.5, index: { min: 50, max: 100 } },
+        { min: 40.5, max: 65.5, index: { min: 100, max: 150 } },
+        { min: 65.5, max: 150.5, index: { min: 150, max: 200 } },
+        { min: 150.5, max: 250.5, index: { min: 200, max: 300 } },
+        { min: 250.5, max: 500.5, index: { min: 300, max: 400 } },
+        { min: 500.5, max: 99999999999, index: { min: 400, max: 99999999999 } }
+    ]
+    };
+
+    // Get the upper and lower bounds of particle concentration for corresponding AQI
+    function getBreakpoints(AQI) {
+    const breakpoints = AQITablePM25.concentrations.find(function (conc) {
+        return conc.index.min <= AQI && conc.index.max > AQI;
+    });
+    if (breakpoints === undefined) {
+        throw new Error(`AQI out of bounds. AQI: ${AQI}`);
+    }
+    return breakpoints;
+    }
+
+    // Calculate PM 2.5 concentration per 24 hours based on AQI
+    function calcPM25(AQI) {
+    const breakpoints = getBreakpoints(AQI);
+    
+    // Particle concentration
+    const PM_min = breakpoints.min;
+    const PM_max = breakpoints.max;
+    
+    // Air quality index
+    const AQI_min = breakpoints.index.min;
+    const AQI_max = breakpoints.index.max;
+
+    // Particle concentration based on given AQI
+    const PM = ((AQI - AQI_min) / (AQI_max - AQI_min)) * (PM_max - PM_min) + PM_min;
+    
+    return PM;
+    }
+    
+    // Calculate cigarette equivalent based on AQI (assuming 24-hour exposure)
+    function calculateCigarettes(AQI, hours = 24) {
+        // Step 1: Calculate PM2.5 concentration from AQI
+        const PM25 = calcPM25(AQI);
+        
+        // Step 2: Calculate the equivalent number of cigarettes
+        const cigaretteFactor = 22 * 24; // 22 µg/m³ for 24 hours is equivalent to 1 cigarette
+        const cigarettes = (PM25 * hours) / cigaretteFactor;
+
+        // Return the calculated cigarette count, rounded to two decimal places
+        return (cigarettes).toFixed(2);
+    }
+
+    //aqi
     const apiKey = '9eaa5b53392b2983fdc8e5e67bc0c7fdc28e38fd';
     const baseApiUrl = 'https://api.waqi.info/feed/@';
     const stationUrls = {
@@ -399,15 +469,29 @@
             const pm25 = aqiData.iaqi.pm25 ? aqiData.iaqi.pm25.v : 'N/A';
             const pm10 = aqiData.iaqi.pm10 ? aqiData.iaqi.pm10.v : 'N/A';
 
-            // Show AQI details
+            // Calculate cigarettes equivalent
+            let cigarettesHTML = '';
+            if (pm25 > 50) {
+                // Show the 'cigarettes-equivalent' div
+                const cigarettes = calculateCigarettes(pm25);
+                cigarettesHTML = `
+                    <div id="cigarettes-equivalent">
+                        <strong>Equivalent to smoking <span style="color:red" id="cigarettes-count">${cigarettes}  <i class="fas fa-smoking"></i></span>&nbsp;&nbsp;if exposed for 24 hours</strong>
+                    </div><br>
+                `;
+            }
+            // Show AQI details in the 'aqi-details' div
             const aqiDetails = document.getElementById("aqi-details");
             aqiDetails.innerHTML = `
-                <strong> <h4 style="text-decoration:underline;">${formattedCityName}</h4></strong>
-                <div class="aqi-box ${getAQIClass(aqi)}">AQI Level : ${aqi} | ${healthStatus}</div><br>
+                <strong><h4 style="text-decoration:underline;">${formattedCityName}</h4></strong>
+                <div class="aqi-box ${getAQIClass(aqi)}">AQI Level: ${aqi} | ${healthStatus}</div><br>
+                ${cigarettesHTML}
                 <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
                 <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
-                <div>Last updated: ${lastUpdated}</div></strong>
+                <div>Last updated: ${lastUpdated}</div>
             `;
+
+            // You can call this function on page load or when the AQI data is updated
             document.querySelector(".aqi-info").style.display = "block";
 
             // Show map
@@ -452,15 +536,30 @@
     const pm25 = iaqi.pm25 ? iaqi.pm25.v : 'N/A';
     const pm10 = iaqi.pm10 ? iaqi.pm10.v : 'N/A';
 
-    // Show AQI details
+    // Calculate cigarettes equivalent
+    let cigarettesHTML = '';
+    if (pm25 > 50) {
+        // Show the 'cigarettes-equivalent' div
+        const cigarettes = calculateCigarettes(pm25);
+        cigarettesHTML = `
+            <div id="cigarettes-equivalent">
+                <strong>Equivalent to smoking <span style="color:red" id="cigarettes-count">${cigarettes}  <i class="fas fa-smoking"></i></span>&nbsp;&nbsp;if exposed for 24 hours</strong>
+            </div><br>
+        `;
+    }
+    // Show AQI details in the 'aqi-details' div
     const aqiDetails = document.getElementById("aqi-details");
     aqiDetails.innerHTML = `
-        <strong> <h4 style="text-decoration:underline;">${formattedCityName}</h4></strong>
-        <div class="aqi-box ${getAQIClass(aqi)}">AQI Level : ${aqi} | ${healthStatus}</div><br>
+        <strong><h4 style="text-decoration:underline;">${formattedCityName}</h4></strong>
+        <div class="aqi-box ${getAQIClass(aqi)}">AQI Level: ${aqi} | ${healthStatus}</div><br>
+        ${cigarettesHTML}
         <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
         <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
-        <div>Last updated: ${lastUpdated}</div></strong>
+        <div>Last updated: ${lastUpdated}</div>
     `;
+
+    // You can call this function on page load or when the AQI data is updated
+
     document.querySelector(".aqi-info").style.display = "block";
     });
     // End of Trigger fetching AQI data for Teynampet on page load
@@ -484,7 +583,7 @@
     <script src="script.js"></script>
     <footer class="text-center mt-5" style="font-size: 14px;">
         <hr>
-        <p>Join the <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me <br> News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. <br> Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</p>
+        <p>Join the <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me <br> News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. <br> <!-- Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</p> -->
     </footer>
 </body>
 </html>
