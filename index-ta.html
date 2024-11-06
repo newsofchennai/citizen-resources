@@ -385,8 +385,8 @@
     function getRainfallCategory(rainAmount) {
         if (isNaN(rainAmount)) return "தகவல் இல்லை";
         if (rainAmount === 0) return "மழை இல்லை";
-        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "மிக இலகு மழை";
-        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "இலகு மழை";
+        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "மிக லேசான மழை";
+        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "லேசான மழை";
         if (rainAmount >= 7.6 && rainAmount <= 35.5) return "மிதமான மழை";
         if (rainAmount >= 35.6 && rainAmount <= 64.4) return "சற்றே கனமான மழை";
         if (rainAmount >= 64.5 && rainAmount <= 115.5) return "கன மழை";
