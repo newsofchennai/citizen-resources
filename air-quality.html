@@ -484,7 +484,7 @@
             const aqiDetails = document.getElementById("aqi-details");
             aqiDetails.innerHTML = `
                 <strong><h4 style="text-decoration:underline;">${formattedCityName}</h4></strong>
-                <div class="aqi-box ${getAQIClass(aqi)}">AQI Level: ${aqi} | ${healthStatus}</div><br>
+                <div class="aqi-box ${getAQIClass(pm25)}">AQI Level: ${pm25} | ${healthStatus}</div><br>
                 ${cigarettesHTML}
                 <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
                 <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
@@ -551,7 +551,7 @@
     const aqiDetails = document.getElementById("aqi-details");
     aqiDetails.innerHTML = `
         <strong><h4 style="text-decoration:underline;">${formattedCityName}</h4></strong>
-        <div class="aqi-box ${getAQIClass(aqi)}">AQI Level: ${aqi} | ${healthStatus}</div><br>
+        <div class="aqi-box ${getAQIClass(pm25)}">AQI Level: ${pm25} | ${healthStatus}</div><br>
         ${cigarettesHTML}
         <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
         <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
