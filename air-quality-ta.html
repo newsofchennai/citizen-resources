@@ -189,11 +189,6 @@
             <div class="aqi-info text-left" style="display: none;">
                 <div id="aqi-details"></div>
             </div>
-            <div class="text-left">
-                <small><em>AQI-க்கு சமமான சிகரெட் தரவுகள் 
-                    <a href="https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/">பெர்க்லி ஆராய்ச்சியை</a> அடிப்படையாகக் கொண்டு கணக்கிடப்பட்டுள்ளது
-                </em></small>
-            </div><br>
         </div>
 
         <div class="col-md-6">
@@ -241,7 +236,11 @@
         </div>
     </div>
     
-    <div>தரவு பெறப்பட்டது <a href="https://aqicn.org/city/chennai//us-consulate/">சென்னை - காற்றின் தரம் குறியீடு (AQI)</a></div>
+    <div class="text-left">
+        <small><em> தரவு பெறப்பட்டது <a href="https://aqicn.org/city/chennai//us-consulate/">சென்னை - காற்றின் தரம் குறியீடு (AQI)</a> | AQI-க்கு சமமான சிகரெட் தரவுகள் 
+            <a href="https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/">பெர்க்லி ஆராய்ச்சியை</a> அடிப்படையாகக் கொண்டு கணக்கிடப்பட்டுள்ளது
+        </em></small>
+    </div>
     
     <!-- Scroll Up Button -->
     <button id="scrollUpBtn" onclick="scrollToTop()">
@@ -353,7 +352,7 @@
         { paddingTopLeft: [40, 35] } // Adjust the second value to scroll lower
     );
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        // attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
     function getAQIClass(aqi) {
@@ -375,11 +374,11 @@
                 const data = await response.json();
 
                 if (data.status === 'ok') {
-                    const pm25 = data.data.iaqi.pm25?.v || 'N/A';
-                    const aqiClass = getAQIClass(pm25);
+                    const aqi = data.data.aqi;
+                    const aqiClass = getAQIClass(aqi);
                     const aqiMarkerHtml = `
-                        <div class="aqi-pluck-card ${aqiClass}" onclick="showAQIInfo('${location.name}', '${pm25}')">
-                            <div>${pm25}</div>
+                        <div class="aqi-pluck-card ${aqiClass}" onclick="showAQIInfo('${location.name}', '${aqi}')">
+                            <div>${aqi}</div>
                         </div>
                     `;
 
@@ -391,7 +390,7 @@
 
                     L.marker(location.coords, { icon: aqiIcon })
                         .addTo(map)
-                        .on('click', () => showAQIInfo(location, pm25, aqiClass));
+                        .on('click', () => showAQIInfo(location, aqi, aqiClass));
                 } else {
                     console.error(`Failed to fetch AQI data for station ${stationId}`);
                 }
@@ -423,7 +422,7 @@
     function initializeMap() {
         map = L.map('map-container').setView([13.0827, 80.2707], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
+            // attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
     }
 
@@ -462,7 +461,7 @@
             const aqiDetails = document.getElementById("aqi-details");
             aqiDetails.innerHTML = `
                 <strong> <h4 style="text-decoration:underline;">${tamilCityName}</h4></strong>
-                <div class="aqi-box ${getAQIClass(pm25)}">AQI நிலை : ${pm25} | ${healthStatus}</div><br>
+                <div class="aqi-box ${getAQIClass(aqi)}">AQI நிலை : ${aqi} | ${healthStatus}</div><br>
                 ${cigarettesHTML}
                 <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
                 <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
@@ -527,7 +526,7 @@
     const aqiDetails = document.getElementById("aqi-details");
     aqiDetails.innerHTML = `
         <strong> <h4 style="text-decoration:underline;">${tamilCityName}</h4></strong>
-        <div class="aqi-box ${getAQIClass(pm25)}">AQI நிலை : ${pm25} | ${healthStatus}</div><br>
+        <div class="aqi-box ${getAQIClass(aqi)}">AQI நிலை : ${aqi} | ${healthStatus}</div><br>
         ${cigarettesHTML}
         <div>PM<sub>2.5</sub>: ${pm25} µg/m³</div><br>
         <div>PM<sub>10</sub>: ${pm10} µg/m³</div><br>
