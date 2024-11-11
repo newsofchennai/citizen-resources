@@ -215,7 +215,12 @@
         .dark-mode table, .dark-mode .rainfall-table th {
             background-color: black;
         }
-        .dark-mode .modal-content h2 , .dark-mode .modal-content .close{
+        .dark-mode .modal-content h2 ,
+        .dark-mode .modal-content h4, 
+        .dark-mode .modal-content .close, 
+        .dark-mode .popup-content p, 
+        .dark-mode .nudge-modal-content h3 ,
+        .dark-mode .nudge-modal-content p {
             color: black;
         }
         /* Styling for the rain status card */
@@ -260,6 +265,47 @@
         .leaflet-popup-content strong {
             color: #333;
         } */
+        
+        /* Styles for the nudge modal */
+        .nudge-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nudge-modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 300px;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .nudge-modal-content h3 {
+            margin-top: 0;
+        }
+
+        #closeNudgeModal {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #closeNudgeModal:hover {
+            background-color: #357ae8;
+        }
 
     </style>
     <link href="styles.css" rel="stylesheet">
@@ -551,6 +597,14 @@
             </table>
             </div>
         </div>
+        <!--nudge-->
+        <div id="nudgeModal" class="nudge-modal">
+            <div class="nudge-modal-content">
+                <h3>Add to Home Screen</h3>
+                <p>For one-click access to this <strong>Citizen Resources Website</strong>, save this page to your home screen.</p>
+                <button id="closeNudgeModal">Got it!</button>
+            </div>
+        </div>               
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -768,6 +822,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const defaultOption = localitySelect.querySelector('option[value="ZWL005190"]');
     localitySelect.value = defaultOption.value;
     fetchWeatherData(defaultOption.value, parseFloat(defaultOption.getAttribute('data-lat')), parseFloat(defaultOption.getAttribute('data-lng')), defaultOption.text);
+
+    // Check if modal has already been shown during the current session
+    const modalShown = sessionStorage.getItem("modalShown");
+
+    if (!modalShown) {
+        // Show the nudge modal if it hasn't been shown in the current session
+        const nudgeModal = document.getElementById("nudgeModal");
+        nudgeModal.style.display = "flex"; // Make the nudge modal visible and centered
+
+        // Close the nudge modal on button click and save to sessionStorage
+        document.getElementById("closeNudgeModal").addEventListener("click", function () {
+            nudgeModal.style.display = "none";
+            sessionStorage.setItem("modalShown", "true"); // Set flag to prevent showing modal again in the same session
+        });
+    }
 });
 
 
