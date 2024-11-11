@@ -3,6 +3,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    font-family: Arimo, sans-serif ;
 }
 /* rotating globe and time css */
 .date-time {
