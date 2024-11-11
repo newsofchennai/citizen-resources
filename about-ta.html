@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News of சென்னை - பற்றி</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        .thirukural {
+            font-style: italic;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            h1, h4 {
+                font-size: 1.3rem;
+            } 
+            p {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="about.html" class="btn icon-circle" style="white-space: nowrap;">English Version</a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time-tamil"></span>
+        </div> 
+        <hr>
+        <h1 class="text-center mt-4">News of சென்னை பற்றி</h1>
+        
+        <p>News of சென்னை என்பது முக்கியமான மற்றும் சரிபார்க்கப்பட்ட தகவல்களை துல்லியமாக வழங்கும் ஒரு குடிமக்கள் சேவையாகும். இது சென்னை குடிமக்களுக்கும் வருகையர்களையும் உதவும். இந்த இணையதளம் சென்னை தொடர்பான சரிபார்க்கப்பட்ட உதவி எண்ணங்கள், பயனுள்ள வழிகாட்டி குறிப்புகள், நகரவியல் குறிப்புக்கள் மற்றும் செயல்முறை வழிமுறைகளை விரைவான வழியில் வழங்கப்படும். முக்கியமான மற்றும் உறுதியான தகவல்களை ஒரே இடத்தில் சேர்த்துக் காட்டுவதன் மூலம் சென்னை மக்களிடம் விழிப்புணர்வை ஊக்குவிப்பதே இதன் நோக்கம்.</p>
+
+        <p>ஒவ்வொரு பக்கத்தின் முடிவிலும் அல்லது ஹெல்ப்லைன் பக்கத்தின் முடிவிலும், சமீபத்திய புதுப்பிப்பு எப்போது நடந்தது என்பதை குறிக்கும் ஒரு குறிப்பு காலடி குறிப்பாக இருக்கும். இந்த இணையதளம் அடிக்கடி புதுப்பிக்கப்படும் வகையில் இருக்கும். புதிய, சரிபார்க்கப்பட்ட தகவல்களைச் சேர்ப்பதோடு, காலாவதியான அல்லது தொடர்பற்ற உள்ளடக்கங்கள் நீக்கப்படும்.</p>
+
+        <p>எந்த விளம்பரங்கள் இல்லாமல், எந்த விளம்பரத் திட்டங்கள் இல்லாமல், எந்த கூட்டுறவுகள் இல்லாமல் — இது நிரந்தரமாக ஒரு குடிமக்கள் சேவையாகவே மட்டுமே இருக்கும்.</p>
+        
+        <div class="mt-4">
+            <p>தொடர்புக்கு - <a href="mailto:newsofchennai@pm.me">newsofchennai@pm.me</a></p>
+        </div>
+        <hr>
+        <div class="thirukural mt-4">
+            <h4>திருக்குறள் | Thirukural</h4>
+            <p>பிணியின்மை செல்வம் விளைவின்பம் ஏமம்<br>
+            அணியென்ப நாட்டிவ் வைந்து.</p>
+            <p>நோய் இல்லாமை, செல்வம், விளைச்சல், மகிழ்ச்சி, நல்ல காவல் இவை ஐந்தும் ஒரு நாட்டிற்கு அழகு என்று நூலோர் கூறுவர்.</p>
+            <p><em>Freedom from epidemics, wealth, produce, happiness, and protection (to subjects); these five, the learned, say, are the ornaments of a kingdom.</em></p>
+        </div>
+        
+        <div class="mt-5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Constitution_of_India.jpg/800px-Constitution_of_India.jpg" alt="Constitution of India" class="img-fluid rounded">
+        </div>
+
+        <!-- Scroll Up Button -->
+        <button id="scrollUpBtn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+        // Show scroll-up button on scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                document.getElementById('scrollUpBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollUpBtn').style.display = 'none';
+            }
+        };
+    </script>
+
+    <script src="script.js"></script>
+
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about-ta.html">News of சென்னை பற்றி</a> | <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+            <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+            <a href="https://x.com/newsofchennai">Twitter</a>, 
+            <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+            <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - newsofchennai@pm.me  | <a href="credits-ta.html"> உரிமம் மற்றும் மறுப்பு</a>  | விளம்பரம், விளம்பரங்கள் இல்லை
+        </p>
+    </footer>
+</body>
+</html>
