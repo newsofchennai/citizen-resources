@@ -622,7 +622,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let marker;
-
+let currentPopup = null;
 function fetchWeatherData(localityId, lat, lng, localityName) {
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
@@ -685,10 +685,13 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
                     map.setView([lat, lng], 13);
 
+                    showRainInfo(location, rainIntensity); 
+
                     // Add click event to show detailed content with rain intensity when clicked
                     marker.on('click', function() {
                         showRainInfo(location, rainIntensity);
                     });
+                    
 
                     // Update weather details in the content section
                     const weatherContent = `
@@ -721,6 +724,10 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
 }
 
 function showRainInfo(location, rainIntensity) {
+    if (currentPopup) {
+        map.closePopup(currentPopup);
+    }
+
     const popupContent = `
         <div class="popup-content">
             <p>${location.name}</p>
@@ -729,7 +736,7 @@ function showRainInfo(location, rainIntensity) {
     `;
 
     // Display the popup with an offset to position it above the rain status
-    L.popup({ 
+    currentPopup = L.popup({ 
         closeButton: true,        
         offset: [0, -25]  // Offset to position the popup above rain status
     })

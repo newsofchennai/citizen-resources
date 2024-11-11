@@ -583,7 +583,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let marker;
-
+let currentPopup = null;
 function fetchWeatherData(localityId, lat, lng, localityName) {
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
@@ -646,6 +646,8 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
                     map.setView([lat, lng], 13);
 
+                    showRainInfo(location, rainIntensity); 
+
                     // Add click event to show detailed content with rain intensity when clicked
                     marker.on('click', function() {
                         showRainInfo(location, rainIntensity);
@@ -683,22 +685,30 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
 }
 
 function showRainInfo(location, rainIntensity) {
-    const popupContent = `
-        <div class="popup-content">
-            <p>${location.name}</p>
-            <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
-        </div>
-    `;
+    if (currentPopup) {
+        map.closePopup(currentPopup);
+    }
 
-    // Display the popup with an offset to position it above the rain status
-    L.popup({ 
-        closeButton: true,        
-        offset: [0, -25]  // Offset to position the popup above rain status
-    })
-        .setLatLng(location.coords)
-        .setContent(popupContent)
-        .openOn(map);
+    // Add a 100ms delay before displaying the popup
+    setTimeout(() => {
+        const popupContent = `
+            <div class="popup-content">
+                <p>${location.name}</p>
+                <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
+            </div>
+        `;
+
+        // Display the popup with an offset to position it above the rain status
+        currentPopup = L.popup({ 
+            closeButton: true,        
+            offset: [0, -25]  // Offset to position the popup above rain status
+        })
+            .setLatLng(location.coords)
+            .setContent(popupContent)
+            .openOn(map);
+    }, 100); // Delay of 100ms
 }
+
 
 // Event listener for locality selection
 document.getElementById('localitySelect').addEventListener('change', function () {
