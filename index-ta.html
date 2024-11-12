@@ -620,7 +620,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const rainStatus = rainIntensityStatus > 0 ? 'மழை' : 'மழை-இல்லை';
                     const weatherIcon = rainStatus === 'Rain' 
                                     ? '<i class="fas fa-cloud-showers-heavy"></i>' 
-                                    : '<i class="fas fa-sun"></i>';  // Use sun icon for "No-Rain"
+                                    : '';  // Use sun icon for "No-Rain"
 
 
                     // Define location for marker
