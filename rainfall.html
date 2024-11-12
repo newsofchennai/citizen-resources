@@ -232,8 +232,12 @@
             text-align: center;
         }
 
-        .rain-pluck-card.rain, .rain-pluck-card.no-rain {
+        .rain-pluck-card.rain {
             background-color: #EDF4FF; 
+            color: #0E3272;
+        }
+        .rain-pluck-card.no-rain {
+            background-color: #F5F5F5; 
             color: #0E3272;
         }
 
@@ -317,10 +321,7 @@
             <div class="col-lg-12 col-md-12">
                 <div id="map"></div>
             </div>
-        </div>
-        <div style="text-align: left;font-size: 12px;">      
-            <em> Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</em>
-        </div>
+        </div>        
 
         <!-- Weather Details Table -->
         <div class="col-lg-12 col-md-12 mt-4" id="weather-table">
@@ -341,6 +342,9 @@
                 </tbody>
             </table>
             </div>
+        </div>
+        <div style="text-align: left;font-size: 12px;">      
+            <em> Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</em>
         </div>
         <!-- Scroll Up Button -->
         <button id="scrollUpBtn" onclick="scrollToTop()">
@@ -612,7 +616,7 @@ function loadAllLocalities() {
                     // Choose icon based on rain status
                     const weatherIcon = rainStatus === 'Rain'
                         ? '<i class="fas fa-cloud-showers-heavy"></i>'
-                        : '<i class="fas fa-sun"></i>';
+                        : ''; //<i class="fas fa-sun"></i>
 
                     // Define the rain marker HTML with icon and status
                     const rainMarkerHtml = `

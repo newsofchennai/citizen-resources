@@ -229,8 +229,16 @@
             text-align: center;
         }
 
-        .rain-pluck-card.மழை, .rain-pluck-card.மழை-இல்லை {
+        /* .rain-pluck-card.மழை, .rain-pluck-card.மழை-இல்லை {
             background-color: #EDF4FF; 
+            color: #0E3272;
+        } */
+        .rain-pluck-card.மழை {
+            background-color: #EDF4FF; 
+            color: #0E3272;
+        }
+        .rain-pluck-card.மழை-இல்லை {
+            background-color: #F5F5F5; 
             color: #0E3272;
         }
         .dropdown-container {
@@ -339,9 +347,7 @@
                 <div id="map"></div>
             </div>
         </div>
-        <div style="text-align: left;font-size: 12px;">      
-            <em> சென்னை முழுவதும் நிறுவப்பட்டுள்ள வானிலை நிலையங்களின் நிலத்தடி நெட்வொர்க்கின் அடிப்படையில் <a href="https://www.weatherunion.com/">வெதர் யூனியனில்</a> இருந்து பெறப்பட்ட வானிலை தரவு.</em>
-        </div> 
+        
         <!-- Weather Details Table -->
         <div class="col-lg-12 col-md-12 mt-4" id="weather-table">
             <div class="table-responsive">
@@ -350,9 +356,9 @@
                     <tr>	
                         <th scope="col">இடம்</th>
                         <th scope="col">வெப்பநிலை (°C)</th>
-                        <th scope="col">மழைக் குவிப்பு (மிமீ)</th>
-                        <th scope="col">மழை தீவிரம் (மிமீ/ம)</th>
-                        <th scope="col">காற்றின் வேகம் (மீ/வி)</th>
+                        <th scope="col">மழைக் குவிப்பு (mm)</th>
+                        <th scope="col">மழை தீவிரம் (mm/h)</th>
+                        <th scope="col">காற்றின் வேகம் (m/s)</th>
                         <th scope="col">ஈரப்பதம் (%)</th>
                     </tr>
                 </thead>
@@ -361,7 +367,10 @@
                 </tbody>
             </table>
             </div>
-        </div>        
+        </div>   
+        <div style="text-align: left;font-size: 12px;">      
+            <em> சென்னை முழுவதும் நிறுவப்பட்டுள்ள வானிலை நிலையங்களின் நிலத்தடி நெட்வொர்க்கின் அடிப்படையில் <a href="https://www.weatherunion.com/">வெதர் யூனியனில்</a> இருந்து பெறப்பட்ட வானிலை தரவு.</em>
+        </div>      
 
         <!-- Scroll Up Button -->
         <button id="scrollUpBtn" onclick="scrollToTop()">
@@ -579,9 +588,9 @@ function loadAllLocalities() {
                     const localityName = localityOption.text; // Get the locality name
 
                     // Choose icon based on rain status
-                    const weatherIcon = rainStatus === 'Rain'
+                    const weatherIcon = rainStatus === 'மழை'
                         ? '<i class="fas fa-cloud-showers-heavy"></i>'
-                        : '<i class="fas fa-sun"></i>';
+                        : '';//<i class="fas fa-sun"></i>
 
                     // Define the rain marker HTML with icon and status
                     const rainMarkerHtml = `
