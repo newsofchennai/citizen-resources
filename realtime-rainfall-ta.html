@@ -323,7 +323,7 @@
                     <option value="ZWL008876" data-lat="13.125301" data-lng="80.069776">ஆவடி</option>
                     <option value="ZWL003387" data-lat="13.080772" data-lng="80.248018">கீழ்ப்பாக்கம்</option>
                     <option value="ZWL003452" data-lat="12.931197" data-lng="80.182327">மேடவாக்கம்</option>
-                    <option value="ZWL009897" data-lat="13.282298" data-lng="80.266616">மீஞ்சூர்</option>
+                    <!-- <option value="ZWL009897" data-lat="13.282298" data-lng="80.266616">மீஞ்சூர்</option> -->
                     <option value="ZWL005857" data-lat="13.080365" data-lng="80.175724">முகப்பேர்</option>
                     <option value="ZWL008548" data-lat="13.014886" data-lng="80.152455">முகலிவாக்கம்</option>  
                     <option value="ZWL001141" data-lat="12.841923" data-lng="80.209025">நாவலூர்</option>
@@ -522,7 +522,7 @@ function loadAllLocalities() {
                 "ZWL008876": "ஆவடி",
                 "ZWL003387": "கீழ்ப்பாக்கம்",
                 "ZWL003452": "மேடவாக்கம்",
-                "ZWL009897": "மீஞ்சூர்",
+                // "ZWL009897": "மீஞ்சூர்",
                 "ZWL005857": "முகப்பேர்",
                 "ZWL008548": "முகலிவாக்கம்",
                 "ZWL001141": "நாவலூர்",
@@ -563,6 +563,7 @@ function loadAllLocalities() {
             for (const row of weatherData) {
                 const localityId = row[localityIndex];
                 const localityName = localityMap[localityId] || "Unknown Area"; 
+                if (localityName === "Unknown Area") continue;
                 const rainIntensityStatus = parseFloat(row[rainIntensityIndex]);
                 const rainStatus = rainIntensityStatus > 0 ? 'மழை' : 'மழை-இல்லை';
 
