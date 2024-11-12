@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>சரிபார்க்கப்பட்ட மழை உதவி எண்கள் - News of சென்னை</title>
+    <meta property="og:title" content="சரிபார்க்கப்பட்ட மழை உதவி எண்கள் - News of சென்னை" />
+    <meta property="og:description" content="News of சென்னை ஒரு குடிமக்கள் சேவையாகும். இந்த பக்கம் மழை தொடர்பான உதவிகளுக்கு சரி பார்க்கப்பட்ட தொடர்பு தகவல்களை வழங்குகிறது, அதில் நீர் தேக்கம், மின்சாரப் பிரச்சினைகள், மரங்கள் விழுதல் போன்றவற்றை புகாரளிக்கவும் உதவி பெறவும்  முடியும். குடிமக்கள் இந்தத் தகவல்களை உதவி பெற பயன்படுத்தலாம்." />
+    <meta property="og:image" content="https://newsofchennai.in/Banners/rain-helplines.png" />
+    <meta property="og:url" content="https://newsofchennai.in/Rain-helplines.html" />
+    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            /* width: 80%; */
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        /* th {
+            background-color: #f8f8f8;
+        } */
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            th, td {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 0.9em;
+            }
+            th, td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+            #some-help {
+                font-size: 10px;
+            }
+        }
+
+        @media (min-width: 768px) { /* Adjust the breakpoint as needed */
+            .banner-img {
+                width: 80%; /* Set the desired width for desktop view */
+                max-width: 800px; /* Optional: Set a max width */
+            }
+            #some-help {
+                font-size: 14px;
+            }
+        }
+
+        /* Scroll-to-top button */
+        #scrollUp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+        }
+        #scrollUp:hover {
+            background-color: #155bb5;
+        }
+
+        .modal-content {
+            background-color: rgb(233, 230, 230); /* Mild grey background */
+            color: black;
+            max-height: 80vh; /* Set max height for modal */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .modal-content table, 
+        .modal-content th, 
+        .modal-content td {
+            border: 1px solid black;
+        }
+
+        .modal-header, .modal-footer {
+            border-color: black;
+        }
+        .close-btn {
+            background-color: transparent;
+            border: none;
+            color: #007bff;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #0056b3;
+        }
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<!-- Main Content -->
+<div class="container" style="padding-left: 1rem;">
+    <div class="text-center">
+        <a href="index.html">
+            <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+        </a>
+        <!-- Top Ribbon -->
+        <div class="top-ribbon">
+            <a href="index.html" class="btn icon-circle" aria-label="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="Rain-helplines-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+            </a>
+            <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <i id="theme-icon" class="fas fa-moon"></i>
+            </button>
+            
+            <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+        </div>
+    </div>
+    <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+    <hr>
+    
+    <center>        
+        <p style="font-size: 22px;font-weight:bold;"> Verified Helplines</p>
+        <p id="some-help" style="font-weight: bold;color:crimson;max-width: 800px;">Some helplines may not be available during periods of high call volume. An alternative option is to reach out to your area councillor.</p> <!--or designated IAS officer appointed by TN Govt.-->
+        <div style="border: 2px solid #ccc; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 600px; margin: 0 auto;font-size: 14px;">
+            <p>To know your zone and ward - <a href="know-you-ward.html">Click here</a></p>
+            <hr>
+            <p>Ward-wise councillors - <a href="councillor-contact.html">Contact numbers</a></p>
+            <!-- <hr>
+            <p style="margin-bottom: 0;">Designated IAS officers - 
+                <a href="#" onclick="openIasPopup()">Contact numbers</a>
+            </p> -->
+        </div>
+        
+    </center>
+    <!-- IAS officers numbers-->
+    <div id="IASpopupModal" style="display:none;">
+        <div class="modal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);">
+            <div class="modal-dialog" style="position:relative;width:80%;max-width:800px;margin:5% auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">IAS Officers in-charge <br> Chennai Rains</h5>
+                        <button type="button" class="close-btn" onclick="closeIasPopup()">✖</button>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Zone</th>
+                                    <th>IAS Officer In-Charge</th>
+                                    <th>Mobile</th>
+                                    <th>Landline</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Dr.G.S Sameeran</td>
+                                    <td><a href="https://wa.me/9600038071">9600038071</a></td>
+                                    <td><a href="tel:04429585823">04429585823</a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>P. Kumaravel Pandian</td>
+                                    <td><a href="https://wa.me/9150238111">9150238111</a></td>
+                                    <td><a href="tel:04428524643">04428524643</a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>J. Meghanatha Reddy</td>
+                                    <td><a href="https://wa.me/7823925700">7823925700</a></td>
+                                    <td><a href="tel:04425612011">04425612011</a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>R. Kannan</td>
+                                    <td><a href="https://wa.me/7845599733">7845599733</a></td>
+                                    <td><a href="tel:0442152200">0442152200</a></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Johny T Vargehese</td>
+                                    <td><a href="https://wa.me/5500656753">5500656753</a></td>
+                                    <td><a href="tel:04426425082">04426425082</a></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>B Ganesan</td>
+                                    <td><a href="https://wa.me/9342369099">9342369099</a></td>
+                                    <td><a href="tel:04429585992">04429585992</a></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>S.A.Raman</td>
+                                    <td><a href="https://wa.me/9445883226">9445883226</a></td>
+                                    <td><a href="tel:04424954360">04424954360</a></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Shreya P. Singh</td>
+                                    <td><a href="https://wa.me/9444094205">9444094205</a></td>
+                                    <td><a href="tel:04428173403">04428173403</a></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>M. Prathap</td>
+                                    <td><a href="https://wa.me/9952218877">9952218877</a></td>
+                                    <td><a href="tel:04425670074">04425670074</a></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Dr.S. Visakan</td>
+                                    <td><a href="https://wa.me/9677066999">9677066999</a></td>
+                                    <td><a href="tel:04428521201">4428521201</a></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>A.Sivagnanam</td>
+                                    <td><a href="https://wa.me/9444341856">9444341856</a></td>
+                                    <td><a href="tel:04428415618">04428415618</a></td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Dr.S. Prabhakar</td>
+                                    <td><a href="https://wa.me/9363646574">9363646574</a></td>
+                                    <td><a href="tel:04429862107">04429862107</a></td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Dr. K. Senthil Raj</td>
+                                    <td><a href="https://wa.me/7397770020">7397770020</a></td>
+                                    <td><a href="tel:04445261771">04445261771</a></td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Mageswari Ravikumar</td>
+                                    <td><a href="https://wa.me/9445001100">9445001100</a></td>
+                                    <td><a href="tel:04424338714">04424338714</a></td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>P. Uma Maheswari</td>
+                                    <td><a href="https://wa.me/9445195008">9445195008</a></td>
+                                    <td><a href="tel:04424339830">04424339830</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="close-btn" onclick="closeIasPopup()">✖</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Electricity helpline numbers -->
+    <div id="EBpopupModal" style="display:none;">
+        <div class="modal-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);">
+            <div class="modal-dialog" style="position:relative;width:80%;max-width:800px;margin:5% auto;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nodal Officers Contact Information</h5>
+                        <button type="button" class="close-btn" onclick="closeEbPopup()">✖</button>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Zone</th>
+                                    <th>Nodal Officer</th>
+                                    <th>Mobile</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Zone I <br>Thiruvottriyur</td>
+                                    <td>Er. Jagadish Kumar</td>
+                                    <td><a href="tel:9445850889">9445850889</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone II <br>Manali</td>
+                                    <td>Er. Rengaraj</td>
+                                    <td><a href="tel:9445850871">9445850871</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone III <br>Madhavaram</td>
+                                    <td>Er. SoundharRajan</td>
+                                    <td><a href="tel:9445850344">9445850344</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone IV <br>Tondiarpet</td>
+                                    <td>Er. R. Suja</td>
+                                    <td><a href="tel:9445850900">9445850900</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone V <br>Royapuram</td>
+                                    <td>Er. Premkumar</td>
+                                    <td><a href="tel:9445850686">9445850686</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone VI <br>Thiru.Vi.Ka Nagar</td>
+                                    <td>Er. C. Jayachandran</td>
+                                    <td><a href="tel:9445850909">9445850909</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone VII <br>Ambattur</td>
+                                    <td>Er. Malaivendhan</td>
+                                    <td><a href="tel:9445850311">9445850311</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone VIII <br>Anna Nagar</td>
+                                    <td>Er. Anbarasu</td>
+                                    <td><a href="tel:9445850286">9445850286</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone IX <br>Teynampet</td>
+                                    <td>Er. Udayakumar</td>
+                                    <td><a href="tel:9445850717">9445850717</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone X <br>Kodambakkam</td>
+                                    <td>Er. Venkatesan</td>
+                                    <td><a href="tel:9445850727">9445850727</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XI <br>Valasaravakkam</td>
+                                    <td>Er. Velmurugan</td>
+                                    <td><a href="tel:9445850202">9445850202</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XII <br>Alandur</td>
+                                    <td>Er. Naresh Babu</td>
+                                    <td><a href="tel:9445850179">9445850179</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XIII <br>Adyar</td>
+                                    <td>Er. Ramu</td>
+                                    <td><a href="tel:9445850555">9445850555</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XIV <br>Perungudi</td>
+                                    <td>Er. M. Balasubramanian</td>
+                                    <td><a href="tel:9500659827">9500659827</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Zone XV <br>Sholinganallur</td>
+                                    <td>Er. Premkumar</td>
+                                    <td><a href="tel:9445850164">9445850164</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="close-btn" onclick="closeEbPopup()">✖</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <!-- Table with helpline numbers -->
+    <table>
+        <thead>
+            <tr>
+                <th>Helpline</th>
+                <th>Number / Website</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Chennai Corporation</td>
+                <td>
+                    <a href="tel:1913">1913</a> | 
+                    <a href="tel:04425619204">04425619204</a> 
+                    <a href="tel:04425619206">04425619206</a>
+                    <!--<a href="https://wa.me/91944547720" target="_blank">WhatsApp</a>-->
+                </td>
+                <td>Report Flood Grievances, Water Logging</td>
+            </tr>
+            <tr>
+                <td>Chennai Police - Disaster Response Control Room</td>
+                <td>
+                    <a href="GCP-NorthZone.pdf" target="_blank">North Zone</a> | 
+                    <a href="GCP-SouthZone.pdf" target="_blank">South Zone</a> |
+                    <a href="GCP-EastZone.pdf" target="_blank">East Zone</a> |
+                    <a href="GCP-WestZone.pdf" target="_blank">West Zone</a> 
+                    <a href="https://chennaicorporation.gov.in/gcc/about-GCC/about-chennai/police-station/" target="_blank">Know your Police Zone</a>
+                </td>
+                <td>Greater Chennai Police has set up Disaster Response Teams, For assistance, contact nearby police officers</td>
+            </tr>
+            <tr>
+                <td>Disaster Management (TNSDMA)</td>
+                <td><a href="tel:1070">1070</a> | <a href="tel:1077">1077</a></td>
+                <td>State Disaster Management helplines</td>
+            </tr>
+            <tr>
+                <td>Relief Centers and Cooking Centers</td>
+                <td>
+                    <a href="Relief-Centers.pdf" target="_blank">Relief Centers</a> | 
+                    <a href="Cooking-Centers.pdf" target="_blank">Cooking Centers</a>
+                </td>
+                <td>For people in need of relief centers in low-lying areas</td>
+            </tr>
+            <tr>
+                <td>Electricity / Power (TANGEDCO)</td>
+                <td>
+                    <a href="tel:9498794987">9498794987</a> | <a href="#" onclick="openEbPopup()">Zone-wise Helpline</a> |
+                    <a href="https://ccms.tangedco.org/tangedco-public/" target="_blank">Register Online</a>
+                </td>
+                <td>Report power failure or hazardous power situations</td>
+            </tr>
+            <tr>
+                <td>Water Supply and Sewerage (CMWSSB)</td>
+                <td>
+                    <a href="tel:04445674567">04445674567</a> | 
+                    <a href="http://chennaimetrowater.in/publicfeedback.php" target="_blank">Register Online</a>
+                </td>
+                <td>Metro Water and Removal of Sewage Overflow</td>
+            </tr>
+            <tr>
+                <td>Snake or Wildlife Rescue</td>
+                <td>
+                    <a href="tel:04422200335">04422200335</a> | 
+                    <a href="https://x.com/chennaicorp/status/1731429763062128770/photo/1" target="_blank">Area wise numbers</a>
+                </td>
+                <td>Call in case of snake spotted in a threatening situation</td>
+            </tr>
+            <tr>
+                <td>Animal Helplines</td>
+                <td>
+                    Blue Cross - <a href="tel:9677297978">9677297978</a> |
+                    BMAD 1 - <a href="tel:9841631014">9841631014</a> |
+                    BMAD 2 - <a href="tel:9841588852">9841588852</a> |
+                    BMAD 3 - <a href="tel:9176160685">9176160685</a>
+                </td>
+                <td>Animal helplines are for emergencies only. Please note that these are volunteer numbers, so be mindful of the need.</td>
+            </tr>
+            <tr>
+                <td>LPG Gas Leakage</td>
+                <td><a href="tel:1906">1906</a></td>
+                <td>Report Gas Leakage - All Gas Suppliers</td>
+            </tr>
+            <tr>
+                <td>Southern Railways</td>
+                <td>
+                    <a href="tel:139">139</a> | <a href="tel:04425330952">04425330952</a> | <a href="tel:04425330953">04425330953</a>
+                    <a href="https://enquiry.indianrail.gov.in/mntes/" target="_blank">Enquire Online</a>
+                </td>
+                <td>Train Enquiry System for Central, Egmore, and Tambaram stations</td>
+            </tr>
+            <tr>
+                <td>Chennai Metrorail</td>
+                <td>
+                    <a href="tel:18604251515">18604251515</a> | 
+                    <a href="https://chennaimetrorail.org/wp-content/uploads/2023/11/Line-Map.pdf" target="_blank">Route Map</a>
+                </td>
+                <td>Assistance regarding Chennai Metro Rail operations</td>
+            </tr>
+            <tr>
+                <td>Chennai Airport</td>
+                <td>
+                    T1 Domestic: <a href="tel:04422563100">04422563100</a>, <a href="tel:04422563101">04422563101</a>, <a href="tel:8056220066">8056220066</a><br>
+                    T2 Intl: <a href="tel:04422565100">04422565100</a>, <a href="tel:04422565101">04422565101</a>, <a href="tel:8056220077">8056220077</a><br>
+                    T4 Domestic: <a href="tel:04422563600">04422563600</a>, <a href="tel:04422563601">04422563601</a>, <a href="tel:7845792544">7845792544</a>
+                    <br><a href="https://www.avionio.com/en/airport/maa/departures" target="_blank">Departure Status</a><br>
+                    <a href="https://www.avionio.com/en/airport/maa/arrivals" target="_blank">Arrival Status</a>
+                </td>
+                <td>For all queries regarding both domestic and international airport departures and arrivals</td>
+            </tr>
+            <tr>
+                <td>MTC (Metropolitan Transport Corporation)</td>
+                <td>
+                    <a href="tel:9445030516">9445030516</a> | 
+                    <a href="tel:149">149</a>
+                </td>
+                <td>Check if MTC buses are operating in certain routes</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="font-size: 12px;font-style: italic;">*Last updated: This list was collated and verified by News of Chennai on October 28 01:15 AM</p>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollUp" title="Go to top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function openIasPopup() {
+            document.getElementById("IASpopupModal").style.display = "block";
+        }
+        
+        function closeIasPopup() {
+            document.getElementById("IASpopupModal").style.display = "none";
+        }
+        function openEbPopup() {
+            document.getElementById("EBpopupModal").style.display = "block";
+        }
+        
+        function closeEbPopup() {
+            document.getElementById("EBpopupModal").style.display = "none";
+        }        
+    
+        // Scroll to Top Functionality
+        window.onscroll = function() {
+            scrollFunction();
+        };
+    
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("scrollUp").style.display = "block";
+            } else {
+                document.getElementById("scrollUp").style.display = "none";
+            }
+        }
+    
+        function scrollToTop() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+        }
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+    </body>
+    </html>
+    
