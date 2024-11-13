@@ -258,6 +258,13 @@
             margin-bottom:10px; 
             font-size: 14px;
         }
+        .leaflet-popup-content {
+            margin: 10px 20px;
+            line-height: .5;
+            font-size: 13px;
+            font-size: 1em;
+            min-height: 0px;
+        }
         @media (max-width: 768px) {
             #weather-table {
                 font-size: 12px; /* Adjusts font size for smaller screens */
@@ -407,6 +414,9 @@
         </div>
     </div>
 
+   
+    
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
     // Open the modal
@@ -457,9 +467,9 @@
     }
 
     // Initialize the map
-    const map = L.map('map').setView([13.116018, 80.231667], 10); //avadi - 13.114656, 80.089645
+    const map = L.map('map').setView([13.026018, 80.131667], 10); //avadi - 13.114656, 80.089645
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 14
+    maxZoom: 19
 }).addTo(map);
 
 let marker;
@@ -467,7 +477,7 @@ let marker;
 function showRainInfo(location, rainIntensity) {
     const popupContent = `
         <div class="popup-content">
-            <p>${location.name}</p>
+            <p><strong>${location.name}</strong></p>
             <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
         </div>
     `;
@@ -623,7 +633,7 @@ function loadAllLocalities() {
                     // Optionally, bind a popup to show details when clicked
                     marker.bindPopup(`
                     <div class="popup-content">
-                        <p>${localityName}</p>
+                        <p><strong>${localityName}</strong></p>
                         <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
                     </div>
                     `,{

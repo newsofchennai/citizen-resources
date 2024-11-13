@@ -310,6 +310,13 @@
         #closeNudgeModal:hover {
             background-color: #357ae8;
         }
+        .leaflet-popup-content {
+            margin: 10px 20px;
+            line-height: .5;
+            font-size: 13px;
+            font-size: 1em;
+            min-height: 0px;
+        }
 
     </style>
     <link href="styles.css" rel="stylesheet">
@@ -788,7 +795,7 @@ function showRainInfo(location, rainIntensity) {
 
     const popupContent = `
         <div class="popup-content">
-            <p>${location.name}</p>
+            <p><strong>${location.name}</strong></p>
             <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
         </div>
     `;
