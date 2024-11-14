@@ -589,6 +589,20 @@ function loadAllLocalities() {
                 const rainAccumulation = isNaN(parseFloat(row[rainAccumulationIndex])) ? 'தரவு இல்லை' : row[rainAccumulationIndex];
                 const lastFetched = row[lastFetchedIndex] || 'தரவு இல்லை';
 
+                // Determine rain intensity description
+                let rainDescription;
+                if (rainIntensity <= 10) {
+                    rainDescription = 'மென்மையான மழை';
+                } else if (rainIntensity <= 20) {
+                    rainDescription = 'மிதமான மழை';
+                } else if (rainIntensity <= 30) {
+                    rainDescription = 'பலத்த மழை';
+                } else if (rainIntensity <= 50) {
+                    rainDescription = 'மிகப்  பலத்த மழை';
+                } else {
+                    rainDescription = 'கன மழை';
+                }
+
                 // Create table row for each locality
                 const tableRow = document.createElement('tr');
                 tableRow.innerHTML = `
@@ -635,6 +649,7 @@ function loadAllLocalities() {
                     <div class="popup-content">
                         <p><strong>${localityName}</strong></p>
                         <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
+                        <p><strong>${rainDescription}</strong></p>
                     </div>
                     `,{
                         offset: L.point(0, -10)  // This moves the popup 40 pixels upwards

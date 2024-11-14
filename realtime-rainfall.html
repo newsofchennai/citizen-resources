@@ -464,30 +464,30 @@
     }
 
     // Example function for categorizing rainfall amount
-    function getRainfallCategory(rainAmount) {
-        if (isNaN(rainAmount)) return "No data available";
-        if (rainAmount === 0) return "No Rain";
-        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
-        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
-        if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
-        if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
-        if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
-        if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
-        return "Extreme Rainfall"; // for cases above 204.4 mm
-    }
+    // function getRainfallCategory(rainAmount) {
+    //     if (isNaN(rainAmount)) return "No data available";
+    //     if (rainAmount === 0) return "No Rain";
+    //     if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
+    //     if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
+    //     if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
+    //     if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
+    //     if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
+    //     if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
+    //     return "Extreme Rainfall"; // for cases above 204.4 mm
+    // }
     
     // Helper function to classify rainfall according to IMD standards
-    function getRainfallCategory(rainAmount) {
-        if (isNaN(rainAmount)) return "No data available";
-        if (rainAmount === 0) return "No Rain";
-        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
-        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
-        if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
-        if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
-        if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
-        if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
-        return "Extreme Rainfall"; // for cases above 204.4 mm
-    }
+    // function getRainfallCategory(rainAmount) {
+    //     if (isNaN(rainAmount)) return "No data available";
+    //     if (rainAmount === 0) return "No Rain";
+    //     if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
+    //     if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
+    //     if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
+    //     if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
+    //     if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
+    //     if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
+    //     return "Extreme Rainfall"; // for cases above 204.4 mm
+    // }
 
     // Initialize the map
     const map = L.map('map').setView([13.026018, 80.131667], 10); //avadi - 13.114656, 80.089645
@@ -611,6 +611,20 @@ function loadAllLocalities() {
                 const rainAccumulation = isNaN(parseFloat(row[rainAccumulationIndex])) ? 'No data' : row[rainAccumulationIndex];
                 const lastFetched = row[lastFetchedIndex] || 'No data';
 
+                // Determine rain intensity description
+                let rainDescription;
+                if (rainIntensity <= 10) {
+                    rainDescription = 'Light spell';
+                } else if (rainIntensity <= 20) {
+                    rainDescription = 'Moderate spell';
+                } else if (rainIntensity <= 30) {
+                    rainDescription = 'Intense spell';
+                } else if (rainIntensity <= 50) {
+                    rainDescription = 'Very intense spell';
+                } else {
+                    rainDescription = 'Extremely intense spell';
+                }
+
                 // Create table row for each locality
                 const tableRow = document.createElement('tr');
                 tableRow.innerHTML = `
@@ -657,6 +671,7 @@ function loadAllLocalities() {
                     <div class="popup-content">
                         <p><strong>${localityName}</strong></p>
                         <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
+                        <p><strong>${rainDescription}</strong></p>
                     </div>
                     `,{
                         offset: L.point(0, -10)  // This moves the popup 40 pixels upwards
