@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5 நாள் வானிலை முன்னறிவிப்பு - News of சென்னை</title>
-    <meta property="og:title" content="5 நாள் வானிலை முன்னறிவிப்பு - News of சென்னை" />
-    <meta property="og:description" content="News of சென்னை ஒரு குடிமக்கள் சேவையாகும். இந்தப் பக்கம் வானிலை மாதிரிகள் மற்றும் இயக்கங்களின் அடிப்படையில் புதுப்பிக்கப்பட்டு 5 நாள் முன்னறிவிப்பை வழங்குகிறது. இந்த தரவுகள் நம்பகமான வானிலை முன்னறிவிப்பு வழங்குநர்களிடமிருந்து பெறப்பட்டவை." />
+    <title>வானிலை முன்னறிவிப்பு</title>
+    <meta property="og:title" content="வானிலை முன்னறிவிப்பு - News of சென்னை" />
+    <meta property="og:description" content="News of சென்னை ஒரு குடிமக்கள் சேவையாகும். இந்தப் பக்கம் வானிலை மாதிரிகள் மற்றும் இயக்கங்களின் அடிப்படையில் புதுப்பிக்கப்பட்டு முன்னறிவிப்பை வழங்குகிறது. இந்த தரவுகள் நம்பகமான வானிலை முன்னறிவிப்பு வழங்குநர்களிடமிருந்து பெறப்பட்டவை." />
     <meta property="og:image" content="https://newsofchennai.in/Banners/weather-forecast-ta.png" />
     <meta property="og:url" content="https://newsofchennai.in/weather-forecast-ta.html" />
     <meta property="og:type" content="website" />
@@ -28,6 +28,57 @@
             cursor: pointer;
             font-size: 18px;
             z-index: 999;
+        }
+        .accordion .card {
+            border: none;
+            /* border-radius: 10px; */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .accordion .card-header {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .accordion .card-header .header-content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .accordion .card-header h6 {
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 0;
+        }
+        .accordion .card-header large {
+            color: #333;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+        .accordion .card-body {
+            font-size: 16px;
+            color: #333;
+            padding: 15px 20px;
+        }
+        .accordion .chevron {
+            font-size: 18px;
+            color: #1a73e8;
+            transition: transform 0.3s ease;
+        }
+        .accordion .chevron.rotate {
+            transform: rotate(180deg);
+        }
+        .nowcast-iframe, .imd-iframe {
+            height: 500px;
+        }
+        @media (max-width: 450px) {
+            .nowcast-iframe, .imd-iframe {
+                height: 200px;
+            }
         }
     </style>
     <link href="styles.css" rel="stylesheet">
@@ -56,53 +107,54 @@
         <hr>
         <center><strong><h4>சென்னையின் வானிலை முன்னறிவிப்பு</h4></strong>
         </center>
-            <!--Chennai-->
-            <!-- <div id="weather-dark" class="tomorrow"
-               data-location-id="131517"
-               data-language="EN"
-               data-unit-system="METRIC"
-               data-skin="dark"
-               data-widget-type="upcoming"
-               style="padding-bottom:22px;position:relative;"
-            >
-              <a
-                href="https://www.tomorrow.io/weather-api/"
-                rel="nofollow noopener noreferrer"
-                target="_blank"
-                style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
-              >
-                <img
-                  alt="Powered by the Tomorrow.io Weather API"
-                  src="https://weather-website-client.tomorrow.io/img/powered-by.svg"
-                  width="250"
-                  height="18"
-                />
-              </a>
-            </div> -->
-            <!-- <div id="weather-light" class="tomorrow"
-                data-location-id="131517"
-                data-language="EN"
-                data-unit-system="METRIC"
-                data-skin="light"
-                data-widget-type="upcoming"
-                style="padding-bottom:22px;position:relative;"
-            >
-                <a
-                href="https://www.tomorrow.io/weather-api/"
-                rel="nofollow noopener noreferrer"
-                target="_blank"
-                style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
-                >
-                <img
-                    alt="Powered by the Tomorrow.io Weather API"
-                    src="https://weather-website-client.tomorrow.io/img/powered-by.svg"
-                    width="1174"
-                    height="18"
-                />
-                </a>
-            </div> -->
-                    
-                <div class="tomorrow"
+        <div class="accordion" id="weatherAccordion">
+            <!-- Accordion 1: IMD Nowcast for Chennai -->
+            <div class="card">
+                <div class="card-header" id="nowcastHeader" data-toggle="collapse" data-target="#nowcastContent" aria-expanded="false" aria-controls="nowcastContent">
+                    <div class="header-content">
+                        <h6><i class="fa-solid fa-cloud-sun"></i>&nbsp;&nbsp;சென்னைக்கான IMD நவ்காஸ்ட்</h6>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="nowcastContent" class="collapse" aria-labelledby="nowcastHeader" data-parent="#weatherAccordion">
+                    <div class="card-body text-left">
+                        <iframe class="nowcast-iframe" src="https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf&embedded=true" 
+                                width="100%" 
+                                style="border: none;">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Accordion 2: IMD Rainfall Warning -->
+            <div class="card">
+                <div class="card-header" id="rainfallHeader" data-toggle="collapse" data-target="#rainfallContent" aria-expanded="false" aria-controls="rainfallContent">
+                    <div class="header-content">
+                        <h6><i class="fa-solid fa-cloud-showers-heavy"></i>&nbsp;&nbsp;IMD மழை எச்சரிக்கை</h6> <!--  IMD மழைப்பொழிவு எச்சரிக்கை-->
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="rainfallContent" class="collapse" aria-labelledby="rainfallHeader" data-parent="#weatherAccordion">
+                    <div class="card-body text-left">
+                        <iframe class="imd-iframe" src="https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/heavy_rainfall.pdf&embedded=true" 
+                                width="100%" 
+                                style="border: none;">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Accordion 3: 5 Day Forecast -->
+            <div class="card">
+                <div class="card-header" id="fiveDayForecastHeader" data-toggle="collapse" data-target="#fiveDayForecastContent" aria-expanded="false" aria-controls="fiveDayForecastContent">
+                    <div class="header-content">
+                        <h6><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;5 நாள் முன்னறிவிப்பு</h6>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="fiveDayForecastContent" class="collapse" aria-labelledby="fiveDayForecastHeader" data-parent="#weatherAccordion">
+                    <div class="card-body text-left">
+                        <div class="tomorrow"
                    data-location-id="131517"
                    data-language="EN"
                    data-unit-system="METRIC"
@@ -123,38 +175,37 @@
                       height="18"
                     />
                   </a>
+                        </div>
+                        <br>
+                        <div class="text-left" style="font-size: 10px;"><em>இந்தப் பக்கத்தில் வழங்கப்படும் வானிலை முன்னறிவிப்பு வழிகாட்டலுக்காக மட்டுமே பயன்படுத்தப்படுகிறது. வானிலை நிலைமைகள் மாறுபடும் காற்றுமண்டல காரணிகளால் வேகமாக மாறக்கூடும், எனவே தற்போதைய தகவல்களுக்காக மீண்டும் அடிக்கடி சரிபார்க்கவும் மற்றும் அதிகாரப்பூர்வமான புதுப்பிப்புகளுக்காக இந்திய வானிலைத் துறை (IMD) அறிவுறுத்தல்களைப் பின்பற்றவும்.
+                        </em></div>
+                    </div>
                 </div>
-                <br>
-                <div class="text-left" style="font-size: 10px;"><em>இந்தப் பக்கத்தில் வழங்கப்படும் வானிலை முன்னறிவிப்பு வழிகாட்டலுக்காக மட்டுமே பயன்படுத்தப்படுகிறது. வானிலை நிலைமைகள் மாறுபடும் காற்றுமண்டல காரணிகளால் வேகமாக மாறக்கூடும், எனவே தற்போதைய தகவல்களுக்காக மீண்டும் அடிக்கடி சரிபார்க்கவும் மற்றும் அதிகாரப்பூர்வமான புதுப்பிப்புகளுக்காக இந்திய வானிலைத் துறை (IMD) அறிவுறுத்தல்களைப் பின்பற்றவும்.
-                </em></div>
-        <!-- Perungudi -->
-        <!-- <div class="tomorrow"
-            data-location-id="133426"
-            data-language="EN"
-            data-unit-system="METRIC"
-            data-skin="dark"
-            data-widget-type="upcoming"
-            style="padding-bottom:22px;position:relative;"
-            >
-            <a
-                href="https://www.tomorrow.io/weather-api/"
-                rel="nofollow noopener noreferrer"
-                target="_blank"
-                style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
-            >
-                <img
-                alt="Powered by the Tomorrow.io Weather API"
-                src="https://weather-website-client.tomorrow.io/img/powered-by.svg"
-                width="250"
-                height="18"
-                />
-            </a>
-        </div> -->
-        <!-- Scroll Up Button -->
+            </div>
+        
+            <!-- Accordion 4: 14 Day Forecast -->
+            <div class="card">
+                <div class="card-header" id="fourteenDayForecastHeader" data-toggle="collapse" data-target="#fourteenDayForecastContent" aria-expanded="false" aria-controls="fourteenDayForecastContent">
+                    <div class="header-content">
+                        <h6><i class="fa-solid fa-calendar-alt"></i>&nbsp;&nbsp;14 நாள் முன்னறிவிப்பு</h6>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="fourteenDayForecastContent" class="collapse" aria-labelledby="fourteenDayForecastHeader" data-parent="#weatherAccordion">
+                    <div class="card-body text-left">
+                        14 நாட்களுக்கு முன்னறிவிப்பை பெற <a href="https://meteologix.com/in/forecast/1264527-chennai/14-day-trend" target="_blank">Meteologix இணையதளத்தை</a> பார்க்கவும்
+                    </div>
+                </div>
+            </div>
+        </div>    
+        
+    <!-- Scroll Up Button -->
     <button id="scrollUpBtn" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </button>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
     // Show scroll-up button on scroll
     window.onscroll = function() {
@@ -165,23 +216,39 @@
             document.getElementById('scrollUpBtn').style.display = 'none';
         }
     };
-    </script>
-    <script src="script.js"></script>
-    <script>
-        (function(d, s, id) {
-            if (d.getElementById(id)) {
-                if (window.__TOMORROW__) {
-                    window.__TOMORROW__.renderWidget();
-                }
-                return;
-            }
-            const fjs = d.getElementsByTagName(s)[0];
-            const js = d.createElement(s);
-            js.id = id;
-            js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+    //accordion toggle
+    $(document).ready(function() {
+        // Toggle chevron rotation
+        $('.accordion .card-header').on('click', function() {
+            var chevron = $(this).find('.chevron');
+            
+            // Collapse other sections and reset their chevrons
+            $('.accordion .chevron').not(chevron).removeClass('rotate');
+            
+            // Toggle the current chevron rotation
+            chevron.toggleClass('rotate');
+        });
 
-            fjs.parentNode.insertBefore(js, fjs);
-        })(document, 'script', 'tomorrow-sdk');
+        // Reset chevron when section is collapsed by other means
+        $('.collapse').on('hidden.bs.collapse', function () {
+            $(this).parent().find('.chevron').removeClass('rotate');
+        });
+    });
+    // for tomorrow.io map
+    (function(d, s, id) {
+        if (d.getElementById(id)) {
+            if (window.__TOMORROW__) {
+                window.__TOMORROW__.renderWidget();
+            }
+            return;
+        }
+        const fjs = d.getElementsByTagName(s)[0];
+        const js = d.createElement(s);
+        js.id = id;
+        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+        fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'tomorrow-sdk');
     </script>
     <footer class="text-center mt-5" style="font-size: 12px;">
         <hr>
