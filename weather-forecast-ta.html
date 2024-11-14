@@ -111,24 +111,6 @@
         <center><strong><h4>சென்னையின் வானிலை முன்னறிவிப்பு</h4></strong>
         </center>
         <div class="accordion" id="weatherAccordion">
-            <!-- Accordion 1: IMD Nowcast for Chennai -->
-            <div class="card">
-                <div class="card-header" id="nowcastHeader" data-toggle="collapse" data-target="#nowcastContent" aria-expanded="false" aria-controls="nowcastContent">
-                    <div class="header-content">
-                        <h6><i class="fa-solid fa-cloud-sun"></i>&nbsp;&nbsp;சென்னைக்கான IMD நவ்காஸ்ட்</h6>
-                    </div>
-                    <i class="chevron fas fa-chevron-down"></i>
-                </div>
-                <div id="nowcastContent" class="collapse" aria-labelledby="nowcastHeader" data-parent="#weatherAccordion">
-                    <div class="card-body text-left">
-                        <iframe class="nowcast-iframe" src="https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf&embedded=true" 
-                                width="100%" 
-                                style="border: none;">
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        
             <!-- Accordion 2: IMD Rainfall Warning -->
             <div class="card">
                 <div class="card-header" id="rainfallHeader" data-toggle="collapse" data-target="#rainfallContent" aria-expanded="false" aria-controls="rainfallContent">
@@ -146,7 +128,25 @@
                     </div>
                 </div>
             </div>
-        
+            
+            <!-- Accordion 2: IMD Nowcast for Chennai -->
+            <div class="card">
+                <div class="card-header" id="nowcastHeader" data-toggle="collapse" data-target="#nowcastContent" aria-expanded="false" aria-controls="nowcastContent">
+                    <div class="header-content">
+                        <h6><i class="fa-solid fa-cloud-sun"></i>&nbsp;&nbsp;சென்னைக்கான IMD நவ்காஸ்ட்</h6>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="nowcastContent" class="collapse" aria-labelledby="nowcastHeader" data-parent="#weatherAccordion">
+                    <div class="card-body text-left">
+                        <iframe class="nowcast-iframe" src="https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf&embedded=true" 
+                                width="100%" 
+                                style="border: none;">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+               
             <!-- Accordion 3: 5 Day Forecast -->
             <div class="card">
                 <div class="card-header" id="fiveDayForecastHeader" data-toggle="collapse" data-target="#fiveDayForecastContent" aria-expanded="false" aria-controls="fiveDayForecastContent">
@@ -207,6 +207,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
     </div>
+    <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
