@@ -558,12 +558,12 @@
         const categories = [
             { range: "0 mm", label: "மழை இல்லை" },
             { range: "0.1 - 2.4 mm", label: "மிக லேசான மழை" },
-            { range: "2.5 - 7.5 mm", label: "லேசான மழை" },
-            { range: "7.6 - 35.5 mm", label: "மிதமான மழை" },
-            { range: "35.6 - 64.4 mm", label: "சற்றே கனமான மழை" },
+            { range: "2.5 - 15.5 mm", label: "லேசான மழை" },
+            { range: "15.6 - 64.4 mm", label: "மிதமான மழை" },
+            // { range: "35.6 - 64.4 mm", label: "சற்றே கனமான மழை" },
             { range: "64.5 - 115.5 mm", label: "கன மழை" },
             { range: "115.6 - 204.4 mm", label: "மிகவும் கன மழை" },
-            { range: "204.5+ mm", label: "தீவிரமான மழை" },
+            { range: "204.5+ mm", label: "அதி கன மழை" },
         ];
 
         categories.forEach(category => {
@@ -622,6 +622,18 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const rainfallCategory = getRainfallCategory(rainAccumulation);
                     const rainIntensityStatus = parseFloat(row[rainIntensityIndex]);
 
+                    let rainDescription;
+                    if (rainIntensity <= 10) {
+                        rainDescription = 'மென்மையான மழை';
+                    } else if (rainIntensity <= 20) {
+                        rainDescription = 'மிதமான மழை';
+                    } else if (rainIntensity <= 30) {
+                        rainDescription = 'பலத்த மழை';
+                    } else if (rainIntensity <= 50) {
+                        rainDescription = 'மிகப்  பலத்த மழை';
+                    } else {
+                        rainDescription = 'கன மழை';
+                    }
                     // Set rain or no rain status
                     const rainStatus = rainIntensityStatus > 0 ? 'மழை' : 'மழை-இல்லை';
                     const weatherIcon = rainStatus === 'Rain' 
@@ -637,7 +649,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
 
                     // Create the rain marker HTML
                     const rainMarkerHtml = `
-                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity})">
+                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity},'${rainDescription}')">
                             <div>${weatherIcon} ${rainStatus}</div>
                         </div>
                     `;
@@ -656,11 +668,11 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
                     map.setView([lat, lng], 13);
 
-                    showRainInfo(location, rainIntensity); 
+                    showRainInfo(location, rainIntensity, rainDescription); 
 
                     // Add click event to show detailed content with rain intensity when clicked
                     marker.on('click', function() {
-                        showRainInfo(location, rainIntensity);
+                        showRainInfo(location, rainIntensity, rainDescription);
                     });
 
                     // Update weather details in the content section
@@ -694,7 +706,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
         });
 }
 
-function showRainInfo(location, rainIntensity) {
+function showRainInfo(location, rainIntensity, rainDescription) {
     if (currentPopup) {
         map.closePopup(currentPopup);
     }
@@ -705,6 +717,8 @@ function showRainInfo(location, rainIntensity) {
             <div class="popup-content">
                 <p><strong>${location.name}</strong></p>
                 <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
+                <p><strong>${rainDescription}</strong></p>
+
             </div>
         `;
 

@@ -441,7 +441,7 @@
                 </div>
                 <div class="col-12 col-md-4 d-none d-md-block mb-2">
                     <a href="weather-forecast.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
-                        <i class="fa-solid fa-cloud-sun-rain"></i> 5 day Weather Forecast
+                        <i class="fa-solid fa-cloud-sun-rain"></i> Weather Forecast
                     </a>
                 </div>
                 <div class="col-12 col-md-4 d-none d-md-block mb-2">
@@ -639,9 +639,9 @@
         const categories = [
             { range: "0 mm", label: "No Rain" },
             { range: "0.1 - 2.4 mm", label: "Very Light Rain" },
-            { range: "2.5 - 7.5 mm", label: "Light Rain" },
-            { range: "7.6 - 35.5 mm", label: "Moderate Rain" },
-            { range: "35.6 - 64.4 mm", label: "Rather Heavy Rain" },
+            { range: "2.5 - 15.5 mm", label: "Light Rain" },
+            { range: "15.6 - 64.4 mm", label: "Moderate Rain" },
+            // { range: "35.6 - 64.4 mm", label: "Rather Heavy Rain" },
             { range: "64.5 - 115.5 mm", label: "Heavy Rain" },
             { range: "115.6 - 204.4 mm", label: "Very Heavy Rain" },
             { range: "204.5+ mm", label: "Extreme Rainfall" },
@@ -688,6 +688,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 let marker;
 let currentPopup = null;
+
 function fetchWeatherData(localityId, lat, lng, localityName) {
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
@@ -711,17 +712,27 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
             for (const row of weatherData) {
                 if (row[localityIndex] === localityId) {
                     found = true;
-                    const rainAccumulation = parseFloat(row[rainAccumulationIndex]);
                     const rainIntensity = parseFloat(row[rainIntensityIndex]);
+                    const rainAccumulation = parseFloat(row[rainAccumulationIndex]);
                     const rainfallCategory = getRainfallCategory(rainAccumulation);
-                    const rainIntensityStatus = parseFloat(row[rainIntensityIndex]);
 
-                    // Set rain or no rain status
-                    const rainStatus = rainIntensityStatus > 0 ? 'Rain' : 'No-Rain';
+                    let rainDescription;
+                    if (rainIntensity <= 10) {
+                        rainDescription = 'Light spell';
+                    } else if (rainIntensity <= 20) {
+                        rainDescription = 'Moderate spell';
+                    } else if (rainIntensity <= 30) {
+                        rainDescription = 'Intense spell';
+                    } else if (rainIntensity <= 50) {
+                        rainDescription = 'Very intense spell';
+                    } else {
+                        rainDescription = 'Extremely intense spell';
+                    }
+
+                    const rainStatus = rainIntensity > 0 ? 'Rain' : 'No-Rain';
                     const weatherIcon = rainStatus === 'Rain' 
                                     ? '<i class="fas fa-cloud-showers-heavy"></i>' 
                                     : '';  // Use sun icon for "No-Rain" <i class="fas fa-sun"></i>
-
 
                     // Define location for marker
                     const location = {
@@ -731,7 +742,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
 
                     // Create the rain marker HTML
                     const rainMarkerHtml = `
-                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity})">
+                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity}, '${rainDescription}')">
                             <div>${weatherIcon} ${rainStatus}</div>
                         </div>
                     `;
@@ -750,24 +761,23 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
                     map.setView([lat, lng], 13);
 
-                    showRainInfo(location, rainIntensity); 
+                    showRainInfo(location, rainIntensity, rainDescription); 
 
                     // Add click event to show detailed content with rain intensity when clicked
                     marker.on('click', function() {
-                        showRainInfo(location, rainIntensity);
+                        showRainInfo(location, rainIntensity, rainDescription);
                     });
-                    
 
                     // Update weather details in the content section
                     const weatherContent = `
-                            <div class="weather-content">
-                                <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;Temperature: ${row[temperatureIndex]}°C</span><br><br>                            
-                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong><br><br>
-                                <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[humidityIndex]}%</span><br>
-                                <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;Wind Speed: ${row[windSpeedIndex]} m/s</span><br><br>
-                                <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;Last Updated: ${row[lastFetchedIndex]}</span>
-                            </div>
-                        `;
+                        <div class="weather-content">
+                            <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;Temperature: ${row[temperatureIndex]}°C</span><br><br>                            
+                            <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong><br><br>
+                            <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[humidityIndex]}%</span><br>
+                            <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;Wind Speed: ${row[windSpeedIndex]} m/s</span><br><br>
+                            <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;Last Updated: ${row[lastFetchedIndex]}</span>
+                        </div>
+                    `;
                     document.getElementById('weatherContent').innerHTML = weatherContent;
                     document.getElementById('selectedLocality').innerText = localityName;
                     break;
@@ -787,8 +797,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
             document.getElementById('weatherContent').innerHTML = 'Failed to retrieve weather data.';
         });
 }
-
-function showRainInfo(location, rainIntensity) {
+function showRainInfo(location, rainIntensity, rainDescription) {
     if (currentPopup) {
         map.closePopup(currentPopup);
     }
@@ -796,18 +805,21 @@ function showRainInfo(location, rainIntensity) {
     const popupContent = `
         <div class="popup-content">
             <p><strong>${location.name}</strong></p>
-            <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
+            <p>Rain Intensity: ${rainIntensity} mm/h</p>
+            <p><strong>${rainDescription}</strong></p>
         </div>
     `;
 
-    // Display the popup with an offset to position it above the rain status
-    currentPopup = L.popup({ 
-        closeButton: true,        
-        offset: [0, -25]  // Offset to position the popup above rain status
-    })
-        .setLatLng(location.coords)
-        .setContent(popupContent)
-        .openOn(map);
+    // Adding a delay of 100ms and offset to position the popup above the marker
+    setTimeout(() => {
+        currentPopup = L.popup({
+            closeButton: true,        
+            offset: [0, -25]  // Offset to position the popup above rain status
+        })
+            .setLatLng(location.coords)
+            .setContent(popupContent)
+            .openOn(map);
+    }, 100);  // Delay of 100ms
 }
 
 // Event listener for locality selection
