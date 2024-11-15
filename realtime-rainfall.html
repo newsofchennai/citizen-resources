@@ -613,17 +613,20 @@ function loadAllLocalities() {
 
                 // Determine rain intensity description
                 let rainDescription;
-                if (rainIntensity <= 10) {
+                if (rainIntensity == 0) {
+                    rainDescription = 'No Rain'; 
+                } else if (rainIntensity > 0 && rainIntensity <= 10) {
                     rainDescription = 'Light spell';
-                } else if (rainIntensity <= 20) {
+                } else if (rainIntensity > 10.1 && rainIntensity <= 20) {
                     rainDescription = 'Moderate spell';
-                } else if (rainIntensity <= 30) {
+                } else if (rainIntensity > 20.1 && rainIntensity <= 30) {
                     rainDescription = 'Intense spell';
-                } else if (rainIntensity <= 50) {
+                } else if (rainIntensity > 30.1 && rainIntensity <= 50) {
                     rainDescription = 'Very intense spell';
-                } else {
+                } else if (rainIntensity > 50.1 && rainIntensity <= 100) {
                     rainDescription = 'Extremely intense spell';
                 }
+
 
                 // Create table row for each locality
                 const tableRow = document.createElement('tr');

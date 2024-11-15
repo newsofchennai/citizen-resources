@@ -717,17 +717,20 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const rainfallCategory = getRainfallCategory(rainAccumulation);
 
                     let rainDescription;
-                    if (rainIntensity <= 10) {
+                    if (rainIntensity == 0) {
+                        rainDescription = 'No Rain'; 
+                    } else if (rainIntensity > 0 && rainIntensity <= 10) {
                         rainDescription = 'Light spell';
-                    } else if (rainIntensity <= 20) {
+                    } else if (rainIntensity > 10.1 && rainIntensity <= 20) {
                         rainDescription = 'Moderate spell';
-                    } else if (rainIntensity <= 30) {
+                    } else if (rainIntensity > 20.1 && rainIntensity <= 30) {
                         rainDescription = 'Intense spell';
-                    } else if (rainIntensity <= 50) {
+                    } else if (rainIntensity > 30.1 && rainIntensity <= 50) {
                         rainDescription = 'Very intense spell';
-                    } else {
+                    } else if (rainIntensity > 50.1 && rainIntensity <= 100) {
                         rainDescription = 'Extremely intense spell';
                     }
+
 
                     const rainStatus = rainIntensity > 0 ? 'Rain' : 'No-Rain';
                     const weatherIcon = rainStatus === 'Rain' 

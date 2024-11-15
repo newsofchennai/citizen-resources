@@ -623,15 +623,17 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const rainIntensityStatus = parseFloat(row[rainIntensityIndex]);
 
                     let rainDescription;
-                    if (rainIntensity <= 10) {
+                    if (rainIntensity == 0) {
+                    rainDescription = 'மழை-இல்லை'; 
+                    } else if (rainIntensity > 0 && rainIntensity <= 10) {
                         rainDescription = 'மென்மையான மழை';
-                    } else if (rainIntensity <= 20) {
+                    } else if (rainIntensity > 10.1 && rainIntensity <= 20) {
                         rainDescription = 'மிதமான மழை';
-                    } else if (rainIntensity <= 30) {
+                    } else if (rainIntensity > 20.1 && rainIntensity <= 30) {
                         rainDescription = 'பலத்த மழை';
-                    } else if (rainIntensity <= 50) {
+                    } else if (rainIntensity > 30.1 && rainIntensity <= 50) {
                         rainDescription = 'மிகப்  பலத்த மழை';
-                    } else {
+                    } else if (rainIntensity > 50.1 && rainIntensity <= 100) {
                         rainDescription = 'கன மழை';
                     }
                     // Set rain or no rain status
