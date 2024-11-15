@@ -591,9 +591,7 @@ function loadAllLocalities() {
 
                 // Determine rain intensity description
                 let rainDescription;
-                if (rainIntensity = 0) {
-                    rainDescription = 'மழை-இல்லை';
-                } else if (rainIntensity <= 10) {
+                if (rainIntensity <= 10) {
                     rainDescription = 'மென்மையான மழை';
                 } else if (rainIntensity <= 20) {
                     rainDescription = 'மிதமான மழை';
