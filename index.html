@@ -717,9 +717,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const rainfallCategory = getRainfallCategory(rainAccumulation);
 
                     let rainDescription;
-                    if (rainIntensity = 0) {
-                        rainDescription = 'No Rain'; 
-                    } else if (rainIntensity <= 10) {
+                    if (rainIntensity <= 10) {
                         rainDescription = 'Light spell';
                     } else if (rainIntensity <= 20) {
                         rainDescription = 'Moderate spell';
