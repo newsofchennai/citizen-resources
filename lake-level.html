@@ -155,12 +155,12 @@
                 <div class="dropdown">
                     <label for="reservoir-select">Select Reservoir:</label>
                     <select id="reservoir-select">
-                        <option value="CHEMBARAMBAKKAM" data-current="54.24">CHEMBARAMBAKKAM</option>
+                        <!-- <option value="CHEMBARAMBAKKAM" data-current="54.24">CHEMBARAMBAKKAM</option>
                         <option value="CHOLAVARAM" data-current="10.64">CHOLAVARAM</option>                    
                         <option value="KANNANKOTTAI THERVOY KANDIGAI" data-current="61.20">KANNANKOTTAI THERVOY KANDIGAI</option>
                         <option value="POONDI" data-current="15.82">POONDI</option>
                         <option value="PUZHAL" data-current="71.73">PUZHAL</option>
-                        <option value="VEERANAM" data-current="62.37">VEERANAM</option>
+                        <option value="VEERANAM" data-current="62.37">VEERANAM</option> -->
                     </select>
                 </div>
             </div>
@@ -188,33 +188,49 @@
         </footer>
     </div>
     <script>
-        // Function to update water levels based on selected reservoir
-        function updateWaterLevels() {
+        document.addEventListener("DOMContentLoaded", () => {
             const select = document.getElementById('reservoir-select');
-            const selectedOption = select.options[select.selectedIndex];
-            const currentLevel = selectedOption.getAttribute('data-current');
+            const currentLevelElem = document.getElementById('current-level');
+            const currentDateElem = document.getElementById('current-date');
+            const waterLevelElem = document.getElementById('water-level');
 
-            // Update the water level displayed
-            document.getElementById('current-level').textContent = currentLevel;
+            // Fetch JSON data
+            fetch('lake-data.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Set global "last updated" date
+                    currentDateElem.textContent = data.lastUpdated;
 
-            // Set the heights of the water level relative to the container height
-            const containerHeight = 150; // height of the water container
-            const percentageHeight = (currentLevel / 100) * containerHeight; // calculate height based on percentage
-            document.getElementById('water-level').style.height = `${percentageHeight}px`; // set height
-        }
+                    // Populate dropdown with reservoirs
+                    data.reservoirs.forEach(reservoir => {
+                        const option = document.createElement('option');
+                        option.value = reservoir.name;
+                        option.textContent = reservoir.name; // Default language
+                        option.setAttribute('data-current', reservoir.current);
+                        select.appendChild(option);
+                    });
 
-        // Set current date
-        const date = new Date();
-        //const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`; // if value is updated on current date
-        const formattedDate = '21-11-2024' //if data is past date
-        document.getElementById('current-date').textContent = formattedDate;
+                    // Update water levels
+                    updateWaterLevels();
 
-        // Update water levels on page load
-        updateWaterLevels();
+                    // Add event listener for dropdown changes
+                    select.addEventListener('change', updateWaterLevels);
+                })
+                .catch(error => console.error('Error loading JSON:', error));
 
-        // Add event listener to update water levels on dropdown change
-        document.getElementById('reservoir-select').addEventListener('change', () => {
-            updateWaterLevels();
+            // Function to update water levels
+            function updateWaterLevels() {
+                const selectedOption = select.options[select.selectedIndex];
+                const currentLevel = selectedOption.getAttribute('data-current');
+
+                // Update current level
+                currentLevelElem.textContent = currentLevel;
+
+                // Adjust water level height
+                const containerHeight = 150; // height of water container
+                const percentageHeight = (currentLevel / 100) * containerHeight;
+                waterLevelElem.style.height = `${percentageHeight}px`;
+            }
         });
     </script>
     <script src="script.js"></script>
