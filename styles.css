@@ -7,6 +7,14 @@ body {
     text-align: center;    
     font-family: 'Arimo', sans-serif ;
 }
+.page-heading {
+    color: darkblue;
+}
+
+body.dark-mode .page-heading {
+    color: white;
+}
+
 @media (min-width: 768px) { /* Adjust the breakpoint as needed */
     .banner-img {
         width: 80%; /* Set the desired width for desktop view */
