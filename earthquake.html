@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Earthquake</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
+    <style>
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="#" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+        <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <header>
+        <!-- <h4>Earthquake Data</h4> -->
+        <h5 class="page-heading"><i class="fas fa-wave-square"></i> Earthquake Data</h5> 
+
+      </header>
+      <!-- <iframe src="https://riseq.seismo.gov.in/riseq/earthquake" width="100%" height="600" style="border: none;">
+        Your browser does not support iframes.
+    </iframe> -->
+    <div id="iframe-container" style="position: relative; width: 100%; height: 600px;">
+        <div id="loader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <!-- <p>Loading...</p> -->
+            <div class="spinner" style="border: 4px solid rgba(0, 0, 0, 0.1); border-top: 4px solid #3498db; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite;"></div>
+        </div>
+        <iframe id="earthquake-iframe" src="https://riseq.seismo.gov.in/riseq/earthquake" 
+                width="100%" height="600" style="border: none; display: none;" 
+                onload="hideLoader();">
+            Your browser does not support iframes.
+        </iframe>
+    </div>
+    
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <script>
+        function hideLoader() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('earthquake-iframe').style.display = 'block';
+        }
+    </script>
+    
+    
+    <!--USGS-->
+    <!-- <div id="earthquake-map" style="height: 500px;"></div>
+    <br>
+    <div id="earthquake-info"> 
+    <h5 id="no-earthquake-message" style="font-weight: bold; display: none; color: red;">No significant earthquake activity detected in nearby regions of Chennai</h5>
+    <hr>
+    <h5 class="text-left">Earthquake Reports as on <span id="current-date"></span></h5>
+    <table id="earthquake-table" border="1" style="width: 100%; margin-top: 20px; text-align: center;">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Time</th>
+                <th>Magnitude</th>
+                <th>Tsunami</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>-->
+    </table>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+    const earthquakeTableBody = document.querySelector("#earthquake-table tbody");
+    const noEarthquakeMessage = document.getElementById("no-earthquake-message");
+    const map = L.map("earthquake-map").setView([13.0827, 80.2707], 5); // Center map on Chennai
+
+    // Initialize Leaflet Map
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(map);
+
+    // Set current date in the header
+    document.getElementById("current-date").innerText = new Date().toLocaleDateString();
+
+    // Nearby regions to filter
+    const nearbyRegions = ["bay of bengal", "arabian sea", "tamil nadu", "sri lanka", "andaman"];
+
+    // Fetch earthquake data from USGS API
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    const startDate = thirtyDaysAgo.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+    const apiUrl = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=13.0827&longitude=80.2707&maxradius=180&starttime=${startDate}&limit=10`;
+
+    fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            // Filter earthquakes based on nearby regions
+            // const earthquakes = data.features.filter((earthquake) => {
+            //     const place = earthquake.properties.place.toLowerCase();
+            //     return nearbyRegions.some((region) => place.includes(region));
+            // });
+            const earthquakes = data.features; 
+
+            earthquakeTableBody.innerHTML = ""; // Clear any previous data
+           if (earthquakes.length === 0) {
+                // Show message if no earthquake data found
+                noEarthquakeMessage.style.display = "block";
+                const row = document.createElement("tr");
+                row.innerHTML = `<td colspan="5">No recent earthquakes in the nearby regions of Chennai.</td>`;
+                earthquakeTableBody.appendChild(row);
+                return;
+            }
+
+            noEarthquakeMessage.style.display = "block"; // Hide the message if earthquakes are found
+
+            // Display earthquakes in the table
+            earthquakes.forEach((earthquake) => {
+                const { place, mag, time, tsunami, status } = earthquake.properties;
+                const [longitude, latitude] = earthquake.geometry.coordinates;
+
+                // Format the timestamp
+                const date = new Date(time).toLocaleString();
+
+                // Create a new row in the table
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${place}</td>
+                    <td>${date}</td>
+                    <td>${mag}</td>
+                    <td>${tsunami ? "Yes" : "No"}</td>
+                    <td>${status || "Reviewed"}</td>
+                `;
+                earthquakeTableBody.appendChild(row);
+
+                // Add marker to the map
+                L.marker([latitude, longitude]).addTo(map).bindPopup(`
+                    <strong>Location:</strong> ${place}<br>
+                    <strong>Magnitude:</strong> ${mag}<br>
+                    <strong>Time:</strong> ${date}
+                `);
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching earthquake data:", error);
+            alert("Failed to fetch earthquake data. Please try again later.");
+        });
+</script>
+
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 14px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+</body>
+</html>
+
