@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Action</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 5px;
+        }
+        .accordion .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .accordion .card-header {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .accordion .card-header .header-content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .accordion .card-header h6 {
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 0;
+        }
+        .accordion .card-header small {
+            color: #333;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+        .accordion .card-header p {
+            color: #777;
+            margin: 0;
+            font-size: 14px;
+        }
+        .accordion .card-body {
+            font-size: 16px;
+            color: #333;
+            padding: 15px 20px;
+        }
+        .accordion .chevron {
+            font-size: 18px;
+            color: #1a73e8;
+            transition: transform 0.3s ease;
+        }
+        .accordion .chevron.rotate {
+            transform: rotate(180deg);
+        }
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        } 
+        .video-responsive {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .dark-mode .more-reading , .dark-mode .last-edit{
+            color: #131313;
+        }
+        
+        p , ul, li, .more-reading {
+            text-align: left;    
+        }
+        .btn p {
+            text-align: center; 
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="actions-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+    <center><strong><h4>Take Action</h4></strong></center>
+         <div class="accordion" id="actionAccordion">
+            <!-- Hygienic & Healthy Food -->
+            <div class="card">
+                <div class="card-header" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <div class="header-content">
+                        <h6>Report Food Adulteration</h6>
+                        <!-- <small>Hygienic & Healthy Food</small> -->
+                        <p>Commissioner of Food Safety</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>To report <strong>food adulteration in Chennai</strong>, call the following number which functions in the Office of the Commissioner of Food Safety during office hours i.e., 10.00 am to 5.45 pm on all working days.</p>
+                        </div>
+                        <a href="tel:9444042322" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call to Report Food Adulteration
+                        </a>
+                        <hr>
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            <p><strong>What is the most common food safety violation in Chennai?</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside;">
+                                <li>In most cases, it is the use of artificial colours. These addictions are toxic and in the long run can cause diseases such as cancer. The dark red colour in Chicken 65, grilled meat and bhajis come from the artificial colours. Many sweets and savoury shops also add such colours. Use of these colours are prohibited under the food safety rules although it can be used except up to a permissible level in some sweets. </li>
+                                <li>The other common violation is the use of stale meat. Eateries either buy stale meat because they cost less or it turns stale because they fail to preserve them at the right temperature.</li>
+                                <li>Other violations include adulteration, misbranding, and substandard quality of bakery items, groceries, milk, aerated drinks, package water, tea and coffee.</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><em>Credits: Laasya Shekhar, Citizen Matters</em></p>
+                        </div>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://raindrop.io/newsofchennai/useful-articles-on-food-adulteration-news-of-chennai-21952673" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Useful articles on Food Adulteration <a href="https://raindrop.io/newsofchennai/useful-articles-on-food-adulteration-news-of-chennai-21952673"> raindrop.io</a>
+                                </li>
+                                <li>
+                                    <a href="https://timesofindia.indiatimes.com/city/chennai/file-a-complaint-if-food-is-adulterated/articleshow/86663381.cms" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Want to know about the most common food safety violations? <a href="https://timesofindia.indiatimes.com/city/chennai/file-a-complaint-if-food-is-adulterated/articleshow/86663381.cms"> timesofindia.indiatimes.com</a> 
+                                </li> 
+                                <li>
+                                    <a href="https://fssai.gov.in/cms/guidance-notes.php" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Food Safety and Standards Authority of India Guidance Notes <a href="https://fssai.gov.in/cms/guidance-notes.php"> fssai.gov.in</a> 
+                                </li>                            
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 12:58 AM </p>                         
+                    </div>
+                </div>
+            </div>
+            <!-- Caring for Chennai Section -->
+            <div class="card">
+                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <div class="header-content">
+                        <h6>Help Abandoned and Destitutes</h6>
+                        <!-- <small>Caring for Chennai</small> -->
+                        <p>Greater Chennai Police</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "><p>Greater Chennai Police's <strong>Kaaval Karangal</strong> is an initiative to help the abandoned elderly and destitutes. If you see any old age homeless person on roadside in need of help, please contact <strong>Kaaval Karangal.</strong></p>
+                        </div>
+                        <a href="tel:9444717100" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call Kaaval Karangal
+                        </a>
+                        <a href="https://opencity.in/data/chennai-corporation-gcc-list-of-night-shelters-for-the-homeless" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-list mr-2"></i> List of Night Shelters
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <strong>More reading</strong> 
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a hhref="https://www.newindianexpress.com/cities/chennai/2021/apr/22/integrated-initiative-by-chennai-policeto-help-the-abandoned-destitutes-2293098.html" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Integrated initiative by Chennai police to help the abandoned, destitutes <a href="https://www.newindianexpress.com/cities/chennai/2021/apr/22/integrated-initiative-by-chennai-policeto-help-the-abandoned-destitutes-2293098.html">www.newindianexpress.com</a>
+                                </li>
+                            </ul>
+                        </p>
+                        <hr>
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 12:10 PM </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Safe Sanitation -->
+            <div class="card">
+                <div class="card-header" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    <div class="header-content">
+                        <h6>Report Unsafe Manhole Cleaning</h6>
+                        <!-- <small>Safe Sanitation</small> --> 
+                        <p>Chennai Metropolitan Water Supply and Sewerage Board</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#actionAccordion">
+                    <div class="card-body">                        
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>
+                                <strong>Helpline to register complaints</strong>, if you see workers cleaning sewage systems <strong>without wearing masks or other safety gear </strong> in Chennai. Unauthorized entry into septic tank or sewers can also be reported.
+                                
+                            </p>
+                        </div>
+                        <a href="tel:14420" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call CMWSSB to Report
+                        </a>
+                        <a href="tel:044-45674567" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Contact CMWSSB
+                        </a>
+                        <div class="btn alt alert-dark btn-block ">
+                            <p>House owners/contractors, who have engaged workers under unsafe conditions, are liable to be prosecuted and punished under Prohibition of Employment as a Manual Scavenger and their Rehabilitation Act of 2013 </p>
+                        </div>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <!-- <li>
+                                    <a href="https://timesofindia.indiatimes.com/city/chennai/come-across-unsafe-manhole-cleaning-dial-14420-to-report/articleshow/81478858.cms" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Come across unsafe manhole cleaning? Dial 14420 to report <a href="https://timesofindia.indiatimes.com/city/chennai/come-across-unsafe-manhole-cleaning-dial-14420-to-report/articleshow/81478858.cms" target="_blank"> timesofindia.indiatimes.com</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ndtv.com/india-news/ensure-no-manual-scavenging-permitted-madras-high-court-to-civic-bodies-2534411" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Ensure No Manual Scavenging Permitted: Madras High Court To Civic Bodies <a href="https://www.ndtv.com/india-news/ensure-no-manual-scavenging-permitted-madras-high-court-to-civic-bodies-2534411" target="_blank"> www.ndtv.com</a> 
+                                </li>   -->
+                                <li>
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i><a href="https://www.newindianexpress.com/states/tamil-nadu/2024/May/01/take-steps-to-end-manual-scavenging-by-26-madras-hc-to-tamil-nadu-government"> Take steps to end manual scavenging by ’26: Madras HC </a>
+                                </li>                        
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 01:10 AM </p>                         
+                    </div>
+                </div>
+            </div>
+            <!-- Repurpose Old Clothes -->
+            <div class="card">
+                <div class="card-header" id="heading10" data-toggle="collapse" data-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                    <div class="header-content">
+                        <h6>Stop clothes from reaching landfill</h6>
+                        <!-- <small>Repurpose Old Clothes</small> -->                        
+                        <p>Multiple Organizations</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            <strong>Organisations in Chennai That Repurpose Used Clothes</strong>
+                            Thuli has outlets at Adyar and Vadapalani.<br>                            
+                            Rajasthan Cosmo Club Foundation picks up clothes from the doorsteps.<br>                            
+                            Little Drops is at Kalluri Salai, Koluthuvancheri and Paraniputhur. It encourages apartments to organise a collection drive and sends a van for the items to be transported.<br>                            
+                            Dhanagam is at 29 C P Ramaswamy Road, Alwarpet.<br>                            
+                            Goonj Chennai Office, Kovilambakkam (Sunday closed).
+                        </div>
+                        <p style="margin-top: 10px;"><em>Credits: Liffy Thomas, The Hindu</em></p>
+                        <a href="tel:6380306662" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Contact Thuli
+                        </a>
+                        <a href="tel:9962299622" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Rajasthan Cosmo Club Foundation
+                        </a>
+                        <a href="tel:9884080869" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Little Drops (1)
+                        </a>
+                        <a href="tel:9884080864" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Little Drops (2)
+                        </a>
+                        <a href="tel:9940502933" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Dhanagam (1)
+                        </a>
+                        <a href="tel:044-24663411" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Dhanagam (2)
+                        </a>
+                        <a href="tel:9354937428" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Goonj, Chennai
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.thehindu.com/news/cities/chennai/stopping-clothes-from-reaching-the-landfill/article33888626.ece" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Stopping clothes from reaching the landfill <a href="https://www.thehindu.com/news/cities/chennai/stopping-clothes-from-reaching-the-landfill/article33888626.ece" target="_blank"> www.thehindu.com</a>
+                                </li>                     
+                            </ul>
+                        </p>  
+                        <p><em>Note: News of Chennai is suggesting mentioned organisation(s) as an option based on public information and does not have any affiliation with the organisation(s). Discretion advised.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 02:10 AM </p> 
+                    </div>
+                </div>
+            </div> 
+            <!-- Get Facts Checked Section -->
+            <div class="card">
+                <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <div class="header-content">                        
+                        <h6>Report Fake News</h6>
+                        <!-- <small>Get Facts Checked</small> -->
+                        <p>Multiple Organizations</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn btn-outline-info btn-block ">
+                            <p><strong>Break The Chain of Fake News</strong>
+                            <br>
+                            Fighting misinformation and propaganda is possible when we citizens are alert. </p>
+                        </div>
+                        <a href="https://wa.me/919819888887" class="btn btn-outline-primary btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Report to Times Verified by TOI
+                        </a>
+                        <a href="https://wa.me/919603132132" class="btn btn-primary btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Report to Factly
+                        </a>
+                        <a href="https://wa.me/917700906111" class="btn btn-primary btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Report to Boom
+                        </a>
+                        <a href="https://wa.me/917600011160" class="btn btn-primary btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Report to AltNews
+                        </a>
+                        <a href="https://wa.me/919643651818" class="btn btn-primary btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Report to Quint WebQoof
+                        </a>
+                        <a href="https://wa.me/918799711259" class="btn btn-outline-primary btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Report to PIB Factcheck
+                        </a>
+                        <a href="tel:6369748351" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (1)
+                        </a>
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>Some of the above mentioned fact-checking organizations are recognized by The International Fact-Checking Network (IFCN) in India where you can report fake news.</p>
+                        </div>
+                        <hr>
+                        <p class="more-reading">
+                            <strong>More Resources</strong> 
+                            <img src="Images/fake-news.webp" class="img-fluid" alt="how to spot fake news">
+                            <hr>
+                            <div class="video-responsive">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Z2C3HD9v0uY?si=JKVAiEbI0kIW-2K-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <hr>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.reuters.com/manipulatedmedia/en/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                    </a> Identifying and tackling manipulated media <a href="https://www.reuters.com/manipulatedmedia/en/" target="_blank"> www.reuters.com</a>
+                                </li>
+                                <li>
+                                    <a href="https://newslit.org/tips-tools/how-news-literate-are-you-quiz/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                    </a> How news-literate are you? <a href="https://newslit.org/tips-tools/how-news-literate-are-you-quiz/" target="_blank"> newslit.org</a>
+                                </li>             
+                            </ul>
+                        </p>   
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 01 November 2024 11:50 PM </p> 
+                    </div>
+                </div>
+            </div>
+            <!-- Report Corruption Section -->
+            <div class="card">
+                <div class="card-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <div class="header-content">
+                        <h6>Report Corruption</h6>
+                        <!-- <small>All You Need To Know</small> -->
+                        <p>Directorate of Vigilance & Anti-Corruption</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <a href="tel:1064" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Anti Corruption
+                        </a>
+                        <a href="tel:1965" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Vigilance
+                        </a>
+                        <a href="tel:044-22321090" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (1)
+                        </a>
+                        <a href="tel:044-22321085" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (2)
+                        </a>
+                        <a href="tel:044-22310989" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (3)
+                        </a>
+                        <a href="tel:044-22342142" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (4)
+                        </a>
+                        <hr>
+                        <a href="https://www.dvac.tn.gov.in/pdf/RTI/Proforma%20for%20Complaints%20DVAC.pdf" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-file-pen"></i> Proforma For Complaints
+                        </a>
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            <p><strong>The Main Functions of DVAC</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside;">                             
+                                <li>To conduct enquiries into the allegations of corruption and allied misconducts referred to by the State Vigilance Commission/Government.</li>
+                                <li>To furnish the State Vigilance Commission, information and statistics gathered by the Directorate</li>
+                                <li>To institute enquiries on the complaints made by members of public regarding the alleged corrupt practices by public servants</li>
+                                <li>To collect intelligence for detection of cases of bribery and corruption and to investigate offences falling within the purview of the Prevention of Corruption Act, 1988 and the Amended Act w.e.f. 26/07/2018.</li>
+                                <li>On specific complaints, traps are organised after complying with the formalities and the corrupt Government servants are caught red handed while accepting the bribe.</li>
+                            </ul>
+                        </div> 
+                        <hr>
+                        <a href="https://portal.cvc.gov.in/" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-file-pen"></i> Lodge a Complaint with CVC
+                        </a>
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            <p><strong>The Main Functions of CVC</strong></p>                            
+                            <p>
+                                The Commission is empowered to inquire or cause inquiries to be conducted into offences alleged to have been committed under the Prevention of Corruption Act, 1988 by certain categories of public servants of the Central Government, corporations established by or under any Central Act, Government Companies, societies, and local authorities owned or controlled by the Central Government. Categories of such public servants are as below:
+                            </p>                            
+                            <ul style="padding-left: 20px; list-style-position: outside;">
+                                <li>Members of All-India Services serving in connection with the affairs of the Union and Group A officers of the Central Government</li>
+                                <li>Officers of the rank of Scale V and above in the Public Sector Banks</li>
+                                <li>Chief Executives and Executives on the Board and other officers of E-8 and above in Schedule ‘A’ and ‘B’ Public Sector Undertakings</li>
+                                <li>Chief Executives and Executives on the Board and other officers of E-7 and above in Schedule ‘C’ and ‘D’ Public Sector Undertakings</li>
+                                <li>Officers in Grade D and above in Reserve Bank of India, NABARD, and SIDBI</li>
+                                <li>Managers and above in General Insurance Companies</li>
+                                <li>Senior Divisional Managers and above in Life Insurance Corporations</li>
+                                <li>Officers drawing a salary of Rs.8700/- p.m. and above on Central Government D.A. pattern, as on the date of the notification (dt.12th September 2007) and as may be revised from time to time in Societies and other Local Authorities</li>
+                            </ul>                            
+                            <p><strong>Note:</strong></p>
+                            <ol style="padding-left: 20px;">
+                                <li>Please do not lodge complaints in respect of matters against officers of the Central Government and its organizations other than the categories/levels mentioned above.</li>
+                                <li>Matters pertaining to State Governments are not within the powers of the Central Vigilance Commission. Kindly lodge complaints relating to State Governments and its officials to the designated authorities concerned.</li>
+                            </ol>
+                        </div>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 12:30 AM </p>                      
+                    </div>
+                </div>
+            </div>            
+            <!-- Prevent injury to health and people Drug-->
+            <div class="card">
+                <div class="card-header" id="heading6" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <div class="header-content">
+                        <h6>Report Drug Trafficking / Abuse</h6>
+                        <!-- <small>Prevent Injury to Health and People</small> -->                        
+                        <p>Narcotics Control Bureau & Tamil Nadu Police</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>Citizens can inform matters related to drug trafficking/abuse to NCB or TN anti-drug helpline</p>
+                        </div>
+                        <a href="tel:10581" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> TN Anti-drug Helpline (1)
+                        </a>
+                        <a href="tel:9498410581" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> TN Anti-drug Helpline (2)
+                        </a>
+                        <a href="tel:044-26821481" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> NCB Chennai Division - Phone
+                        </a>
+                        <a href="mailto:szu-ncb@nic.in" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-envelope mr-2"></i> NCB Chennai Division - Email
+                        </a>                        
+                        <a href="tel:100" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call Chennai City Police
+                        </a> 
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/interview-with-a-bruno-zonal-director-narcotics-control-bureau-chennai-14306" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Teens the most vulnerable to drug addiction in Chennai <a href="https://chennai.citizenmatters.in/interview-with-a-bruno-zonal-director-narcotics-control-bureau-chennai-14306" target="_blank"> chennai.citizenmatters.in</a>
+                                </li>
+                                <li>
+                                    <a href="https://blog.ipleaders.in/report-incidents-drug-trafficking-neighborhood/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> How to report incidents of drug trafficking <a href="https://blog.ipleaders.in/report-incidents-drug-trafficking-neighborhood/" target="_blank"> blog.ipleaders.in</a> 
+                                </li>                          
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 01:25 AM </p>      
+                    </div>
+                </div>
+            </div>
+            <!-- Prevent Injury to Health and People Alcohol-->
+            <div class="card">
+                <div class="card-header" id="heading7" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <div class="header-content">                        
+                        <h6>Report Illicit Alcohol (Prohibition)</h6>
+                        <!-- <small>Prevent Injury to Health and People</small> -->
+                        <p>Tamil Nadu Police Prohibition Enforcement Wing</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>If you have any information about <strong>illicit liquor distillation or sale or transport</strong>, it can be reported to TN prohibition enforcement wing.<br> Anonymity will be maintained.</p>
+                        </div>
+                        <a href="tel:10581" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call TNPEW
+                        </a>
+                        <a href="https://wa.me/919498410581" class="btn btn-danger btn-block ">
+                            <i class="fab fa-whatsapp mr-2"></i> Whatsapp TNPEW
+                        </a>
+                        <a href="mailto:tnprohibitionhelpline@gmail.com" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-envelope mr-2"></i> Send Email
+                        </a>  
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVnNzvVrXY0vbZWYQheZo4xRX6xe_kOPPtSGce7L3S9-cYnA/viewform" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-file-pen mr-2"></i> Form Reporting
+                        </a>  
+                        <hr>
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 01:30 AM </p> 
+                    </div>
+                </div>
+            </div>        
+            <!-- Developing Chennai -->
+            <div class="card">
+                <div class="card-header" id="heading8" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                    <div class="header-content">
+                        <h6>Report Illegal Construction</h6>
+                        <!-- <small>Developing Chennai</small> -->                        
+                        <p>Chennai Metropolitan Development Authority</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <a href="tel:18004256099" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call CMDA Enforcement Cell
+                        </a>
+                        <a href="mailto:mscmda@tn.gov.in" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-envelope mr-2"></i> Email CMDA Enforcement Cell
+                        </a>
+                        <hr>
+                        <div>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>CMDA has provided a toll-free number to reach its enforcement cell, to make complaints and inform about any deviated / illegal constructions in Chennai Metropolitan Area (CMA). </li>
+                            <li>Based on the complaints, the authorities will follow up on the planning permissions and approvals issued by them to the builders. If the permission is not issued by the CMDA, they will forward the complaint to the concerned local body.
+                            </li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>Credits:  Korah Abraham, Citizen Matters</em></p>
+                        </div>
+                        <p class="more-reading">
+                            <p><strong>More Resources</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/illegal-construction-in-chennai-cmda-rules-and-complaint-mechanism-35973" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Illegal construction in Chennai: Where are the rules and whom can one report to? <a href="https://chennai.citizenmatters.in/illegal-construction-in-chennai-cmda-rules-and-complaint-mechanism-35973" target="_blank"> chennai.citizenmatters.in</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.cmdachennai.gov.in/ppurchase.html" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Before buying plots or individual house <a href="http://www.cmdachennai.gov.in/ppurchase.html" target="_blank"> www.cmdachennai.gov.in</a> 
+                                </li> 
+                                <li>
+                                    <a href="http://www.cmdachennai.gov.in/before_buying_flat.html" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Before buying Flat <a href="http://www.cmdachennai.gov.in/before_buying_flat.html" target="_blank"> www.cmdachennai.gov.in</a> 
+                                </li>                           
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 01:45 AM </p> 
+                    </div>
+                </div>
+            </div>
+            <!-- Pollution-free Chennai -->
+            <div class="card">
+                <div class="card-header" id="heading9" data-toggle="collapse" data-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                    <div class="header-content">                        
+                        <h6>Report Industrial Pollution</h6>
+                        <!-- <small>Pollution-free Chennai</small> -->
+                        <p>Tamil Nadu Pollution Control Board</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <ul style="text-align: left;">
+                                <li>Register environmental pollution complaint caused only by industries.</li>
+                                <li>Details of action taken on the complaint will be intimated by post to the address registered.</li>
+                            </ul>
+                        </div>
+                        <a href="http://pcbolgprs.in/pcb/" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-file-pen mr-2"></i> Register Complaint with TNPCB
+                        </a> 
+                        <a href="actions.html" class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fa-solid fa-smog mr-2"></i> Air Quality in Chennai
+                        </a> 
+                        <p class="more-reading">
+                            <p><strong>More Resources</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="http://www.tnpcb.gov.in/contact.php" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> TNPCB Department Contact Details <a href="http://www.tnpcb.gov.in/contact.php" target="_blank"> www.tnpcb.gov.in</a>
+                                </li>
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/chennai-air-pm2-5-pollution-emissions-industry-dust-32207" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> PM2.5 upto four times higher than safe limits in Chennai pockets <a href="https://chennai.citizenmatters.in/chennai-air-pm2-5-pollution-emissions-industry-dust-32207" target="_blank"> chennai.citizenmatters.in</a> 
+                                </li>                        
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 02:05 AM </p>  
+                    </div>
+                </div>
+            </div>    
+            <!-- Make Lives Better -->
+            <div class="card">
+                <div class="card-header" id="heading11" data-toggle="collapse" data-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                    <div class="header-content">
+                        <h6>Sign up for Organ Donation</h6>
+                        <!-- <small>Make Lives Better</small> -->                        
+                        <p>Multiple Organizations</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2" style="text-align: left;">
+                            <strong>There are two types of organ donation:</strong>
+                            <ul>
+                                <li><strong>Living Donor Organ Donation</strong>: A person during his/her life can donate one kidney (the other kidney is capable of maintaining the body functions adequately for the donor), a portion of the pancreas (half of the pancreas is adequate for sustaining pancreatic functions) and a part of the liver (the segments of liver will regenerate after a period of time in both recipient and donor).</li>
+                                <li><strong>Deceased Donor Organ Donation</strong>: A person can donate multiple organs and tissues after (brain-stem/cardiac) death. His/her organs continue to live in another person's body.</li>
+                            </ul>
+                        </div>
+                        <p>You may pledge to donate your organs by signing up with National Organ and Tissue Transplant Organization's website or call toll-free number (24x7) | A Government of India organization</p>
+                        <a href="tel:1800114770" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Organ Donation Helpline (NOTTO)
+                        </a>
+                        <a href="https://www.notto.gov.in/index.htm" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> Sign up for Organ Donation (NOTTO)
+                        </a>
+                        <hr>
+                        <a href="tel:9884080869" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call Mohan Foundation
+                        </a>
+                        <a href="https://www.mohanfoundation.org/donorcard.asp" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> Sign up via Mohan Foundation
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <p><strong>More Reading</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/guide-to-organ-donation-after-death-chennai-6211" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Considering organ donation? Here is all the information you need <a href="https://chennai.citizenmatters.in/guide-to-organ-donation-after-death-chennai-6211" target="_blank"> chennai.citizenmatters.in</a>
+                                </li>                     
+                            </ul>
+                        </p>  
+                        <p><em>Note: News of Chennai is suggesting mentioned organisation(s) as an option based on public information and does not have any affiliation with the organisation(s). Discretion advised.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 02:25 AM </p> 
+                    </div>
+                </div>
+            </div>        
+            <!-- Volunteer In Case Of Emergency -->
+            <div class="card">
+                <div class="card-header" id="heading12" data-toggle="collapse" data-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                    <div class="header-content">
+                        <h6>Sign up to be First Responder</h6>
+                        <!-- <small>Volunteer In Case Of Emergency</small> -->                        
+                        <p>Alert NGO</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">ALERT (Amenity Lifeline Emergency Response Team) is a Chennai-based NGO, which empowers the common man in case of an emergency to ensure ‘Right to Life’ through various training interventions.</div>
+                        <a href="tel:9944066002" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Contact ALERT (1)
+                        </a>
+                        <a href="tel:9944066004" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Contact ALERT (2)
+                        </a>
+                        <a href="https://alert.ngo/savioursaturdays/" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> Sign up for First Aid Training
+                        </a>                        
+                        <a href="https://alert.ngo/training/" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> Sign up for First Responder Trainings
+                        </a>
+                        <hr>
+                        <p><em>Note: News of Chennai is suggesting mentioned organisation(s) as an option based on public information and does not have any affiliation with the organisation(s). Discretion advised.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 02:30 AM </p> 
+                    </div>
+                </div>
+            </div>        
+            <!-- Caring for Chennai -->
+            <div class="card">
+                <div class="card-header" id="heading13" data-toggle="collapse" data-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                    <div class="header-content">
+                        <h6>Donate hair for Cancer Patients</h6>
+                        <!-- <small>Caring for Chennai</small> -->                        
+                        <p>Multiple Organizations</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            Hair donations will help the below mentioned NGOs produce wigs to be given free of cost to people with cancer. Hair loss is a common side effect of cancer treatment that includes chemotherapy and radiation.
+                        </div>
+                        <img src="Images/hair-donate.webp" class="img-fluid" alt="hair donation">                        
+                        <a href="https://cherianfoundation.org/gift-hair-gift-confidence/" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-hand-holding-medical mr-2"></i> Donate via Cherian Foundation
+                        </a>
+                        <a href="https://haircrown.in/donate" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-hand-holding-medical mr-2"></i> Donate via Hair Crown (Theni)
+                        </a>
+                        <a href="https://www.lifeagainfoundation.org/donateMaterial" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-hand-holding-medical mr-2"></i> Donate via Life Again Foundation
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.thehindu.com/society/with-increased-hair-donations-the-ngos-are-scaling-up-making-of-wigs-to-be-given-free-of-cost-to-the-underprivileged-cancer-patients/article34071728.ece" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Crowning glory: Why people in their 20s are shaving their heads <a href="https://www.thehindu.com/society/with-increased-hair-donations-the-ngos-are-scaling-up-making-of-wigs-to-be-given-free-of-cost-to-the-underprivileged-cancer-patients/article34071728.ece" target="_blank"> www.thehindu.com</a>
+                                </li>                     
+                            </ul>
+                        </p>  
+                        <p><em>Note: News of Chennai is suggesting mentioned organisation(s) as an option based on public information and does not have any affiliation with the organisation(s). Discretion advised.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 02 November 2024 02:35 AM </p> 
+                    </div>
+                </div>
+            </div>        
+        </div> <!--accordion close div-->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle chevron rotation
+            $('.accordion .card-header').on('click', function() {
+                var chevron = $(this).find('.chevron');
+                
+                // Collapse other sections and reset their chevrons
+                $('.accordion .chevron').not(chevron).removeClass('rotate');
+                
+                // Toggle the current chevron rotation
+                chevron.toggleClass('rotate');
+            });
+
+            // Reset chevron when section is collapsed by other means
+            $('.collapse').on('hidden.bs.collapse', function () {
+                $(this).parent().find('.chevron').removeClass('rotate');
+            });
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        // Show scroll-up button on scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+            100) {
+                document.getElementById('scrollUpBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollUpBtn').style.display = 'none';
+            }
+        };        
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+</body>
+</html>

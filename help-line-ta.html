@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Helpline</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 5px;
+        }
+        .accordion-button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .accordion .card-header h6 {
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 0;
+        }
+        .header-icon-circle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px; /* Set the circle size */
+            height: 40px;
+            background-color: #f1f1f1; /* Circle background color */
+            border-radius: 50%;
+        }
+
+        .card-header{
+            padding: 10px;
+        }
+        .card-header span {            
+            text-align:left;
+        }
+
+        .header-icon-img {
+            width: 60%; /* Adjust to make the image smaller within the circle */
+            height: auto;
+        }
+        .accordion-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            /* padding: 0.5rem 1rem; */
+            border: none;
+            background-color: transparent;
+        }
+        .accordion .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .accordion .card-header {
+            background-color: white;
+        }
+
+        .header-icon-circle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f1f1f1;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .header-icon-img {
+            width: 60%;
+            height: auto;
+        }
+        .accordion-button .chevron {
+            font-size: 18px;
+            color: #1a73e8;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+
+        .accordion-button .chevron.rotate {
+            transform: rotate(180deg);
+        }
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        } 
+        /* @media (max-width: 600px) { */
+           .btn-block , .btn-custom { 
+            font-size: 12px;
+           }            
+        /* } */
+        body.dark-mode {
+            background-color: #333;
+            color: #131313;
+        }
+        .dark-mode .card p {
+            color: #131313;
+        }
+        .dark-mode h4 {
+            color: #f1f1f1;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            text-align: center;
+        }
+        p , ul, li, .more-reading {
+        text-align: left;    
+        }
+        .btn p {
+            text-align: center; 
+            margin-bottom: 0px;
+        }
+        @media (max-width: 576px) {
+            #helpline {
+                font-size: 10px;
+            }
+            label {
+                font-size: 12px;
+            }
+            .modal-footer .btn {
+                font-size: 12px;
+            }
+            th, td {
+                font-size: 12px;
+            }
+        }
+    </style>    
+    <script src="https://kit.fontawesome.com/48d264722b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index-ta.html">
+                <img id="banner-image" src="NOC2024-v2-white" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index-ta.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="help-line.html" class="btn icon-circle" style="white-space: nowrap;">English Version</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time-tamil"></span>
+        </div> 
+        <hr>
+        <center><strong><h4>உதவி எண்கள்</h4></strong>
+        </center>
+        <div class="accordion" id="zoneAccordion">
+        <!--Greater Chennai Police-->   
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/police.png" alt="Police Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-shield"></i>  சென்னைப் பெருநகர காவல் துறை </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:100" class="btn btn-danger btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> காவலரை அழைக்கவும் - அவசரநிலை - எஸ்.ஓ.எஸ்
+                    </a>
+                    <a href="https://wa.me/919498111191" class="btn btn-danger btn-block mb-2">
+                        <i class="fab fa-whatsapp mr-2"></i> வாட்ஸ்அப் - தமிழ்நாடு காவல் துறை
+                    </a>
+                    <a href="https://eservices.tnpolice.gov.in/CCTNSNICSDC/ComplaintRegistrationPage" target="_blank" class="btn btn-secondary btn-block mb-2">
+                        <i class="fas fa-file-alt mr-2"></i> காவல் புகார் ஆன்லைனில் பதிவு செய்யவும்
+                    </a>
+                    <a href="https://eservices.tnpolice.gov.in/CCTNSNICSDC/PSHomePage?3" target="_blank" class="btn btn-primary btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> அனைத்து காவல் நிலையங்கள் & தொடர்புகள்
+                    </a>
+                    <a href="https://www.tn.gov.in/detail_contact/6765/4" target="_blank" class="btn btn-primary btn-block">
+                        <i class="fas fa-venus mr-2"></i> அனைத்து மகளிர் காவல் நிலைய தொடர்புகள்
+                    </a>
+                    <a href="https://chennai.citizenmatters.in/how-to-file-an-fir-in-chennai-18271" target="_blank" class="btn btn-secondary btn-block">
+                        <i class="fas fa-file-alt mr-2"></i> எப்.ஐ.ஆர் பதிவு செய்வது எப்படி
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.amtexsystems.kaavaluthavi&amp;hl=en_IN&amp;gl=US" target="_blank" class="btn btn-outline-primary btn-block">
+                        <i class="fa-solid fa-download"></i> காவல் உதவி செயலியை நிறுவவும்
+                    </a>
+                    <button class="btn alt alert-dark btn-block">
+                        பொதுமக்கள் திங்கட்கிழமை, புதன்கிழமை மற்றும் வெள்ளிக்கிழமை, மதியம் 12-1 மணிக்குள் 6369100100 என்ற எண்ணில் வீடியோ கால் மூலம் கமிஷனர் உடன் தொடர்பு கொள்ளலாம்.
+                    </button>
+                    <a href="https://wa.me/916369100100" class="btn btn-danger btn-block mb-2">
+                        <i class="fab fa-whatsapp mr-2"></i> சென்னை காவல் ஆணையர் தொடர்பு கொள்ள
+                    </a>
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 02:30 PM </p>
+                </div>
+            </div>
+        </div>
+        <!--Greater Chennai Traffic Police-->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/traffic.png" alt="Traffic Police Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"> <i class="fa-solid fa-traffic-light"></i> சென்னைப் பெருநகர போக்குவரத்து காவல் துறை </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <a href="tel:103" class="btn btn-danger btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> சாலை விபத்துகள் நேரத்தில், சென்னைப் பெருநகர போக்குவரத்து காவல்துறைக்கு அழைக்கவும்
+                    </a> 
+                    <a href="https://wa.me/919003130103" class="btn btn-danger btn-block mb-2">
+                        <i class="fab fa-whatsapp mr-2"></i> சென்னைப் பெருநகர போக்குவரத்து காவல்துறை தொடர்பு கொள்ளவும்
+                    </a>
+                    <a href="https://echallan.parivahan.gov.in/index/accused-challan" target="_blank" class="btn btn-secondary btn-block mb-2">
+                        <i class="fas fa-file-alt mr-2"></i> e-challan ஆன்லைனில் செலுத்த
+                    </a>                        
+                    <a href="https://sarathi.parivahan.gov.in/sarathiservice/" target="_blank" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-id-card"></i> தொடுதலில்லா டி.என் உரிம சேவைகள்
+                    </a>
+                    <button class="btn alt alert-dark btn-block">
+                        RTO அலுவலக சேவைகளின் சேவைகளில் மேம்படுத்த, தமிழ்நாடு அரசு தொடுதலில்லா முறையில் சில சேவைகளை வழங்குகிறது. பொதுமக்கள் பல சேவைகளுக்கு ஆன்லைனில் விண்ணப்பிக்க முடியும் மற்றும் RTO அலுவலகத்திற்கு பல முறை செல்வதற்குத் தேவையில்லை.
+                    </button>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>போக்குவரத்து நிறுத்தத்தின் போது கவனிக்க வேண்டியவை</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>உங்களுக்கு நிறுத்தம் செய்யும் அதிகாரம் இருப்பவரை உறுதி செய்யவும். போக்குவரத்து காவலர்கள் பெயர் மற்றும் பெல்ட் எண் தெளிவாக தெரிவதுடன் அவர்களின் சீருடையில் இருக்க வேண்டும்.</li>
+                            <li>ஹெல்மெட் அணிதல் கட்டாயமாகும். ஹெல்மெட் அணியாமல் அபராதம் விதிக்கப்பட்டவர்களுக்கு ஒரு சலான் வழங்கப்படும், இது அரைநிரந்தரமாக இருக்கும்.</li>
+                            <li>ஆண் போக்குவரத்து காவலர்களுடன் பெண்கள் ஓட்டுநர்களின் வாகனங்களைத் தேடுவதற்கு பெண் காவலர்கள் கூடவே இருக்க வேண்டும்.</li>
+                            <li>சென்னை போக்குவரத்து காவல்துறை ஒரு பணமற்ற முறைமை அமைத்துள்ளது. போக்குவரத்து நிறுத்தங்களில் உள்ள குற்றங்களுக்கு பணம் கொடுப்பதை தவிர்க்கவும். குற்றங்களுக்கு சலான் வழங்க வேண்டும்.</li>
+                            <li>ரூ.100 க்கு மேல் அபராதம் விதிக்க சப்-இன்ஸ்பெக்டர் அல்லது அதற்கு மேல் பதவியில் உள்ள போக்குவரத்து காவலர் மட்டுமே அதிகாரம் பெற்றவர்.</li>
+                            <li>புகை பிடித்தல், போன் பயன்பாடு, மது குடிப்பது, சிவப்பு விளக்கில் நிறுத்தமின்மை போன்ற குற்றங்களுக்கு ஓட்டுநர் உரிமம் பறிக்கப்படலாம். உரிமம் பறிக்குமுன் செல்லமான ரசீது வழங்க வேண்டும்.</li>
+                            <li>குறிப்பிட்ட உரிமம், அனுமதி, பதிவு இல்லாமல் ஓட்டினால் போக்குவரத்து காவலர் உங்களது வாகனத்தை பறிமுதல் செய்யலாம். பறிமுதல் செய்யப்பட்ட வாகனம் அருகிலுள்ள காவல் நிலையத்தில் பாதுகாப்பாக வைக்கப்படும்.</li>
+                            <li>போக்குவரத்து காவலர்களால் பிடிக்கப்பட்ட குற்றவாளிகள் நேரடியாக காவல் நிலையத்திற்கு கொண்டு செல்லப்பட வேண்டும் மற்றும் 24 மணி நேரத்துக்குள் நீதிபதி முன் ஆஜராக வேண்டும்.</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>கிரெடிட்ஸ்: அருணா நடராஜன், சிட்டிசன் மெட்டர்ஸ்</em></p>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/chennai-traffic-police-stop-driver-rights-responsibilities-5832" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> போக்குவரத்து காவல்துறையால் நிறுத்தப்படுகிறீர்களா? உங்கள் பொறுப்புகள் மற்றும் உரிமைகள் அறிய! <a href="https://chennai.citizenmatters.in/chennai-traffic-police-stop-driver-rights-responsibilities-5832">chennai.citizenmatters.in</a>
+                                </li>
+                            </ul>
+                        </p>
+                    </div>                        
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 02:45 PM </p>
+                </div>
+            </div>
+        </div>
+        <!--Cyber Crime-->
+        <div class="card">
+            <div class="card-header" id="heading16">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse16" aria-expanded="true" aria-controls="collapse16">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/cybercrime.png" alt="Cyber Crime Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-laptop-code"></i> இணைய வழி குற்றம்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse16" class="collapse" aria-labelledby="heading16" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <a href="tel:155260" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> இணைய வழி குற்றம் உதவிக்குறிப்புக்கு அழைக்கவும்
+                    </a> 
+                    <a href="https://cybercrime.gov.in/Webform/Crime_ReportAnonymously.aspx" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> பெண்கள் அல்லது குழந்தைகள் தொடர்பான இணைய வழி குற்றத்தை தெரிவிக்கவும் (அறிமுகம் இல்லாமல்)
+                    </a>
+                    <a href="https://cybercrime.gov.in/Webform/Crime_AuthoLogin.aspx?rnt=1" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> பெண்கள் அல்லது குழந்தைகள் தொடர்பான இணைய வழி குற்றத்தை தெரிவிக்கவும் மற்றும் தடுப்பது
+                    </a>
+                    <a href="https://cybercrime.gov.in/Webform/Crime_AuthoLogin.aspx" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> மற்ற இணைய வழி குற்றங்களை தெரிவிக்கவும்
+                    </a>
+                    <hr>   
+                    <p class="more-reading">  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://citizenmatters.in/cyber-crime-banking-fraud-phishing-understanding-prevention-and-redress-8781" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> இணைய வழி குற்றம்: புரிந்து கொள்ள, தடுக்கும் மற்றும் மீட்டெடுக்கும் வழிகாட்டி <a href="https://citizenmatters.in/cyber-crime-banking-fraud-phishing-understanding-prevention-and-redress-8781" target="_blank">citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> இணைய வழி பாதுகாப்பு குறிப்புகள் <a href="https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx" target="_blank">cybercrime.gov.in</a>
+                            </li>             
+                        </ul>
+                    </p>   
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 04:50 PM </p>   
+                </div>          
+            </div>
+        </div>  
+        <!--Women Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading10">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/women.png" alt="Milk Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-venus"></i> மகளிர் உதவி எண்கள்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:181" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> 181 - தமிழக அரசு மகளிர் உதவி எண்
+                    </a>
+                    <a href="tel:1091" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> 1091 - மகளிர் காவல் உதவி எண்
+                    </a>
+                    <a href="https://wa.me/919840888882" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> வாட்ஸ்அப் PCVC த்வனி உதவி எண்
+                    </a>
+                    <a href="tel:18001027282" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> அழைக்கவும் PCVC த்வனி உதவி எண்
+                    </a>
+                    <a href="sms://+917358434964/" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-comment-sms" aria-hidden="true"></i> எஸ்.எம்.எஸ் - தமிழக அரசு மகளிர் உதவி எண்
+                    </a>
+                    <a href="tel:7827170170" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> தேசிய மகளிர் ஆணையம்
+                    </a>
+                    <hr>
+                    <a href="https://tn181whl.org/indian-law/" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> நீங்கள் அறிய வேண்டிய சட்டங்கள்
+                    </a>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p>தூண்டுதலுக்கான ஆதரவு மற்றும் உதவியைப் பெற பெண்கள் பயன்படுத்தக்கூடிய கூடுதல் ஆதாரங்களின் பட்டியல் இதோ:</p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>நட்சத்திரம் - பாலியல் வன்முறை மற்றும் கடத்தல் தொடர்பான சட்ட, மருத்துவ, ஆலோசனை உதவிகள் வழங்கும் சேவை | 9003058479 / 7845629339</li>
+                            <li>அவேர் - பாலின அடிப்படையிலான வன்முறைக்கு உதவியாக செயல்படுகிறது | 8122241688</li>
+                            <li>PCVC - பெண்கள் மற்றும் குயர் நபர்களுக்கு தங்குமிடம், மருத்துவ, ஆலோசனை மற்றும் சட்ட உதவி வழங்குகிறது | 044-43111143</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>குறிப்பு: பவானி பிரபாகர், சிடிசன் மேட்டர்ஸ்</em></p>
+                        <hr>
+                    </div>
+                    <p class="more-reading">
+                        <strong>மேலும் வாசிக்க</strong>
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://citizenmatters.in/stalking-in-chennai-resources-and-support/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> பெண்கள் துரத்தல் பிரச்சினைக்கு எதிராக செயல்பட வழிமுறைகள் - <a href="https://citizenmatters.in/stalking-in-chennai-resources-and-support/">chennai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://citizenmatters.in/womens-helplines-in-chennai-for-sexual-abuse-violence-and-mental-health-issues" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> பெண்களுக்கு உதவி எண்கள் - <a href="https://citizenmatters.in/womens-helplines-in-chennai-for-sexual-abuse-violence-and-mental-health-issues">chennai.citizenmatters.in</a>
+                            </li>
+                        </ul>
+                    </p>
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:50 PM</p>
+                </div>
+            </div>
+        </div>
+        <!--Children Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading11">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/children.png" alt="Milk Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-children"></i>  குழந்தைகள் உதவி எண்கள்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#zoneAccordion">
+                <div class="card-body">   
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        குழந்தைகள் பாதுகாப்பு தற்காப்பு உதவி எண் என்பது 24 மணி நேரம், ஆண்டில் 365 நாட்கள் குழந்தைகளுக்கான அவசர தொலைபேசி சேவையாகும்
+                    </button>                 
+                    <a href="tel:14417" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> குழந்தைகள் உதவி எண் - தமிழ்நாடு அரசு
+                    </a> 
+                    <a href="tel:1098" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> இந்திய குழந்தைகள் உதவி எண் - 1098
+                    </a> 
+                    <a href="https://wa.me/919940631098" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> சென்னை கலெக்டரை தொடர்பு கொள்ள அல்லது வழக்குகளைப் பதிவு செய்ய
+                    </a> 
+                    <a href="https://wa.me/919940631098" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> துணை ஆணையர், பெண்கள் மற்றும் குழந்தைகள் மீதான குற்றங்கள்
+                    </a> 
+                    <a href="https://cybercrime.gov.in/Webform/Crime_ReportAnonymously.aspx" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> குழந்தைகளுக்கு எதிரான இணைய குற்றச்செயல்களைப் பதிவு செய்யுங்கள்
+                    </a>   
+                    <a href="https://www.childlineindia.org/a/knowledgecenter" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> குழந்தைகள் தொடர்பான கொள்கைகள் & சட்டங்கள்
+                    </a>  
+                    <hr>
+                    <p class="more-reading">
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://citizenmatters.in/child-sexual-abuse-laws-and-helplines/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> குழந்தை பாலியல் குற்றங்கள்: சட்டங்கள் மற்றும் நியாயம் பெற உதவி எண்கள் <a href="https://citizenmatters.in/child-sexual-abuse-laws-and-helplines/">chennai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://thenestery.in/blogs/parentalk/preventing-child-sexual-abuse" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> குழந்தை பாலியல் குற்றங்களைத் தடுக்க <a href="https://thenestery.in/blogs/parentalk/preventing-child-sexual-abuse">thenestery.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 04:00 PM </p>   
+                </div>                     
+            </div>
+        </div>        
+        <!--LGBTQIA+ Helplines-->    
+        <div class="card">
+            <div class="card-header" id="heading12">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse12" aria-expanded="true" aria-controls="collapse12">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/LGBT.png" alt="Milk Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 14px;font-weight: bold;"><i class="fa-solid fa-mars-double"></i> LGBTQIA+ உதவி எண்கள் <i class="fa-solid fa-venus-double"></i></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#zoneAccordion">
+                <div class="card-body"> 
+                    <button class="btn btn-outline-success btn-block mb-2">
+                        <strong>ஒரினம்</strong> <br>
+                        ஒரினம் என்பது சென்னை அடிப்படையிலான LGBTQIA+ மக்களும், நண்பர்களும் சேர்ந்த, அனைத்து ஆலோசகர்களால் இயங்கும் பதிவு செய்யப்படாத கூட்டமைப்பாகும்.
+                    </button>      
+                    <a href="tel:9841557983" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ஒரினத்தை அழைக்கவும்
+                    </a> 
+                    <a href="https://wa.me/919841557983" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> WHATSAPP
+                    </a>            
+                    <button class="btn btn-outline-success btn-block mb-2">
+                        <strong>சகோதரன்</strong> <br>
+                        சகோதரன், தமிழ்நாட்டின் பழமையான LGBTQIA+ அமைப்புகளில் ஒன்றாகும்.
+                    </button>   
+                    <a href="tel:044-23740486" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> சகோதரனை அழைக்கவும்
+                    </a>    
+                    <a href="tel:044-23740486" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> நிலையான இலக்கு
+                    </a> 
+                    <button class="btn btn-outline-success btn-block mb-2">
+                        <strong>சேவிகள்</strong> <br>
+                        சேவிகள் என்பது LGBTQIA+ சமுதாயத்திற்கான ஆலோசனையும், சந்தேகங்களை தெளிவுபடுத்தும் உதவிக்கோலாகும்.
+                    </button>      
+                    <a href="tel:9176999974" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> சேவிகளை அழைக்கவும்
+                    </a> 
+                    <a href="tel:044-24640050" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ஸ்நேஹா தற்கொலை தடுப்பு உதவிக்கோல்
+                    </a> 
+                    <p class="more-reading">
+                        <strong>மேலும் படிக்கவும்</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="http://orinam.net/resources-for/lgbt/crisis-support/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> ஒரினம் LGBTIQA+ க்கான ஆதாரங்கள் <a href="http://orinam.net/resources-for/lgbt/crisis-support/">orinam.net</a>
+                            </li>
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/plight-of-members-of-lgbtq-community-in-chennai-19821" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> சென்னை எவ்வளவு உட்கொள்ளப்பட்டிருக்கிறது? <a href="https://chennai.citizenmatters.in/plight-of-members-of-lgbtq-community-in-chennai-19821">chennai.citizenmatters.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 04:10 PM </p>   
+                </div>            
+            </div>
+        </div>        
+        <!--Differently Abled Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading13">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse13" aria-expanded="true" aria-controls="collapse13">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/differently-abled.png" alt="Differently-abled Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-wheelchair"></i>  மாற்றுத் திறன்களுக்கான உதவி எண்கள்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#zoneAccordion">
+                <div class="card-body"> 
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        மாற்றுத் திறன்களின் நலன் குறித்து மாநில ஆணைக்குழு - தமிழக அரசு
+                    </button>      
+                    <a href="tel:18004250111" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> தகுதிக்கூடிய அழைப்பு
+                    </a> 
+                    <a href="https://wa.me/919700799993" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> வாட்ஸ்அப் வீடியோ
+                    </a>         
+                    <hr>   
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        பல்வேறு மாற்றுத் திறனாளிகளின் மகிழ்ச்சிக்கு தேசிய நிறுவனம் - மத்திய அரசு. மொபைல் உதவி எண்கள் வேலை நாள்களில் மட்டுமே செயல்படும்.
+                    </button>      
+                    <a href="tel:18004250345" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> தகுதிக்கூடிய அழைப்பு
+                    </a> 
+                    <a href="tel:9444314716" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> மொபைல்
+                    </a>         
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>மேலும் ஆதாரங்கள்</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.nic.in/school-list/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> மாற்றுத் திறனாளிகளுக்கான சிறப்பு பள்ளிகள் பட்டியல், வீடுகள் மற்றும் நிறுவனங்கள் <a href="https://chennai.nic.in/school-list/">chennai.nic.in</a>
+                            </li>
+                            <li>
+                                <a href="https://chennai.nic.in/differently-abled-welfare-schemes/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> மாற்றுத் திறனாளிகளுக்கான நலத் திட்டங்கள் <a href="https://chennai.nic.in/differently-abled-welfare-schemes/">chennai.nic.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 04:20 PM </p>   
+                </div>           
+            </div>
+        </div>        
+        <!--Elderly Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading14">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse14" aria-expanded="true" aria-controls="collapse14">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/elders.png" alt="Elderly Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-person-cane"></i>  முதியோர் உதவி எண்கள்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#zoneAccordion">
+                <div class="card-body">                          
+                    <a href="tel:14567" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> எல்டர்லைன் உதவி எண்கள் (அரசு)
+                    </a> 
+                    <a href="tel:18001801253" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ஹெல்பேஜ் இந்தியாவை அழைக்கவும்
+                    </a> 
+                    <hr>
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        டிக்னிட்டி அடிப்படை | திங்க்-வெள்ளி 10am-6pm
+                    </button> 
+                    <a href="tel:18002678780" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> டிக்னிட்டி அடிப்படையை அழைக்கவும்
+                    </a> 
+                    <hr>
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        உதவி என்பது மூதாட்டி மற்றும் மூதாவிகளுக்கான சென்னையில் அமைந்துள்ள என்.ஜி.ஓ
+                    </button> 
+                    <a href="tel:9840092938" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> உதவியை அழைக்கவும் (1)
+                    </a> 
+                    <a href="tel:9445165876" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> உதவியை அழைக்கவும் (2)
+                    </a>                         
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>மேலும் ஆதாரங்கள்</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://mumbai.citizenmatters.in/what-you-should-do-if-you-spot-elder-abuse-27183" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                    mumbai.citizenmatters.in
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://udhavi.net/contact.html" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                    udhavi.net
+                                </a>
+                            </li>                          
+                        </ul>
+                    </p>   
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 04:30 PM </p>   
+                </div>             
+            </div>
+        </div>   
+        <!--Ambulance - Emergency-->
+        <!-- <div class="card">
+            <div class="card-header" id="headingFour">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        <span class="header-icon-circle">
+                            <img src="Images/ambulance.png" alt="Ambulance Icon" class="header-icon-img">
+                        </span> 
+                        <span style="font-size: 16px;font-weight: bold;">ஆம்புலன்ஸ் - அவசர நிலை </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:108" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> 108 ஆம்புலன்ஸை அழைக்கவும்
+                    </a>
+                    <a href="tel:04428194630" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> செயிண்ட் ஜான்ஸ் ஆம்புலன்ஸ் அழைக்கவும்
+                    </a>
+                    <a href="tel:104" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> 104 தமிழக மருத்துவ உதவி
+                    </a>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:1066" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> அப்பல்லோ மருத்துவமனை
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-46242424" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> குளோபல் மருத்துவமனை
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:105757" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> செட்டிநாடு மருத்துவமனை
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-49334933" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> போர்டிஸ் மலார் மருத்துவமனை
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>அரசு மருத்துவமனைகள்</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>அரசு பொது மருத்துவமனை | <a href="tel:04425305000">04425305000</a></li>
+                            <li>அரசு கில்பாக் மருத்துவமனை | <a href="tel:04428364951">04428364951</a></li>
+                            <li>அரசு ராயப்பேட்டை மருத்துவமனை | <a href="tel:04428483051">04428483051</a></li>
+                            <li>அரசு ஸ்டான்லி மருத்துவமனை | <a href="tel:04425281347">04425281347</a></li>
+                            <li>பெண்களுக்கான கஸ்தூர்பா மருத்துவமனை | <a href="tel:04428545449">04428545449</a></li>
+                            <li>குழந்தைகளுக்கான மருத்துவக் கழகம் | <a href="tel:04428191135">04428191135</a></li>
+                            <li>பெண்கள் மற்றும் குழந்தைகளுக்கான அரசு மருத்துவமனை | <a href="tel:04428191982">04428191982</a></li>
+                        </ul>                    
+                    </div>
+                    <hr>
+                    <button type="button" class="btn alt alert-dark w-100 btn-custom" style="text-align: center;font-size: 14px;">
+                        <p><strong>வானூர்தி ஆம்புலன்ஸ் சேவைகள்</strong></p>
+                        <span>இயக்கத்திற்கு 2 - 12 மணிநேரம் ஆகும் | கிடைக்கும் நிலை மற்றும் வானிலை சார்ந்தது</span>
+                    </button><br><br>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://wa.me/9710940000" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-helicopter" aria-hidden="true"></i> ஏரோ கேர்
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://wa.me/9701111156" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-helicopter" aria-hidden="true"></i> ஐசாட்டி
+                            </a>
+                        </div>
+                    </div>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>ஆம்புலன்ஸ்களின் வகைகள்</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>நோயாளி பரிமாற்ற ஆம்புலன்ஸ்</li>
+                            <li>அடிப்படை உயிர்காக்கும் ஆம்புலன்ஸ்</li>
+                            <li>மேம்பட்ட உயிர்காக்கும் ஆம்புலன்ஸ்</li>
+                            <li>வானூர்தி ஆம்புலன்ஸ் (ஹெலிகாப்டர் / விமானம்)</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:05 PM</p>   
+                </div>           
+            </div>
+        </div> -->
+        <!--Fire & Rescue | Gas Leakage-->
+        <div class="card">
+            <div class="card-header" id="headingSix">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/fire.png" alt="Ambulance Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"> <i class="fa-solid fa-fire"></i>  தீ மற்றும் மீட்பு | வாயு கசிவு</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:101" class="btn btn-danger btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> சென்னை தீயணைப்பு சேவையை அழைக்கவும்
+                    </a>
+                    <a href="https://www.tnfrs.tn.gov.in/about-us/station-list/northern-region/" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> சென்னை தீயணைப்பு நிலையங்களின் பட்டியல் தொடர்பு எண்களுடன்
+                    </a>                    
+                    <hr>
+                    <a href="tel:1906" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> வாயு கசிவு உதவி அழைப்பு
+                    </a>
+                    <a href="tel:1906" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> எல்பிஜி கசிவின் போது என்ன செய்ய வேண்டும்
+                    </a>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>எல்பிஜி கசிவின் போது என்ன செய்ய வேண்டும்</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>அதிர்ச்சியடைய வேண்டாம்</li>
+                            <li>ஒவ்வொரு கதவுகளையும் மற்றும் ஜன்னல்களையும்த் திறந்து காற்றோட்டம் செய்யவும். எல்பிஜி காற்றை விட கனமானது என்பதால் அது கீழே தங்கும். கதவுகளைத் திறப்பது முதல் நடவடிக்கையாக இருக்க வேண்டும்.</li>
+                            <li>அனைத்து தீப்பொறிகள், விளக்குகள், கற்பூரம் மற்றும் அசைவங்களைக் கழிக்கவும்.</li>
+                            <li>அணைத்துவிட்ட பாதுகாப்பு நிழலை சிலிண்டரின் மேல் வைக்கவும்.</li>
+                            <li>ரெகுலேட்டர் மற்றும் பர்னர் பொத்தான்களை மூடவும்.</li>
+                            <li>மின்சார சுவிட்ச், உபகரணம் அல்லது சமையலறையில் உள்ள எதையும் இயக்க வேண்டாம்.</li>
+                            <li>வெளியிலிருந்து மின்சார ஆதாரத்தை தனித்துவமாக்கவும்.</li>
+                            <li>உடனடி உதவிக்காக உங்கள் எல்பிஜி விற்பனையாளரை அழைக்கவும் மற்றும் 1906</li>
+                            <li>காற்று சுழலூட்டும் இடத்தில் சிலிண்டரை தனித்துவமாக்கவும் மற்றும் அது பச்சை துணியால் மூடவும்.</li>
+                            <li>தேவையானால் தீயணைப்பு மற்றும் போலீஸ் உதவியை அழைக்கவும்.</li>
+                        </ul>
+                    </div>  
+                    <hr>
+                    <img src="Images/know-your-extinguisher.jpeg" class="img-fluid" alt="Know Your Extinguisher">
+                    <a href="https://play.google.com/store/apps/details?id=com.amtex.pathukavalan" target="_blank" class="btn btn-outline-danger btn-block">
+                        <i class="fa-solid fa-download"></i> தீ எஸ்ஒஎஸ் செயலியை நிறுவவும்
+                    </a>
+                    <hr>
+                    <p class="more-reading">
+                        <strong>மேலும் படிக்க</strong>           
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://www.tnfrs.tn.gov.in/about-us/station-list/northern-region/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> தீ விபத்து ஏற்பட்டால் என்ன செய்ய வேண்டும்? <a href="www.tnfrs.tn.gov.in">www.tnfrs.tn.gov.in</a>
+                            </li>
+                            <li>
+                                <a href="https://www.indiatoday.in/information/story/how-to-use-fire-extinguisher-step-by-step-guide-1692707-2020-06-25" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> தீயணைப்பு சாதனத்தை எப்படி பயன்படுத்துவது <a href="www.indiatoday.in">www.indiatoday.in</a> 
+                            </li>
+                            <li>
+                                <a href="https://bengaluru.citizenmatters.in/the-dos-and-donts-during-a-fire-accident-in-bengaluru-22862" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> தீ விபத்தின்போது என்ன செய்ய வேண்டும் <a href="www.indiatoday.in">bengaluru.citizenmatters.in</a> 
+                            </li>
+                        </ul>
+                    </p>                   
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:20 PM</p>   
+                </div>           
+            </div>
+        </div>
+        <!--Disaster Management-->
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/disaster.png" alt="Ambulance Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-triangle-exclamation"></i>  பேரிடர் மேலாண்மை</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:1070" class="btn btn-danger btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> தமிழ்நாடு மாநில பேரிடர் மேலாண்மை உதவி மையம் அழைக்கவும்
+                    </a>
+                    <a href="tel:1077" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> மாவட்ட பேரிடர் மேலாண்மை உதவி மையம் அழைக்கவும்
+                    </a>                    
+                    <hr>
+                    <a href="https://beta-tnsmart.rimes.int/index.php/EmergencyCall/Complaint" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> புகார் பதிவு செய்யவும் / உதவியை நாடவும் - TNSDMA
+                    </a>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://beta-tnsmart.rimes.int/index.php/Awareness/advisoryPdfs" class="btn btn-outline-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> அறிவுரை - என்ன செய்ய வேண்டும் & என்ன செய்யக்கூடாது - TNSDMA
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://cdn.s3waas.gov.in/s330ef30b64204a3088a26bc2e6ecf7602/uploads/2018/11/2018112967.pdf" class="btn btn-outline-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> அறிவுரை - என்ன செய்ய வேண்டும் & என்ன செய்யக்கூடாது - NDMA
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="https://drive.google.com/file/d/1-IR9NuKwJiAnM1feY3R4yYF57k_fECFA/view" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-file-alt mr-2" aria-hidden="true"></i> பேரிடர் மீட்பு வழிகாட்டி - இந்தியா | NDMA
+                    </a>                    
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:10 PM</p>   
+                </div>           
+            </div>
+        </div>
+        <!--Greater Chennai Corporation-->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/chn-corp.png" alt="Corporation Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-building-circle-check"></i>  சென்னை மாநகராட்சி </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:1913" class="btn btn-danger btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> மாநகராட்சி உதவி எண் அழைக்கவும்
+                    </a>
+                    <a href="https://wa.me/919499933644" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> மாநகராட்சி வாட்ஸ்அப்
+                    </a>
+        
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-25619206" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> மாநகராட்சி கட்டுப்பாட்டு அறை (1)
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-25303511" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> மாநகராட்சி கட்டுப்பாட்டு அறை (2)
+                            </a>
+                        </div>
+                    </div>
+        
+                    <a href="know-you-ward.html" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa fa-globe" aria-hidden="true"></i> உங்கள் மாநகராட்சி மண்டலம் & வார்டு அறிக
+                    </a>
+        
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://chennaicorporation.gov.in/gcc/online-services/" class="btn btn-primary w-100 btn-custom" target="_blank" rel="noopener noreferrer">
+                                <i class="fa fa-globe" aria-hidden="true"></i> ஆன்லைன் சேவைகள்
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="councillor-contact.html" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> மண்டல அதிகாரிகள் தொடர்புகள்
+                            </a>
+                        </div>
+                    </div>
+        
+                    <a href="https://chennaicorporation.gov.in/gcc/swm_bin/" class="col-12 btn btn-info btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa fa-trash" aria-hidden="true"></i> குப்பை அகற்றும் லாரி அட்டவணை
+                    </a>
+        
+                    <hr>
+                    <p class="more-reading">
+                        <strong>மேலும் படிக்க</strong>
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/chennai-governance-corporation-mtc-railways-cmrl-tnpcb-tnhb-32855" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> சென்னையில் பொது சேவைகளை வழங்குவோர் யார்?
+                            </li>
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/gcc-greater-chennai-corporation-and-how-it-functions-local-elected-council-36664" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> சென்னை மாநகராட்சி எப்படி செயல்படுகிறது
+                            </li>
+                        </ul>
+                    </p>
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 02:45 PM</p>
+                </div>
+            </div>
+        </div>
+        <!--Metro Water | Electricity-->
+        <div class="card">
+            <div class="card-header" id="heading7">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/metro.png" alt="Metro Water and Electricity Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-faucet-drip"></i>  மெட்ரோ தண்ணீர் | மின்சாரம்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="https://dfw.chennaimetrowater.in/#/index" class="btn btn-primary btn-block mb-2">
+                        <i class="fa-solid fa-droplet"></i> தண்ணீர் டேங்கர் - ஆன்லைனில் முன்பதிவு செய்யவும்
+                    </a>
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        தண்ணீர் முன்பதிவு இணையதளம் மொபைலில் சரியாக ஏற்றப்படாதிருக்கலாம்
+                    </button>
+                    <a href="tel:044-45674567" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> சென்னை மெட்ரோ தண்ணீர் தொடர்பு கொள்ளவும்
+                    </a>
+                    <hr>
+                    <a href="https://chennaimetrowater.tn.gov.in/NewMetroWater/MetroWater/PGBD2/CMCEntryAdvance.aspx" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-money-check-dollar" aria-hidden="true"></i> தண்ணீர் வரி செலுத்தவும் - ஆன்லைன்
+                    </a>
+                    <hr>
+                    <p class="more-reading"> <strong>மின்சார வழங்கல்</strong> </p>
+                    <a href="https://ccms.tangedco.org/tangedco-public/" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> புகார் பதிவு செய்யவும் - ஆன்லைன்
+                    </a>
+                    <a href="tel:9498794987" class="btn btn-danger btn-block mb-2">
+                        <i class="fa-solid fa-square-phone mr-2"></i> மின்சார வாரியம் (TNEB) தொடர்பு கொள்ளவும்
+                    </a>
+                    <a href="https://wa.me/919445850811" class="btn btn-danger btn-block mb-2">
+                        <i class="fab fa-whatsapp mr-2"></i> மின்சார வாரியம் (TNEB) வாட்ஸ்அப் செய்யவும்
+                    </a>
+                    <a href="https://www.tnebnet.org/qwp/qpay" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-money-check-dollar" aria-hidden="true"></i> மின்சார பில் செலுத்தவும் - ஆன்லைன்
+                    </a>
+                    <a href="https://www.tnebnet.org/qwp/consno" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i> உங்கள் EB நுகர்வோர் எண்ணை அறியவும்
+                    </a>
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:30 PM</p>
+                </div>
+            </div>
+        </div>
+        <!--Blood Banks-->
+        <div class="card">
+            <div class="card-header" id="heading8">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/blood.png" alt="Blood Bank Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-hand-holding-droplet"></i>  இரத்த வங்கிகள்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:044-24881392" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ரோட்டரி இரத்த வங்கி
+                    </a>
+                    <a href="tel:044-28554425" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> இந்திய ரெட் கிராஸ் சங்கம்
+                    </a>
+                    <a href="tel:044-28294870" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> அபோலோ மருத்துவமனை இரத்த வங்கி
+                    </a>
+                    <a href="tel:044-28415959" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> லயன்ஸ் இரத்த வங்கி
+                    </a>
+                    <a href="tel:044-28259601" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> குழந்தைகள் நம்பிக்கை இரத்த வங்கி
+                    </a>
+                    <hr>
+                    <a href="https://wa.me/919381005254" class="btn btn-primary btn-block mb-2">
+                        <i class="fab fa-whatsapp mr-2"></i> வாட்ஸ்அப் இரத்த ஒருங்கிணைப்பாளர்
+                    </a>
+                    <a href="https://blod.in/becomedonor" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-file-pen" aria-hidden="true"></i> இரத்தம் வழங்க கையொப்பமிடவும்
+                    </a>
+                    <hr>
+                    <img src="Images/Blood-donors.webp" class="img-fluid" alt="Know Your Extinguisher">
+                    <p class="more-reading">
+                        <strong>மேலும் படிக்க</strong>
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="http://nbtc.naco.gov.in/faq/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> இரத்த தானம் குறித்த கேள்வி பதில்கள் <a href="http://nbtc.naco.gov.in/faq/">nbtc.naco.gov.in</a>
+                            </li>
+                            <li>
+                                <a href="https://citizenmatters.in/blood-donation-in-mumbai/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> இரத்த தானம் ஏன் முக்கியம்? <a href="https://citizenmatters.in/blood-donation-in-mumbai/">mumbai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://stopcorona.tn.gov.in/blood-bank.php" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> இரத்த வங்கிகள் <a href="https://stopcorona.tn.gov.in/blood-bank.php">stopcorona.tn.gov.in</a>
+                            </li>
+                        </ul>
+                    </p>
+                    <hr>
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:40 PM</p>
+                </div>
+            </div>
+        </div>                
+        <!--Human Milk Banks-->
+        <div class="card">
+            <div class="card-header" id="heading9">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/milk.png" alt="Milk Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-person-breastfeeding"></i>  மனித பால் வங்கிகள்</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#zoneAccordion">
+                <div class="card-body">                    
+                    <a href="tel:044-25902961" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ஆர்.எஸ்.ஆர்.எம், ராயபுரம்
+                    </a> 
+                    <a href="tel:044-28192138" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ஐ.சி.ஹெச், எக்மோர்
+                    </a> 
+                    <a href="tel:044-66646600" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> விஜயா மருத்துவமனை (1)
+                    </a> 
+                    <a href="tel:044-6664666" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> விஜயா மருத்துவமனை (2)
+                    </a> 
+                    <a href="tel:044-28544901" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> அரசு கஸ்தூர்பா காந்தி மருத்துவமனை
+                    </a>   
+                    <a href="tel:044-2819198" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ஐ.ஓ.ஜி, எக்மோர்
+                    </a>  
+                    <a href="tel:044-4200180" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> குழந்தைகள் நம்பிக்கை மருத்துவமனை
+                    </a>
+                    <a href="tel:044-66300300" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> டாக்டர் காமாட்சி நினைவுப் பால் வங்கி
+                    </a>                                    
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>மனித பால் வங்கிகளைப் பயன்படுத்தும் முறை</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>சென்னையில், மேற்கண்ட எந்த மனித பால் வங்கிகளிலும், தாயின் பால் வழங்க இயலாது என்பதைச் சொல்லும் ஒரு அங்கீகரிக்கப்பட்ட மருத்துவரின் கடிதத்துடன் செல்லலாம். அனைத்து வசதிகளும் இலவசமாக வழங்குகின்றன.</li>
+                            <li>கறப்பதில் சிக்கல் காணும் தாய்மார்கள் அரசு மகப்பேறு மருத்துவமனைகளில் சென்று ஆலோசனை பெறலாம்.</li>
+                            <li>தாய், தானமாகப் பால் பெறுவதற்கு தன்னிச்சையாக சம்மதிக்கும் படிவத்தில் கையெழுத்திட வேண்டும்.</li>
+                            <li>குழந்தைக்கு வழங்கப்படும் பால் அளவு கிடைக்கும் பாலின் அடிப்படையில் இருக்கும். நகரின் அரசு மருத்துவமனைகளில், அந்த மருத்துவமனையில் பிறந்த குழந்தைகளுக்கு முன்னுரிமை அளிக்கப்படுகிறது.</li>
+                            <li>நன்கு சுத்திகரிக்கப்பட்டு சேமிக்கப்பட்ட பால் ஒரு ஸ்டீல் பாத்திரத்தில் தாய்க்கு வழங்கப்படும்.</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>குறிப்புரை: லாச்யா ஷேகர், குடிமக்கள் விவகாரங்கள்</em></p>
+                    </div>
+                    <hr>
+                    <p class="more-reading">
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/world-breastfeeding-week-guide-to-chennai-human-milk-banks-11262" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> மனித பால் வங்கிகள் குறித்து மேலும் அறிய <a href="https://citizenmatters.in/world-breastfeeding-week-guide-to-chennai-human-milk-banks/">chennai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://www.thehindu.com/news/national/tamil-nadu/sourcing-milk-from-human-milk-banks-is-safe-say-experts/article32289228.ece" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> மனித பால் வங்கிகளில் இருந்து பெறப்பட்ட பால் பாதுகாப்பானது <a href="https://www.thehindu.com/news/national/tamil-nadu/sourcing-milk-from-human-milk-banks-is-safe-say-experts/article32289228.ece">www.thehindu.com</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 03:35 PM</p>   
+                </div>           
+            </div>
+        </div>           
+        <!--Animal Helplines & Snake Catching-->
+        <div class="card">
+            <div class="card-header" id="heading15">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse15" aria-expanded="true" aria-controls="collapse15">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/animal.png" alt="Animal & Snake Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"> <i class="fa-solid fa-paw"></i>  விலங்கு உதவி எண்கள் & பாம்பு பிடிப்பு</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse15" class="collapse" aria-labelledby="heading15" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <button class="btn btn-outline-info btn-block mb-2">
+                        உங்கள் பகுதியில் நெஞ்சரிவாதிகள் மற்றும் கட்டுப்பாட்டுக்கு உட்பட்ட நாய்களைப் பதிவு செய்ய, மற்றும் வறண்ட மாடு பாதுகாப்பு கோர, தயவுசெய்து Greater Chennai Corporation ஐ 1913க்கு அழைக்கவும்.
+                    </button> 
+                    <strong><em>அவசரத்தில் உள்ள தெருக்களிலுள்ள மான்களை காப்பாற்ற கோரவும்</em></strong>                     
+                    <a href="tel:044-71819575" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ப்ளூ குரோஸ் (1)
+                    </a> 
+                    <a href="tel:044-46274999" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ப்ளூ குரோஸ் (2)
+                    </a>
+                    <a href="https://forms.zohopublic.com/bluecrossofindia/form/RCubeIncomingRescueRequest/formperma/t2jGbXyvG-uMixFH6vG1fXpWbymSCCfHm9U3NFDiVVY" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> ப்ளூ குரோஸ் மூலம் அவசரத்தில் உள்ள தெருக்களிலுள்ள மான்களை காப்பாற்ற கோரவும் (விரட்டிகள்)
+                    </a> 
+                    <a href="tel:1962" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-truck-medical" aria-hidden="true"></i> மான்கள் மொபைல் மருத்துவ ஆம்புலன்ஸ்
+                    </a>
+                    <hr>                             
+                    <a href="tel:9444748914" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> பாம்பு கடிக்கும் தொலைபேசி காப்பாற்றவும்
+                    </a>  
+                    <a href="tel:044-22200335" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> காடுகளுக்கு அழைக்கவும் - பாம்பு காப்பாற்ற - சென்னையில்
+                    </a>
+                    <button class="btn btn-outline-danger btn-block mb-2" data-toggle="modal" data-target="#helplineModal">
+                        பாம்பு பிடிக்கும் தொலைபேசி சேவைகள்
+                    </button>                
+                    <!-- Modal -->
+                    <div class="modal fade" id="helplineModal" tabindex="-1" aria-labelledby="helplineModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="helplineModalLabel">பாம்பு பிடிக்கும் தொலைபேசி சேவைகள்</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-striped table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>இடங்கள்</th>
+                                                <th>பெயர்</th>
+                                                <th>தொலைபேசி</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 12px;">
+                                            <tr>
+                                                <td>பூந்தமல்லி, நெற்குன்றம், கோயம்பேடு</td>
+                                                <td>பாபா</td>
+                                                <td><a href="tel:9841588852">9841588852</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>போரூர், ஐயப்பன்தாங்கல், வளசரவாக்கம்</td>
+                                                <td>பாபா</td>
+                                                <td><a href="tel:9841588852">9841588852</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>முகலிவாக்கம், பெரம்பூர், போரூர், ராமாபுரம், நெற்குன்றம், மணப்பாக்கம்</td>
+                                                <td>சக்தி</td>
+                                                <td><a href="tel:9094321393">9094321393</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>அண்ணாநகர் முதல் பட்டாபிராம் வரை</td>
+                                                <td>கணேசன்</td>
+                                                <td><a href="tel:7448927227">7448927227</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>குரோம்பேட்டை</td>
+                                                <td>ஜெய்சன்</td>
+                                                <td><a href="tel:8056204821">8056204821</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>குரோம்பேட்டை முதல் தாம்பரம் வரை</td>
+                                                <td>ராபின்</td>
+                                                <td><a href="tel:8807870610">8807870610</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>போரூர் மற்றும் ஆலப்பாக்கம் சுற்றியுள்ள பகுதி</td>
+                                                <td>மணிகண்டன்</td>
+                                                <td><a href="tel:9840346631">9840346631</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>குரோம்பேட்டை</td>
+                                                <td>ரவிசந்திரன்</td>
+                                                <td><a href="tel:9600119081">9600119081</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>திருவான்மியூர், ECR மற்றும் OMR</td>
+                                                <td>சவண்</td>
+                                                <td><a href="tel:6379163347">6379163347</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>திருவான்மியூர், ECR மற்றும் OMR</td>
+                                                <td>சவண்</td>
+                                                <td><a href="tel:9445070909">9445070909</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>மணலி, தண்டையார்பேட்டை, ராயபுரம், திருவொற்றியூர்</td>
+                                                <td>நகேந்திரன்</td>
+                                                <td><a href="tel:9940073642">9940073642</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>தாம்பரம் சுற்றியுள்ள பகுதி</td>
+                                                <td>பிரவீன்</td>
+                                                <td><a href="tel:9962205585">9962205585</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ECR மற்றும் OMR</td>
+                                                <td>அர்ஜூன்</td>
+                                                <td><a href="tel:9176543213">9176543213</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>தாம்பரம், படப்பை & திருநீர்மலை</td>
+                                                <td>சந்திரன்</td>
+                                                <td><a href="tel:9840724104">9840724104</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>பெருங்களத்தூர் முதல் மறைமலை நகர் வரை</td>
+                                                <td>முருகேசன்</td>
+                                                <td><a href="tel:9884847673">9884847673</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>சோழிங்கநல்லூர் முதல் கேளம்பாக்கம் வரை</td>
+                                                <td>விஜயநாதன்</td>
+                                                <td><a href="tel:9884306960">9884306960</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>செங்கல்பட்டு மாவட்டம்</td>
+                                                <td>ஆதித்தன் (FG)</td>
+                                                <td><a href="tel:8489517927">8489517927</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+            <div style="font-size: 14px; line-height: 1.6;">
+                <p><strong> <u>பாம்பு கடிக்கும் போது என்ன செய்வது</u><br>
+                பாம்பு கடித்து விட்ட பிறகு நினைவில் கொள்ள வேண்டிய விஷயங்கள்</strong></p>
+                <ul style="padding-left: 20px; list-style-position: outside;">
+                    <li>கோபிக்கவும், பதறிக்கொள்ளவும் வேண்டாம்.</li>
+                    <li>பாம்பு கடித்த பகுதி காலில் இருந்தால், நடக்கவோ, ஓடவோ கூடாது. 
+                    நீங்கள் காயம் ஏற்பட்ட பகுதியை நிலைமையாக வைத்திருப்பது மிக முக்கியம்.</li>
+                    <li>காயத்தை உட்பட்டுப் பணி செய்யாமல், அருகிலுள்ள மருத்துவமனைக்கு உடனடியாக செல்வது முக்கியமாகும்.</li>
+                    <li>அத்தியாவசியமாக, “காயத்திற்கேற்ப ஒரு கட்டுப்பாட்டை சிக்கவோ கூடாது,” என்றார் மருத்துவர்.</li>
+                    <li>தமிழ்நாடு அரசு அனைத்து முதன்மை, இரண்டாம் மற்றும் மூன்றாம் நிலை அரசு மருத்துவ நிறுவனங்களுக்கு எதிர்ப்பார்க்கும் மெருகூட்டு வழங்குகிறது. “எனவே, ஒரு மருத்துவமனைக்கு உடனடியாக செல்ல வேண்டும் – ஒரு மோசமான மருத்துவரிடம் அல்ல.</li>
+                    <li>பாம்பு கடிக்கும் சந்தர்ப்பங்களில் செயல்படுவதற்கு தயாரான மருத்துவமனையில், மருத்தவர்கள் முதலில் நரம்பியல் மதிப்பீடு மேற்கொண்டு, அதன் பின்னர் மெருகூட்டை வழங்க ஆரம்பிக்கப் பணியாற்றுவர்.</li>
+                </ul>
+            </div>                                                    
+            <hr>   
+            <p class="more-reading">
+                <strong>மேலும் வாசிப்பு</strong>  
+                <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                    <li>
+                        <a href="https://chennai.citizenmatters.in/how-to-care-for-stray-dogs-and-animals-chennai-32067" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                        </a> சென்னை நகரில் சிறுமி நாய்களை மற்றும் சமூக மான்களுக்கான உதவிக்கு ஆலோசனைகள்
+                    </li>
+                    <li>
+                        <a href="https://chennai.citizenmatters.in/learning-to-live-with-snakes-in-chennai-guide-1982" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                        </a> நகரத்தில் பாம்புகளுடன் வாழ படிக்கிறோம்!
+                    </li>                                          
+                    <li>
+                        <a href="https://timesofindia.indiatimes.com/city/chennai/free-treatment-programme-to-reduce-snake-bite-casualties/articleshow/90787511.cms" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                        </a> பாம்பு கடித்தால் பாதிப்புகளை குறைக்க இலவச சிகிச்சை திட்டம் | சென்னை செய்திகள் - டைம்ஸ் ஆஃப் இந்தியா
+                    </li>                 
+                </ul>
+            </p>   
+            <hr>                    
+            <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 04:40 PM </p> 
+            </div>        
+        </div>
+        </div>  
+        <!--Inter Caste Marriage Protection & Crime against SC/ST Helpline-->
+        <div class="card">
+            <div class="card-header" id="heading17">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse17" aria-expanded="true" aria-controls="collapse17">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/intercaste.png" alt="Inter Caste Marriage Protection Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-hand-holding-hand"></i>  இடைச்சாதி திருமண பாதுகாப்பு  & SC/ST எதிர்ப்பு குற்றம் உதவிக்குறிப்பு</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapse17" class="collapse" aria-labelledby="heading17" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <a href="tel:044-23452365" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> IC திருமண உதவிக்குறிப்பு (1)
+                    </a> 
+                    <a href="tel:9444404090" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> IC திருமண உதவிக்குறிப்பு (2)
+                    </a> 
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        அடுத்தினால் காதல் செய்பவர் (AKS) என்பது கல marryingது மற்றும் விரைவில் திருமணம் ஆகும் இடைச்சாதி தம்பதிகளை பாதுகாத்து ஆலோசனை வழங்கும் தமிழ்நாட்டின் அடிப்படையிலான NGO ஆகும்.
+                    </button>                
+                    <a href="tel:9361545000" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> AKS-ஐ தொடர்புகொள்ளவும்
+                    </a>
+                    <a href="tel:9500190590" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> மாவட்ட பாதுகாப்பு அலுவலகம் சென்னை 
+                    </a>
+                    <a href="tel:14566" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> அத்திமதிக்கு எதிரான தேசிய உதவிக்குறிப்பு (SC/ST குற்றங்களுக்கு எதிராக)
+                    </a>
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>மேலும் வாசிக்க</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://www.tnsocialwelfare.org/pages/view/marriage-assistance-schemes" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> திருமண உதவித்தொகுப்புகள் <a href="https://www.tnsocialwelfare.org/pages/view/marriage-assistance-schemes" target="_blank" rel="noopener noreferrer">www.tnsocialwelfare.org</a>
+                            </li>
+                            <li>
+                                <a href="https://www.ndtv.com/india-news/what-is-sc-st-act-all-you-need-to-know-about-this-1832430" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> SC/ST சட்டம் என்ன? <a href="https://www.ndtv.com/india-news/what-is-sc-st-act-all-you-need-to-know-about-this-1832430" target="_blank" rel="noopener noreferrer">www.ndtv.com</a>
+                            </li>
+                            <li>
+                                <a href="https://www.thenewsminute.com/article/how-four-lawyers-and-cop-are-supporting-inter-caste-couples-tamil-nadu-155351" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> தமிழ்நாட்டில் இடைச்சாதி தம்பதிகளை ஆதரிக்கும் 4 சட்டத்தரணிகள் மற்றும் ஒரு போலீசாரின் கதைகள் <a href="https://www.thenewsminute.com/article/how-four-lawyers-and-cop-are-supporting-inter-caste-couples-tamil-nadu-155351" target="_blank" rel="noopener noreferrer">www.thenewsminute.com</a>
+                            </li>                
+                        </ul>
+                    </p>   
+                    <hr>
+                    <p class="small font-italic"> குறிப்பு: சென்னை செய்திகள் மேற்கண்ட அமைப்புகளுடன் தொடர்பில்லை. விவாதிக்கவும். </p>
+                    <hr>                    
+                    <p class="small font-italic">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர்'24 05:00 PM </p>   
+                </div>          
+            </div>
+        </div>   
+        <hr>
+        <button class="col-12 btn btn-outline-primary btn-custom mb-2" data-toggle="modal" data-target="#reportModal">
+            <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> எதேனும் எண் சேவையில் இல்லையெனில் இங்கு புகாரளிக்கவும்
+        </button>
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+    //email 
+    (function() {
+        emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
+    })();
+
+    document.getElementById('reportForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Send the form data
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this) // Replace with your EmailJS service ID and template ID
+            .then(function(response) {
+                alert("Report sent successfully!");
+                $('#reportModal').modal('hide'); // Close modal after submission
+            }, function(error) {
+                alert("An error occurred. Please try again.");
+                console.log("FAILED...", error);
+            });
+    });
+    // jQuery to toggle the icon on collapse/expand
+    $('.collapse').on('shown.bs.collapse', function () {
+        $(this).parent().find('.accordion-button i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+    }).on('hidden.bs.collapse', function () {
+        $(this).parent().find('.accordion-button i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+    });
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    // Show scroll-up button on scroll
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+        100) {
+            document.getElementById('scrollUpBtn').style.display = 'block';
+        } else {
+            document.getElementById('scrollUpBtn').style.display = 'none';
+        }
+    };
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about-ta.html">News of சென்னை பற்றி</a> | <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+            <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+            <a href="https://x.com/newsofchennai">Twitter</a>, 
+            <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+            <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - newsofchennai@pm.me  | <a href="credits-ta.html"> உரிமம் மற்றும் மறுப்பு</a>  | விளம்பரம், விளம்பரங்கள் இல்லை
+        </p>
+    </footer>
+    </body>
+</html>      
+        
+        
+        

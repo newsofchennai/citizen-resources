@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Helpline</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 5px;
+        }
+        .accordion-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            /* padding: 0.5rem 1rem; */
+            border: none;
+            background-color: transparent;
+        }
+        .accordion .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .accordion .card-header {
+            background-color: white;
+        }
+
+        .header-icon-circle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f1f1f1;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .header-icon-img {
+            width: 60%;
+            height: auto;
+        }
+        .accordion-button .chevron {
+            font-size: 18px;
+            color: #1a73e8;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+        .card-header {
+            padding: 10px;
+        }
+        .card-header span {            
+            text-align:left;
+        }
+        .accordion-button .chevron.rotate {
+            transform: rotate(180deg);
+        }
+        
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        } 
+        /* @media (max-width: 600px) { */
+           .btn-block , .btn-custom { 
+            font-size: 12px;
+           }            
+        /* } */
+        body.dark-mode {
+            background-color: #333;
+            color: #131313;
+        }
+        .dark-mode .card p {
+            color: #131313;
+        }
+        .dark-mode h4 {
+            color: #f1f1f1;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            text-align: center;
+        }                
+        p , ul, li, .more-reading {
+        text-align: left;    
+        }
+        .btn p {
+            text-align: center; 
+            margin-bottom: 0px;
+        }
+        @media (max-width: 576px) {
+            #helpline {
+                font-size: 10px;
+            }
+            label {
+                font-size: 12px;
+            }
+            .modal-footer .btn {
+                font-size: 12px;
+            }
+            th, td {
+                font-size: 12px;
+            }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/48d264722b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="help-line-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+    <center><strong><h4>Helplines</h4></strong>
+    </center>
+    <div class="accordion" id="zoneAccordion">
+        <!--Greater Chennai Police-->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/police.png" alt="Police Icon" class="header-icon-img">
+                        </span> -->
+                        <span style="font-size: 16px;font-weight: bold;">
+                            <!-- <i class="fa-solid fa-shield-halved"></i> -->
+                            <i class="fa-solid fa-shield"></i> Greater Chennai Police  
+                            </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:100" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> CALL POLICE - EMERGENCY - SOS
+                    </a>
+                    <a href="https://wa.me/919498111191" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fab fa-whatsapp mr-2"></i> WHATSAPP - TAMIL NADU POLICE
+                    </a>
+                    <a href="https://eservices.tnpolice.gov.in/CCTNSNICSDC/ComplaintRegistrationPage" target="_blank" class="btn btn-secondary btn-block mb-2 ">
+                        <i class="fas fa-file-alt mr-2"></i> REGISTER POLICE COMPLAINT ONLINE
+                    </a>
+                    <a href="https://eservices.tnpolice.gov.in/CCTNSNICSDC/PSHomePage?3" target="_blank" class="btn btn-primary btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> ALL POLICE STATIONS & CONTACTS
+                    </a>
+                    <a href="https://www.tn.gov.in/detail_contact/6765/4" target="_blank" class="btn btn-primary btn-block ">
+                        <i class="fas fa-venus mr-2"></i> ALL WOMEN POLICE STATIONS CONTACTS
+                    </a>
+                    <a href="https://chennai.citizenmatters.in/how-to-file-an-fir-in-chennai-18271" target="_blank" class="btn btn-secondary btn-block ">
+                        <i class="fas fa-file-alt mr-2"></i> All You Need To Know About Filing an FIR
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.amtexsystems.kaavaluthavi&amp;hl=en_IN&amp;gl=US" target="_blank" class="btn btn-outline-primary btn-block ">
+                        <i class="fa-solid fa-download"></i> Install Kaaval Uthavi App
+                    </a>
+                    <button class="btn alt alert-dark btn-block ">
+                        Members of the public can contact the Commissioner through video calls on 6369100100 between 12-1 p.m on Mondays, Wednesdays and Fridays.
+                    </button>
+                    <a href="https://wa.me/916369100100" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fab fa-whatsapp mr-2"></i> Contact Chennai Police Commissioner
+                    </a>
+                    <hr>
+                    <p class="small font-italic">Last Updated - 29 Oct'24 12:10 AM </p>
+                </div>
+            </div>
+        </div>
+        <!--Greater Chennai Traffic Police-->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <!--<span class="header-icon-circle">
+                            <img src="Images/traffic.png" alt=" Traffic Police Icon" class="header-icon-img">
+                        </span>-->
+                        <span style="font-size: 16px;font-weight: bold;"> <i class="fa-solid fa-traffic-light"></i> Greater Chennai Traffic Police </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <a href="tel:103" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> In Case of Road Accidents, Call Greater Chennai Traffic Police
+                    </a> 
+                    <a href="https://wa.me/919003130103" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fab fa-whatsapp mr-2"></i> Call Greater Chennai Traffic Police
+                    </a>
+                    <a href="https://echallan.parivahan.gov.in/index/accused-challan" target="_blank" class="btn btn-secondary btn-block mb-2 ">
+                        <i class="fas fa-file-alt mr-2"></i> Pay e-challan Online
+                    </a>                        
+                    <a href="https://sarathi.parivahan.gov.in/sarathiservice/" target="_blank" class="btn btn-primary btn-block ">
+                        <i class="fa-solid fa-id-card"></i> Contactless TN Licence Services
+                    </a>
+                    <button class="btn alt alert-dark btn-block ">
+                        To improve RTO office service delivery, TN Govt is now offering the following services in a Contactless mode. The citizens would be able to apply for many services online and without needing to visit RTO offices multiple times
+                    </button>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>Things to keep in mind during a traffic stop</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>Ensure that you are being pulled over by the competent authority. Traffic police must be in their uniform with name and buckle number clearly visible.</li>
+                            <li>Wearing of helmets is compulsory. Persons fined for not wearing a helmet will be issued a challan that is valid until midnight.</li>
+                            <li>Male traffic police must be accompanied by female traffic police to conduct vehicle searches on female drivers.</li>
+                            <li>Chennai Traffic Police has adopted a cashless system for spot fines. Payments for violations must not be made in cash during traffic stops. Challan must be issued for all spot fines.</li>
+                            <li>Fines over Rs 100 can be levied only by traffic police of the rank of sub-inspector or above.</li>
+                            <li>Drivers' licenses may be seized for a broad range of offences such as smoking while driving, using the phone, drunken driving, and not stopping at a red light. A valid receipt must be issued by the police before seizing the license.</li>
+                            <li>Traffic police may detain your vehicle if found to be driving or riding without a valid license, permit, or registration. The detained vehicle will be handed over to the police officer in charge of the nearest police station and will be kept under safe custody until a release order is issued.</li>
+                            <li>Offenders detained by the traffic police must be taken directly to the police station and produced before the magistrate within 24 hours of detention.</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>Credits: Aruna Natarajan, Citizen Matters</em></p>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/chennai-traffic-police-stop-driver-rights-responsibilities-5832" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Pulled up by traffic police? Know your responsibilities and rights! <a href="https://chennai.citizenmatters.in/chennai-traffic-police-stop-driver-rights-responsibilities-5832">chennai.citizenmatters.in</a>
+                                </li>
+                            </ul>
+                        </p>
+                    </div>                        
+                    <hr>
+                    <p class="small font-italic">Last Updated - 29 Oct'24 11:07 PM </p>
+                </div>
+            </div>
+        </div>
+        <!--Cyber Crime-->
+        <div class="card">
+            <div class="card-header" id="heading16">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse16" aria-expanded="true" aria-controls="collapse16">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/cybercrime.png" alt="Cyber Crime Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-laptop-code"></i> Cyber Crime</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse16" class="collapse" aria-labelledby="heading16" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <a href="tel:155260" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Cyber Crime Helpline
+                    </a> 
+                    <a href="https://cybercrime.gov.in/Webform/Crime_ReportAnonymously.aspx" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Report Cyber Crime Related to Women or Children (Anonymously)
+                    </a>
+                    <a href="https://cybercrime.gov.in/Webform/Crime_AuthoLogin.aspx?rnt=1" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Report & Track Cyber Crime Related to Women or Children
+                    </a>
+                    <a href="https://cybercrime.gov.in/Webform/Crime_AuthoLogin.aspx" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Report other Cyber Crime 
+                    </a>
+                    <hr>   
+                    <p class="more-reading">  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://citizenmatters.in/cyber-crime-banking-fraud-phishing-understanding-prevention-and-redress-8781" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> Cyber crime: A guide to understanding, prevention and redress <a href="https://citizenmatters.in/cyber-crime-banking-fraud-phishing-understanding-prevention-and-redress-8781" target="_blank">citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> Online Safety Tips <a href="https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx" target="_blank">cybercrime.gov.in</a>
+                            </li>             
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 05:02 PM </p>   
+                </div>          
+            </div>
+        </div>
+        <!--Women Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading10">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/women.png" alt="Milk Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"> <i class="fa-solid fa-venus"></i>  Women Helplines</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#zoneAccordion">
+                <div class="card-body">                    
+                    <a href="tel:181" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call 181 - TN Govt Women Helpline
+                    </a> 
+                    <a href="tel:1091" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call 1091 - Police Helpline for Women
+                    </a> 
+                    <a href="https://wa.me/919840888882" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> Whatsapp PCVC Dhwani Helpline
+                    </a> 
+                    <a href="tel:18001027282" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call PCVC Dhwani Helpline
+                    </a> 
+                    <a href="sms://+917358434964/" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-comment-sms" aria-hidden="true"></i> SMS - TN Govt Women Helpline
+                    </a>   
+                    <a href="tel:7827170170" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> National Commission for Women
+                    </a>  
+                    <hr>
+                    <a href="https://tn181whl.org/indian-law/" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Laws You Need to Know
+                    </a>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p>The following is a non-exhaustive list of additional resources that women may use to seek support and help in times of need</p>                        
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>Nakshatra is a non-profit organisation that works in areas of sexual violence and trafficking. The organisation provides legal, medical and counselling assistance | 9003058479 / 7845629339</li>
+                            <li>AWARE works on areas of gender-based violence through sensitisation and provides help for women affected by violence | 8122241688</li>
+                            <li>PCVC works to create a “support network for women and queer individuals facing domestic and interpersonal violence”. The organisation provides both emergency and rehabilitation. Crisis intervention help offered includes dealing with the police, creating an exit plan from abusive relationships and households, as well as medical and legal help and counselling | 044-43111143</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>Credits: Bhavani Prabhakar, Citizen Matters</em></p>
+                    <hr></div>
+                    <p class="more-reading">
+                        <strong>More reading</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://citizenmatters.in/stalking-in-chennai-resources-and-support/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Tips for women in Chennai to fight the stalking menace <a href="https://citizenmatters.in/stalking-in-chennai-resources-and-support/">chennai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://citizenmatters.in/womens-helplines-in-chennai-for-sexual-abuse-violence-and-mental-health-issues" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Chennai helplines for women suffering abuse, gender violence or mental health issues <a href="https://citizenmatters.in/womens-helplines-in-chennai-for-sexual-abuse-violence-and-mental-health-issues">chennai.citizenmatters.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 01:50 AM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Children Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading11">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/children.png" alt="Milk Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-children"></i> Children Helplines</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#zoneAccordion">
+                <div class="card-body">   
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        Childline is 24-hour a day, 365 days a year, free, emergency phone service for children
+                    </button>                 
+                    <a href="tel:14417" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Child Helpline - TN Govt
+                    </a> 
+                    <a href="tel:1098" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Childline India - 1098
+                    </a> 
+                    <a href="https://wa.me/919940631098" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> WWhatsApp Chennai Collector to Get Help or Report Cases
+                    </a> 
+                    <a href="https://wa.me/919940631098" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> Deputy Commissioner, Crime Against Women and children
+                    </a> 
+                    <a href="https://cybercrime.gov.in/Webform/Crime_ReportAnonymously.aspx" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Report Cybercrime Against Children
+                    </a>   
+                    <a href="https://www.childlineindia.org/a/knowledgecenter" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Child-related Policies & Legislations
+                    </a>  
+                    <hr>
+                    <p class="more-reading">
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://citizenmatters.in/child-sexual-abuse-laws-and-helplines/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Child Sexual Abuse: Laws and helplines to protect our children and seek justice <a href="https://citizenmatters.in/child-sexual-abuse-laws-and-helplines/">chennai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://thenestery.in/blogs/parentalk/preventing-child-sexual-abuse" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Preventing Child Sexual Abuse <a href="https://thenestery.in/blogs/parentalk/preventing-child-sexual-abuse">thenestery.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 03:49 PM </p>   
+                </div>                     
+            </div>
+        </div>
+        <!--LGBTQIA+ Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading12">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse12" aria-expanded="true" aria-controls="collapse12">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/LGBT.png" alt="Milk Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-mars-double"></i> LGBTQIA+ Helplines <i class="fa-solid fa-venus-double"></i></span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#zoneAccordion">
+                <div class="card-body"> 
+                    <button class="btn btn-outline-success btn-block mb-2">
+                        <strong>Orinam</strong> <br>
+                        Orinam is an all-volunteer unregistered collective of LGBTQIA+ people and allies based in Chennai
+                    </button>      
+                    <a href="tel:9841557983" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Orinam
+                    </a> 
+                    <a href="https://wa.me/919841557983" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> WHATSAPP
+                    </a>            
+                    <button class="btn btn-outline-success btn-block mb-2">
+                        <strong>Sahodaran</strong> <br>
+                        Sahodaran, one of Tamil Nadu's oldest LGBTQIA+ organisations
+                    </button>   
+                    <a href="tel:044-23740486" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Sahodaran
+                    </a>    
+                    <a href="tel:044-23740486" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> LANDLINE
+                    </a> 
+                    <button class="btn btn-outline-success btn-block mb-2">
+                        <strong>Sevigal</strong> <br>
+                        Sevigal is a helpline for LGBTQIA+ community offering counselling and clearing doubts
+                    </button>      
+                    <a href="tel:9176999974" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Sevigal
+                    </a> 
+                    <a href="tel:044-24640050" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Sneha Suicide Prevention Helpline
+                    </a> 
+                    <p class="more-reading">
+                        <strong>Read More</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="http://orinam.net/resources-for/lgbt/crisis-support/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Orinam Resources for LGBTIQA+ <a href="http://orinam.net/resources-for/lgbt/crisis-support/">orinam.net</a>
+                            </li>
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/plight-of-members-of-lgbtq-community-in-chennai-19821" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> How inclusive is Chennai? <a href="https://chennai.citizenmatters.in/plight-of-members-of-lgbtq-community-in-chennai-19821">chennai.citizenmatters.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 04:05 PM </p>   
+                </div>            
+            </div>
+        </div>
+        <!--Differently Abled Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading13">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse13" aria-expanded="true" aria-controls="collapse13">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/differently-abled.png" alt="Differently-abled Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-wheelchair"></i>  Differently Abled Helplines</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#zoneAccordion">
+                <div class="card-body"> 
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        State Commissionerate for Welfare of the Differently Abled - Tamil Nadu Government
+                    </button>      
+                    <a href="tel:18004250111" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> TOLL FREE
+                    </a> 
+                    <a href="https://wa.me/919700799993" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i> WHATSAPP VIDEO
+                    </a>         
+                    <hr>   
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        National Institute for Empowerment of Persons with Multiple Disabilities - Union Govt. Mobile helplines will be active only on working days.
+                    </button>      
+                    <a href="tel:18004250345" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> TOLL FREE
+                    </a> 
+                    <a href="tel:9444314716" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> MOBILE
+                    </a>         
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>More Resources</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.nic.in/school-list/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Differently Abled Special Schools List, Homes & Institutions <a href="https://chennai.nic.in/school-list/">chennai.nic.in</a>
+                            </li>
+                            <li>
+                                <a href="https://chennai.nic.in/differently-abled-welfare-schemes/"" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Differently Abled Welfare Schemes <a href="https://chennai.nic.in/differently-abled-welfare-schemes/">chennai.nic.in</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 04:15 PM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Elderly Helplines-->
+        <div class="card">
+            <div class="card-header" id="heading14">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse14" aria-expanded="true" aria-controls="collapse14">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/elders.png" alt="Elderly Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-person-cane"></i> Elderly Helplines</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse14" class="collapse" aria-labelledby="heading14" data-parent="#zoneAccordion">
+                <div class="card-body">                          
+                    <a href="tel:14567" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Elderline Helpline (Govt)
+                    </a> 
+                    <a href="tel:18001801253" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Helpage India
+                    </a> 
+                    <hr>
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        Dignity Foundation | Mon-Fri 10am-6pm
+                    </button> 
+                    <a href="tel:18002678780" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Dignity Foundation
+                    </a> 
+                    <hr>
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        Udhavi is a Chennai-based NGO for the elderly
+                    </button> 
+                    <a href="tel:9840092938" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Udhavi (1)
+                    </a> 
+                    <a href="tel:9445165876" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Udhavi (2)
+                    </a>                         
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>More Resources</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://mumbai.citizenmatters.in/what-you-should-do-if-you-spot-elder-abuse-27183" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                    mumbai.citizenmatters.in
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://udhavi.net/contact.html" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                    udhavi.net
+                                </a>
+                            </li>                          
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 04:20 PM </p>   
+                </div>             
+            </div>
+        </div>
+        <!--Ambulance - Emergency-->
+        <!-- <div class="card">
+            <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <span class="header-icon-circle">
+                        <img src="Images/ambulance.png" alt="Ambulance Icon" class="header-icon-img">
+                    </span> 
+                    <span style="font-size: 16px;font-weight: bold;"> Ambulance - Emergency </span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:108" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> Call 108 Ambulance
+                    </a>
+                    <a href="tel:04428194630" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call St. John's Ambulance
+                    </a>
+                    <a href="tel:104" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call 104 TN Medical Helpline
+                    </a>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:1066" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Apollo Hospital
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-46242424" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Global Hospital
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:105757" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Chettinad Hospital
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-49334933" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Fortis Malar Hospital
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>Government Hospitals</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>Government General Hospital | <a href="tel:04425305000">04425305000</a></li>
+                            <li>Government Kilpauk Hospital | <a href="tel:04428364951">04428364951</a></li>
+                            <li>Government Royapettah Hospital | <a href="tel:04428483051">04428483051</a></li>
+                            <li>Government Stanley Hospital | <a href="tel:04425281347">04425281347</a></li>
+                            <li>Kasturba Hospital for Women | <a href="tel:04428545449">04428545449</a></li>
+                            <li>Institute of Child Health &amp; Hospital | <a href="tel:04428191135">04428191135</a></li>
+                            <li>Government Hospital for Women &amp; Children | <a href="tel:04428191982">04428191982</a></li>
+                        </ul>                    
+                    </div>
+                    <hr>
+                    <button type="button" class="btn alt alert-dark w-100 btn-custom" style="text-align: center;font-size: 14px;">
+                        <p><strong>Air Ambulance Services</strong></p>
+                        <span>Activation takes about 2 - 12 hours | Subject to availability and weather conditions</span>
+                    </button><br><br>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://wa.me/9710940000" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-helicopter" aria-hidden="true"></i> Aero Care
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://wa.me/9701111156" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-helicopter" aria-hidden="true"></i> ICATT
+                            </a>
+                        </div>
+                    </div>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>Types of Ambulance</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>Patient Transport Ambulance</li>
+                            <li>Basic Life Support Ambulance</li>
+                            <li>Advanced Life Support Ambulance</li>
+                            <li>Air Ambulance (Helicopter / Aeroplane)</li>
+                        </ul>
+                    </div>
+                    <hr>
+                <p class="small font-italic">Last Updated - 30 Oct'24 01:21 AM </p>   
+                </div>           
+            </div>
+        </div> -->
+        <!--Fire & Rescue | Gas Leakage-->
+        <div class="card">
+            <div class="card-header" id="headingSix">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/fire.png" alt="Ambulance Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-fire"></i>   Fire & Rescue | Gas Leakage</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:101" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> Call Fire Service - Chennai
+                    </a>
+                    <a href="https://www.tnfrs.tn.gov.in/about-us/station-list/northern-region/" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> List of Fire Stations in Chennai with Contact Numbers
+                    </a>                    
+                    <hr>
+                    <a href="tel:1906" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call for Gas Leakage Help
+                    </a>
+                    <a href="tel:1906" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> What to do in Case of LPG Leakage
+                    </a>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>What to do in Case of LPG Leakage</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>Do not panic</li>
+                            <li>Open all doors &amp; windows for ventilation. LPG is heavier than air and hence it tends to settle down. Opening doors must be the first step.</li>
+                            <li>Put off all flames, lamps, incense sticks etc.</li>
+                            <li>Put the safety cap back on the cylinder.</li>
+                            <li>Close regulator and burner knobs.</li>
+                            <li>Do not operate any electrical switches, appliance or equipment in the kitchen.</li>
+                            <li>Isolate the electrical supply from the outside source.</li>
+                            <li>Call your LPG dealer for emergency assistance and then 1906</li>
+                            <li>Try to isolate the cylinder to an open space and cover it with wet cloth.</li>
+                            <li>Call the fire brigade and police if required.</li>
+                        </ul>
+                    </div>  
+                    <hr>
+                    <img src="Images/know-your-extinguisher.jpeg" class="img-fluid" alt="Know Your Extinguisher">
+                    <a href="https://play.google.com/store/apps/details?id=com.amtex.pathukavalan" target="_blank" class="btn btn-outline-danger btn-block ">
+                        <i class="fa-solid fa-download"></i> Install Thee SOS app
+                    </a>
+                    <hr>
+                    <p class="more-reading">
+                        <strong>More reading</strong>           
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://www.tnfrs.tn.gov.in/about-us/station-list/northern-region/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> What to do in case of fire? <a href="www.tnfrs.tn.gov.in">www.tnfrs.tn.gov.in</a>
+                            </li>
+                            <li>
+                                <a href="https://www.indiatoday.in/information/story/how-to-use-fire-extinguisher-step-by-step-guide-1692707-2020-06-25" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> How to use Fire Extinguisher <a href="www.indiatoday.in">www.indiatoday.in</a> 
+                            </li>
+                            <li>
+                                <a href="https://bengaluru.citizenmatters.in/the-dos-and-donts-during-a-fire-accident-in-bengaluru-22862" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> The dos and don’ts during a fire accident <a href="www.indiatoday.in">bengaluru.citizenmatters.in</a> 
+                            </li>
+                        </ul>
+                    </p>                   
+                    <hr>
+                <p class="small font-italic">Last Updated - 30 Oct'24 09:25 PM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Disaster Management-->
+        <div class="card">
+            <div class="card-header" id="headingFive">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/disaster.png" alt="Ambulance Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-triangle-exclamation"></i> Disaster Management</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:1070" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> Call TNSDMA State Helpline
+                    </a>
+                    <a href="tel:1077" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call TNSDMA District Helpline
+                    </a>                    
+                    <hr>
+                    <a href="https://beta-tnsmart.rimes.int/index.php/EmergencyCall/Complaint" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Register Complaint / Seek Help - TNSDMA
+                    </a>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://beta-tnsmart.rimes.int/index.php/Awareness/advisoryPdfs" class="btn btn-outline-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Advisory - Do's & Dont's - TNSDMA
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://cdn.s3waas.gov.in/s330ef30b64204a3088a26bc2e6ecf7602/uploads/2018/11/2018112967.pdf" class="btn btn-outline-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Advisory - Do's & Dont's - NDMA
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="https://drive.google.com/file/d/1-IR9NuKwJiAnM1feY3R4yYF57k_fECFA/view" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-file-alt mr-2" aria-hidden="true"></i> Disaster Survival Guide - India | NDMA
+                    </a>                    
+                    <hr>
+                <p class="small font-italic">Last Updated - 30 Oct'24 01:00 PM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Greater Chennai Corporation-->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/chn-corp.png" alt="Corporation Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-building-circle-check"></i> Greater Chennai Corporation </span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="tel:1913" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> Call Corporation Helpline
+                    </a>
+                    <a href="https://wa.me/919499933644" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Corporation WhatsApp
+                    </a>
+                
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-25619206" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> GCC Control Room (1)
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="tel:044-25303511" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> GCC Control Room (2)
+                            </a>
+                        </div>
+                    </div>
+                
+                    <a href="know-you-ward.html" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa fa-globe" aria-hidden="true"></i> Know Your GCC Zone & Ward
+                    </a>
+                    
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="https://chennaicorporation.gov.in/gcc/online-services/" class="btn btn-primary w-100 btn-custom" target="_blank" rel="noopener noreferrer">
+                                <i class="fa fa-globe" aria-hidden="true"></i> Online Services
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <a href="councillor-contact.html" class="btn btn-primary w-100 btn-custom">
+                                <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Zonal Officers Contacts
+                            </a>
+                        </div>
+                    </div>
+                
+                    <a href="https://chennaicorporation.gov.in/gcc/swm_bin/" class="col-12 btn btn-info btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Garbage Removal Trucks Schedule
+                    </a>
+                
+                    <hr>
+                    <p class="more-reading">
+                        <strong>More reading</strong>           
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/chennai-governance-corporation-mtc-railways-cmrl-tnpcb-tnhb-32855" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Who administers and provides public services in Chennai? 
+                            </li>
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/gcc-greater-chennai-corporation-and-how-it-functions-local-elected-council-36664" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> How GCC administers the city 
+                            </li>
+                        </ul>
+                    </p>
+                    <hr>
+                <p class="small font-italic">Last Updated - 30 Oct'24 12:46 AM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Metro Water | Electricity-->
+        <div class="card">
+            <div class="card-header" id="heading7">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/metro.png" alt="Metro water and Electricity Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-faucet-drip"></i> Metro Water | Electricity</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#zoneAccordion">
+                <div class="card-body">
+                    <a href="https://dfw.chennaimetrowater.in/#/index" class="btn btn-primary btn-block mb-2 ">
+                        <i class="fa-solid fa-droplet"></i> Book Water Tanker - Online
+                    </a>
+                    <button class="btn alt alert-dark btn-block mb-2 ">
+                        Water booking website may not load properly on mobile
+                    </button>
+                    <a href="tel:044-45674567" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Contact Chennai Metro Water
+                    </a>                    
+                    <hr>
+                    <a href="https://chennaimetrowater.tn.gov.in/NewMetroWater/MetroWater/PGBD2/CMCEntryAdvance.aspx" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-money-check-dollar" aria-hidden="true"></i> Pay Water Tax - Online
+                    </a>
+                    <hr>
+                    <p class="more-reading"> <strong>Electricity Supply</strong> </p>
+                    <a href="https://ccms.tangedco.org/tangedco-public/" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Raise Compliant - Online
+                    </a>
+                    <a href="tel:9498794987" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fa-solid fa-square-phone mr-2"></i> Contact Electricity Board (TNEB)
+                    </a>
+                    <a href="https://wa.me/919445850811" class="btn btn-danger btn-block mb-2 ">
+                        <i class="fab fa-whatsapp mr-2"></i> Whatsapp Electricity Board (TNEB)
+                    </a>
+                    <a href="https://www.tnebnet.org/qwp/qpay" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-money-check-dollar" aria-hidden="true"></i> Pay Electricity Bill - Online
+                    </a>
+                    <a href="https://www.tnebnet.org/qwp/consno" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Know your EB Consumer Number
+                    </a>
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 30 Oct'24 09:50 PM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Blood Banks-->
+        <div class="card">
+            <div class="card-header" id="heading8">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/blood.png" alt="Blood bank Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-hand-holding-droplet"></i>  Blood Banks</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#zoneAccordion">
+                <div class="card-body">                    
+                    <a href="tel:044-24881392" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Rotary Blood Bank
+                    </a> 
+                    <a href="tel:044-28554425" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> India Red Cross Society
+                    </a> 
+                    <a href="tel:044-28294870" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Apollo Hospital Blood Bank
+                    </a> 
+                    <a href="tel:044-28415959" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Lions Blood Bank
+                    </a>   
+                    <a href="tel:044-28259601" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Child Trust Blood Bank
+                    </a>                  
+                    <hr>
+                    <a href="https://wa.me/919381005254" class="btn btn-primary btn-block mb-2 ">
+                        <i class="fab fa-whatsapp mr-2"></i> Whatsapp Blood Coordinator
+                    </a>
+                    <a href="https://blod.in/becomedonor" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-file-pen" aria-hidden="true"></i> Sign up to Donate Blood
+                    </a>
+                    <hr>
+                    <img src="Images/Blood-donors.webp" class="img-fluid" alt="Know Your Extinguisher">
+                    <p class="more-reading">
+                        <strong>Read More</strong>           
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="http://nbtc.naco.gov.in/faq/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> FAQs on Blood Donation <a href="http://nbtc.naco.gov.in/faq/">nbtc.naco.gov.in</a>
+                            </li>
+                            <li>
+                                <a href="https://citizenmatters.in/blood-donation-in-mumbai/" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Why is blood donation a big deal? <a href="https://citizenmatters.in/blood-donation-in-mumbai/">mumbai.citizenmatters.in</a> 
+                            </li>
+                            <li>
+                                <a href="https://stopcorona.tn.gov.in/blood-bank.php" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Blood Banks <a href="https://stopcorona.tn.gov.in/blood-bank.php">stopcorona.tn.gov.in</a> 
+                            </li>
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 30 Oct'24 10:12 PM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Human Milk Banks-->
+        <div class="card">
+            <div class="card-header" id="heading9">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/milk.png" alt="Milk Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-person-breastfeeding"></i>  Human Milk Banks</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#zoneAccordion">
+                <div class="card-body">                    
+                    <a href="tel:044-25902961" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> RSRM, Royapuram
+                    </a> 
+                    <a href="tel:044-28192138" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> ICH, Egmore
+                    </a> 
+                    <a href="tel:044-66646600" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Vijaya Hospital (1)
+                    </a> 
+                    <a href="tel:044-6664666" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Vijaya Hospital (2)
+                    </a> 
+                    <a href="tel:044-28544901" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Govt Kasturba Gandhi Hosp
+                    </a>   
+                    <a href="tel:044-2819198" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> IOG, Egmore
+                    </a>  
+                    <a href="tel:044-4200180" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Child Trust Hospital
+                    </a>
+                    <a href="tel:044-66300300" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Dr. Kamakshi Memorial
+                    </a>                                    
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong>How to avail human milk bank services</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                        <li>In Chennai, you can visit any of the above human milk banks, with a letter from an authorised doctor about the mother’s inability to produce the milk. All these facilities supply milk for free.</li>
+                        <li>Mothers who encounter issues with breastfeeding can visit any of the government maternity hospitals.</li>
+                        <li>The mother should sign a consent form at the hospital, indicating willingness to opt for donor’s milk. </li>
+                        <li>The amount of milk given to an infant depends on availability of the milk. In the city’s government hospitals, priority is given to the infants who are born in the hospital itself. </li>
+                        <li>The sterilised and stored milk is given in a steel container to the mother.</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><em>Credits: Laasya Shekhar, Citizen Matters</em></p>
+                        <p>
+                    </div>
+                    <hr>
+                    <p class="more-reading">
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/world-breastfeeding-week-guide-to-chennai-human-milk-banks-11262" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Know more about human milk banks <a href="https://citizenmatters.in/world-breastfeeding-week-guide-to-chennai-human-milk-banks/">chennai.citizenmatters.in</a>
+                            </li>
+                            <li>
+                                <a href="https://www.thehindu.com/news/national/tamil-nadu/sourcing-milk-from-human-milk-banks-is-safe-say-experts/article32289228.ece" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </a> Milk from human milk banks is safe <a href="https://www.thehindu.com/news/national/tamil-nadu/sourcing-milk-from-human-milk-banks-is-safe-say-experts/article32289228.ece">www.thehindu.com</a> 
+                            </li>                            
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 30 Oct'24 10:20 PM </p>   
+                </div>           
+            </div>
+        </div>
+        <!--Animal Helplines & Snake Catching-->
+        <div class="card">
+            <div class="card-header" id="heading15">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse15" aria-expanded="true" aria-controls="collapse15">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/animal.png" alt="Animal & Snake Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-paw"></i>   Animal Helplines & Snake Catching</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse15" class="collapse" aria-labelledby="heading15" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <button class="btn btn-outline-info btn-block mb-2">
+                        To report unsterilised dogs in your area, request animal birth control and stray cow menace, please call Greater Chennai Corporation at 1913
+                    </button> 
+                    <strong><em>Request Rescue of Street Animals In Distress</em></strong>                     
+                    <a href="tel:044-71819575" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Blue Cross (1)
+                    </a> 
+                    <a href="tel:044-46274999" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Blue Cross (2)
+                    </a>
+                    <a href="https://forms.zohopublic.com/bluecrossofindia/form/RCubeIncomingRescueRequest/formperma/t2jGbXyvG-uMixFH6vG1fXpWbymSCCfHm9U3NFDiVVY" class="col-12 btn btn-outline-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Request Rescue of Street Animals (Stray) In Distress  via Blue Cross
+                    </a> 
+                    <a href="tel:1962" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-truck-medical" aria-hidden="true"></i> Animal Mobile Medical Ambulance
+                    </a>
+                    <hr>                             
+                    <a href="tel:9444748914" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Snake Bite Helpline
+                    </a>  
+                    <a href="tel:044-22200335" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call Forest Dept. - Snake Rescue - Across Chennai
+                    </a>
+                    <button class="btn btn-outline-danger btn-block mb-2" data-toggle="modal" data-target="#helplineModal">
+                        Snake Catching Helplines
+                    </button>                
+                    <!-- Modal -->
+                    <div class="modal fade" id="helplineModal" tabindex="-1" aria-labelledby="helplineModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="helplineModalLabel">Snake Catching Helplines</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-striped table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Places</th>
+                                                <th>Name</th>
+                                                <th>Contact</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Poonamalee, Nerkundram, Koyambedu</td>
+                                                <td>Baba</td>
+                                                <td><a href="tel:9841588852">9841588852</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Porur, Iyyappanthangal, Valasaravakkam</td>
+                                                <td>Baba</td>
+                                                <td><a href="tel:9841588852">9841588852</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mugalivakkam, Perambur Porur, Ramapuram, Nerkundram, Manappakkam</td>
+                                                <td>Sakthi</td>
+                                                <td><a href="tel:9094321393">9094321393</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Annanagar to Pattabhiram</td>
+                                                <td>Ganesh</td>
+                                                <td><a href="tel:7448927227">7448927227</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chrompet</td>
+                                                <td>Jaison</td>
+                                                <td><a href="tel:8056204821">8056204821</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chrompet to Tambaram</td>
+                                                <td>Robin</td>
+                                                <td><a href="tel:8807870610">8807870610</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Surrounding of Porur & Alappakam</td>
+                                                <td>Manikandan</td>
+                                                <td><a href="tel:9840346631">9840346631</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chrompet</td>
+                                                <td>Ravi</td>
+                                                <td><a href="tel:9600119081">9600119081</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Thiruvanmiyur, ECR & OMR</td>
+                                                <td>Shavan</td>
+                                                <td><a href="tel:6379163347">6379163347</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Thiruvanmiyur, ECR & OMR</td>
+                                                <td>Shavan</td>
+                                                <td><a href="tel:9445070909">9445070909</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Manali, Thandayarpet, Royapuram, Thiruvattiyur</td>
+                                                <td>Nagendran</td>
+                                                <td><a href="tel:9940073642">9940073642</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Surrounding of Tambaram</td>
+                                                <td>Praveen</td>
+                                                <td><a href="tel:9962205585">9962205585</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ECR & OMR</td>
+                                                <td>Arjun</td>
+                                                <td><a href="tel:9176543213">9176543213</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tambaram, Padappai & Thiruneermalai</td>
+                                                <td>Chandran</td>
+                                                <td><a href="tel:9840724104">9840724104</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Perungulathur to Maraimalai Nagar</td>
+                                                <td>Murugesan</td>
+                                                <td><a href="tel:9884847673">9884847673</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sholinganallur to Kelambakkam</td>
+                                                <td>Vijayanadan</td>
+                                                <td><a href="tel:9884306960">9884306960</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chengalpattu District</td>
+                                                <td>Aadithan (FG)</td>
+                                                <td><a href="tel:8489517927">8489517927</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div style="font-size: 14px; line-height: 1.6;">
+                        <p><strong> <u>What to do in Case of Snake Bite </u><br>
+                        Things to keep in mind after snake bite</strong></p>
+                        <ul style="padding-left: 20px; list-style-position: outside;">
+                            <li>Do not panic.</li>
+                            <li>If the bite is on the foot, do not walk or run. 
+                            You must basically keep the injured part of the body immobile.</li>
+                            <li>It is important to note that one must not meddle with the wound, but immediately go to nearby hospital facilities.</li>
+                            <li>Most importantly, do not tie a tourniquet over the wound,” added the doctor. </li>
+                            <li>Tamil Nadu Government is providing anti-venom to all primary, secondary and tertiary care government institutions.“It is therefore important to rush to a hospital – and not a quack. </li>
+                            <li>At hospitals equipped to deal with snake bite cases, doctors would first do a neurological assessment and would then start administering the anti-venom.</li>
+                        </ul>
+                    </div>                                                    
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>More Reading</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/how-to-care-for-stray-dogs-and-animals-chennai-32067" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> Pointers for those who want to help stray dogs and community animals in Chennai
+                            </li>
+                            <li>
+                                <a href="https://chennai.citizenmatters.in/learning-to-live-with-snakes-in-chennai-guide-1982" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> Learning to live with snakes…in the city!
+                            </li>                                          
+                            <li>
+                                <a href="https://timesofindia.indiatimes.com/city/chennai/free-treatment-programme-to-reduce-snake-bite-casualties/articleshow/90787511.cms" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> Free Treatment Programme To Reduce Snake Bite Casualties | Chennai News - Times of India
+                            </li>                 
+                        </ul>
+                    </p>   
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 04:20 PM </p>   
+                </div>             
+            </div>                
+        </div>
+        <!--Inter Caste Marriage Protection & Crime against SC/ST Helpline-->
+        <div class="card">
+            <div class="card-header" id="heading17">
+            <h2 class="mb-0">
+                <button class="btn btn-link accordion-button" type="button" data-toggle="collapse" data-target="#collapse17" aria-expanded="true" aria-controls="collapse17">
+                    <!--<span class="header-icon-circle">
+                        <img src="Images/intercaste.png" alt="Inter Caste Marriage Protection Icon" class="header-icon-img">
+                    </span> -->
+                    <span style="font-size: 16px;font-weight: bold;"><i class="fa-solid fa-hand-holding-hand"></i>  Inter Caste Marriage Protection <br> & Crime against SC/ST Helpline</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </h2>
+            </div>
+            <div id="collapse17" class="collapse" aria-labelledby="heading17" data-parent="#zoneAccordion">
+                <div class="card-body">     
+                    <a href="tel:044-23452365" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> IC Marriage Helpline (1)
+                    </a> 
+                    <a href="tel:9444404090" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> IC Marriage Helpline (2)
+                    </a> 
+                    <button class="btn alt alert-dark btn-block mb-2">
+                        Adhalinal Kaadhal Seiveer (AKS) is a Tamil Nadu-based NGO that protects and counsels married and soon-to-be-married inter-caste couples.
+                    </button>                
+                    
+                    <a href="tel:9361545000" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Contact AKS
+                    </a>
+                    <a href="tel:9500190590" class="col-12 btn btn-primary btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i>District Protection Office Chennai 
+                    </a>
+                    <a href="tel:14566" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i>National Helpline Against Atrocities (Crimes against SC/ST)
+                    </a>
+                    <hr>   
+                    <p class="more-reading">
+                        <strong>More Reading</strong>  
+                        <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                            <li>
+                                <a href="https://www.tnsocialwelfare.org/pages/view/marriage-assistance-schemes" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> Marriage Assistance Schemes <a href="https://www.tnsocialwelfare.org/pages/view/marriage-assistance-schemes" target="_blank" rel="noopener noreferrer">www.tnsocialwelfare.org</a>
+                            </li>
+                            <li>
+                                <a href="https://www.ndtv.com/india-news/what-is-sc-st-act-all-you-need-to-know-about-this-1832430" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> What Is SC/ST Act? <a href="https://www.ndtv.com/india-news/what-is-sc-st-act-all-you-need-to-know-about-this-1832430" target="_blank" rel="noopener noreferrer">www.ndtv.com</a>
+                            </li>
+                            <li>
+                                <a href="https://www.thenewsminute.com/article/how-four-lawyers-and-cop-are-supporting-inter-caste-couples-tamil-nadu-155351" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i> 
+                                </a> How 4 lawyers and a cop are supporting inter-caste couples in Tamil Nadu <a href="https://www.thenewsminute.com/article/how-four-lawyers-and-cop-are-supporting-inter-caste-couples-tamil-nadu-155351" target="_blank" rel="noopener noreferrer">www.thenewsminute.com</a>
+                            </li>                
+                        </ul>
+                    </p>   
+                    <hr>
+                    <p class="small font-italic"> Note: News of Chennai does not have any affiliation with the mentioned organisations. Discretion advised. </p>
+                    <hr>                    
+                <p class="small font-italic">Last Updated - 31 Oct'24 05:30 PM </p>   
+                </div>          
+            </div>
+        </div>
+        <hr>
+        <button class="col-12 btn btn-outline-primary btn-custom mb-2" data-toggle="modal" data-target="#reportModal">
+            <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Report Out-of-service Helplines Here
+        </button>
+        <!-- Modal Structure -->
+        <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">Report Out-of-service Helplines</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="mailto:newsofchennai@gmail.com" method="post" enctype="text/plain">
+                        <div class="modal-body">
+                            <!-- Name Field -->
+                            <div class="form-group">
+                                <label for="name">Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <!-- Email Field -->
+                            <div class="form-group">
+                                <label for="email">Your Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <!-- Helpline Dropdown -->
+                            <div class="form-group">
+                                <label for="helpline">Which helpline is out of service? <span class="text-danger">*</span></label>
+                                <select class="form-control" id="helpline" name="helpline" required>
+                                    <option value="" disabled selected>Select the service</option>
+                                    <option value="Greater Chennai Police">Greater Chennai Police</option>
+                                    <option value="Greater Chennai Traffic Police">Greater Chennai Traffic Police</option>
+                                    <option value="Greater Chennai Corporation">Greater Chennai Corporation</option>
+                                    <option value="Ambulance - Emergency">Ambulance - Emergency</option>
+                                    <option value="Disaster Management">Disaster Management</option>
+                                    <option value="Fire & Rescue | Gas Leakage">Fire & Rescue | Gas Leakage</option>
+                                    <option value="Metro Water | Electricity">Metro Water | Electricity</option>
+                                    <option value="Blood Banks">Blood Banks</option>
+                                    <option value="Human Milk Banks">Human Milk Banks</option>
+                                    <option value="Women Helplines">Women Helplines</option>
+                                    <option value="Children Helplines">Children Helplines</option>
+                                    <option value="LGBTQIA+ Helplines">LGBTQIA+ Helplines</option>
+                                    <option value="Differently Abled Helplines">Differently Abled Helplines</option>
+                                    <option value="Elderly Helplines">Elderly Helplines</option>
+                                    <option value="Animal Helplines & Snake Catching">Animal Helplines & Snake Catching</option>
+                                    <option value="Cyber Crime">Cyber Crime</option>
+                                    <option value="Inter Caste Marriage Protection & Crime against SC/ST Helpline">Inter Caste Marriage Protection & Crime against SC/ST Helpline</option>
+                                </select>
+                            </div>
+                            <!-- Details Field -->
+                            <div class="form-group">
+                                <label for="details">Tell us in detail which number was out of service <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="details" name="details" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+    //email 
+    (function() {
+        emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
+    })();
+
+    document.getElementById('reportForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Send the form data
+        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this) // Replace with your EmailJS service ID and template ID
+            .then(function(response) {
+                alert("Report sent successfully!");
+                $('#reportModal').modal('hide'); // Close modal after submission
+            }, function(error) {
+                alert("An error occurred. Please try again.");
+                console.log("FAILED...", error);
+            });
+    });
+    // jQuery to toggle the icon on collapse/expand
+    $('.collapse').on('shown.bs.collapse', function () {
+        $(this).parent().find('.accordion-button i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+    }).on('hidden.bs.collapse', function () {
+        $(this).parent().find('.accordion-button i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+    });
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    // Show scroll-up button on scroll
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+        100) {
+            document.getElementById('scrollUpBtn').style.display = 'block';
+        } else {
+            document.getElementById('scrollUpBtn').style.display = 'none';
+        }
+    };
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+</body>
+</html>

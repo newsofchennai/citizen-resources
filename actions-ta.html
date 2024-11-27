@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Action</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 5px;
+        }
+        .accordion .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .accordion .card-header {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .accordion .card-header .header-content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .accordion .card-header h6 {
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 0;
+        }
+        .accordion .card-header small {
+            color: #333;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+        .accordion .card-header p {
+            color: #777;
+            margin: 0;
+            font-size: 14px;
+        }
+        .accordion .card-body {
+            font-size: 16px;
+            color: #333;
+            padding: 15px 20px;
+        }
+        .accordion .chevron {
+            font-size: 18px;
+            color: #1a73e8;
+            transition: transform 0.3s ease;
+        }
+        .accordion .chevron.rotate {
+            transform: rotate(180deg);
+        }
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        } 
+        .video-responsive {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .dark-mode .more-reading , .dark-mode .last-edit{
+            color: #131313;
+        }
+        
+        p , ul, li, .more-reading {
+        text-align: left;    
+        }
+        .btn p {
+            text-align: center; 
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white" alt="Banner" class="img-fluid banner-img" />
+            </a>
+             <!-- Top Ribbon -->
+            <div class="top-ribbon">
+                <!-- <div class="left-options"> -->
+                    <a href="index.html" class="btn icon-circle" aria-label="Home">
+                        <i class="fas fa-home"></i>
+                    </a>                
+                    <a href="actions.html" class="btn icon-circle" style="white-space: nowrap;">English Version</i> <!--<i class="fa fa-language" aria-hidden="true"></i>-->
+                    </a>
+                    <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                   <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a>
+                 </div> -->
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time-tamil"></span>
+        </div> 
+        <hr>
+    <center><strong><h4>செயல் எடுக்கவும்</h4></strong></center>
+         <div class="accordion" id="actionAccordion">
+            <!-- Hygienic & Healthy Food -->
+            <div class="card">
+                <div class="card-header" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <div class="header-content">
+                        <h6>உணவு கலப்படத்தை புகாரளிக்க</h6>
+                        <!-- <small>சுத்தமான மற்றும் ஆரோக்கியமான உணவு</small> -->
+                        <p>உணவுப் பாதுகாப்பு ஆணையர்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            <p><strong>சென்னையில் உணவு கலப்படத்தை</strong> புகாரளிக்க, அலுவலக நேரங்களில் (அதாவது, திங்கள் முதல் வெள்ளி வரை காலை 10.00 மணி முதல் மாலை 5.45 மணி வரை) உணவுப் பாதுகாப்பு ஆணையரின் அலுவலகத்தில் செயல்படும் கீழ்க்கண்ட எண்ணை அழைக்கவும்.</p>
+                        </div>
+                        <a href="tel:9444042322" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> உணவு கலப்படத்தை புகாரளிக்க அழைக்கவும்
+                        </a>
+                        <hr>
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            <p><strong>சென்னையில் மிகவும் பொதுவான உணவுப் பாதுகாப்பு மீறல் எது?</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside;">
+                                <li>பொதுவாக, செயற்கை நிறங்களை பயன்படுத்துவது மிக அதிகமாக நடைபெறுகிறது. இவை தீவிரமாக உடலுக்குக் கேடு விளைவிக்கும் மற்றும் நீண்ட காலத்தில் புற்றுநோயை ஏற்படுத்தக் கூடும். செம்மஞ்சள் நிறம் உள்ள சிக்கன் 65, கிரில்லட் மீட் மற்றும் பஜ்ஜிகளில் இந்த செயற்கை நிறங்களே பயன்படுத்தப்படுகிறது. பல மிட்டாய் மற்றும் கடைகளும் இதுபோன்ற நிறங்களைச் சேர்க்கின்றன. உணவுப் பாதுகாப்பு விதிகளின் கீழ் இவை தடை செய்யப்பட்டுள்ளது, ஆனால் சில பண்டங்களில் குறைந்த அளவு பயன்படுத்த அனுமதிக்கப்படுகிறது.</li>
+                                <li>மேலும் ஒரு பொதுவான மீறல், பழைய மாமிசத்தைப் பயன்படுத்துவது ஆகும். உணவகங்கள் அல்லது கடைகள் குறைவான விலையில் பழைய மாமிசத்தை வாங்குகின்றன அல்லது மாமிசம் சரியான வெப்பநிலையில் பாதுகாக்கப்படாததால் பழையதாக மாறுகிறது.</li>
+                                <li>மற்ற மீறல்கள், தந்திரமான மாற்றம், பாக்கரி பொருட்கள், மளிகை பொருட்கள், பால், குளிர்பானங்கள், பாட்டில் நீர், தேநீர் மற்றும் காபியின் தரம் குறைவாக இருப்பதை உள்ளடக்குகின்றன.</li>
+                            </ul>
+                            <p style="margin-top: 10px;"><em>தகவல்: லாச்யா ஷேகர், சிட்டிசன் மேட்டர்ஸ்</em></p>
+                        </div>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://raindrop.io/newsofchennai/useful-articles-on-food-adulteration-news-of-chennai-21952673" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> உணவு கலப்படம் பற்றிய பயனுள்ள கட்டுரைகள் <a href="https://raindrop.io/newsofchennai/useful-articles-on-food-adulteration-news-of-chennai-21952673"> raindrop.io</a>
+                                </li>
+                                <li>
+                                    <a href="https://timesofindia.indiatimes.com/city/chennai/file-a-complaint-if-food-is-adulterated/articleshow/86663381.cms" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> பொதுவான உணவுப் பாதுகாப்பு மீறல்கள் பற்றிய தகவல்கள் அறிய? <a href="https://timesofindia.indiatimes.com/city/chennai/file-a-complaint-if-food-is-adulterated/articleshow/86663381.cms"> timesofindia.indiatimes.com</a>
+                                </li>
+                                <li>
+                                    <a href="https://fssai.gov.in/cms/guidance-notes.php" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> இந்திய உணவுப் பாதுகாப்பு மற்றும் தரநிலைகள் ஆணையத்தின் வழிகாட்டல் குறிப்புகள் <a href="https://fssai.gov.in/cms/guidance-notes.php"> fssai.gov.in</a>
+                                </li>
+                            </ul>
+                        </p>
+                        <hr>
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 12:58 AM</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Caring for Chennai Section -->
+            <div class="card">
+                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <div class="header-content">
+                        <h6>கைவிடப்பட்ட மற்றும் ஆதரவற்றவர்களுக்கு உதவவும்</h6>
+                        <!-- <small>சென்னைக்கு அக்கறை</small> -->
+                        <p>சென்னை பெருநகர காவல்துறை</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            <p>சென்னை பெருநகர காவல்துறையின் <strong>காவல் கரங்கள்</strong> என்பது உதவியற்ற முதியவர்களுக்கும் ஆதரவற்றவர்களுக்கும் உதவ அமைக்கப்பட்ட ஒரு திட்டமாகும்.</p>
+                            <p>நீங்கள் சாலையோரத்தில் உதவியதேவைப்படும் முதியவர்களை கண்டால், தயவுசெய்து <strong>காவல் கரங்கள்</strong> திட்டத்தை தொடர்புகொள்ளவும்.</p>
+                        </div>
+                        <a href="tel:9444717100" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> காவல் கரங்களை அழைக்கவும்
+                        </a>
+                        <a href="https://opencity.in/data/chennai-corporation-gcc-list-of-night-shelters-for-the-homeless" class="btn btn-danger btn-block mb-2">
+                            <i class="fa-solid fa-list mr-2"></i> இரவு தங்கும் இடங்களின் பட்டியல்
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <strong>மேலும் படிக்க</strong>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.newindianexpress.com/cities/chennai/2021/apr/22/integrated-initiative-by-chennai-policeto-help-the-abandoned-destitutes-2293098.html" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> தவறவிடப்பட்டவர்களுக்கும் ஆதரவற்றவர்களுக்கும் உதவ சென்னை காவல்துறையின் ஒருங்கிணைந்த முயற்சி <a href="https://www.newindianexpress.com/cities/chennai/2021/apr/22/integrated-initiative-by-chennai-policeto-help-the-abandoned-destitutes-2293098.html">www.newindianexpress.com</a>
+                                </li>
+                            </ul>
+                        </p>
+                        <hr>
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 12:10 PM</p>
+                    </div>
+                </div>
+            </div>            
+            <!-- Safe Sanitation -->
+            <div class="card">
+                <div class="card-header" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    <div class="header-content">
+                        <h6>பாதுகாப்பற்ற ஆள்துளை சுத்தம் செய்வதை புகாரளிக்கவும்</h6>
+                        <!-- <small>பாதுகாப்பான சுகாதாரம்</small> --> 
+                        <p>சென்னை மாநகர நீர் வழங்கல் மற்றும் கழிவு நீர் வாரியம்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#actionAccordion">
+                    <div class="card-body">                        
+                        <div class="btn alt alert-dark btn-block mb-2"> 
+                            <p>
+                                <strong>24X7 உதவி எண்ணை தொடர்பு கொள்ளவும்</strong>, சென்னையில் பணியாளர்கள் முகக்கவசங்கள் அல்லது பிற பாதுகாப்பு உபகரணங்கள் அணியாமல் கழிவு நீர் மான்ஹோல் சுத்தம் செய்வதை நீங்கள் கண்டால். அனுமதியின்றி சேப்ப்டிக் டேங்கில் அல்லது கழிவறைகளில் நுழைவதையும் புகாரளிக்கலாம்.
+                                <br>
+                                சென்னை மாநகர நீர் வழங்கல் மற்றும் கழிவு நீர் வாரியம் இந்த உதவி எண்ணை நிர்வகிக்கும்.
+                            </p>
+                        </div>
+                        <a href="tel:14420" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> புகார் அளிக்க CMWSSB ஐ அழைக்கவும்
+                        </a>
+                        <a href="tel:044-45674567" class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> CMWSSB ஐ தொடர்பு கொள்ளவும்
+                        </a>
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            <p>பாதுகாப்பற்ற சூழ்நிலைகளில் பணியாளர்களை வேலைக்கு அமர்த்திய வீட்டு உரிமையாளர்கள்/கான்ட்ராக்டர்கள், 2013 ஆம் ஆண்டு கையால் கழிவுகளை அகற்றல் தடை மற்றும் புனர்வாழ்வு சட்டத்தின் கீழ் தண்டிக்கப்படுவார்கள்</p>
+                        </div>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://timesofindia.indiatimes.com/city/chennai/come-across-unsafe-manhole-cleaning-dial-14420-to-report/articleshow/81478858.cms" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> பாதுகாப்பற்ற மான்ஹோல் சுத்தம் செய்யப்படுவது கண்டால் 14420 அழைக்கவும் <a href="https://timesofindia.indiatimes.com/city/chennai/come-across-unsafe-manhole-cleaning-dial-14420-to-report/articleshow/81478858.cms" target="_blank"> timesofindia.indiatimes.com</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ndtv.com/india-news/ensure-no-manual-scavenging-permitted-madras-high-court-to-civic-bodies-2534411" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> கையால் கழிவுகளை அகற்ற அனுமதிக்க வேண்டாம்: மெட்ராஸ் உயர்நீதிமன்றம் நகராட்சிகளுக்கு அறிவுறுத்தல் <a href="https://www.ndtv.com/india-news/ensure-no-manual-scavenging-permitted-madras-high-court-to-civic-bodies-2534411" target="_blank"> www.ndtv.com</a> 
+                                </li>                          
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 01:10 AM</p>                         
+                    </div>
+                </div>
+            </div>            
+            <!-- Repurpose Old Clothes -->
+            <div class="card">
+                <div class="card-header" id="heading10" data-toggle="collapse" data-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                    <div class="header-content">
+                        <h6>ஆடை பாழடைவதைத் தடுக்கவும்</h6>
+                        <!-- <small>பழைய ஆடைகளை மறுசுழற்சி செய்யவும்</small> -->                        
+                        <p>பல அமைப்புகள்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            <strong>சென்னையில் பயன்படுத்திய ஆடைகளை மறுசுழற்சி செய்யும் அமைப்புகள்</strong>
+                            துளி அடையாறு மற்றும் வடபழனியில் கிளைகள் உள்ளன.<br>                            
+                            ராஜஸ்தான் காஸ்மோ கிளப் பவுண்டேஷன் வீட்டு வாசலில் இருந்து ஆடைகளை கொண்டு செல்வது.<br>                            
+                            லிட்டில் டிராப்ஸ் கல்லூரி சாலை, கொளுத்துவாஞ்சேரி மற்றும் பரனிபுத்தூரில் உள்ளது. இது குடியிருப்புகளை ஆடை சேகரிப்பு இயக்கத்தில் பங்கேற்க ஊக்குவிக்கிறது, மேலும் சேகரிக்கப்பட்ட பொருட்களை எடுத்துச் செல்ல ஒரு வேன் அனுப்புகிறது.<br>                            
+                            தனகம், 29 சி பி இராமசாமி சாலை, அழ்வார்பேட்டில் உள்ளது.<br>                            
+                            குஞ்ஞ் சென்னை அலுவலகம், கோவிலம்பாக்கம் (ஞாயிற்றுக்கிழமை மூடப்பட்டிருக்கும்).
+                        </div>
+                        <p style="margin-top: 10px;"><em>கடன்: லிஃபி தோமஸ், தி ஹிந்து</em></p>
+                        <a href="tel:6380306662" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> துளியை தொடர்பு கொள்ளவும்
+                        </a>
+                        <a href="tel:9962299622" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> ராஜஸ்தான் காஸ்மோ கிளப் பவுண்டேஷன்
+                        </a>
+                        <a href="tel:9884080869" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> லிட்டில் டிராப்ஸ் (1)
+                        </a>
+                        <a href="tel:9884080864" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> லிட்டில் டிராப்ஸ் (2)
+                        </a>
+                        <a href="tel:9940502933" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> தனகம் (1)
+                        </a>
+                        <a href="tel:044-24663411" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> தனகம் (2)
+                        </a>
+                        <a href="tel:9354937428" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> குஞ்ஞ், சென்னை
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.thehindu.com/news/cities/chennai/stopping-clothes-from-reaching-the-landfill/article33888626.ece" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> ஆடைகள் பாழடைவதைத் தடுக்க <a href="https://www.thehindu.com/news/cities/chennai/stopping-clothes-from-reaching-the-landfill/article33888626.ece" target="_blank"> www.thehindu.com</a>
+                                </li>                     
+                            </ul>
+                        </p>  
+                        <p><em>குறிப்பு: சென்னை செய்திகள் இந்த குறிப்பிட்ட அமைப்புகளை பொது தகவலின் அடிப்படையில் பரிந்துரை செய்கின்றது; அமைப்புகளுடன் எந்தவொரு தொடர்பும் இல்லை. வினைவிதி கேட்டுக் கொள்ளப்படுகிறது.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 02:10 AM</p> 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Get Facts Checked Section -->
+            <div class="card">
+                <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <div class="header-content">                        
+                        <h6>போலியான செய்திகளை புகாரளிக்கவும்</h6>
+                        <!-- <small>செய்திகளை சரிபார்க்கவும்</small> -->
+                        <p>பல்வேறு நிறுவனங்கள்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn btn-outline-info btn-block mb-2">
+                            <p><strong>போலியான செய்திகளை உடைக்கவும்</strong><br>
+                            தவறான தகவல் மற்றும் பிரச்சாரத்தை எதிர்க்க நாம் விழிப்பாக இருப்பது முக்கியம்.</p>
+                        </div>
+                        <a href="https://wa.me/919819888887" class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> Times Verified மூலம் புகாரளிக்கவும் (TOI)
+                        </a>
+                        <a href="https://wa.me/919603132132" class="btn btn-primary btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> Factly-க்கு புகாரளிக்கவும்
+                        </a>
+                        <a href="https://wa.me/917700906111" class="btn btn-primary btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> Boom-க்கு புகாரளிக்கவும்
+                        </a>
+                        <a href="https://wa.me/917600011160" class="btn btn-primary btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> AltNews-க்கு புகாரளிக்கவும்
+                        </a>
+                        <a href="https://wa.me/919643651818" class="btn btn-primary btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> Quint WebQoof-க்கு புகாரளிக்கவும்
+                        </a>
+                        <a href="https://wa.me/918799711259" class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> PIB Factcheck-க்கு புகாரளிக்கவும்
+                        </a>
+                        <a href="tel:6369748351" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (1)
+                        </a>
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            <p>மேற்கண்ட சில உண்மைத்தன்மை பரிசோதனை அமைப்புகள், இந்தியாவில் உள்ள சர்வதேச உண்மைத்தன்மை பரிசோதனை நெட்வொர்க் (IFCN) மூலம் அங்கீகரிக்கப்பட்டவை, இங்கு போலியான செய்திகளை புகாரளிக்கலாம்.</p>
+                        </div>
+                        <hr>
+                        <p class="more-reading">
+                            <strong>மேலும் செய்திகள்</strong>
+                            <img src="Images/fake-news.webp" class="img-fluid" alt="போலியான செய்திகளை கண்டறியும் வழிகள்">
+                            <hr>
+                            <div class="video-responsive">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Z2C3HD9v0uY?si=JKVAiEbI0kIW-2K-" title="YouTube வீடியோ பிளேயர்" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <hr>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.reuters.com/manipulatedmedia/en/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> மாற்றியமைக்கப்பட்ட ஊடகங்களை கண்டறியும் மற்றும் தடுக்கும் வழிமுறைகள் <a href="https://www.reuters.com/manipulatedmedia/en/" target="_blank"> www.reuters.com</a>
+                                </li>
+                                <li>
+                                    <a href="https://newslit.org/tips-tools/how-news-literate-are-you-quiz/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> நீங்கள் எவ்வளவு செய்தி அறிவாளியாக இருக்கிறீர்கள்? <a href="https://newslit.org/tips-tools/how-news-literate-are-you-quiz/" target="_blank"> newslit.org</a>
+                                </li>             
+                            </ul>
+                        </p>   
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 01 நவம்பர் 2024 11:50 PM</p> 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Report Corruption Section -->
+            <div class="card">
+                <div class="card-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <div class="header-content">
+                        <h6>ஊழல் புகார் அளிக்கவும்</h6>
+                        <!-- <small>உங்களுக்கு தேவையான அனைத்து தகவல்களும்</small> -->
+                        <p>விழிப்புணர்வு மற்றும் ஊழல் தடுப்பு இயக்குநரகம்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <a href="tel:1064" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> ஊழல் தடுப்பு
+                        </a>
+                        <a href="tel:1965" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> விழிப்புணர்வு
+                        </a>
+                        <a href="tel:044-22321090" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (1)
+                        </a>
+                        <a href="tel:044-22321085" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (2)
+                        </a>
+                        <a href="tel:044-22310989" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (3)
+                        </a>
+                        <a href="tel:044-22342142" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> DVAC (4)
+                        </a>
+                        <hr>
+                        <a href="https://www.dvac.tn.gov.in/pdf/RTI/Proforma%20for%20Complaints%20DVAC.pdf" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-file-pen"></i> புகார் மாதிரி
+                        </a>
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            <p><strong>DVAC இன் முக்கிய செயல்பாடுகள்</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside;">
+                                <li>மாநில விழிப்புணர்வு ஆணையம்/அரசாங்கம் கூறிய ஊழல் மற்றும் தொடர்புடைய குற்றச்சாட்டுகள் தொடர்பாக விசாரணை நடத்துதல்.</li>
+                                <li>விழிப்புணர்வு ஆணையத்திற்கு தகவல் மற்றும் புள்ளிவிவரங்களை வழங்குதல்.</li>
+                                <li>அரசு ஊழியர்களின் ஊழல் செயல்கள் குறித்த பொதுமக்களின் புகார்களை விசாரணை செய்யப்பட்டது.</li>
+                                <li>நிறுவனங்களில் லஞ்சம் மற்றும் ஊழல் சம்பவங்கள் தொடர்பான புலனாய்வு செய்தல் மற்றும் ஊழல் தடுப்பு சட்டம், 1988 மற்றும் திருத்திய சட்டத்தின் கீழ் குற்றங்களை விசாரணை செய்தல்.</li>
+                                <li>சிறப்பு புகார்களைப் பொருத்தவரை, முறையான நடவடிக்கைகளை மேற்கொண்டு, லஞ்சம் வாங்கிய அரசாங்க ஊழியர்கள் கைது செய்யப்படுவர்.</li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <a href="https://portal.cvc.gov.in/" class="btn btn-danger btn-block ">
+                            <i class="fa-solid fa-file-pen"></i> CVC-க்கு புகார் அளிக்கவும்
+                        </a>
+                        <div style="font-size: 14px; line-height: 1.6;">
+                            <p><strong>CVC இன் முக்கிய செயல்பாடுகள்</strong></p>
+                            <p>
+                                சிஇசி மைய அரசாங்கத்தினால் கட்டுப்படுத்தப்படும் நிறுவனங்கள் மற்றும் இடப்பிரிவுகளின் ஊழல் குற்றச்சாட்டுகள் குறித்த விசாரணைகளை மேற்கொள்ளும் அதிகாரம் பெற்றுள்ளது.
+                            </p>
+                            <ul style="padding-left: 20px; list-style-position: outside;">
+                                <li>மத்திய அரசு அலுவலர்கள் மற்றும் ரிசர்வ் வங்கி, நபார்டு மற்றும் சிடிபி போன்ற நிறுவனங்களில் உள்ள அதிகாரிகள்.</li>
+                                <li>பொது துறையில் உயர் பதவியில் உள்ளவர்.</li>
+                                <li>சமூக மற்றும் உள்ளூராட்சி நிறுவனங்களில் கேளிக்கூறிய சம்பளத்தைப் பெறுபவர்கள்.</li>
+                            </ul>
+                            <p><strong>குறிப்பு:</strong></p>
+                            <ol style="padding-left: 20px;">
+                                <li>மத்திய அரசு அலுவலர்கள் தொடர்பான புகார்களை CVC யிடம் மட்டுமே அளிக்கவும்.</li>
+                                <li>மாநில அரசு தொடர்பான விவகாரங்களை மாநில அதிகாரிகளிடம் அளிக்கவும்.</li>
+                            </ol>
+                        </div>
+                        <hr>
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்ட தேதி - 02 நவம்பர் 2024 12:30 AM </p>
+                    </div>
+                </div>
+            </div>
+                       
+            <!-- Prevent injury to health and people Drug-->
+            <div class="card">
+                <div class="card-header" id="heading6" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <div class="header-content">
+                        <h6>மருந்து கடத்தல் / போதைப்பொருள் தவறாக பயன்பாடு குறித்த புகார்</h6>
+                        <!-- <small>மக்களின் உடல் நலத்திற்கு தீங்கு விளைவதை தடுக்கவும்</small> -->
+                        <p>போதைப் பொருள் கட்டுப்பாட்டு அலுவலகம் மற்றும் தமிழ்நாடு காவல்துறை</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2"> 
+                            <p>பொதுமக்கள் போதைப் பொருள் கடத்தல்/தவறாக பயன்பாடு தொடர்பான விவரங்களை NCB அல்லது TN போதைப்பொருள் எதிர்ப்பு உதவி எண்களுக்கு தகவல் அளிக்கலாம்</p>
+                        </div>
+                        <a href="tel:10581" class="btn btn-danger btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> TN போதைப்பொருள் எதிர்ப்பு உதவி எண் (1)
+                        </a>
+                        <a href="tel:9498410581" class="btn btn-danger btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> TN போதைப்பொருள் எதிர்ப்பு உதவி எண் (2)
+                        </a>
+                        <a href="tel:044-26821481" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> NCB சென்னை பிரிவு - தொலைபேசி
+                        </a>
+                        <a href="mailto:szu-ncb@nic.in" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-envelope mr-2"></i> NCB சென்னை பிரிவு - மின்னஞ்சல்
+                        </a>
+                        <a href="tel:100" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> சென்னை மாநகர காவல்துறைக்கு அழைக்கவும்
+                        </a>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/interview-with-a-bruno-zonal-director-narcotics-control-bureau-chennai-14306" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> சென்னை நகரில் போதைப்பொருள் அடிமைக்கு மிக ஆபத்தானவர்கள் வயது குறைந்தவர்கள் <a href="https://chennai.citizenmatters.in/interview-with-a-bruno-zonal-director-narcotics-control-bureau-chennai-14306" target="_blank"> chennai.citizenmatters.in</a>
+                                </li>
+                                <li>
+                                    <a href="https://blog.ipleaders.in/report-incidents-drug-trafficking-neighborhood/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> உங்கள் பகுதியில் போதைப் பொருள் கடத்தல் சம்பவங்களைப் புகாரளிக்க எப்படி? <a href="https://blog.ipleaders.in/report-incidents-drug-trafficking-neighborhood/" target="_blank"> blog.ipleaders.in</a> 
+                                </li>                          
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 01:25 AM</p>      
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prevent Injury to Health and People Alcohol-->
+            <div class="card">
+                <div class="card-header" id="heading7" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <div class="header-content">                        
+                        <h6>சமூக விரோத மதுவகை (தடை) குறித்த புகார்</h6>
+                        <!-- <small>மக்களின் உடல் நலத்திற்கு தீங்கு விளைவதை தடுக்கவும்</small> -->
+                        <p>தமிழ்நாடு காவல்துறை மதுவிலக்கு அமல்பிரிவு</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2"> 
+                            <p>உங்களுக்கு <strong>சமூக விரோத மதுவகை உற்பத்தி, விற்பனை அல்லது போக்குவரத்து</strong> தொடர்பான எந்த தகவலும் இருந்தால், அதை TN மதுவிலக்கு அமல்பிரிவுக்கு புகாரளிக்கலாம்.<br> உங்களின் பெயர் ரகசியமாக வைக்கப்படும்.</p>
+                        </div>
+                        <a href="tel:10581" class="btn btn-danger btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> TNPEW க்கு அழைக்கவும்
+                        </a>
+                        <a href="https://wa.me/919498410581" class="btn btn-danger btn-block mb-2">
+                            <i class="fab fa-whatsapp mr-2"></i> வாட்ஸ்ஆப் TNPEW
+                        </a>
+                        <a href="mailto:tnprohibitionhelpline@gmail.com" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-envelope mr-2"></i> மின்னஞ்சல் அனுப்பவும்
+                        </a>  
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVnNzvVrXY0vbZWYQheZo4xRX6xe_kOPPtSGce7L3S9-cYnA/viewform" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-file-pen mr-2"></i> படிவம் மூலம் புகார்
+                        </a>  
+                        <hr>
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 01:30 AM</p> 
+                    </div>
+                </div>
+            </div>
+                   
+            <!-- Developing Chennai -->
+            <div class="card">
+                <div class="card-header" id="heading8" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                    <div class="header-content">
+                        <h6>சட்ட விரோத கட்டிடங்கள் குறித்த புகார்</h6>
+                        <!-- <small>சென்னை நகரத்தை மேம்படுத்துதல்</small> -->                        
+                        <p>சென்னை நகர திட்ட மேம்பாட்டு ஆணையம்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <a href="tel:18004256099" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-square-phone mr-2"></i> CMDA அமல்பிரிவை அழைக்கவும்
+                        </a>
+                        <a href="mailto:mscmda@tn.gov.in" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-envelope mr-2"></i> CMDA அமல்பிரிவுக்கு மின்னஞ்சல்
+                        </a>
+                        <hr>
+                        <div>
+                            <ul style="padding-left: 20px; list-style-position: outside;">
+                                <li>சென்னை நகரப் பகுதிகளில் (CMA) உள்ள சட்ட விரோத கட்டிடங்கள் குறித்த புகார்களை செய்ய CMDA ஒரு இலவச தொலைபேசி எண்ணை வழங்கியுள்ளது.</li>
+                                <li>புகாரின் அடிப்படையில், நிர்வாகிகள் கட்டிட அனுமதிகள் மற்றும் அதற்கான அனுமதிகளை தொடர்ந்து கண்காணிப்பார்கள். அனுமதி CMDA மூலம் வழங்கப்படவில்லை என்றால், அவர்கள் புகாரை சம்பந்தப்பட்ட உள்ளூர் மன்றத்திற்குச் சேர்க்கின்றனர்.
+                                </li>
+                            </ul>
+                            <p style="margin-top: 10px;"><em>தகவல்: கோரா ஆப்ரஹாம், சிட்டிசன் மேட்டர்ஸ்</em></p>
+                        </div>
+                        <p class="more-reading">
+                            <p><strong>மேலும் தகவல்கள்</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/illegal-construction-in-chennai-cmda-rules-and-complaint-mechanism-35973" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> சென்னை நகரத்தில் சட்ட விரோத கட்டிடங்கள்: எங்கே விதிகள் உள்ளன, எவரிடம் புகாரளிக்கலாம்? <a href="https://chennai.citizenmatters.in/illegal-construction-in-chennai-cmda-rules-and-complaint-mechanism-35973" target="_blank"> chennai.citizenmatters.in</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.cmdachennai.gov.in/ppurchase.html" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> தனிநபர் வீடு அல்லது நிலம் வாங்குவதற்கு முன் <a href="http://www.cmdachennai.gov.in/ppurchase.html" target="_blank"> www.cmdachennai.gov.in</a> 
+                                </li> 
+                                <li>
+                                    <a href="http://www.cmdachennai.gov.in/before_buying_flat.html" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> குடியிருப்பு வாங்குவதற்கு முன் <a href="http://www.cmdachennai.gov.in/before_buying_flat.html" target="_blank"> www.cmdachennai.gov.in</a> 
+                                </li>                           
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 01:45 AM</p> 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pollution-free Chennai -->
+            <div class="card">
+                <div class="card-header" id="heading9" data-toggle="collapse" data-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                    <div class="header-content">                        
+                        <h6>தொழிற்சாலை மாசுபாட்டை புகாரளிக்கவும்</h6>
+                        <!-- <small>மாசுபாடு இல்லா சென்னை</small> -->
+                        <p>தமிழ்நாடு மாசுபாடு கட்டுப்பாட்டு வாரியம்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <ul style="text-align: left;">
+                                <li>மசுலியாக தொழிற்சாலிகள் மூலம் ஏற்பட்ட சுற்றுச்சூழல் மாசுபாட்டுக்கான புகார்களை பதிவு செய்யுங்கள்.</li>
+                                <li>புகாரின் அடிப்படையில் எடுத்த நடவடிக்கைகள் பதிவு செய்யப்பட்ட முகவரிக்கு தபால் மூலம் தெரியப்படுத்தப்படும்.</li>
+                            </ul>
+                        </div>
+                        <a href="http://pcbolgprs.in/pcb/" class="btn btn-primary btn-block mb-2">
+                            <i class="fa-solid fa-file-pen mr-2"></i> TNPCB உடன் புகாரை பதிவு செய்யவும்
+                        </a> 
+                        <a href="actions.html" class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fa-solid fa-smog mr-2"></i> சென்னையின் காற்று தரம்
+                        </a> 
+                        <p class="more-reading">
+                            <p><strong>மேலும் தகவல்கள்</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="http://www.tnpcb.gov.in/contact.php" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> TNPCB துறையின் தொடர்பு விவரங்கள் <a href="http://www.tnpcb.gov.in/contact.php" target="_blank"> www.tnpcb.gov.in</a>
+                                </li>
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/chennai-air-pm2-5-pollution-emissions-industry-dust-32207" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> சென்னை நகரில் பாதுகாப்பான அளவுகோலை விட 4 மடங்கு அதிகமான PM2.5 <a href="https://chennai.citizenmatters.in/chennai-air-pm2-5-pollution-emissions-industry-dust-32207" target="_blank"> chennai.citizenmatters.in</a> 
+                                </li>                        
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 02:05 AM</p>  
+                    </div>
+                </div>
+            </div>  
+               
+            <!-- Make Lives Better -->
+            <div class="card">
+                <div class="card-header" id="heading11" data-toggle="collapse" data-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                    <div class="header-content">
+                        <h6>உடல் உறுப்பு தானத்திற்கு பதிவு செய்யவும்</h6>
+                        <!-- <small>ஆய்வுகளை மேம்படுத்தவும்</small> -->                        
+                        <p>பல்வேறு நிறுவனங்கள்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2" style="text-align: left;">
+                            <strong>உடல் பொருள் பங்களிப்பிற்கு இரண்டு வகைகள் உள்ளன:</strong>
+                            <ul>
+                                <li><strong>வாழும் பொருள் பங்களிப்பு</strong>: ஒருவர் தனது வாழ்க்கையின் போது ஒரே ஒரு சிறுநீரகத்தை (மற்றொரு சிறுநீரகம் தானாளரின் உடல் செயல்பாடுகளை adequatly பராமரிக்க இயலும்), ஒரு பகுதியாக உணவு குழாயின் (உணவு குழாயின் பாதி மட்டுமே செயல்பாட்டினை பராமரிக்க தேவையானது) மற்றும் கல்லீரலின் ஒரு பகுதியை (கல்லீரல் உடலில் பாகங்கள் சில காலத்திற்கு பிறகு மீண்டும் வளர்ச்சியடையும்).</li>
+                                <li><strong>இழப்புக்கூற்றுப் பொருள் பங்களிப்பு</strong>: ஒருவர் (மூளை ஊதல்/இதய) இறப்பிற்குப் பிறகு பல்வேறு உறுப்புகளை மற்றும் மொத்தத்தினைக் கொடுக்க முடியும். அவருடைய உறுப்புகள் மற்றொரு நபரின் உடலில் உயிர்க்கொண்டு வாழ்ந்து போகின்றன.</li>
+                            </ul>
+                        </div>
+                        <p>உங்கள் உறுப்புகளை பங்களிக்க தேசிய உடல் மற்றும் இழை மாற்றுதல் அமைப்பின் இணையதளத்தில் பதிவு செய்வதன் மூலம் நீங்கள் உறுதி செய்யலாம் அல்லது தொலைபேசி இலவச எண்ணை (24x7) அழைக்கலாம் | இந்திய அரசு நிறுவனமாகும்</p>
+                        <a href="tel:1800114770" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> உடல் பொருள் பங்களிப்பு உதவி நேரம் (NOTTO)
+                        </a>
+                        <a href="https://www.notto.gov.in/index.htm" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> உடல் பொருள் பங்களிப்பிற்கு பதிவு செய்யவும் (NOTTO)
+                        </a>
+                        <hr>
+                        <a href="tel:9884080869" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> மோகன் அறக்கட்டளை அழைக்கவும்
+                        </a>
+                        <a href="https://www.mohanfoundation.org/donorcard.asp" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> மோகன் அறக்கட்டளை வழியாக பதிவு செய்யவும்
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <p><strong>மேலும் படிக்கவும்</strong></p>
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://chennai.citizenmatters.in/guide-to-organ-donation-after-death-chennai-6211" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> உடல் பொருள் பங்களிப்பை கருதுகிறீர்களா? நீங்கள் தேவையான அனைத்து தகவல்களும் இங்கே <a href="https://chennai.citizenmatters.in/guide-to-organ-donation-after-death-chennai-6211" target="_blank"> chennai.citizenmatters.in</a>
+                                </li>                     
+                            </ul>
+                        </p>  
+                        <p><em>குறிப்பு: சென்னை செய்தி குறிப்பிடப்பட்ட நிறுவனங்களை பொதுமக்கள் தகவல்களின் அடிப்படையில் விருப்பமாக அறிவுறுத்துகிறது மற்றும் நிறுவனத்துடன் எந்த தொடர்பும் இல்லை. கவனம் தேவை.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 02:25 AM</p> 
+                    </div>
+                </div>
+            </div>
+                   
+            <!-- Volunteer In Case Of Emergency -->
+            <div class="card">
+                <div class="card-header" id="heading12" data-toggle="collapse" data-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                    <div class="header-content">
+                        <h6>முதன்மை பதிலளிக்கப்பெறுவதற்கு பதிவு செய்யவும்</h6>
+                        <!-- <small>அவசரத்தில் சேவையாளர் ஆகுங்கள்</small> -->                        
+                        <p>அலெர்ட் எஞ்சியோ</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">ALERT (Amenity Lifeline Emergency Response Team) என்பது சென்னையில் அடிப்படையிலான ஒரு நிதி அமைப்பு ஆகும், இது அவசரத்தின் போது பொதுமக்களுக்கு 'உயிர் உரிமை' ஐ உறுதி செய்ய பல்வேறு பயிற்சி தலையீடுகள் மூலம் அதிகாரம் வழங்குகிறது.</div>
+                        <a href="tel:9944066002" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> ALERT ஐ அணுகவும் (1)
+                        </a>
+                        <a href="tel:9944066004" class="btn btn-outline-primary btn-block ">
+                            <i class="fa-solid fa-square-phone mr-2"></i> ALERT ஐ அணுகவும் (2)
+                        </a>
+                        <a href="https://alert.ngo/savioursaturdays/" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> முதலுதவி பயிற்சிக்கு பதிவு செய்யவும்
+                        </a>                        
+                        <a href="https://alert.ngo/training/" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-file-pen mr-2"></i> முதன்மை பதிலளிப்பாளருக்கான பயிற்சிக்கு பதிவு செய்யவும்
+                        </a>
+                        <hr>
+                        <p><em>குறிப்பு: சென்னை செய்தி குறிப்பிடப்பட்ட அமைப்புகளை பொதுமக்கள் தகவலின் அடிப்படையில் விருப்பமாக அறிவுறுத்துகிறது மற்றும் அமைப்புகளுடன் எந்த தொடர்பும் இல்லை. கவனம் தேவை.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 02:30 AM</p> 
+                    </div>
+                </div>
+            </div>
+                    
+            <!-- Caring for Chennai -->
+            <div class="card">
+                <div class="card-header" id="heading13" data-toggle="collapse" data-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                    <div class="header-content">
+                        <h6>புற்றுநோயாளிகளுக்கு முடி தானம் செய்யுங்கள்</h6>
+                        <!-- <small>சென்னை நலனில் கவனம் செலுத்துதல்</small> -->                        
+                        <p>பல அமைப்புகள்</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block mb-2">
+                            முடி தானங்கள் கீழே குறிப்பிடப்பட்டுள்ள எஞ்சியோக்களுக்கு முகக்கவசங்களை தயாரிக்க உதவும், இது காமிகெமோதெரபி மற்றும் கதிரியக்கத்தை உள்ளடக்கிய காங்கர் சிகிச்சையின் பரவலான பக்க விளைவாக முடி இழப்பு ஏற்படுகிறது.
+                        </div>
+                        <img src="Images/hair-donate.webp" class="img-fluid" alt="முடி தானம்">                        
+                        <a href="https://cherianfoundation.org/gift-hair-gift-confidence/" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-hand-holding-medical mr-2"></i> Cherian Foundation மூலம் தானம் செய்யவும்
+                        </a>
+                        <a href="https://haircrown.in/donate" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-hand-holding-medical mr-2"></i> Hair Crown (Theni) மூலம் தானம் செய்யவும்
+                        </a>
+                        <a href="https://www.lifeagainfoundation.org/donateMaterial" target="_blank" class="btn btn-primary btn-block ">
+                            <i class="fa-solid fa-hand-holding-medical mr-2"></i> Life Again Foundation மூலம் தானம் செய்யவும்
+                        </a>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://www.thehindu.com/society/with-increased-hair-donations-the-ngos-are-scaling-up-making-of-wigs-to-be-given-free-of-cost-to-the-underprivileged-cancer-patients/article34071728.ece" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> தலைக்கவசமாக: 20-இல் உள்ளவர்கள் ஏன் தங்களது தலைமுடியை முறுக்கு விடுகிறார்கள் <a href="https://www.thehindu.com/society/with-increased-hair-donations-the-ngos-are-scaling-up-making-of-wigs-to-be-given-free-of-cost-to-the-underprivileged-cancer-patients/article34071728.ece" target="_blank"> www.thehindu.com</a>
+                                </li>                     
+                            </ul>
+                        </p>  
+                        <p><em>குறிப்பு: சென்னை செய்தி குறிப்பிடப்பட்ட அமைப்புகளை பொதுமக்கள் தகவலின் அடிப்படையில் விருப்பமாக அறிவுறுத்துகிறது மற்றும் அமைப்புகளுடன் எந்த தொடர்பும் இல்லை. கவனம் தேவை.</em></p>
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 02 நவம்பர் 2024 02:35 AM</p> 
+                    </div>
+                </div>
+            </div>
+                  
+        </div> <!--accordion close div-->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle chevron rotation
+            $('.accordion .card-header').on('click', function() {
+                var chevron = $(this).find('.chevron');
+                
+                // Collapse other sections and reset their chevrons
+                $('.accordion .chevron').not(chevron).removeClass('rotate');
+                
+                // Toggle the current chevron rotation
+                chevron.toggleClass('rotate');
+            });
+
+            // Reset chevron when section is collapsed by other means
+            $('.collapse').on('hidden.bs.collapse', function () {
+                $(this).parent().find('.chevron').removeClass('rotate');
+            });
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        // Show scroll-up button on scroll
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+            100) {
+                document.getElementById('scrollUpBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollUpBtn').style.display = 'none';
+            }
+        };        
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about-ta.html">News of சென்னை பற்றி</a> | <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+            <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+            <a href="https://x.com/newsofchennai">Twitter</a>, 
+            <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+            <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - newsofchennai@pm.me  | <a href="credits-ta.html"> உரிமம் மற்றும் மறுப்பு</a>  | விளம்பரம், விளம்பரங்கள் இல்லை
+        </p>
+    </footer>
+</body>
+</html>
