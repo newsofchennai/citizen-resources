@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function enableDarkMode() {
         body.classList.add('dark-mode');
         themeIcon.classList.replace('fa-moon', 'fa-sun');
-        // bannerImage.src = 'NOCWHITEBACKGROND.png';
         bannerImage.src = 'NOC2024-v2-dark.png';
         body.style.backgroundColor = '#333';
     }
@@ -34,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function enableLightMode() {
         body.classList.remove('dark-mode');
         themeIcon.classList.replace('fa-sun', 'fa-moon');
-        // bannerImage.src = 'NOC2024bg.png';
         bannerImage.src = 'NOC2024-v2-white.png';
         body.style.backgroundColor = '#F1EFEF';
     }
