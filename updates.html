@@ -77,35 +77,48 @@
             document.getElementById('scrollUpBtn').style.display = 'none';
         }
     };
-    function loadTumblrImages(folderPath, maxImages) {
-            const container = document.getElementById("imageContainer");
-            let stopLoading = false;  // Flag to control the loop
+    function loadTumblrImages(folderPath, maxImages) { 
+    const container = document.getElementById("imageContainer");
+    const images = []; // Array to store preloaded images
 
-            // Start from maxImages and go backwards
-            for (let i = maxImages; i >= 1; i--) {
-                if (stopLoading) {
-                    break;  // Stop if stopLoading is true
-                }
+    let loadedCount = 0; // Counter to track loaded images
 
-                const tumblrImg = new Image(); // Create a new image element
-                tumblrImg.src = `${folderPath}/${i}.png`;
-                tumblrImg.alt = `Image ${i}`;
-                tumblrImg.classList.add("tumblr-img");  // Corrected variable name
+    for (let i = maxImages; i >= 1; i--) {
+        const tumblrImg = new Image();
+        tumblrImg.src = `${folderPath}/${i}.png`;
+        tumblrImg.alt = `Image ${i}`;
+        tumblrImg.classList.add("tumblr-img");
 
-                tumblrImg.onload = () => {
-                    container.appendChild(tumblrImg);
-                    container.appendChild(document.createElement("br")); // Add a line break after each image
-                };
+        tumblrImg.onload = () => {
+            images.push(tumblrImg);
+            loadedCount++;
+            checkAllImagesLoaded();
+        };
 
-                tumblrImg.onerror = () => {
-                    console.log(`Image ${i}.png not found, stopping further load.`);
-                    stopLoading = true; // Set flag to stop loading further images
-                };
-            }
+        tumblrImg.onerror = () => {
+            console.log(`Image ${i}.png not found.`);
+            loadedCount++;
+            checkAllImagesLoaded();
+        };
+    }
+
+    // Check if all images have been processed (loaded or errored)
+    function checkAllImagesLoaded() {
+        if (loadedCount === maxImages) {
+            // Append all loaded images to the container in correct order
+            images
+                .sort((a, b) => b.alt.split(" ")[1] - a.alt.split(" ")[1]) // Sort by descending image number
+                .forEach(img => {
+                    container.appendChild(img);
+                    container.appendChild(document.createElement("br"));
+                });
         }
+    }
+}
 
-    // Call the function with the folder path and the maximum number of images you expect
-    loadTumblrImages("tumblr", 21);
+// Call the function
+loadTumblrImages("tumblr", 21);
+
     </script>
     <script src="script.js"></script>
     <footer class="text-center mt-3" style="font-size: 14px;">
