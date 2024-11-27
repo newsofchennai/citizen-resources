@@ -145,17 +145,7 @@
         .close-btn:hover {
             color: #0056b3;
         }
-        .icon-circle {
-            width: 40px;
-            height: 40px;
-            background-color: #007bff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 18px;
-        }
+        
 
         .d-flex {
             display: flex;
@@ -198,11 +188,20 @@
             <img class="rotating-globe" src="globe.gif" 
                  alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
             <span class="date-time" id="date-time-tamil"></span>
-        </div> 
+    </div> 
     <hr>
     <center>        
-        <p style="font-size: 22px;font-weight:bold;"> சரிபார்க்கப்பட்ட உதவி எண்கள்</p>
-        <p id="some-help" style="font-weight: bold;color:crimson;max-width: 800px;">அசாதாரண அழைப்பு எண்ணிக்கை காலங்களில், சில உதவி எண்கள் கிடைக்காதிருக்கலாம். மாற்று வழியாக, உங்கள் பகுதிச் சட்டமன்ற உறுப்பினர் அணுகலாம்.</p><!--அல்லது தமிழக அரசால் நியமிக்கப்பட்ட ஐஏஎஸ் அதிகாரியை -->
+        <!-- <p style="font-size: 22px;font-weight:bold;"> சரிபார்க்கப்பட்ட உதவி எண்கள்</p> -->
+        <p style="font-size: 22px;font-weight:bold;">சரிபார்க்கப்பட்ட உதவி எண்கள்</p>
+        <div class="col-12 col-md-6 col-sm-4">
+            <!-- <button class="btn btn-secondary mb-3 w-100" onclick="scrollToSection()" style="font-size: 14px;">
+                <i class="fa-solid fa-list"></i> மழை ஆதாரங்கள்
+            </button> -->
+            <button class="btn mb-3 w-100" onclick="scrollToSection()" style="font-size: 14px;background-color: #06065D;color: white;">
+                <i class="fa-solid fa-user-shield"></i> மழை வளங்களுக்கு இங்கே கிளிக் செய்யவும்
+            </button>
+        </div>
+        <!-- <p id="some-help" style="font-weight: bold;color:crimson;max-width: 800px;">அசாதாரண அழைப்பு எண்ணிக்கை காலங்களில், சில உதவி எண்கள் கிடைக்காதிருக்கலாம். மாற்று வழியாக, உங்கள் பகுதிச் சட்டமன்ற உறுப்பினர் அணுகலாம்.</p>அல்லது தமிழக அரசால் நியமிக்கப்பட்ட ஐஏஎஸ் அதிகாரியை -->
         <div style="border: 2px solid #ccc; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 600px; margin: 0 auto;font-size: 14px;">
             <p>உங்கள் மண்டலம் மற்றும் வார்டை தெரிந்துகொள்ள - <a href="know-you-ward-ta.html">இங்கே கிளிக் செய்யவும்</a></p>
             <hr>
@@ -559,9 +558,78 @@
         </tbody>
     </table>
     
-    <p style="font-size: 12px;font-style: italic;text-align: left;">*கடைசியாக புதுப்பிக்கப்பட்டது: அக்டோபர் 28 01:15 AM அன்று சென்னை நியூஸ் மூலம் இந்தப் பட்டியல் தொகுக்கப்பட்டு சரிபார்க்கப்பட்டது.</p>
+    <p style="font-size: 12px;font-style: italic;text-align: left;">*கடைசியாக புதுப்பிக்கப்பட்டது: நவம்பர் 26 11:10 PM அன்று சென்னை நியூஸ் மூலம் இந்தப் பட்டியல் தொகுக்கப்பட்டு சரிபார்க்கப்பட்டது.</p>
     </div>
-    
+    <hr>
+    <center>
+        <!-- நகர ஆதாரங்கள் -->
+        <p style="font-size: 22px;font-weight:bold;" id="rain-resources">மழை ஆதாரங்கள்</p>
+        <!-- <p><a href="Rain-helplines-ta.html">இங்கே கிளிக் செய்யவும் - உதவி எண்கள்</a></p> -->
+        <div class="col-12 col-md-6 col-sm-4">
+            <button class="btn btn-secondary mb-3 w-100" onclick="window.open('NDMA-NoC.pdf', '_blank')" style="font-size: 14px; ">
+                <i class="fa-solid fa-list"></i> வெள்ளத்தின் போது செய்ய வேண்டியவை மற்றும் செய்யக்கூடாதவை
+            </button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>வளம்</th>
+                    <th>இணைப்பு</th>
+                    <th>விளக்கம்</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>சென்னை மண்டல வானிலை மையம் (IMD)</td>
+                    <td><a href="https://mausam.imd.gov.in/chennai/" target="_blank">இங்கே கிளிக் செய்யவும்</a></td>
+                    <td>சென்னை மற்றும் தமிழகத்தின் பிற மாவட்டங்களுக்கான அதிகாரப்பூர்வ IMD எச்சரிக்கைகள் மற்றும் முன்னறிவிப்புகள்.</td>
+                </tr>
+                <tr>
+                    <td>தனிப்பட்ட வானிலை முன்னறிவிப்பாளர்கள் / பதிவர்கள்</td>
+                    <td>
+                        <a href="https://x.com/chennaiweather" target="_blank">சென்னை வெதர்</a><br>
+                        <a href="https://x.com/praddy06" target="_blank">TN வெதர்மேன்</a><br>
+                        <a href="https://x.com/ChennaiRains" target="_blank">சென்னை ரெய்ன்ஸ்</a><br>
+                        <a href="https://x.com/smkirthiga" target="_blank">டாக்டர் கீர்த்திகா</a>
+                    </td>
+                    <td>சென்னையில் இருந்து வானிலை கண்காணிப்பாளர்கள், பல ஆண்டுகளாக வானிலை தரவுகளை விளக்குகிறார்கள்.                </td>
+                </tr>
+                <tr>
+                    <td>தமிழ்நாடு எச்சரிக்கை App</td>
+                    <td>
+                        <a href="https://play.google.com/store/apps/details?id=int_.rimes.tnsmart&hl=en_IN&pli=1" target="_blank">Android</a> | 
+                        <a href="https://apps.apple.com/in/app/tn-alert/id1559849577" target="_blank">iOS</a>
+                    </td>
+                    <td>மழைக்காலத் தயார்நிலைக்கான தமிழ்நாடு அரசாங்கத்தின் அதிகாரப்பூர்வ பயன்பாடு.
+                    </td>
+                </tr>
+                <tr>
+                    <td>சென்னை ஏரி நிலைகள்</td>
+                    <td><a href="lake-level-ta.html">இங்கே கிளிக் செய்யவும்</a></td>
+                    <td>சென்னை மற்றும் அதை சுற்றியுள்ள ஏரிகளின் நீர்மட்டம்.</td>
+                </tr>
+                <tr>
+                    <td>சென்னை கேர்ஸ்</td>
+                    <td>
+                        <a href="https://x.com/ChennaiCares" target="_blank">X இல் பின்தொடரவும்</a> | 
+                        <a href="https://chennaicarescrr.wordpress.com/contact/" target="_blank">இணையதளம்</a>
+                    </td>
+                    <td>நெருக்கடி மீட்பு மற்றும் நிவாரணம் (CSR குழு) பத்திரிகையாளர்கள் மற்றும் தன்னார்வலர்களால் நிர்வாகிக்கப்படுகிறது.                </td>
+                </tr>
+                <tr>
+                    <td>பத்திரிக்கையாளர்கள் சென்னை மழை அறிவிப்புகளைப் பின்தொடர வேண்டும்	</td>
+                    <td>
+                        <a href="https://x.com/omjasvinMD" target="_blank">ஓம்ஜஸ்வின் TOI</a> | 
+                        <a href="https://x.com/padmajaTOI" target="_blank">பத்மஜா TOI</a> | 
+                        <a href="https://x.com/Swedha_RK" target="_blank">ஸ்வேதா DT Next </a> | 
+                        <a href="https://x.com/nimishaspradeep" target="_blank">நிமிஷா TNIE</a>
+                    </td>
+                    <td>சென்னையைச் சேர்ந்த பத்திரிக்கையாளர்கள், குடிமைப் பிரச்சனைகள் மற்றும் நகரின் மழை குறித்த நிகழ்நேர அறிவிப்புகளை வழங்குகிறார்கள்.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 12px;font-style: italic;text-align: left;">*கடைசியாக புதுப்பிக்கப்பட்டது: நவம்பர் 26 11:10 PM அன்று சென்னை நியூஸ் மூலம் இந்தப் பட்டியல் தொகுக்கப்பட்டு சரிபார்க்கப்பட்டது.</p>
+    </center>
     <!-- Scroll to Top Button -->
     <button id="scrollUp" title="Go to top" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
@@ -570,6 +638,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Scroll to the section with the id "rain-resources"
+        function scrollToSection() {        
+            document.getElementById('rain-resources').scrollIntoView({ behavior: 'smooth' });
+        }
         function openIasPopup() {
             document.getElementById("IASpopupModal").style.display = "block";
         }

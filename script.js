@@ -27,12 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('dark-mode');
         themeIcon.classList.replace('fa-moon', 'fa-sun');
         bannerImage.src = 'NOC2024-v2-dark.png';
+        body.style.backgroundColor = '#333';
     }
 
     function enableLightMode() {
         body.classList.remove('dark-mode');
         themeIcon.classList.replace('fa-sun', 'fa-moon');
         bannerImage.src = 'NOC2024-v2-white.png';
+        body.style.backgroundColor = '#F1EFEF';
     }
 });
 

@@ -83,6 +83,25 @@
                 height: 400px;
             }
         }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader.hidden {
+            display: none;
+        }
     </style>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -125,14 +144,11 @@
                 </div>
                 <div id="rainfallContent" class="collapse" aria-labelledby="rainfallHeader" data-parent="#weatherAccordion">
                     <div class="card-body text-left">
-                        <iframe class="imd-iframe" src="https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/heavy_rainfall.pdf&embedded=true" 
-                                width="100%" 
-                                style="border: none;">
-                        </iframe>
+                        <div class="loader" id="rainfallLoader"></div>
+                        <iframe class="imd-iframe" width="100%" style="border: none;" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
-
             <!-- Accordion 2: IMD Nowcast for Chennai -->
             <div class="card">
                 <div class="card-header" id="nowcastHeader" data-toggle="collapse" data-target="#nowcastContent" aria-expanded="false" aria-controls="nowcastContent">
@@ -143,14 +159,25 @@
                 </div>
                 <div id="nowcastContent" class="collapse" aria-labelledby="nowcastHeader" data-parent="#weatherAccordion">
                     <div class="card-body text-left">
-                        <iframe class="nowcast-iframe" src="https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf&embedded=true" 
-                                width="100%" 
-                                style="border: none;">
-                        </iframe>
+                        <div class="loader" id="nowcastLoader"></div>
+                        <iframe class="nowcast-iframe" width="100%" style="border: none;" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
-                
+            <!-- Accordion 5: Tidal Wave Alert -->
+            <div class="card">
+                <div class="card-header" id="tidalWaveAlertHeader" data-toggle="collapse" data-target="#tidalWaveAlertContent" aria-expanded="false" aria-controls="tidalWaveAlertContent">
+                    <div class="header-content">
+                        <h6><i class="fa-solid fa-water"></i>&nbsp;&nbsp;Tidal Wave Alert</h6>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="tidalWaveAlertContent" class="collapse" aria-labelledby="tidalWaveAlertHeader" data-parent="#weatherAccordion">
+                    <div class="card-body text-left">
+                        Visit <a href="https://incois.gov.in/portal/osf/Alerts.html" target="_blank">INCOIS Tidal Wave Alert page</a> for the latest updates.
+                    </div>
+                </div>
+            </div>
             <!-- Accordion 3: 5 Day Forecast -->
             <div class="card">
                 <div class="card-header" id="fiveDayForecastHeader" data-toggle="collapse" data-target="#fiveDayForecastContent" aria-expanded="false" aria-controls="fiveDayForecastContent">
@@ -188,8 +215,7 @@
                                 </em></div>
                     </div>
                 </div>
-            </div>
-        
+            </div>        
             <!-- Accordion 4: 14 Day Forecast -->
             <div class="card">
                 <div class="card-header" id="fourteenDayForecastHeader" data-toggle="collapse" data-target="#fourteenDayForecastContent" aria-expanded="false" aria-controls="fourteenDayForecastContent">
@@ -239,6 +265,28 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
+    //pdf load
+    document.addEventListener('DOMContentLoaded', function() { 
+    const rainfallContent = document.getElementById('rainfallContent');
+    const nowcastContent = document.getElementById('nowcastContent');
+
+    $('#rainfallContent').on('shown.bs.collapse', function() {
+        const loader = document.getElementById('rainfallLoader');
+        const iframe = document.querySelector('.imd-iframe');
+        loader.classList.remove('hidden');
+        iframe.src = "https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/heavy_rainfall.pdf&embedded=true";
+        iframe.onload = () => loader.classList.add('hidden');
+    });
+
+    $('#nowcastContent').on('shown.bs.collapse', function() {
+        const loader = document.getElementById('nowcastLoader');
+        const iframe = document.querySelector('.nowcast-iframe');
+        loader.classList.remove('hidden');
+        iframe.src = "https://docs.google.com/viewer?url=https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf&embedded=true";
+        iframe.onload = () => loader.classList.add('hidden');
+    });
+});
+
     // Show scroll-up button on scroll
     window.onscroll = function() {
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop >

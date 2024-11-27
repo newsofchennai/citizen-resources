@@ -145,18 +145,7 @@
         .close-btn:hover {
             color: #0056b3;
         }
-        .icon-circle {
-            width: 40px;
-            height: 40px;
-            background-color: #007bff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 18px;
-        }
-
+        
         .d-flex {
             display: flex;
         }
@@ -198,12 +187,17 @@
             <img class="rotating-globe" src="globe.gif" 
                  alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
             <span class="date-time" id="date-time"></span>
-        </div> 
-    <hr>
-    
+    </div> 
+    <hr>    
     <center>        
-        <p style="font-size: 22px;font-weight:bold;"> Verified Helplines</p>
-        <p id="some-help" style="font-weight: bold;color:crimson;max-width: 800px;">Some helplines may not be available during periods of high call volume. An alternative option is to reach out to your area councillor.</p> <!--or designated IAS officer appointed by TN Govt.-->
+        <p style="font-size: 22px;font-weight:bold;"> Rain Helplines & Resources</p>
+        <!-- <h2>Verified Helplines</h2>   -->
+        <div class="col-12 col-md-4">
+            <button class="btn mb-3 w-100" onclick="scrollToSection()" style="font-size: 14px;background-color: #06065D;color: white;">
+                <i class="fa-solid fa-user-shield"></i> Click Here for Rain Resources
+            </button>
+        </div>
+        <!-- <p id="some-help" style="font-weight: bold;color:crimson;max-width: 800px;">Some helplines may not be available during periods of high call volume. An alternative option is to reach out to your area councillor.</p> or designated IAS officer appointed by TN Govt. -->
         <div style="border: 2px solid #ccc; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 600px; margin: 0 auto;font-size: 14px;">
             <p>To know your zone and ward - <a href="know-you-ward.html">Click here</a></p>
             <hr>
@@ -559,8 +553,78 @@
             </tr>
         </tbody>
     </table>
-    <p style="font-size: 12px;font-style: italic;">*Last updated: This list was collated and verified by News of Chennai on October 28 01:15 AM</p>
-    </div>
+    <p style="font-size: 12px;font-style: italic;text-align: left;">*Last updated: This list was collated and verified by News of Chennai on November 26 11:00 PM</p>
+    <hr>
+    <center>
+        <!-- Rain Resources -->
+        <p id="rain-resources" style="font-size: 22px;font-weight:bold;"> Rain Resources</p>
+        <!-- <h2 id="rain-resources">Rain Resources</h2>     -->
+        <!-- <p><a href="Rain-helplines.html">Click Here - Verified Helplines</a></p> -->
+        <div class="col-12 col-md-4">
+            <button class="btn btn-secondary mb-3 w-100" onclick="window.open('NDMA-NoC.pdf', '_blank')" style="font-size: 14px;">
+                <i class="fa-solid fa-list"></i> Do’s and Don’t during Floods
+            </button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Regional Meteorological Center Chennai (IMD)</td>
+                    <td><a href="https://mausam.imd.gov.in/chennai/" target="_blank">Click Here</a></td>
+                    <td>Official IMD alerts and forecasts for Chennai and other districts of TN.</td>
+                </tr>
+                <tr>
+                    <td>Private Weather Forecasters / Bloggers</td>
+                    <td>                    
+                        <a href="https://x.com/chennaiweather" target="_blank">Chennai Weather</a><br>
+                        <a href="https://x.com/praddy06" target="_blank">TN Weatherman</a><br>
+                        <a href="https://x.com/ChennaiRains" target="_blank">Chennai Rains</a><br>
+                        <a href="https://x.com/smkirthiga" target="_blank">Dr. Kirthiga</a>
+                    </td>
+                    <td>Weather trackers from Chennai, who have been interpreting weather data over the years.</td>
+                </tr>
+                <tr>
+                    <td>TN Alert App</td>
+                    <td>
+                        <a href="https://play.google.com/store/apps/details?id=int_.rimes.tnsmart&hl=en_IN&pli=1" target="_blank">Android</a> | 
+                        <a href="https://apps.apple.com/in/app/tn-alert/id1559849577" target="_blank">iOS</a>
+                    </td>
+                    <td>Official app from TN Government for monsoon preparedness.</td>
+                </tr>
+                <tr>
+                    <td>Chennai Lake Levels</td>
+                    <td><a href="lake-level.html">Click Here</a></td>
+                    <td>Water Levels of Lakes in and Around Chennai.</td>
+                </tr>
+                <tr>
+                    <td>Chennai Cares</td>
+                    <td>
+                        <a href="https://x.com/ChennaiCares" target="_blank">Follow on X</a> | 
+                        <a href="https://chennaicarescrr.wordpress.com/contact/" target="_blank">Website</a>
+                    </td>
+                    <td>Crisis Rescue and Relief (Team CRR) managed by Journalists and Volunteers.</td>
+                </tr>
+                <tr>
+                    <td>Journalists to follow for Chennai Rain Updates</td>
+                    <td>
+                        <a href="https://x.com/omjasvinMD" target="_blank">Omjasvin TOI</a> | 
+                        <a href="https://x.com/padmajaTOI" target="_blank">Padmaja TOI</a> | 
+                        <a href="https://x.com/Swedha_RK" target="_blank">Swedha DT Next </a> | 
+                        <a href="https://x.com/nimishaspradeep" target="_blank">Nimisha TNIE</a>
+                    </td>
+                    <td>Journalists from Chennai who report on civic issues and provide real-time updates on the city's rains.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 12px;font-style: italic;text-align: left;">*Last updated: This list was collated and verified by News of Chennai on November 26 11:00 PM</p>
+    </center>
+</div>
     
     <!-- Scroll to Top Button -->
     <button id="scrollUp" title="Go to top" onclick="scrollToTop()">
@@ -570,6 +634,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Scroll to the section with the id "rain-resources"
+        function scrollToSection() {        
+            document.getElementById('rain-resources').scrollIntoView({ behavior: 'smooth' });
+        }
         function openIasPopup() {
             document.getElementById("IASpopupModal").style.display = "block";
         }

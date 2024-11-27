@@ -73,8 +73,8 @@
             margin: 10px 0; /* Add spacing */
             text-align: left;
         }
-        .weather-content span {
-            font-size:12px;
+        .weather-content {
+            font-size:14px;
         }
 
         /* Scroll-up button styles */
@@ -134,8 +134,8 @@
             }
         }
         @media (max-width: 600px) {
-            .weather-content span {
-                font-size:16px;
+            .weather-content {
+                font-size:14px;
             }
             .weather-details {
                 height :350px;
@@ -319,6 +319,7 @@
         }
 
     </style>
+    <script src="https://kit.fontawesome.com/48d264722b.js" crossorigin="anonymous"></script>
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
@@ -361,7 +362,11 @@
             <!-- <p style="font-size: 12px; font-weight: bold;" class="mb-4">
                 News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. All information is 100% verified and fact-checked.
             </p> -->
-    
+            <div class="alert" style="background-color: #e8e8e8;">
+                <p class="mb-0" style="font-size: 12px;color:black">
+                    Hello 👋 through the News of Chennai Citizen Resources website, you can access reliable and verified information ✅ to empower you as a citizen of Chennai, all in one place 📲
+                </p>
+            </div>
             <div class="row justify-content-center">
                 <!-- Mobile view: Rain Helpline and Rain Resources in 1 row -->
                 <div style="border: 2px solid #ccc; padding-top: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 600px; margin: 0 auto;margin-bottom:10px; font-size: 14px;" class="d-md-none">
@@ -370,8 +375,11 @@
                             <a href="Rain-helplines.html" class="btn w-100 me-1" style="font-size: 12px;background-color: #06065D;color: white;">
                                 <i class="fa-solid fa-cloud-rain"></i> Rain Helplines
                             </a>
-                            <a href="rain-resources.html" class="btn w-100 ms-1" style="font-size: 12px;background-color: #06065D;color: white;">
+                            <!-- <a href="rain-resources.html" class="btn w-100 ms-1" style="font-size: 12px;background-color: #06065D;color: white;">
                                 <i class="fa-solid fa-user-shield"></i> Rain Resources
+                            </a> -->
+                            <a href="realtime-rainfall.html" class="btn w-100 ms-1" style="font-size: 12px;background-color: #06065D;color: white;">
+                                <i class="fa-solid fa-cloud-showers-heavy"></i> Realtime Rainfall
                             </a>
                         </div>
                     </div>
@@ -387,11 +395,11 @@
                 </div> -->
                     <div class="col-12 d-md-none mb-2">
                         <div class="d-flex justify-content-between">
-                            <a href="realtime-rainfall.html" class="btn w-100 me-1" style="font-size: 12px;background-color: #06065D;color: white;">
-                                <i class="fa-solid fa-cloud-showers-heavy"></i> Realtime Rainfall
+                            <a href="weather-forecast.html" class="btn w-100 me-1" style="font-size: 12px;background-color: #06065D;color: white;">
+                                <i class="fa-solid fa-cloud-showers-heavy"></i> Weather Forecast
                             </a>
-                            <a href="weather-forecast.html" class="btn w-100 ms-1" style="font-size: 12px;background-color:#06065D;color: white;">
-                                <i class="fa-solid fa-cloud-sun-rain"></i> Weather Forecast
+                            <a href="lake-level.html" class="btn w-100 ms-1" style="font-size: 12px;background-color:#06065D;color: white;">
+                                <i class="fas fa-water"></i>  Current Lake Levels
                             </a>
                         </div>
                     </div>
@@ -434,11 +442,11 @@
                         <i class="fa-solid fa-cloud-rain"></i> Rain Helplines
                     </a>
                 </div>
-                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                <!-- <div class="col-12 col-md-4 d-none d-md-block mb-2">
                     <a href="rain-resources.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
                         <i class="fa-solid fa-user-shield"></i> Rain Resources
                     </a>
-                </div>
+                </div> -->
                 <div class="col-12 col-md-4 d-none d-md-block mb-2">
                     <a href="realtime-rainfall.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
                         <i class="fa-solid fa-cloud-showers-heavy"></i> Realtime Rainfall
@@ -447,6 +455,11 @@
                 <div class="col-12 col-md-4 d-none d-md-block mb-2">
                     <a href="weather-forecast.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
                         <i class="fa-solid fa-cloud-sun-rain"></i> Weather Forecast
+                    </a>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="lake-level.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
+                        <i class="fas fa-water"></i>  Current Lake Levels
                     </a>
                 </div>
                 <div class="col-12 col-md-4 d-none d-md-block mb-2">
@@ -492,25 +505,33 @@
                     <a href="air-quality.html" class="btn btn-secondary w-100 me-1" style="font-size: 12px;">
                         <i class="fa-solid fa-smog"></i> Realtime Air Quality
                     </a>
-                    <a href="lake-level.html" class="btn btn-secondary w-100 ms-1" style="font-size: 12px;">
+                    <!-- <a href="lake-level.html" class="btn btn-secondary w-100 ms-1" style="font-size: 12px;">
                         <i class="fas fa-water"></i>  Current Lake Levels
+                    </a> -->
+                    <a href="updates.html" class="btn btn-secondary w-100 ms-1" style="font-size: 12px;">
+                        <i class="fa-solid fa-tower-broadcast"></i> Latest Updates
                     </a>
                 </div>
             </div>
-            <div class="col-12 col-md-4 d-none d-md-block mb-2"> 
+            <div class="col-12 col-md-6 d-none d-md-block mb-2"> 
                 <a href="air-quality.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
                     <i class="fa-solid fa-smog"></i> Realtime Air Quality
                 </button></a>
             </div>
-            <div class="col-12 col-md-4 d-none d-md-block mb-2">
+            <!-- <div class="col-12 col-md-4 d-none d-md-block mb-2">
                 <a href="lake-level.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
                     <i class="fas fa-water"></i> Current Lake Levels
                 </button></a>
-            </div>
-            <div class="col-12 col-md-4">
+            </div> -->
+            <!-- <div class="col-12 col-md-4">
                 <button class="btn btn-secondary mb-2 w-100" onclick="window.open('https://newsofchennai.tumblr.com/', '_blank')" style="font-size: 14px; ">
                     <i class="fa-solid fa-tower-broadcast"></i> News of Chennai Updates
                 </button>
+            </div> -->
+            <div class="col-12 col-md-6 d-none d-md-block"> <!--col-md-4 changed to col-md-6-->
+                <a href="updates.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
+                    <i class="fa-solid fa-tower-broadcast"></i> Latest Updates
+                </button></a>
             </div>
         </div>
     </div>    
@@ -654,27 +675,14 @@
         });
     }
 
-    // Example function for categorizing rainfall amount
-    function getRainfallCategory(rainAmount) {
-        if (isNaN(rainAmount)) return "No data available";
-        if (rainAmount === 0) return "No Rain";
-        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
-        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
-        if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
-        if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
-        if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
-        if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
-        return "Extreme Rainfall"; // for cases above 204.4 mm
-    }
-    
     // Helper function to classify rainfall according to IMD standards
     function getRainfallCategory(rainAmount) {
         if (isNaN(rainAmount)) return "No data available";
         if (rainAmount === 0) return "No Rain";
         if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
-        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
-        if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
-        if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
+        if (rainAmount >= 2.5 && rainAmount <= 15.5) return "Light Rain";
+        if (rainAmount >= 15.6 && rainAmount <= 64.4) return "Moderate Rain";
+        // if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
         if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
         if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
         return "Extreme Rainfall"; // for cases above 204.4 mm
@@ -688,6 +696,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 let marker;
 let currentPopup = null;
+let lastWeatherData = {}; // To store the last available data for Nungambakkam
 
 function fetchWeatherData(localityId, lat, lng, localityName) {
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
@@ -730,7 +739,6 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     } else if (rainIntensity > 50.1 && rainIntensity <= 100) {
                         rainDescription = 'Extremely intense spell';
                     }
-
 
                     const rainStatus = rainIntensity > 0 ? 'Rain' : 'No-Rain';
                     const weatherIcon = rainStatus === 'Rain' 
@@ -784,10 +792,40 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     document.getElementById('weatherContent').innerHTML = weatherContent;
                     document.getElementById('selectedLocality').innerText = localityName;
                     break;
+                    // Save the data for Nungambakkam
+                    if (localityId === 'Nungambakkam') {
+                        lastWeatherData = {
+                            temperature: row[temperatureIndex],
+                            humidity: row[humidityIndex],
+                            windSpeed: row[windSpeedIndex],
+                            rainIntensity: row[rainIntensityIndex],
+                            rainAccumulation: row[rainAccumulationIndex],
+                            lastFetched: row[lastFetchedIndex]
+                        };
+                    }
+
+                    updateWeatherUI(localityName, lat, lng, row, headers);
+                    break;
+                    
                 }
             }
 
-            if (!found) {
+            // if (!found) {
+            //     document.getElementById('weatherContent').innerHTML = 'Locality not found in the data.';
+            // }
+            if (!found && localityId === 'Nungambakkam' && lastWeatherData.temperature) {
+                // Fallback to last stored data for Nungambakkam
+                const fallbackRow = [
+                    'Nungambakkam',
+                    lastWeatherData.temperature,
+                    lastWeatherData.humidity,
+                    lastWeatherData.windSpeed,
+                    lastWeatherData.rainIntensity,
+                    lastWeatherData.rainAccumulation,
+                    lastWeatherData.lastFetched
+                ];
+                updateWeatherUI(localityName, lat, lng, fallbackRow, headers);
+            } else if (!found) {
                 document.getElementById('weatherContent').innerHTML = 'Locality not found in the data.';
             }
 
@@ -799,6 +837,38 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
             console.error('Error fetching weather data:', error);
             document.getElementById('weatherContent').innerHTML = 'Failed to retrieve weather data.';
         });
+}
+function updateWeatherUI(localityName, lat, lng, row, headers) {
+    const rainIntensity = parseFloat(row[headers.indexOf('Rain Intensity (mm/h)')]);
+    const rainAccumulation = parseFloat(row[headers.indexOf('Rain Accumulation (mm)')]);
+    const rainfallCategory = getRainfallCategory(rainAccumulation);
+
+    let rainDescription;
+    if (rainIntensity == 0) {
+        rainDescription = 'No Rain';
+    } else if (rainIntensity > 0 && rainIntensity <= 10) {
+        rainDescription = 'Light spell';
+    } else if (rainIntensity > 10.1 && rainIntensity <= 20) {
+        rainDescription = 'Moderate spell';
+    } else if (rainIntensity > 20.1 && rainIntensity <= 30) {
+        rainDescription = 'Intense spell';
+    } else if (rainIntensity > 30.1 && rainIntensity <= 50) {
+        rainDescription = 'Very intense spell';
+    } else if (rainIntensity > 50.1 && rainIntensity <= 100) {
+        rainDescription = 'Extremely intense spell';
+    }
+
+    const weatherContent = `
+        <div class="weather-content">
+            <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;Temperature: ${row[headers.indexOf('Temperature (°C)')]}°C</span><br><br>                            
+            <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong><br><br>
+            <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[headers.indexOf('Humidity (%)')]}%</span><br>
+            <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;Wind Speed: ${row[headers.indexOf('Wind Speed (m/s)')]} m/s</span><br><br>
+            <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;Last Updated: ${row[headers.indexOf('Last Fetched')]}</span>
+        </div>
+    `;
+    document.getElementById('weatherContent').innerHTML = weatherContent;
+    document.getElementById('selectedLocality').innerText = localityName;
 }
 function showRainInfo(location, rainIntensity, rainDescription) {
     if (currentPopup) {

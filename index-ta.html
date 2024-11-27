@@ -12,7 +12,7 @@
     <link rel="icon" href="favicon.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />    
     <style>
         body {
             padding: 5px;
@@ -70,8 +70,8 @@
             margin: 10px 0; /* Add spacing */
             text-align: left;
         }
-        .weather-content span {
-            font-size:11px;
+        .weather-content {
+            font-size:12px;
         }
 
         /* Scroll-up button styles */
@@ -136,8 +136,8 @@
             }
         }
         @media (max-width: 600px) {
-            .weather-content span {
-                font-size:15px;
+            .weather-content {
+                font-size:13px;
             }
         }
         body h6 {
@@ -245,6 +245,7 @@
             min-height: 0px;
         }
     </style>
+    <script src="https://kit.fontawesome.com/48d264722b.js" crossorigin="anonymous"></script>
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
@@ -286,27 +287,31 @@
                 <!-- <p style="font-size: 12px; font-weight: bold;" class="mb-4">
                     News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. All information is 100% verified and fact-checked.
                 </p> -->
-        
+                <div class="alert" style="background-color: #e8e8e8;">
+                    <p class="mb-0" style="font-size: 12px;color:black">
+                        வணக்கம் <i class="fa-solid fa-hands-praying"></i> News of சென்னை இணையதளத்தின் மூலம், நீங்கள் ஒரு சென்னை குடிமகனாக நம்பகமான மற்றும் சரிபார்க்கப்பட்ட தகவல்களை ✅ ஒரே இடத்தில் பெறலாம் 📲
+                    </p>
+                </div>
                 <div class="row justify-content-center">
                     <!-- Mobile View: Rain Helpline and City Resource -->
                     <div style="border: 2px solid #ccc; padding-top: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 600px; margin: 0 auto;margin-bottom:10px; font-size: 14px;" class="d-md-none">
                         <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
                             <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
                                 <a href="Rain-helplines-ta.html" target="" class="btn  w-100 me-1" style="font-size: 10px; background-color: #06065D;color: white;;">
-                                    <i class="fa-solid fa-cloud-rain"></i> மழை உதவி எண்கள்
+                                    <i class="fa-solid fa-cloud-rain"></i> மழை உதவி <br>எண்கள் 
                                 </a>
-                                <a href="rain-resources-ta.html" target="" class="btn  w-100 ms-1" style="font-size: 11px; background-color: #06065D;color: white;;">
-                                    <i class="fa-solid fa-user-shield"></i> மழை ஆதாரங்கள்
+                                <a href="weather-forecast-ta.html" target="" class="btn  w-100 ms-1" style="font-size: 11px; background-color: #06065D;color: white;;">
+                                    <i class="fa-solid fa-cloud-sun-rain"></i> வானிலை <br>முன்னறிவிப்பு
                                 </a>
                             </div>
                         </div>
                         <div class="col-12 d-md-none mb-2">
                             <div class="d-flex justify-content-between">
-                                <a href="weather-forecast-ta.html" class="btn w-100 me-1" style="font-size: 11px;background-color:#06065D;color: white;">
-                                <i class="fa-solid fa-cloud-sun-rain"></i> வானிலை முன்னறிவிப்பு
+                                <a href="realtime-rainfall-ta.html" class="btn w-100 me-1" style="font-size: 11px;background-color:#06065D;color: white;">
+                                    <i class="fa-solid fa-cloud-showers-heavy"></i> நிகழ்நேர <br>மழைப்பொழிவு
                                 </a>
-                                <a href="realtime-rainfall-ta.html" class="btn w-100 ms-1" style="font-size: 10px;background-color: #06065D;color: white;">
-                                    <i class="fa-solid fa-cloud-showers-heavy"></i> நிகழ்நேர மழைப்பொழிவு
+                                <a href="lake-level-ta.html" class="btn w-100 ms-1" style="font-size: 10px;background-color: #06065D;color: white;">
+                                    <i class="fas fa-water"></i> &nbsp; தற்போதைய <br>ஏரி நிலைகள்
                                 </a>
                         </div>
                         </div>
@@ -318,19 +323,24 @@
                             <i class="fa-solid fa-cloud-rain"></i> மழை உதவி எண்கள்
                         </a>
                     </div>
-                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- For desktop view -->
+                    <!-- <div class="col-12 col-md-4 mb-2 d-none d-md-block"> 
                         <a href="rain-resources-ta.html" target="" class="btn  w-100" style="font-size: 14px; background-color: #06065D; color: white;">
                             <i class="fa-solid fa-user-shield"></i> மழை ஆதாரங்கள்
                         </a>
-                    </div>
+                    </div> -->
                     <div class="col-12 col-md-4 d-none d-md-block mb-2">
                         <a href="weather-forecast-ta.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
-                            <i class="fa-solid fa-cloud-sun-rain"></i> வானிலை முன்னறிவிப்பு
+                            <i class="fa-solid fa-cloud-sun-rain"></i> வானிலை <br>முன்னறிவிப்பு
                         </a>
                     </div>
                     <div class="col-12 col-md-4 d-none d-md-block mb-2">
-                        <a href="realtime-rainfall-ta.html" class="btn w-100 ms-1" style="font-size: 13px;background-color: #06065D;color: white;">
-                            <i class="fa-solid fa-cloud-showers-heavy"></i> நிகழ்நேர மழைப்பொழிவு
+                        <a href="realtime-rainfall-ta.html" class="btn w-100 ms-1" style="font-size: 14px;background-color: #06065D;color: white;">
+                            <i class="fa-solid fa-cloud-showers-heavy"></i> நிகழ்நேர <br>மழைப்பொழிவு
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                        <a href="lake-level-ta.html" class="btn w-100 ms-1" style="font-size: 13px;background-color: #06065D;color: white;">
+                            <i class="fas fa-water"></i> தற்போதைய ஏரி நிலைகள்
                         </a>
                     </div>
                     <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- For desktop view -->
@@ -361,10 +371,10 @@
                     <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
                         <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
                             <a href="transport-travel-ta.html" target="" class="btn  w-100 me-1" style="font-size: 10px;background-color: #A2DAE0; color: black;">
-                                <i class="fa-solid fa-compass"></i> போக்குவரத்து + பயணம்
+                                <i class="fa-solid fa-compass"></i> போக்குவரத்து + <br>பயணம்
                             </a>
                             <a href="scams-ta.html" target="" class="btn  w-100 ms-1" style="font-size: 10px;background-color: #A2DAE0; color: black; ">
-                                <i class="fa-solid fa-skull-crossbones"></i> நடக்கும் மோசடிகள்
+                                <i class="fa-solid fa-skull-crossbones"></i> நடக்கும் <br>மோசடிகள்
                             </a>
                         </div>
                     </div>
@@ -416,24 +426,24 @@
                         <a href="air-quality-ta.html" class="btn btn-secondary w-100 me-1" style="font-size: 12px;">
                             <i class="fa-solid fa-smog"></i> &nbsp;நிகழ்நேர காற்றின் தரம்
                         </a>
-                        <a href="lake-level-ta.html" class="btn btn-secondary w-100 ms-1" style="font-size: 12px;">
-                            <i class="fas fa-water"></i> &nbsp; தற்போதைய ஏரி நிலைகள்
+                        <a href="updates.html" class="btn btn-secondary w-100 ms-1" style="font-size: 12px;">
+                            <i class="fa-solid fa-tower-broadcast"></i> சமீபத்திய <br>தகவல்கள்
                         </a>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 d-none d-md-block mb-2"> 
+                <div class="col-12 col-md-6 d-none d-md-block mb-2"> 
                     <a href="air-quality-ta.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
                         <i class="fa-solid fa-smog"></i> நிகழ்நேர காற்றின் தரம்
                     </button></a>
                 </div>
-                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                <!-- <div class="col-12 col-md-4 d-none d-md-block mb-2">
                     <a href="lake-level-ta.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
                         <i class="fas fa-water"></i> தற்போதைய ஏரி நிலைகள்
                     </button></a>
-                </div>
-                <div class="col-12 col-md-4">
+                </div> -->
+                <div class="col-12 col-md-6 d-none d-md-block">
                     <button class="btn btn-secondary mb-3 w-100" onclick="window.open('https://newsofchennai.tumblr.com/', '_blank')" style="font-size: 14px; ">
-                        <i class="fa-solid fa-tower-broadcast"></i> நேரடி தகவல்கள்
+                        <i class="fa-solid fa-tower-broadcast"></i> சமீபத்திய தகவல்கள்
                     </button>
                 </div>
             </div>
@@ -578,12 +588,12 @@
         if (isNaN(rainAmount)) return "தகவல் இல்லை";
         if (rainAmount === 0) return "மழை இல்லை";
         if (rainAmount >= 0.1 && rainAmount <= 2.4) return "மிக லேசான மழை";
-        if (rainAmount >= 2.5 && rainAmount <= 7.5) return "லேசான மழை";
-        if (rainAmount >= 7.6 && rainAmount <= 35.5) return "மிதமான மழை";
-        if (rainAmount >= 35.6 && rainAmount <= 64.4) return "சற்றே கனமான மழை";
+        if (rainAmount >= 2.5 && rainAmount <= 15.5) return "லேசான மழை";
+        if (rainAmount >= 15.6 && rainAmount <= 64.4) return "மிதமான மழை";
+        // if (rainAmount >= 35.6 && rainAmount <= 64.4) return "சற்றே கனமான மழை";
         if (rainAmount >= 64.5 && rainAmount <= 115.5) return "கன மழை";
         if (rainAmount >= 115.6 && rainAmount <= 204.4) return "மிகவும் கன மழை";
-        return "தீவிரமான மழை"; // 204.4 mm க்கும் அதிகமாக உள்ள நிலைகளுக்கு
+        return "அதி கன மழை"; // 204.4 mm க்கும் அதிகமாக உள்ள நிலைகளுக்கு
     }
 
     // Initialize the map

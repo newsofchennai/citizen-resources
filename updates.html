@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Air Quality</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        /* Ensure the images fit within the container and scale with screen size */
+        .tumblr-img {
+            max-width: 100%;
+            height: auto;  /* Maintain aspect ratio */
+            display: block;
+            margin-bottom: 10px; /* Adds space between images */
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024bg.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="/help-line" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+        <div class="image-container" id="imageContainer">
+            <!-- Images will be dynamically loaded here -->
+        </div>
+        <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    </div>
+    <script>
+    // Show scroll-up button on scroll
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+        100) {
+            document.getElementById('scrollUpBtn').style.display = 'block';
+        } else {
+            document.getElementById('scrollUpBtn').style.display = 'none';
+        }
+    };
+    function loadTumblrImages(folderPath, maxImages) {
+            const container = document.getElementById("imageContainer");
+            let stopLoading = false;  // Flag to control the loop
+
+            // Start from maxImages and go backwards
+            for (let i = maxImages; i >= 1; i--) {
+                if (stopLoading) {
+                    break;  // Stop if stopLoading is true
+                }
+
+                const tumblrImg = new Image(); // Create a new image element
+                tumblrImg.src = `${folderPath}/${i}.png`;
+                tumblrImg.alt = `Image ${i}`;
+                tumblrImg.classList.add("tumblr-img");  // Corrected variable name
+
+                tumblrImg.onload = () => {
+                    container.appendChild(tumblrImg);
+                    container.appendChild(document.createElement("br")); // Add a line break after each image
+                };
+
+                tumblrImg.onerror = () => {
+                    console.log(`Image ${i}.png not found, stopping further load.`);
+                    stopLoading = true; // Set flag to stop loading further images
+                };
+            }
+        }
+
+    // Call the function with the folder path and the maximum number of images you expect
+    loadTumblrImages("tumblr", 30);
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 14px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+</body>
+</html>
