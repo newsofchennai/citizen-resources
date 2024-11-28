@@ -90,12 +90,18 @@
             <!-- Images will be dynamically loaded here -->
         </div>
         <!-- Scroll Up Button -->
-    <button id="scrollUpBtn" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <button id="scrollUpBtn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </div>
     <script>
     // Show scroll-up button on scroll
+    const scrollUpBtn = document.getElementById("scrollUpBtn");
+        window.onscroll = function() {
+            if (window.scrollY > 200) scrollUpBtn.style.display = "block";
+            else scrollUpBtn.style.display = "none";
+        };
+    scrollUpBtn.onclick = function() { window.scrollTo({top: 0, behavior: 'smooth'}); };
     window.onscroll = function() {
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
         100) {
