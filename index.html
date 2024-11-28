@@ -724,6 +724,8 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const rainIntensity = parseFloat(row[rainIntensityIndex]);
                     const rainAccumulation = parseFloat(row[rainAccumulationIndex]);
                     const rainfallCategory = getRainfallCategory(rainAccumulation);
+                    const temperature = parseFloat(row[temperatureIndex]);
+
 
                     let rainDescription;
                     if (rainIntensity == 0) {
@@ -752,9 +754,14 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     };
 
                     // Create the rain marker HTML
+                    // const rainMarkerHtml = `
+                    //     <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity}, '${rainDescription}')">
+                    //         <div>${weatherIcon} ${rainStatus}</div>
+                    //     </div>
+                    // `;
                     const rainMarkerHtml = `
                         <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity}, '${rainDescription}')">
-                            <div>${weatherIcon} ${rainStatus}</div>
+                            <div>${weatherIcon} ${temperature}°C</div>
                         </div>
                     `;
 
