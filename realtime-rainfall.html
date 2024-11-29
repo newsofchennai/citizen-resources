@@ -216,54 +216,47 @@
             }
         }
 
+        /* .dark-mode table, .dark-mode .rainfall-table th {
+            background-color: black;
+        }
+        .dark-mode .modal-content h2 , .dark-mode .modal-content .close{
+            color: white;
+        } */
         .dark-mode table {
             color : white;
         }
         .dark-mode .table-striped>tbody>tr:nth-of-type(odd)>* {
             color: white; /* Set text color to white */
         }
+
         /* Styling for the rain status card */
-        .rain-pluck-card {
-            /* display: inline-block; */
-            display: ruby-text;
+        .rain-pluck-card, .weather-pluck-card {
+            display: inline-flex; /* Use inline-flex for consistent horizontal alignment */
+            align-items: center; /* Vertically center the content */
+            justify-content: center; /* Center content horizontally */
             background-color: #ffffff;
-            padding: 5px 10px;
+            padding: 5px 15px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            
             text-align: center;
+            white-space: nowrap; /* Prevent wrapping */
+            overflow: hidden; /* Hide any overflow text */
+            transition: background-color 0.3s ease;
+            font-size: 12px; /* Set default font size */
         }
 
         .rain-pluck-card.rain {
             background-color: #EDF4FF; 
             color: #0E3272;
         }
+
         .rain-pluck-card.no-rain {
             background-color: #F5F5F5; 
             color: #0E3272;
         }
-
-        /* Popup content styling */
-        /* .leaflet-popup  .leaflet-zoom-animated {
-            opacity: 1; transform: translate3d(255px, 200px, 0px); bottom: 25px; left: -113px;
+        .weather-pluck-card {
+            background-color: #e6fff2; 
+            color: #0E3272;
         }
-        .leaflet-popup-content {
-            
-            font-size: 14px;
-            padding: 5px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-        }
-
-        .leaflet-popup-content p {
-            margin: 5px 0;
-        }
-
-        .leaflet-popup-content strong {
-            color: #333;
-        } */
         .dropdown-container {
             display: none;
         }
@@ -293,10 +286,85 @@
             }
         }
         @media (max-width: 480px) {
-            .rain-pluck-card.no-rain {
+            .rain-pluck-card , .weather-pluck-card {
                 font-size: 10px;
             }
         }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #003cb3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .d-none {
+            display: none;
+        }
+        #toggle-text {
+            font-size: bold;
+            color: grey;
+        }
+        @media screen and (max-width: 600px) {
+        .switch {
+            width: 35px;
+            height: 18px;
+        }
+
+        .slider {
+            border-radius: 18px;
+        }
+
+        .slider:before {
+            height: 14px;
+            width: 14px;
+            bottom: 2px;
+            left: 2px;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(17px);
+        }
+    }
+
     </style>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -331,7 +399,23 @@
         </div> 
         <hr>
         <center>
-    <h5><i class="fas fa-cloud-sun-rain"></i> Realtime Rainfall </h5></center>
+            <div class="toggle-container">
+                <h5 id="rain-heading">
+                    <i class="fas fa-cloud-sun-rain"></i> Realtime Rainfall
+                </h5>
+                <h5 id="wind-heading" class="d-none">
+                    <i class="fa-solid fa-wind"></i> Realtime Windflow
+                </h5>
+                <label class="switch">
+                    <input type="checkbox" id="toggleSwitch" onchange="toggleMode()">
+                    <span class="slider"></span>
+                </label>
+               <em> <span id="toggle-text" class="toggle-text">Switch to see Windflow</span>
+            </em>
+            </div>       
+            <span style="color:darkred;font-size: small;">(The map may take up to 5secs to load)</span>
+        </center>
+        <br>
     <div class="container">
         <div class="details-container">
             <div class="col-lg-12 col-md-12">
@@ -360,31 +444,12 @@
             </div>
         </div>
         <div style="text-align: left;font-size: 12px;">      
-            <em> Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</em>
+            <em> Weather data sourced from <a href="https://www.weatherunion.com/">Weather Union</a> based on on-ground network of weather stations installed across Chennai.</em> | Wind Category is sourced from <a href="https://www.meteoswiss.admin.ch/dam/jcr:c1064242-4a6e-4df2-8d21-96e68d1def7a/Beaufort_Tabelle_en.pdf">Beaufort Tabelle</a>
         </div>
         <!-- Scroll Up Button -->
         <button id="scrollUpBtn" onclick="scrollToTop()">
             <i class="fas fa-arrow-up"></i>
         </button>
-
-        <!-- Modal Structure -->
-        <div id="rainInfoModal" class="modal">
-            <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h4 style="text-align:left">Rainfall Classification Details</h4>
-            <table class="rainfall-table">
-                <thead>
-                <tr>
-                    <th>Rainfall Amount (mm)</th>
-                    <th>Category</th>
-                </tr>
-                </thead>
-                <tbody id="rainfall-category-table">
-                <!-- Table rows will be generated dynamically by JavaScript -->
-                </tbody>
-            </table>
-            </div>
-        </div>
 
         <!--hidden / needed to pick lat long of all location -->
         <div class="mb-3 dropdown-container" style="max-width: 600px;">
@@ -429,91 +494,14 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-    // Open the modal
-    function openModal() {
-        document.getElementById("rainInfoModal").style.display = "flex";
-        populateRainfallTable();
-    }
-
-    // Close the modal
-    function closeModal() {
-        document.getElementById("rainInfoModal").style.display = "none";
-    }
-
-    // Populate the rainfall category table
-    function populateRainfallTable() {
-        const table = document.getElementById("rainfall-category-table");
-        table.innerHTML = ""; // Clear existing rows
-
-        const categories = [
-            { range: "0 mm", label: "No Rain" },
-            { range: "0.1 - 2.4 mm", label: "Very Light Rain" },
-            { range: "2.5 - 7.5 mm", label: "Light Rain" },
-            { range: "7.6 - 35.5 mm", label: "Moderate Rain" },
-            { range: "35.6 - 64.4 mm", label: "Rather Heavy Rain" },
-            { range: "64.5 - 115.5 mm", label: "Heavy Rain" },
-            { range: "115.6 - 204.4 mm", label: "Very Heavy Rain" },
-            { range: "204.5+ mm", label: "Extreme Rainfall" },
-        ];
-
-        categories.forEach(category => {
-            const row = document.createElement("tr");
-            row.innerHTML = `<td>${category.range}</td><td>${category.label}</td>`;
-            table.appendChild(row);
-        });
-    }
-
-    // Example function for categorizing rainfall amount
-    // function getRainfallCategory(rainAmount) {
-    //     if (isNaN(rainAmount)) return "No data available";
-    //     if (rainAmount === 0) return "No Rain";
-    //     if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
-    //     if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
-    //     if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
-    //     if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
-    //     if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
-    //     if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
-    //     return "Extreme Rainfall"; // for cases above 204.4 mm
-    // }
-    
-    // Helper function to classify rainfall according to IMD standards
-    // function getRainfallCategory(rainAmount) {
-    //     if (isNaN(rainAmount)) return "No data available";
-    //     if (rainAmount === 0) return "No Rain";
-    //     if (rainAmount >= 0.1 && rainAmount <= 2.4) return "Very Light Rain";
-    //     if (rainAmount >= 2.5 && rainAmount <= 7.5) return "Light Rain";
-    //     if (rainAmount >= 7.6 && rainAmount <= 35.5) return "Moderate Rain";
-    //     if (rainAmount >= 35.6 && rainAmount <= 64.4) return "Rather Heavy Rain";
-    //     if (rainAmount >= 64.5 && rainAmount <= 115.5) return "Heavy Rain";
-    //     if (rainAmount >= 115.6 && rainAmount <= 204.4) return "Very Heavy Rain";
-    //     return "Extreme Rainfall"; // for cases above 204.4 mm
-    // }
-
     // Initialize the map
-    const map = L.map('map').setView([13.026018, 80.131667], 10); //avadi - 13.114656, 80.089645
+    const map = L.map('map').setView([13.026018, 80.131667], 10); //avadi - 13.114656, 80.089645 //t.ngr 13.0418, 80.2341 guindy- 13.0067, 80.2206
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
 let marker;
-
-function showRainInfo(location, rainIntensity) {
-    const popupContent = `
-        <div class="popup-content">
-            <p><strong>${location.name}</strong></p>
-            <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
-        </div>
-    `;
-
-    // Display the popup with an offset to position it above the rain status
-    L.popup({ 
-        closeButton: true,        
-        offset: [0, -25]  // Offset to position the popup above rain status
-    })
-        .setLatLng(location.coords)
-        .setContent(popupContent)
-        .openOn(map);
-}
+let markerLayerGroup = L.layerGroup().addTo(map); // Holds all markers
 
 // Event listener for locality selection
 document.getElementById('localitySelect').addEventListener('change', function () {
@@ -532,19 +520,10 @@ document.getElementById('localitySelect').addEventListener('change', function ()
     }
 });
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Automatically load Nungambakkam data on page load
-    const defaultOption = localitySelect.querySelector('option[value="ZWL005190"]');
-    localitySelect.value = defaultOption.value;
-    fetchWeatherData(defaultOption.value, parseFloat(defaultOption.getAttribute('data-lat')), parseFloat(defaultOption.getAttribute('data-lng')), defaultOption.text);
-
-    // // Load all localities' rain status on the map
-    // loadAllLocalities();
-});
-
 // Function to load all localities and their rain status on initial load
-function loadAllLocalities() {
+function loadAllLocalities(view) {
+    markerLayerGroup.clearLayers();
+
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
     fetch(sheetUrl)
@@ -597,6 +576,29 @@ function loadAllLocalities() {
             const tableBody = document.getElementById('weatherDataTable');
             tableBody.innerHTML = '';
 
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            const rainHeading = document.getElementById('rain-heading');
+            const windHeading = document.getElementById('wind-heading');
+            const toggleText = document.getElementById("toggle-text");
+
+
+            toggleSwitch.addEventListener('change', function () {
+                if (this.checked) {
+                    // Show Wind Heading
+                    rainHeading.classList.add('d-none');
+                    windHeading.classList.remove('d-none');
+                    loadAllLocalities('wind');
+                    toggleText.textContent = "Switch to see Rainfall";
+                } else {
+                    // Show Rain Heading
+                    windHeading.classList.add('d-none');
+                    rainHeading.classList.remove('d-none');
+                    loadAllLocalities('rain');
+                    toggleText.textContent = "Switch to see Windflow";
+                }
+            });
+
+
             for (const row of weatherData) {
                 const localityId = row[localityIndex];
                 const localityName = localityMap[localityId] || "Unknown Area"; 
@@ -627,6 +629,37 @@ function loadAllLocalities() {
                     rainDescription = 'Extremely intense spell';
                 }
 
+                // Determine rain intensity description
+                let windDescription;
+                if (windSpeed >= 0 && windSpeed <= 0.2) {
+                    windDescription = 'Calm'; 
+                } else if (windSpeed > 0.2 && windSpeed <= 1.5) {
+                    windDescription = 'Light Air';
+                } else if (windSpeed > 1.5 && windSpeed <= 3.3) {
+                    windDescription = 'Light Breeze';
+                } else if (windSpeed > 3.3 && windSpeed <= 5.4) {
+                    windDescription = 'Gentle Breeze';
+                } else if (windSpeed > 5.4 && windSpeed <= 7.9) {
+                    windDescription = 'Moderate Breeze';
+                } else if (windSpeed > 7.9 && windSpeed <= 10.7) {
+                    windDescription = 'Fresh Breeze';
+                } else if (windSpeed > 10.7 && windSpeed <= 13.8) {
+                    windDescription = 'Strong Breeze';
+                }  else if (windSpeed > 13.8 && windSpeed <= 17.1) {
+                    windDescription = 'Near Gale';
+                } else if (windSpeed > 17.1 && windSpeed <= 20.7) {
+                    windDescription = 'Gale';
+                } else if (windSpeed > 20.7 && windSpeed <= 24.4) {
+                    windDescription = 'Strong Gale';
+                } else if (windSpeed > 24.4 && windSpeed <= 28.4) {
+                    windDescription = 'Storm';
+                } else if (windSpeed > 28.4 && windSpeed <= 32.6) {
+                    windDescription = 'Violent Storm';
+                } else if (windSpeed > 32.7) {
+                    windDescription = 'Hurricane';
+                } else if (windSpeed === '' || windSpeed === null || windSpeed === 'No data') {
+                    windDescription = 'No Data';
+                }
 
                 // Create table row for each locality
                 const tableRow = document.createElement('tr');
@@ -652,33 +685,42 @@ function loadAllLocalities() {
                         ? '<i class="fas fa-cloud-showers-heavy"></i>'
                         : ''; //<i class="fas fa-sun"></i>
 
-                    // Define the rain marker HTML with icon and status
-                    const rainMarkerHtml = `
-                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}">
-                            ${weatherIcon} ${rainStatus}
-                        </div>
-                    `;
+                        const markerHtml = view === 'rain'
+    ? `<div class="rain-pluck-card ${rainStatus ? rainStatus.toLowerCase() : ''}">
+            ${rainDescription && rainDescription.toLowerCase() !== 'undefined' && rainDescription.toLowerCase() !== 'no rain'
+                ? `<i class="fas fa-cloud-showers-heavy" style="margin-right: 5px;"></i><span>${rainStatus}</span>`
+                : `<span>${rainStatus}</span>`}
+       </div>`
+    : `<div class="weather-pluck-card">
+            ${windDescription && windDescription.toLowerCase() !== 'no data'
+                ? `<i class="fa-solid fa-wind" style="margin-right: 5px;"></i><span>${windDescription}</span>`
+                : `<span>${windDescription}</span>`}
+       </div>`;
 
-                    // Create the rain marker icon
-                    const rainIcon = L.divIcon({
-                        html: rainMarkerHtml,
-                        className: 'rain-icon',
-                        iconSize: [60, 40]
-                    });
 
-                    // Create and add marker for each locality on the map
-                    const marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
+        // Create the marker icon
+        const icon = L.divIcon({
+            html: markerHtml,
+            className: view === 'rain' ? 'rain-icon' : 'wind-icon',
+            iconSize: [60, 40],
+        });
+        const marker = L.marker([lat, lng], { icon }).addTo(markerLayerGroup);
+        
+        // Bind popup for the marker
+        const popupHtml = view === 'rain'
+            ? `<div class="popup-content">
+                    <p><strong>${localityName}</strong></p>
+                    <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
+                    <p><strong>${rainDescription}</strong></p>
+               </div>
+               `
+            : `<div class="popup-content">
+                    <p><strong>${localityName}</strong></p>
+                    <p>Wind Speed: <strong>${windSpeed} m/s</strong></p>
+                    <p><strong>${windDescription}</strong></p>
+               </div>`;
 
-                    // Optionally, bind a popup to show details when clicked
-                    marker.bindPopup(`
-                    <div class="popup-content">
-                        <p><strong>${localityName}</strong></p>
-                        <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
-                        <p><strong>${rainDescription}</strong></p>
-                    </div>
-                    `,{
-                        offset: L.point(0, -10)  // This moves the popup 40 pixels upwards
-                    });
+        marker.bindPopup(popupHtml, { offset: L.point(0, -10) });
                 }
             }
         })
@@ -689,8 +731,7 @@ function loadAllLocalities() {
 
 // Initialize on page load
 window.onload = function() {
-    loadAllLocalities();  // Call only once on page load
-
+    loadAllLocalities('rain');  // Call only once on page load
     // Add event listener for locality change
     document.getElementById('localitySelect').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];

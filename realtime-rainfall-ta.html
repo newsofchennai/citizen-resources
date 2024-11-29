@@ -222,22 +222,23 @@
             color: white; /* Set text color to white */
         }
         /* Styling for the rain status card */
-        .rain-pluck-card {
-            display: ruby-text;
-            font-size: 8px;
+        .rain-pluck-card, .weather-pluck-card {
+            display: inline-flex; /* Use inline-flex for consistent horizontal alignment */
+            align-items: center; /* Vertically center the content */
+            justify-content: center; /* Center content horizontally */
             background-color: #ffffff;
-            padding: 5px 10px;
+            padding: 5px 15px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: background-color 0.3s ease;            
             text-align: center;
+            white-space: nowrap; /* Prevent wrapping */
+            overflow: hidden; /* Hide any overflow text */
+            transition: background-color 0.3s ease;
+            font-size: 12px; /* Set default font size */
         }
-
-        /* .rain-pluck-card.மழை, .rain-pluck-card.மழை-இல்லை {
-            background-color: #EDF4FF; 
+        .weather-pluck-card {
+            background-color: #e6fff2; 
             color: #0E3272;
-        } */
+        }
         .rain-pluck-card.மழை {
             background-color: #EDF4FF; 
             color: #0E3272;
@@ -275,10 +276,84 @@
             }
         }
         @media (max-width: 480px) {
-            .rain-pluck-card.மழை-இல்லை {
-                font-size: 7px;
+            .rain-pluck-card , .weather-pluck-card {
+                font-size: 9px;
             }
         }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #003cb3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .d-none {
+            display: none;
+        }
+        #toggle-text {
+            font-size: 12px;
+            color: grey;
+        }
+        @media screen and (max-width: 600px) {
+        .switch {
+            width: 35px;
+            height: 18px;
+        }
+
+        .slider {
+            border-radius: 18px;
+        }
+
+        .slider:before {
+            height: 14px;
+            width: 14px;
+            bottom: 2px;
+            left: 2px;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(17px);
+        }
+    }
     </style>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -311,11 +386,26 @@
                     alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
             <span class="date-time" id="date-time-tamil"></span>
         </div>  
-        <center>
-            <hr>
+        <hr>
     </div>
-    <h6><i class="fas fa-cloud-sun-rain"></i> நிகழ்நேர மழைப்பொழிவு
-    </h6></center>
+    <center>
+        <div class="toggle-container">
+            <h6 id="rain-heading">
+                <i class="fas fa-cloud-sun-rain"></i> நிகழ்நேர மழைப்பொழிவு
+            </h6>
+            <h6 id="wind-heading" class="d-none">
+                <i class="fa-solid fa-wind"></i> நிகழ்நேர காற்றோட்டம்
+            </h6>
+            <label class="switch">
+                <input type="checkbox" id="toggleSwitch" onchange="toggleMode()">
+                <span class="slider"></span>
+            </label>
+           <em> <span id="toggle-text" class="toggle-text">காற்றோட்டத்தைப் பார்க்க மாற்றவும்</span>
+        </em>
+        </div>       
+        <span style="color:darkred;font-size: x-small;">(வரைபடம் ஏற்றுவதற்கு 5 வினாடிகள் வரை ஆகலாம்)
+        </span>
+    </center>
 
     <div class="container">
        <center>
@@ -358,7 +448,7 @@
                 </select>
             </div>
         </center>
-    
+        <br>
         <div class="details-container">
             <div class="col-lg-12 col-md-12">
                 <div id="map"></div>
@@ -393,30 +483,7 @@
         <button id="scrollUpBtn" onclick="scrollToTop()">
             <i class="fas fa-arrow-up"></i>
         </button>
-
-        <!-- Modal Structure -->
-        <div id="rainInfoModal" class="modal">
-            <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h4 style="text-align:left">மழையின் வகைப்பாடு (24 மணிநேரம்)</h4>
-            <table class="rainfall-table">
-                <thead>
-                <tr>
-                    <th>மழை அளவு (மிமீ)</th>
-                    <th>வகை</th>
-                </tr>
-                </thead>
-                <tbody id="rainfall-category-table">
-                <!-- Table rows will be generated dynamically by JavaScript -->
-                </tbody>
-            </table>
-            </div>
-        </div>
     </div>
-
-   
-    
-
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
     // Open the modal
@@ -473,6 +540,8 @@
 }).addTo(map);
 
 let marker;
+let markerLayerGroup = L.layerGroup().addTo(map); // Holds all markers
+
 
 function showRainInfo(location, rainIntensity) {
     const popupContent = `
@@ -491,37 +560,9 @@ function showRainInfo(location, rainIntensity) {
         .setContent(popupContent)
         .openOn(map);
 }
-
-// Event listener for locality selection
-document.getElementById('localitySelect').addEventListener('change', function () {
-    const selectedOption = this.options[this.selectedIndex];
-    const localityId = selectedOption.value;
-    const lat = selectedOption.getAttribute('data-lat');
-    const lng = selectedOption.getAttribute('data-lng');
-    const localityName = selectedOption.textContent;
-
-    if (localityId === 'Choose a locality') {
-        document.getElementById('weatherDetails').style.display = 'none';
-        document.getElementById('map').style.display = 'none';
-        document.getElementById('disclaimer').style.display = 'none';
-    } else {
-        fetchWeatherData(localityId, lat, lng, localityName);
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Automatically load Nungambakkam data on page load
-    const defaultOption = localitySelect.querySelector('option[value="ZWL005190"]');
-    localitySelect.value = defaultOption.value;
-    fetchWeatherData(defaultOption.value, parseFloat(defaultOption.getAttribute('data-lat')), parseFloat(defaultOption.getAttribute('data-lng')), defaultOption.text);
-
-    // // Load all localities' rain status on the map
-    // loadAllLocalities();
-});
-
 // Function to load all localities and their rain status on initial load
-function loadAllLocalities() {
+function loadAllLocalities(view) {
+    markerLayerGroup.clearLayers();
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
 
     fetch(sheetUrl)
@@ -575,6 +616,28 @@ function loadAllLocalities() {
             const tableBody = document.getElementById('weatherDataTable');
             tableBody.innerHTML = '';
 
+            const toggleSwitch = document.getElementById('toggleSwitch');
+            const rainHeading = document.getElementById('rain-heading');
+            const windHeading = document.getElementById('wind-heading');
+            const toggleText = document.getElementById("toggle-text");
+
+
+            toggleSwitch.addEventListener('change', function () {
+                if (this.checked) {
+                    // Show Wind Heading
+                    rainHeading.classList.add('d-none');
+                    windHeading.classList.remove('d-none');
+                    loadAllLocalities('wind');
+                    toggleText.textContent = "மழைப்பொழிவைப் பார்க்க மாறவும்";
+                } else {
+                    // Show Rain Heading
+                    windHeading.classList.add('d-none');
+                    rainHeading.classList.remove('d-none');
+                    loadAllLocalities('rain');
+                    toggleText.textContent = "காற்றோட்டத்தைப் பார்க்க மாற்றவும்";
+                }
+            });
+
             for (const row of weatherData) {
                 const localityId = row[localityIndex];
                 const localityName = localityMap[localityId] || "Unknown Area"; 
@@ -593,7 +656,7 @@ function loadAllLocalities() {
                 let rainDescription;
                 
                 if (rainIntensity == 0) {
-                    rainDescription = 'மழை-இல்லை'; 
+                    rainDescription = 'மழை இல்லை'; 
                 } else if (rainIntensity > 0 && rainIntensity <= 10) {
                     rainDescription = 'மென்மையான மழை';
                 } else if (rainIntensity > 10.1 && rainIntensity <= 20) {
@@ -606,6 +669,37 @@ function loadAllLocalities() {
                     rainDescription = 'கன மழை';
                 }
 
+                // Determine rain intensity description
+                let windDescription;
+                if (windSpeed >= 0 && windSpeed <= 0.2) {
+                    windDescription = 'அமைதியான காற்று'; 
+                } else if (windSpeed > 0.2 && windSpeed <= 1.5) {
+                    windDescription = 'லேசான காற்று';
+                } else if (windSpeed > 1.5 && windSpeed <= 3.3) {
+                    windDescription = 'லேசான தென்றல்';
+                } else if (windSpeed > 3.3 && windSpeed <= 5.4) {
+                    windDescription = 'இலகு தென்றல்';
+                } else if (windSpeed > 5.4 && windSpeed <= 7.9) {
+                    windDescription = 'மிதமான தென்றல்';
+                } else if (windSpeed > 7.9 && windSpeed <= 10.7) {
+                    windDescription = 'புது தென்றல்';
+                } else if (windSpeed > 10.7 && windSpeed <= 13.8) {
+                    windDescription = 'வலுவான தென்றல்';
+                }  else if (windSpeed > 13.8 && windSpeed <= 17.1) {
+                    windDescription = 'புயல் அருகே';
+                } else if (windSpeed > 17.1 && windSpeed <= 20.7) {
+                    windDescription = 'கடுங்காற்று';
+                } else if (windSpeed > 20.7 && windSpeed <= 24.4) {
+                    windDescription = 'வலுவான காற்று';
+                } else if (windSpeed > 24.4 && windSpeed <= 28.4) {
+                    windDescription = 'புயல்';
+                } else if (windSpeed > 28.4 && windSpeed <= 32.6) {
+                    windDescription = 'கடுமையான புயல்';
+                } else if (windSpeed > 32.7) {
+                    windDescription = 'சூறாவளி';
+                } else if (windSpeed === '' || windSpeed === null || windSpeed === 'No data') {
+                    windDescription = 'தரவு இல்லை';
+                }
                 // Create table row for each locality
                 const tableRow = document.createElement('tr');
                 tableRow.innerHTML = `
@@ -630,33 +724,40 @@ function loadAllLocalities() {
                         ? '<i class="fas fa-cloud-showers-heavy"></i>'
                         : '';//<i class="fas fa-sun"></i>
 
-                    // Define the rain marker HTML with icon and status
-                    const rainMarkerHtml = `
-                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}">
-                            ${weatherIcon} ${rainStatus}
-                        </div>
-                    `;
+                        const markerHtml = view === 'rain'
+    ? `<div class="rain-pluck-card ${rainStatus ? rainStatus.toLowerCase() : ''}">
+            ${rainDescription && rainDescription.toLowerCase() !== 'undefined' && rainDescription.toLowerCase() !== 'மழை இல்லை'
+                ? `<i class="fas fa-cloud-showers-heavy" style="margin-right: 5px;"></i><span>${rainStatus}</span>`
+                : `<span>${rainStatus}</span>`}
+       </div>`
+    : `<div class="weather-pluck-card">
+            ${windDescription && windDescription.toLowerCase() !== 'no data'
+                ? `<i class="fa-solid fa-wind" style="margin-right: 5px;"></i><span>${windDescription}</span>`
+                : `<span>${windDescription}</span>`}
+       </div>`;
+                    // Create the marker icon
+        const icon = L.divIcon({
+            html: markerHtml,
+            className: view === 'rain' ? 'rain-icon' : 'wind-icon',
+            iconSize: [60, 40],
+        });
+        const marker = L.marker([lat, lng], { icon }).addTo(markerLayerGroup);
+        
+        // Bind popup for the marker
+        const popupHtml = view === 'rain'
+            ? `<div class="popup-content">
+                    <p><strong>${localityName}</strong></p>
+                    <p>மழையின் தீவிரம்: <strong>${rainIntensity} mm</strong></p>
+                    <p><strong>${rainDescription}</strong></p>
+               </div>
+               `
+            : `<div class="popup-content">
+                    <p><strong>${localityName}</strong></p>
+                    <p>காற்றின் வேகம்: <strong>${windSpeed} m/s</strong></p>
+                    <p><strong>${windDescription}</strong></p>
+               </div>`;
 
-                    // Create the rain marker icon
-                    const rainIcon = L.divIcon({
-                        html: rainMarkerHtml,
-                        className: 'rain-icon',
-                        iconSize: [60, 40]
-                    });
-
-                    // Create and add marker for each locality on the map
-                    const marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
-
-                    // Optionally, bind a popup to show details when clicked
-                    marker.bindPopup(`
-                    <div class="popup-content">
-                        <p><strong>${localityName}</strong></p>
-                        <p>Rain Intensity: <strong>${rainIntensity} mm</strong></p>
-                        <p><strong>${rainDescription}</strong></p>
-                    </div>
-                    `,{
-                        offset: L.point(0, -10)  // This moves the popup 40 pixels upwards
-                    });
+        marker.bindPopup(popupHtml, { offset: L.point(0, -10) });
                 }
             }
         })
@@ -667,9 +768,7 @@ function loadAllLocalities() {
 
 // Initialize on page load
 window.onload = function() {
-    loadAllLocalities();  // Call only once on page load
-
-    
+    loadAllLocalities('rain');  // Call only once on page load    
 };
     // Scroll to top function
     function scrollToTop() {
