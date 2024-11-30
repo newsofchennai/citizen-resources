@@ -761,7 +761,7 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     // `;
                     const rainMarkerHtml = `
                         <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity}, '${rainDescription}')">
-                            <div>${weatherIcon} ${temperature}°C</div>
+                            <div><i class="fas fa-thermometer-half"></i> ${temperature}°C</div>
                         </div>
                     `;
 
