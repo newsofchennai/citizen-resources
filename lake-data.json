@@ -1,9 +1,9 @@
 {
-    "lastUpdated": "28-11-2024",
+    "lastUpdated": "29-11-2024",
     "reservoirs": [
       {
         "name": "CHEMBARAMBAKKAM",
-        "current": "60.96",
+        "current": "61.48",
         "translations": {
           "ta": "செம்பரம்பாக்கம்"
         }
@@ -24,21 +24,21 @@
       },
       {
         "name": "POONDI",
-        "current": "15.20",
+        "current": "15.82",
         "translations": {
           "ta": "பூண்டி"
         }
       },
       {
         "name": "PUZHAL",
-        "current": "71.30",
+        "current": "71.36",
         "translations": {
           "ta": "புழல்"
         }
       },
       {
         "name": "VEERANAM",
-        "current": "55.76",
+        "current": "60.90",
         "translations": {
           "ta": "வீராணம்"
         }
