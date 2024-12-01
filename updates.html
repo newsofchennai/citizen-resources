@@ -23,13 +23,31 @@
             font-size: 18px;
             z-index: 999;
         }
-        /* Ensure the images fit within the container and scale with screen size */
+        
+        .image-container {
+            display: flex; /* Enable Flexbox */
+            flex-direction: column; /* Align images vertically (one after another) */
+            justify-content: center; /* Center images horizontally */
+            align-items: center; /* Center images vertically */
+            gap: 10px; /* Add spacing between images */
+            min-height: 100vh; /* Full container height for vertical centering */
+        }
+
         .tumblr-img {
-            max-width: 100%;
-            height: auto;  /* Maintain aspect ratio */
+            width: 500px; /* Fixed width for uniform size in desktop */
+            
+            object-fit: cover; /* Ensures images fill the defined size without distortion */
             display: block;
             margin-bottom: 10px; /* Adds space between images */
         }
+
+        @media (max-width: 768px) {
+            .tumblr-img {
+                max-width: 100%;
+                height: auto; /* Maintain aspect ratio on mobile */
+            }
+        }
+
         .loader {
             text-align: center;
             font-size: 18px;
@@ -55,7 +73,6 @@
                 transform: rotate(360deg);
             }
         }
-
     </style>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -86,7 +103,9 @@
         </div> 
         <hr>
         <div class="image-container" id="imageContainer">
-            <div class="loader" id="loader"></div>
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+            </div>
             <!-- Images will be dynamically loaded here -->
         </div>
         <!-- Scroll Up Button -->
@@ -110,12 +129,13 @@
             document.getElementById('scrollUpBtn').style.display = 'none';
         }
     };
-    function loadTumblrImages(folderPath, maxImages) { 
+    function loadTumblrImages(folderPath, maxImages) {
     const container = document.getElementById("imageContainer");
     const loader = document.getElementById("loader");
     const images = []; // Array to store preloaded images
-
     let loadedCount = 0; // Counter to track loaded images
+
+    loader.style.display = "block"; // Ensure the loader is displayed initially
 
     for (let i = maxImages; i >= 1; i--) {
         const tumblrImg = new Image();
@@ -136,25 +156,20 @@
         };
     }
 
-    // Check if all images have been processed (loaded or errored)
     function checkAllImagesLoaded() {
         if (loadedCount === maxImages) {
-            // Hide the loader
-            loader.style.display = 'none';
-
-            // Append all loaded images to the container in correct order
+            loader.style.display = "none"; // Hide the loader
             images
                 .sort((a, b) => b.alt.split(" ")[1] - a.alt.split(" ")[1]) // Sort by descending image number
                 .forEach(img => {
                     container.appendChild(img);
-                    container.appendChild(document.createElement("br"));
                 });
         }
     }
 }
 
-    // Call the function to load images
-    loadTumblrImages("tumblr", 50);
+// Call the function to load images
+loadTumblrImages("tumblr", 50);
     </script>
     <script src="script.js"></script>
     <footer class="text-center mt-3" style="font-size: 14px;">
