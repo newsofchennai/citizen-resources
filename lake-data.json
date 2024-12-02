@@ -1,44 +1,44 @@
 {
-    "lastUpdated": "01-12-2024",
+    "lastUpdated": "02-12-2024",
     "reservoirs": [
       {
         "name": "CHEMBARAMBAKKAM",
-        "current": "71.91",
+        "current": "75.12",
         "translations": {
           "ta": "செம்பரம்பாக்கம்"
         }
       },
       {
         "name": "CHOLAVARAM",
-        "current": "12.02",
+        "current": "12.67",
         "translations": {
           "ta": "சோளவரம்"
         }
       },
       {
         "name": "KANNANKOTTAI THERVOY KANDIGAI",
-        "current": "60.40",
+        "current": "64.80",
         "translations": {
           "ta": "கண்ணாங்கோட்டை தெர்வாய் கந்திகை"
         }
       },
       {
         "name": "POONDI",
-        "current": "19.07",
+        "current": "28.35",
         "translations": {
           "ta": "பூண்டி"
         }
       },
       {
         "name": "PUZHAL",
-        "current": "80.30",
+        "current": "82.36",
         "translations": {
           "ta": "புழல்"
         }
       },
       {
         "name": "VEERANAM",
-        "current": "75.93",
+        "current": "76.75",
         "translations": {
           "ta": "வீராணம்"
         }
