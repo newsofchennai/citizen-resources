@@ -185,7 +185,7 @@
         <!-- Footer -->
         <footer class="text-center mt-3" style="font-size: 12px;">
             <hr>
-            <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+            <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://bsky.app/profile/newsofchennai.bsky.social">Bluesky</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
         </footer>
     </div>
     <script>
@@ -226,8 +226,12 @@
 
                 // Update current level
                 currentLevelElem.textContent = currentLevel;
-
+                // waterLevelElem.style.transition = 'none'; // Disable animation temporarily
+                // waterLevelElem.style.height = '0'; // Reset the height
+                
                 // Adjust water level height
+                // waterLevelElem.offsetHeight; // Accessing this forces a reflow
+                // waterLevelElem.style.transition = 'height 1s'; // Re-enable animation
                 const containerHeight = 150; // height of water container
                 const percentageHeight = (currentLevel / 100) * containerHeight;
                 waterLevelElem.style.height = `${percentageHeight}px`;

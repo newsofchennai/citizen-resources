@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Metro Fare Calculator</title>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        } */
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 16px;
+            max-width: -webkit-fill-available;
+            /* border-width: thick; */
+        }
+        .fare-display {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .discounted-fare {
+            font-size: 16px;
+            color: #007bff;
+            margin-top: 10px;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-around;
+            /* margin-top: 20px; */
+        }
+        .button-row button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-row button:hover {
+            background-color: #0056b3;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .button-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        .fare-display table {
+            width: 100%;
+            border-collapse: collapse;
+            /* margin-top: 10px; */
+            font-size: 16px;
+        }
+
+        .fare-display td {
+            padding: 8px 5px;
+        }
+
+        .fare-display td:first-child {
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .fare-display td:last-child {
+            text-align: right;
+            color: #007bff;
+        }
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="metro-fare-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+        <h5 class="text-center ">Chennai Metro Fare Calculator</h5>
+    <div class="card">
+        <div style="margin-top: 10px; font-size: 16px; color: #777;text-align: left;">
+            Select the stations to see fare details.
+        </div>
+        <div class="input-group">
+            <select id="fromStation" onchange="updateFare()">
+                <option value="" disabled selected>From Station</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <select id="toStation" onchange="updateFare()">
+                <option value="" disabled selected>To Station</option>
+            </select>
+        </div>
+        <hr>      
+        
+        <div class="fare-display" id="fareTable" style="display: none;">
+            <table>
+                <tr>
+                    <td><strong>Fare</strong></td>
+                    <td id="fareValue">₹0</td>
+                </tr>
+                <tr>
+                    <td><strong>Discounted Fare (20% off)</strong></td>
+                    <td id="discountedFareValue">₹0</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="fare-display" id="routeDisplay"></div>
+        <div class="button-row">
+            <a href="https://tickets.chennaimetrorail.org/onlineticket" target="_blank">
+                <button>Buy Ticket</button>
+            </a>            
+        </div>
+        <!-- <div class="button-row">
+            <button onclick="resetSelection()">Reset</button>
+        </div> -->
+    </div>
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    </div>
+    <script>
+        // Constants for blue and green lines
+        const blueLine = ["Wimco Nagar Depot Station", "Wimco Nagar", "Thiruvotriyur", "Thiruvottriyur Theradi", "Kaladipet",
+            "Tollgate", "New Washermenpet", "Tondiarpet", "Thiyagaraya College", "Washermenpet",
+            "Mannadi", "High Court", "Puratchi Thalaivar Dr.M.G.Ramachandran Central", "Government Estate", "LIC",
+            "Thousand Light", "AG - DMS", "Teynampet", "Nandanam", "Saidapet", "Little Mount",
+            "Guindy", "Arignar Anna Alandur", "Nanganallur", "Meenambakkam", "Airport"
+        ];
+        const greenLine = [
+            "Puratchi Thalaivar Dr.M.G.Ramachandran Central", "Egmore", "Nehru Park", "Kilpauk",
+            "Pachaiyappas College", "Shenoy Nagar", "Anna Nagar East", "Anna Nagar Tower",
+            "Thirumangalam", "Koyambedu", "Puratchi Thalaivi Dr.J.Jayalaithaa CMBT", "Arumbakkam", "Vadapalani", "Ashok Nagar",
+            "Ekkattuthangal", "Arignar Anna Alandur", "St. Thomas Mount"
+        ];
+
+        // Load CSV and initialize dropdowns
+        fetch('metro-fare/fare-chart-english.csv')
+            .then(response => response.text())
+            .then(data => {
+                const stations = parseCSV(data);
+                populateDropdown('fromStation', stations);
+                populateDropdown('toStation', stations);
+            })
+            .catch(error => console.error('Error loading CSV:', error));
+
+        function parseCSV(csv) {
+            const rows = csv.split('\n');
+            const header = rows.shift().split(','); // Extract header row
+            const stations = header.slice(1).map(station => station.trim()).filter(station => station); // Trim and filter out blanks
+            return stations.sort(); // Sort the station names
+        }
+
+        // Populate dropdown with station options
+        function populateDropdown(dropdownId, stations) {
+                const dropdown = document.getElementById(dropdownId);
+                const seenStations = new Set(); // To avoid duplicates
+
+                stations.forEach(station => {
+                    if (!seenStations.has(station) && station) { // Skip duplicates and blanks
+                        seenStations.add(station); // Track unique stations
+
+                        const option = document.createElement('option');
+                        option.value = station;
+
+                        if (blueLine.includes(station)) {
+                            option.textContent = `🔵 ${station}`;
+                        } else if (greenLine.includes(station)) {
+                            option.textContent = `🟢 ${station}`;
+                        } else {
+                            option.textContent = station;
+                        }
+                        dropdown.appendChild(option);
+                    }
+                });
+            }
+
+    // Update fare dynamically
+    function updateFare() {
+        const fromStation = document.getElementById('fromStation').value;
+        const toStation = document.getElementById('toStation').value;
+
+        const fareTable = document.getElementById('fareTable');
+        const fareMessage = document.getElementById('fareMessage');
+
+        if (!fromStation || !toStation) {
+            // Show message if stations are not selected
+            fareTable.style.display = 'none';
+            fareMessage.textContent = 'Select the stations to see fare details.';
+            return;
+        }
+
+        fetch('metro-fare/fare-chart-english.csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n').map(row => row.split(','));
+                const header = rows[0];
+                const fromIndex = header.indexOf(fromStation);
+                const toIndex = header.indexOf(toStation);
+
+                if (fromIndex !== -1 && toIndex !== -1) {
+                    const fare = rows[toIndex][fromIndex];
+                    const discountedFare = (fare * 0.8).toFixed(2);
+
+                    document.getElementById('fareValue').textContent = `₹${fare}`;
+                    document.getElementById('discountedFareValue').textContent = `₹${discountedFare}`;
+                    fareTable.style.display = 'block'; // Show fare table
+                    fareMessage.textContent = ''; // Clear message
+                } else {
+                    fareTable.style.display = 'none';
+                    fareMessage.textContent = 'Fare details not found.';
+                }
+            })
+            .catch(error => console.error('Error fetching fare:', error));
+    }
+
+    // Reset selection
+    function resetSelection() {
+        document.getElementById('fromStation').value = '';
+        document.getElementById('toStation').value = '';
+        document.getElementById('fareValue').textContent = '₹0';
+        document.getElementById('discountedFareValue').textContent = '₹0';
+
+        // Hide fare table and show default message
+        document.getElementById('fareTable').style.display = 'none';
+        document.getElementById('fareMessage').textContent = 'Select the stations to see fare details.';
+    }
+// Show scroll-up button on scroll
+window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+        100) {
+            document.getElementById('scrollUpBtn').style.display = 'block';
+        } else {
+            document.getElementById('scrollUpBtn').style.display = 'none';
+        }
+    };
+</script>
+<script src="script.js"></script>
+
+<footer class="text-center mt-3" style="font-size: 14px;">
+    <hr>
+    <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://bsky.app/profile/newsofchennai.bsky.social">Bluesky</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+</footer>
+</body>
+</html>
