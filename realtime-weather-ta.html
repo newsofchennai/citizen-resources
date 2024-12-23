@@ -415,13 +415,14 @@
     </center> -->
     <center>
         <h6 id="mode-heading" style="margin-top: 10px;">
-            <i id="mode-icon" class="fas fa-cloud-sun-rain"></i> நிகழ்நேர மழைப்பொழிவு
+            <i id="mode-icon" class="fas fa-cloud-sun-rain"></i> நிகழ்நேர வெப்பநிலை
         </h6>
         <div class="button-container d-flex justify-content-center flex-wrap">
             <!-- Buttons for Modes -->
-            <button class="btn btn-link ml-2" onclick="showRainfall()">மழைப்பொழிவு</button>
-            <button class="btn btn-link ml-2" onclick="showWindflow()">காற்றோட்டம்</button>
             <button class="btn btn-link ml-2" onclick="showTemperature()">வெப்பநிலை</button>
+            <button class="btn btn-link ml-2" onclick="showWindflow()">காற்றோட்டம்</button>
+            <button class="btn btn-link ml-2" onclick="showRainfall()">மழைப்பொழிவு</button>
+            
         </div>                      
         <span style="color:darkred;font-size: small;">(வரைபடம் ஏற்றுவதற்கு 5 வினாடிகள் வரை ஆகலாம்)</span>
     </center> 
@@ -481,11 +482,11 @@
                 <thead>
                     <tr>	
                         <th scope="col">இடம்</th>
-                        <th scope="col">வெப்பநிலை (°C)</th>
+                        <th scope="col">வெப்பநிலை (°C)</th>                        
+                        <th scope="col">ஈரப்பதம் (%)</th>
+                        <th scope="col">காற்றின் வேகம் (m/s)</th>
                         <th scope="col">மழைக் குவிப்பு (mm)</th>
                         <th scope="col">மழை தீவிரம் (mm/h)</th>
-                        <th scope="col">காற்றின் வேகம் (m/s)</th>
-                        <th scope="col">ஈரப்பதம் (%)</th>
                     </tr>
                 </thead>
                 <tbody id="weatherDataTable">
@@ -740,10 +741,10 @@ function loadAllLocalities(view) {
                 tableRow.innerHTML = `
                     <td>${localityName}</td>
                     <td>${temperature}</td>
+                    <td>${humidity}</td>
+                    <td>${windSpeed}</td>
                     <td>${rainAccumulation}</td>
                     <td>${rainIntensity}</td>
-                    <td>${windSpeed}</td>
-                    <td>${humidity}</td>
                 `;
                 tableBody.appendChild(tableRow);
 
@@ -817,7 +818,7 @@ function loadAllLocalities(view) {
 
 // Initialize on page load
 window.onload = function() {
-    loadAllLocalities('wind');  // Call only once on page load    
+    loadAllLocalities('temp');  // Call only once on page load    
 };
     // Scroll to top function
     function scrollToTop() {

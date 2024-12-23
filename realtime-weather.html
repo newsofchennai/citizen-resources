@@ -404,13 +404,13 @@
         <hr>
         <center>
             <h5 id="mode-heading" style="margin-top: 10px;">
-                <i id="mode-icon" class="fas fa-cloud-sun-rain"></i> Realtime Rainfall
+                <i id="mode-icon" class="fas fa-cloud-sun-rain"></i> Realtime Temperature
             </h5>
             <div class="button-container d-flex justify-content-center flex-wrap">
                 <!-- Buttons for Modes -->
-                <button class="btn btn-link ml-2" onclick="showRainfall()">Rainfall</button>
-                <button class="btn btn-link ml-2" onclick="showWindflow()">Windflow</button>
                 <button class="btn btn-link ml-2" onclick="showTemperature()">Temperature</button>
+                <button class="btn btn-link ml-2" onclick="showWindflow()">Windflow</button>
+                <button class="btn btn-link ml-2" onclick="showRainfall()">Rainfall</button>
             </div>                      
             <span style="color:darkred;font-size: small;">(The map may take up to 5secs to load)</span>
         </center>    
@@ -430,10 +430,10 @@
                     <tr>
                         <th scope="col">Location Name</th>
                         <th scope="col">Temperature (°C)</th>
+			            <th scope="col">Humidity (%)</th>
+                        <th scope="col">Wind Speed (m/s)</th>
                         <th scope="col">Rain Accumulation (mm)</th>
                         <th scope="col">Rain Intensity (mm/h)</th>
-                        <th scope="col">Wind Speed (m/s)</th>
-                        <th scope="col">Humidity (%)</th>
                     </tr>
                 </thead>
                 <tbody id="weatherDataTable">
@@ -664,10 +664,10 @@ function loadAllLocalities(view) {
                 tableRow.innerHTML = `
                     <td>${localityName}</td>
                     <td>${temperature}</td>
+                    <td>${humidity}</td>
+                    <td>${windSpeed}</td>
                     <td>${rainAccumulation}</td>
                     <td>${rainIntensity}</td>
-                    <td>${windSpeed}</td>
-                    <td>${humidity}</td>
                 `;
                 tableBody.appendChild(tableRow);
 
@@ -742,7 +742,7 @@ function loadAllLocalities(view) {
 
 // Initialize on page load
 window.onload = function() {
-    loadAllLocalities('rain');  // Call only once on page load
+    loadAllLocalities('temp');  // Call only once on page load
     // Add event listener for locality change
     document.getElementById('localitySelect').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
