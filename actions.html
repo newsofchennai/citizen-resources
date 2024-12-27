@@ -18,7 +18,22 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 15px;
+            transition: box-shadow 0.3s ease;
         }
+
+        .accordion .card.expanded {
+            box-shadow: 0 0px 12px #8eb7ef; 
+            background-color: #e7f1ff;
+        }
+
+        .accordion .card.expanded .card-header {
+            background-color: #e0ecfc;
+        }
+
+        .accordion .card.expanded .card-body {
+            background-color: #fbfcfd; 
+        }
+
         .accordion .card-header {
             background-color: white;
             border-radius: 10px;
@@ -27,7 +42,9 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
+
         .accordion .card-header .header-content {
             display: flex;
             flex-direction: column;
@@ -101,6 +118,11 @@
             text-align: center; 
             margin-bottom: 0px;
         }
+        @media (max-width: 768px) {
+            #consumer-complaint-table {
+                font-size: 7px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -113,7 +135,7 @@
                 <a href="index.html" class="btn icon-circle" aria-label="Home">
                     <i class="fas fa-home"></i>
                 </a>
-                <a href="about-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                <a href="actions-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
                 </a>
                 <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
                     <i id="theme-icon" class="fas fa-moon"></i>
@@ -188,6 +210,88 @@
                         </p>  
                         <hr>                    
                         <p class="small font-italic last-edit">Last Updated - 02 November 2024 12:58 AM </p>                         
+                    </div>
+                </div>
+            </div>
+            <!--File Consumer Complaint-->
+            <div class="card">
+                <div class="card-header" id="heading0" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">
+                    <div class="header-content">
+                        <h6>File Consumer Complaint</h6>
+                        <p>National Consumer Helpline</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse0" class="collapse" aria-labelledby="heading0" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>Any aggrieved consumer can register their grievance or complaint through the National Consumer Helpline. If you would like to file a case directly, please check the e-Dhaakil portal."</p>
+                        </div>
+                        <a href="tel:1915" class="btn btn-primary btn-block" target="_blank">
+                            <i class="fa-solid fa-square-phone mr-2"></i> Call NCH
+                        </a>
+                        <a href="https://consumerhelpline.gov.in/user/signup.php" class="btn btn-primary btn-block" target="_blank">
+                            <i class="fas fa-globe mr-2"></i> Register Complaint
+                        </a>  
+                        <a href="https://edaakhil.nic.in/edaakhil/faces/login.xhtml" class="btn btn-primary btn-block" target="_blank">
+                            <i class="fa-solid fa-file-pen"></i> File a case
+                        </a>                                                
+                        <hr>
+                        <div style="font-size: 14px; line-height: 1.6; overflow-x: auto;">
+                            <table id="consumer-complaint-table" border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; text-align: left;">
+                                <tr>
+                                    <th>Region</th>
+                                    <th>Details</th>
+                                    <th>Contact</th>
+                                </tr>
+                                <tr>
+                                    <td>Chennai (North) DCDRF</td>
+                                    <td>
+                                        <strong>President,</strong><br>
+                                        District Consumer Disputes Redressal Forum, Chennai (North),<br>
+                                        Frazer Bridge Road, (Behind TNPSC), V.O.C. Nagar, Park Town<br>
+                                        Chennai - 600 003.
+                                    </td>
+                                    <td>
+                                        <a href="tel:04425340083">044 - 25340083</a><br>
+                                        <a href="mailto:chennai.north@gmail.com">chennai.north@gmail.com</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Chennai (South) DCDRF</td>
+                                    <td>
+                                        <strong>President,</strong><br>
+                                        District Consumer Disputes Redressal Forum, Chennai (South),<br>
+                                        Frazer Bridge Road, (Behind TNPSC), V.O.C. Nagar, Park Town<br>
+                                        Chennai - 600 003.
+                                    </td>
+                                    <td>
+                                        <a href="tel:04425340065">044 - 25340065</a><br>
+                                        <a href="mailto:chennaisouth.dcdrf@gmail.com">chennaisouth.dcdrf@gmail.com</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        
+                        
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://economictimes.indiatimes.com/wealth/legal/will/not-happy-with-a-product-or-service-you-can-file-complaint-to-consumer-court-online-through-edaakhil/articleshow/115937512.cms?from=mdr" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Not happy with a product or service? <a href="https://economictimes.indiatimes.com/wealth/legal/will/not-happy-with-a-product-or-service-you-can-file-complaint-to-consumer-court-online-through-edaakhil/articleshow/115937512.cms?from=mdr"> timesofindia.indiatimes.com</a> 
+                                </li> 
+                                <li>
+                                    <a href="https://citizenmatters.in/how-to-file-a-consumer-complaint-in-chennai/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> Cheated by a seller? <a href="https://citizenmatters.in/how-to-file-a-consumer-complaint-in-chennai/"> fssai.gov.in</a> 
+                                </li>                            
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">Last Updated - 27 December 2024 06:45 PM </p>                         
                     </div>
                 </div>
             </div>
@@ -803,19 +907,26 @@
             // Toggle chevron rotation
             $('.accordion .card-header').on('click', function() {
                 var chevron = $(this).find('.chevron');
+                var card = $(this).closest('.card');
                 
-                // Collapse other sections and reset their chevrons
+                // Collapse other sections and reset their styles
                 $('.accordion .chevron').not(chevron).removeClass('rotate');
-                
+                $('.accordion .card').not(card).removeClass('expanded');
+
                 // Toggle the current chevron rotation
                 chevron.toggleClass('rotate');
+
+                // Add or remove the expanded class for box shadow
+                card.toggleClass('expanded');
             });
 
-            // Reset chevron when section is collapsed by other means
+            // Reset chevron and shadow when section is collapsed by other means
             $('.collapse').on('hidden.bs.collapse', function () {
                 $(this).parent().find('.chevron').removeClass('rotate');
+                $(this).closest('.card').removeClass('expanded');
             });
         });
+
 
         // Scroll to top function
         function scrollToTop() {

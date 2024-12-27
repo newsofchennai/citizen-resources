@@ -28,6 +28,18 @@
             justify-content: space-between;
             cursor: pointer;
         }
+        .accordion .card.expanded {
+            box-shadow: 0 0px 12px #8eb7ef; 
+            background-color: #e7f1ff;
+        }
+
+        .accordion .card.expanded .card-header {
+            background-color: #e0ecfc;
+        }
+
+        .accordion .card.expanded .card-body {
+            background-color: #fbfcfd; 
+        }
         .accordion .card-header .header-content {
             display: flex;
             flex-direction: column;
@@ -95,11 +107,16 @@
         }
         
         p , ul, li, .more-reading {
-        text-align: left;    
+            text-align: left;    
         }
         .btn p {
             text-align: center; 
             margin-bottom: 0px;
+        }
+        @media (max-width: 768px) {
+            #consumer-complaint-table {
+                font-size: 7px;
+            }
         }
     </style>
 </head>
@@ -193,6 +210,86 @@
                     </div>
                 </div>
             </div>
+            <!--File Consumer Complaint-->
+            <div class="card">
+                <div class="card-header" id="heading0" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">
+                    <div class="header-content">
+                        <h6>பொருள் நுகர்வோர் புகார் பதிவேற்றம்</h6>
+                        <p>தேசிய நுகர்வோர் உதவி கோரிக்கை</p>
+                    </div>
+                    <i class="chevron fas fa-chevron-down"></i>
+                </div>
+                <div id="collapse0" class="collapse" aria-labelledby="heading0" data-parent="#actionAccordion">
+                    <div class="card-body">
+                        <div class="btn alt alert-dark btn-block "> 
+                            <p>யாராவது பாதிக்கப்பட்ட நுகர்வோர் அவர்களின் புகாரை தேசிய நுகர்வோர் உதவி கோரிக்கை மூலம் பதிவு செய்யலாம். நீங்கள் நேரடியாக வழக்கு பதிவு செய்ய விரும்பினால், தயவுசெய்து e-Dhaakil போர்ட்டலை பார்வையிடவும்."</p>
+                        </div>
+                        <a href="tel:1915" class="btn btn-primary btn-block" target="_blank">
+                            <i class="fa-solid fa-square-phone mr-2"></i> NCH-ஐ அழைக்கவும்
+                        </a>
+                        <a href="https://consumerhelpline.gov.in/user/signup.php" class="btn btn-primary btn-block" target="_blank">
+                            <i class="fas fa-globe mr-2"></i> புகார் பதிவு செய்யவும்
+                        </a>  
+                        <a href="https://edaakhil.nic.in/edaakhil/faces/login.xhtml" class="btn btn-primary btn-block" target="_blank">
+                            <i class="fa-solid fa-file-pen"></i> வழக்கு பதிவு செய்யவும்
+                        </a>                                                 
+                        <hr>
+                        <div style="font-size: 14px; line-height: 1.6; overflow-x: auto;">
+                            <table id="consumer-complaint-table" border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; text-align: left;">
+                                <tr>
+                                    <th>பிரதேசம்</th>
+                                    <th>விவரங்கள்</th>
+                                    <th>தொடர்பு</th>
+                                </tr>
+                                <tr>
+                                    <td>சென்னை (வடக்கு) DCDRF</td>
+                                    <td>
+                                        <strong>தலைவர்,</strong><br>
+                                        மாவட்ட நுகர்வோர் மோதல் தீர்வு மன்றம், சென்னை (வடக்கு),<br>
+                                        ஃப்ரேசர் பிரிட்ஜ் சாலை, (TNPSC-க்கு பின்புறம்), V.O.C. நகர், பாக் டவுன்<br>
+                                        சென்னை - 600 003.
+                                    </td>
+                                    <td>
+                                        <a href="tel:04425340083">044 - 25340083</a><br>
+                                        <a href="mailto:chennai.north@gmail.com">chennai.north@gmail.com</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>சென்னை (தெற்கு) DCDRF</td>
+                                    <td>
+                                        <strong>தலைவர்,</strong><br>
+                                        மாவட்ட நுகர்வோர் மோதல் தீர்வு மன்றம், சென்னை (தெற்கு),<br>
+                                        ஃப்ரேசர் பிரிட்ஜ் சாலை, (TNPSC-க்கு பின்புறம்), V.O.C. நகர், பாக் டவுன்<br>
+                                        சென்னை - 600 003.
+                                    </td>
+                                    <td>
+                                        <a href="tel:04425340065">044 - 25340065</a><br>
+                                        <a href="mailto:chennaisouth.dcdrf@gmail.com">chennaisouth.dcdrf@gmail.com</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr>
+                        <p class="more-reading">
+                            <ul style="padding-left: 20px; list-style-position: outside; list-style-type: none;">
+                                <li>
+                                    <a href="https://economictimes.indiatimes.com/wealth/legal/will/not-happy-with-a-product-or-service-you-can-file-complaint-to-consumer-court-online-through-edaakhil/articleshow/115937512.cms?from=mdr" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> பொருளோ அல்லது சேவையோ வருந்துகிறீர்களா? <a href="https://economictimes.indiatimes.com/wealth/legal/will/not-happy-with-a-product-or-service-you-can-file-complaint-to-consumer-court-online-through-edaakhil/articleshow/115937512.cms?from=mdr"> timesofindia.indiatimes.com</a> 
+                                </li> 
+                                <li>
+                                    <a href="https://citizenmatters.in/how-to-file-a-consumer-complaint-in-chennai/" target="_blank" rel="noopener noreferrer">
+                                        <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                    </a> விற்பனையாளர் மாமோகித்தாரா? <a href="https://citizenmatters.in/how-to-file-a-consumer-complaint-in-chennai/"> fssai.gov.in</a> 
+                                </li>                            
+                            </ul>
+                        </p>  
+                        <hr>                    
+                        <p class="small font-italic last-edit">கடைசியாக புதுப்பிக்கப்பட்டது - 27 டிசம்பர் 2024 07:05 PM </p>                         
+                    </div>
+                </div>
+            </div>
+            
             <!-- Caring for Chennai Section -->
             <div class="card">
                 <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -805,21 +902,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function() {
+         $(document).ready(function() {
             // Toggle chevron rotation
             $('.accordion .card-header').on('click', function() {
                 var chevron = $(this).find('.chevron');
+                var card = $(this).closest('.card');
                 
-                // Collapse other sections and reset their chevrons
+                // Collapse other sections and reset their styles
                 $('.accordion .chevron').not(chevron).removeClass('rotate');
-                
+                $('.accordion .card').not(card).removeClass('expanded');
+
                 // Toggle the current chevron rotation
                 chevron.toggleClass('rotate');
+
+                // Add or remove the expanded class for box shadow
+                card.toggleClass('expanded');
             });
 
-            // Reset chevron when section is collapsed by other means
+            // Reset chevron and shadow when section is collapsed by other means
             $('.collapse').on('hidden.bs.collapse', function () {
                 $(this).parent().find('.chevron').removeClass('rotate');
+                $(this).closest('.card').removeClass('expanded');
             });
         });
 
