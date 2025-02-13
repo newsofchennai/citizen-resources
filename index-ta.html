@@ -705,13 +705,14 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const weatherContent = `
                             <div class="weather-content">
                                 <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;வெப்பநிலை: ${row[temperatureIndex]}°C</span><br><br>                            
-                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} மி.மீ.</strong> மழை 12:00 மணி முதல் தற்போது வரை பதிவாகியுள்ளது, இது <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong> &nbsp;என வகைப்படுத்தப்பட்டுள்ளது.<br><br>
-                                <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;ஈரப்பதம்: ${row[humidityIndex]}%</span><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;ஈரப்பதம்: ${row[humidityIndex]}%</span><br><br>
                                 <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;காற்றின் வேகம்: ${row[windSpeedIndex]} m/s</span><br><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;மழைக் குவிப்பு: ${rainAccumulation} mm<br><br>
                                 <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;புதுப்பிக்கப்பட்ட நேரம்: ${row[lastFetchedIndex]}</span>
                             </div>
-
                         `;
+                        // <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} மி.மீ.</strong> மழை 12:00 மணி முதல் தற்போது வரை பதிவாகியுள்ளது, இது <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong> &nbsp;என வகைப்படுத்தப்பட்டுள்ளது.<br><br>
+
                     document.getElementById('weatherContent').innerHTML = weatherContent;
                     document.getElementById('selectedLocality').innerText = localityName;
                     break;
@@ -742,11 +743,12 @@ function showRainInfo(location, rainIntensity, rainDescription) {
         const popupContent = `
             <div class="popup-content">
                 <p><strong>${location.name}</strong></p>
-                <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
-                <p><strong>${rainDescription}</strong></p>
+                
 
             </div>
         `;
+        // <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
+        // <p><strong>${rainDescription}</strong></p>
 
         // Display the popup with an offset to position it above the rain status
         currentPopup = L.popup({ 

@@ -798,12 +798,14 @@ function fetchWeatherData(localityId, lat, lng, localityName) {
                     const weatherContent = `
                         <div class="weather-content">
                             <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;Temperature: ${row[temperatureIndex]}°C</span><br><br>                            
-                            <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong><br><br>
-                            <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[humidityIndex]}%</span><br>
+                            <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;Humidity: ${row[humidityIndex]}%</span><br><br>
                             <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;Wind Speed: ${row[windSpeedIndex]} m/s</span><br><br>
+                            <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp; Rain Accumulation: ${rainAccumulation} mm<br><br>
                             <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;Last Updated: ${row[lastFetchedIndex]}</span>
                         </div>
                     `;
+                    // <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} mm</strong> of rain has been recorded from 12:00am till now, which is classified as <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong><br><br>
+
                     document.getElementById('weatherContent').innerHTML = weatherContent;
                     document.getElementById('selectedLocality').innerText = localityName;
                     break;
@@ -893,10 +895,10 @@ function showRainInfo(location, rainIntensity, rainDescription) {
     const popupContent = `
         <div class="popup-content">
             <p><strong>${location.name}</strong></p>
-            <p>Rain Intensity: ${rainIntensity} mm/h</p>
-            <p><strong>${rainDescription}</strong></p>
         </div>
     `;
+    // <p>Rain Intensity: ${rainIntensity} mm/h</p>
+    // <p><strong>${rainDescription}</strong></p>
 
     // Adding a delay of 100ms and offset to position the popup above the marker
     setTimeout(() => {
