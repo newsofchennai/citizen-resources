@@ -1,1 +1,825 @@
-<!doctype html><html lang="ta"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>News of Chennai has moved</title><link rel="canonical" href="https://newsofchennai.pages.dev/ta/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=https://newsofchennai.pages.dev/ta/"><script>location.replace("https://newsofchennai.pages.dev/ta/"+location.hash)</script></head><body style="font-family:system-ui,sans-serif;padding:24px"><p>News of சென்னை புதிய முகவரிக்கு மாறியுள்ளது: <a href="https://newsofchennai.pages.dev/ta/">https://newsofchennai.pages.dev/ta/</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News of Chennai - குடிமக்கள் வளங்கள்</title>
+    <meta property="og:title" content="News of Chennai - குடிமக்கள் வளங்கள்" />
+    <meta property="og:description" content="சென்னையின் செய்திகள் தேவைப்படும் நேரங்களில் நம்பத்தகுந்த மற்றும் சரிபார்க்கப்பட்ட தகவல்களுடன் சென்னைக்கு உதவும் குடிமக்கள் சேவையாகும் | 100% உண்மை சரிபார்க்கப்பட்டது | விளம்பரம், விளம்பரங்கள் இல்லை, இணைப்புகள் இல்லை." />
+    <meta property="og:image" content="https://newsofchennai.in/Banners/about-ta.png" />
+    <meta property="og:url" content="https://newsofchennai.in/index-ta.html" />
+    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />    
+    <style>
+        body {
+            padding: 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px; /* Increased padding for bigger buttons */
+            font-size: 16px; /* Increased font size */
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: rgb(0, 74, 173);
+            border: none;
+            border-radius: 15px;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+        }
+
+        .button:hover {
+            background-color: rgb(0, 62, 150); /* Slightly darker shade on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Box shadow for hover effect */
+        }
+
+        .button:active {
+            background-color: rgb(0, 74, 173);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Box shadow when active */
+            transform: translateY(2px); /* Slight move down effect when clicked */
+        }
+
+        /* Specific styling for the helplines button */
+        #helplines {
+            box-shadow: 0 4px 8px rgba(248, 2, 2, 0.899);
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .weather-details {
+            padding: 20px;
+            border-left: 1px solid #dee2e6;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            color: white; /* Text color */
+            border-radius: 8px;
+            position: relative; /* Adjust position for smaller screens */
+            z-index: 1000; /* Ensure it's above the map */
+            height: 400px;
+            width: 100%;
+        }
+        .dropdown-container {
+            text-align: center; /* Center align the dropdown */
+        }
+        .weather-content {
+            margin: 10px 0; /* Add spacing */
+            text-align: left;
+        }
+        .weather-content {
+            font-size:12px;
+        }
+
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        .ticker-tape {
+            background-color: white; /* Background for contrast */
+            color: red; /* Red text for alert */
+            padding: 10px 0;
+            font-size: 12px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            white-space: nowrap;
+        }
+
+
+        /* Responsive design */
+        @media (min-width: 992px) { /* Laptop view */
+            .details-container {
+                display: flex; /* Use flexbox for layout */
+            }
+            .weather-details {
+                width: 300px; /* Fixed width for weather details */
+                margin-right: 20px; /* Spacing from the map */
+            }
+        }
+        
+        @media (max-width: 991px) { /* Mobile and tablet view */
+            .details-container {
+                display: block; /* Stack elements */
+                margin-bottom: 20px; /* Space between sections */
+            }
+        }
+        @media (min-width: 768px) { /* Adjust the breakpoint as needed */
+            .button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            .banner-img {
+                width: 80%; /* Set the desired width for desktop view */
+                max-width: 800px; /* Optional: Set a max width */
+            }
+        }
+        @media screen and (max-width: 480px) {
+            #localitySelect {
+                font-size: 9px;
+            }
+        }
+        @media (max-width: 600px) {
+            .weather-content {
+                font-size:13px;
+            }
+        }
+        body h6 {
+            color: darkblue;
+        }
+        body.dark-mode h6 {
+            color: white;
+        }
+
+        .rain-info {
+            margin: 20px;
+        }
+
+        .info-icon {
+        /* color: #007BFF; */
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .rainfall-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .rainfall-table th, .rainfall-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .rainfall-table th {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .rainfall-table th, .rainfall-table td {
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+
+        .dark-mode table, .dark-mode .rainfall-table th {
+            background-color: black;
+        }
+        .dark-mode .modal-content h2 , .dark-mode .modal-content .close{
+            color: black;
+        }
+        /* Styling for the rain status card */
+        .rain-pluck-card {
+            display: inline-block;
+            background-color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
+            text-align: center;
+        }
+
+        .rain-pluck-card.மழை, .rain-pluck-card.மழை-இல்லை {
+            background-color: #EDF4FF; 
+            color: #0E3272;
+        }
+        .leaflet-popup-content {
+            margin: 10px 20px;
+            line-height: .5;
+            font-size: 13px;
+            font-size: 1em;
+            min-height: 0px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/48d264722b.js" crossorigin="anonymous"></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- <div class="ticker-tape">
+        <marquee class="ticker-content" behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">Depression is weakening and running parallel to the city coast, Chennai may experience moderate rain, with occasional heavy downpours till Oct 17</marquee>
+    </div> -->
+        <div class="container">
+            <div class="text-center">
+                <a href="#">
+                    <img id="banner-image" src="NOC2024-v2-white.png" alt="Banner" class="img-fluid banner-img" />
+                </a>
+                <!-- Top Ribbon -->
+                <div class="top-ribbon">
+                    <a href="#" class="btn icon-circle" aria-label="Home">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="index.html" class="btn icon-circle" style="white-space: nowrap;">English Version</i>
+                    </a>
+                    <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                    
+                    <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+                </div>
+            </div>
+            <!-- Rotating Globe Icon with Date and Time -->
+            <!-- <div> <i class="rotating-globe"></i>   <span class="date-time" id="date-time"></span></div>  -->
+            <div>
+                <img class="rotating-globe" src="globe.gif" 
+                        alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+                <span class="date-time" id="date-time-tamil"></span>
+            </div>  
+            <hr>
+            <center>
+            <div class="text-center mb-2">
+                <!-- <p style="font-size: 12px; font-weight: bold;" class="mb-4">
+                    News of Chennai is a citizen service that has been functioning since 2020, providing reliable and verified information to citizens in times of need. All information is 100% verified and fact-checked.
+                </p> -->
+                <div class="alert" style="background-color: #e8e8e8;">
+                    <p class="mb-0" style="font-size: 12px;color:black">
+                        வணக்கம் <i class="fa-solid fa-hands-praying"></i> News of சென்னை இணையதளத்தின் மூலம், நீங்கள் ஒரு சென்னை குடிமகனாக நம்பகமான மற்றும் சரிபார்க்கப்பட்ட தகவல்களை ✅ ஒரே இடத்தில் பெறலாம் 📲
+                    </p>
+                </div>
+                <div class="row justify-content-center">
+                    <!-- Mobile View: Rain Helpline and City Resource -->
+                    <div style="border: 2px solid #ccc; padding-top: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; max-width: 600px; margin: 0 auto;margin-bottom:10px; font-size: 14px;" class="d-md-none">
+                        <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
+                            <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
+                                <a href="help-line-ta.html" target="" class="btn  w-100 me-1" style="font-size: 10px; background-color: #06065D;color: white;;">
+                                    <i class="fa-solid fa-phone"></i> சரியான உதவி <br>எண்கள்
+                                </a>
+                                <a href="actions-ta.html" class="btn w-100 ms-1" style="font-size: 11px;background-color:#06065D;color: white;">
+                                    <!-- <i class="fa-solid fa-cloud-showers-heavy"></i> -->
+                                    <i class="fa-solid fa-location-crosshairs"></i> செயல் <br>எடுக்கவும்
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12 d-md-none mb-2">
+                            <div class="d-flex justify-content-between">                                
+                                <a href="transport-travel-ta.html" target="" class="btn  w-100 me-1" style="font-size: 11px; background-color: #06065D;color: white;;">
+                                    <i class="fa-solid fa-compass"></i> போக்குவரத்து + <br>பயணம்
+                                </a>
+                                <a href="scams-ta.html" class="btn w-100 ms-1" style="font-size: 11px;background-color: #06065D;color: white;">
+                                    <i class="fa-solid fa-skull-crossbones"></i> நடக்கும் <br>மோசடிகள்
+                                </a>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop View: Rain Helpline and City Resource -->
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- For desktop view -->
+                        <a href="help-line-ta.html" target="" class="btn  w-100" style="font-size: 14px; background-color: #06065D;color: white;">
+                            <i class="fa-solid fa-phone"></i> சரியான உதவி <br>எண்கள்
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> 
+                        <a href="actions-ta.html" target="" class="btn  w-100" style="font-size: 14px; background-color: #06065D; color: white;">
+                            <i class="fa-solid fa-location-crosshairs"></i> செயல் <br>எடுக்கவும்
+                        </a>
+                    </div>
+                    
+                    <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                        <a href="transport-travel-ta.html" class="btn w-100" style="font-size: 14px;background-color: #06065D;color: white;">
+                            <i class="fa-solid fa-compass"></i> போக்குவரத்து + <br>பயணம்
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                        <a href="realtime-weather-ta.html" class="btn w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-cloud-sun-rain"></i> நிகழ்நேர வானிலை
+                        </a>
+                    </div>
+                    <!-- <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                        <a href="lake-level-ta.html" class="btn w-100 ms-1" style="font-size: 13px;background-color: #06065D;color: white;">
+                            <i class="fas fa-water"></i> தற்போதைய ஏரி நிலைகள்
+                        </a>
+                    </div> -->
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> <!-- For desktop view -->
+                        <a href="medical-emergency-ta.html" target="" class="btn btn-danger w-100" style="font-size: 14px; background-color: darkred;">
+                            <i class="fa-solid fa-briefcase-medical"></i> மருத்துவ உதவி எண்கள்
+                        </a>
+                    </div>
+                    
+                    <!-- Mobile View: Medical -->
+                    <div class="col-12 mb-2 d-md-none"> <!-- Only on mobile view -->
+                        <a href="medical-emergency-ta.html" target="" class="btn btn-danger w-100" style="font-size: 14px; background-color: darkred;">
+                            <i class="fa-solid fa-briefcase-medical"></i> மருத்துவ உதவி எண்கள்
+                        </a>
+                    </div>
+                    
+                    <!-- Mobile View: Verified Helpline and Take Action -->
+                    <!-- <div class="col-12 col-md-4 mb-2 d-md-none"> 
+                        <div class="d-flex justify-content-between"> 
+                            <a href="help-line-ta.html" target="" class="btn  w-100 me-1" style="font-size: 10px;background-color: #A2DAE0; color: black;">
+                                <i class="fa-solid fa-phone"></i> சரியான உதவி எண்கள்
+                            </a>
+                            <a href="actions-ta.html" target="" class="btn  w-100 ms-1" style="font-size: 11px;background-color: #A2DAE0; color: black;">
+                                <i class="fa-solid fa-location-crosshairs"></i> செயல் எடுக்கவும்
+                            </a>
+                        </div>
+                    </div> -->
+                    <!-- Mobile View: Transport and Ongoing Scams -->
+                    <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
+                        <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
+                            <a href="realtime-weather-ta.html" target="" class="btn  w-100 me-1" style="font-size: 10px;background-color: #A2DAE0; color: black;">
+                                <i class="fa-solid fa-cloud-sun-rain"></i> நிகழ்நேர வானிலை
+                            </a>
+                            <a href="air-quality-ta.html" target="" class="btn  w-100 ms-1" style="font-size: 10px;background-color: #A2DAE0; color: black; ">
+                                <i class="fa-solid fa-smog"></i> காற்றின் தரம்
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 d-md-none"> <!-- Only on mobile view -->
+                        <div class="d-flex justify-content-between"> <!-- Flexbox for horizontal alignment -->
+                            <a href="updates.html" target="" class="btn  w-100 me-1" style="font-size: 10px;background-color: #A2DAE0; color: black;">
+                                <i class="fa-solid fa-tower-broadcast"></i> சமீபத்திய தகவல்கள்
+                            </a>
+                            <a href="earthquake-ta.html" target="" class="btn  w-100 ms-1" style="font-size: 10px;background-color: #A2DAE0; color: black; ">
+                                <i class="fas fa-wave-square"></i> பூகம்ப எச்சரிக்கை
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Desktop View: Verified Helpline, Take Action, Transport, and Ongoing Scams -->
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> 
+                        <a href="air-quality-ta.html" target="" class="btn  w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-smog"></i> காற்றின் தரம்
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block">  
+                        <a href="scams-ta.html" target="" class="btn  w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-skull-crossbones"></i> நடக்கும் மோசடிகள்
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> 
+                        <a href="updates.html" target="" class="btn  w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                            <i class="fa-solid fa-tower-broadcast"></i> சமீபத்திய தகவல்கள்
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 d-none d-md-block"> 
+                        <a href="earthquake-ta.html" target="" class="btn  w-100" style="font-size: 14px;background-color: #A2DAE0; color: black;">
+                            <i class="fas fa-wave-square"></i> பூகம்ப எச்சரிக்கை     
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="container text-center">
+            <div class="row">
+                <!-- <div class="col-12 col-md-4"> 
+                    <button class="btn btn-secondary mb-3 w-100" onclick="window.open('https://mausam.imd.gov.in/chennai/mcdata/nowcast.pdf', '_blank')" style="font-size: 14px; ">
+                        <i class="fas fa-cloud-sun-rain"></i> சென்னை தற்போதைய காலநிலை - இந்திய வானிலை அறிவிப்பு
+                    </button>
+                </div> -->
+                <!-- <div class="col-12 col-md-4"> 
+                    <a href="air-quality-ta.html"><button class="btn btn-secondary mb-3 w-100" style="font-size: 14px; ">
+                        <i class="fa-solid fa-smog"></i> சென்னை - காற்றின் தரம்
+                    </button></a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="lake-level-ta.html"><button class="btn btn-secondary mb-3 w-100" style="font-size: 14px; ">
+                        <i class="fas fa-water"></i> சென்னை - ஏரி கொள்ளளவு
+                    </button></a>
+                </div> -->
+                <!-- <div class="col-12 d-md-none mb-2">
+                    <div class="d-flex justify-content-between">
+                        <a href="air-quality-ta.html" class="btn btn-secondary w-100 me-1" style="font-size: 11px;">
+                            <i class="fa-solid fa-smog"></i> &nbsp;நிகழ்நேர காற்றின் தரம்
+                        </a>
+                        <a href="earthquake-ta.html" class="btn btn-secondary w-100 ms-1" style="font-size: 12px;">
+                            <i class="fas fa-wave-square"></i> பூகம்ப எச்சரிக்கை
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2"> 
+                    <a href="air-quality-ta.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
+                        <i class="fa-solid fa-smog"></i> நிகழ்நேர காற்றின் தரம்
+                    </button></a>
+                </div>
+                <div class="col-12 col-md-4 d-none d-md-block mb-2">
+                    <a href="earthquake-ta.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
+                        <i class="fas fa-wave-square"></i> பூகம்ப எச்சரிக்கை                    
+                    </button></a>
+                </div>
+                <div class="col-12 col-md-4 col-sm-12"> col-md-4 changed to col-md-6
+                    <a href="updates.html"><button class="btn btn-secondary mb-2 w-100" style="font-size: 14px; ">
+                        <i class="fa-solid fa-tower-broadcast"></i> சமீபத்திய தகவல்கள்
+                    </button></a>
+                </div> -->
+            </div>
+        </div> 
+    <hr>
+    <h6><i class="fas fa-cloud-sun-rain"></i> சென்னை - தற்போதைய வானிலை</h6></center>
+
+    <div class="container">
+        <!-- <p class="text-center" style="
+        font-size: 14px;
+        color: black;
+        font-weight: bold;
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px #6c757d;
+        max-width: 650px;
+        margin: 20px auto;
+        "> -->
+        <p style="text-align:center; margin-bottom: 0;">
+        உங்கள் அருகிலுள்ள பகுதியைத் தேர்ந்தெடுத்து, நேரடி வானிலை தகவலை அறியுங்கள் <i class="fa-solid fa-arrow-down"></i>
+        </p>
+        <center>
+            <div class="mb-3 dropdown-container" style="max-width: 600px;">
+                <label for="localitySelect" class="form-label"></label>
+                <select class="form-select" id="localitySelect" aria-label="Select locality" style="
+                box-shadow: 0 0 10px rgb(0, 74, 173);
+                border: 1px solid #007bff;
+                transition: box-shadow 0.3s ease;">
+                    <option selected>உங்கள் அருகிலுள்ள பகுதியைத் தேர்ந்தெடுக்கவும்</option>
+                    <!--new-->
+                    <option value="ZWL006520" data-lat="12.993947" data-lng="80.247174">அடையாறு</option>
+                    <option value="ZWL001210" data-lat="13.032366" data-lng="80.257625">ஆழ்வார்பேட்டை</option>
+                    <option value="ZWL007209" data-lat="13.117566" data-lng="80.146667">அம்பத்தூர்</option>
+                    <option value="ZWL003967" data-lat="13.086884" data-lng="80.206602">அண்ணா நகர்</option>
+                    <option value="ZWL007059" data-lat="13.022680" data-lng="80.200286">அசோக் நகர்</option>
+                    <option value="ZWL008876" data-lat="13.125301" data-lng="80.069776">ஆவடி</option>
+                    <!-- <option value="ZWL003387" data-lat="13.080772" data-lng="80.248018">கீழ்ப்பாக்கம்</option> -->
+                    <option value="ZWL003452" data-lat="12.931197" data-lng="80.182327">மேடவாக்கம்</option>
+                    <!-- <option value="ZWL009897" data-lat="13.282298" data-lng="80.266616">மீஞ்சூர்</option> -->
+                    <option value="ZWL005857" data-lat="13.080365" data-lng="80.175724">முகப்பேர்</option>
+                    <option value="ZWL008548" data-lat="13.014886" data-lng="80.152455">முகலிவாக்கம்</option>  
+                    <option value="ZWL001141" data-lat="12.841923" data-lng="80.209025">நாவலூர்</option>
+                    <option value="ZWL005190" data-lat="13.060471" data-lng="80.255887">நுங்கம்பாக்கம்</option>
+                    <option value="ZWL004297" data-lat="12.973055" data-lng="80.151271">பல்லாவரம்</option>
+                    <option value="ZWL008996" data-lat="13.121741" data-lng="80.225058">பெரம்பூர்</option>
+                    <option value="ZWL007176" data-lat="13.052763" data-lng="80.090763">பூந்தமல்லி</option>
+                    <option value="ZWL006053" data-lat="13.048069" data-lng="80.158163">போரூர்</option>
+                    <option value="ZWL006789" data-lat="12.799983" data-lng="80.029865">பொத்தேரி</option>
+                    <option value="ZWL001398" data-lat="13.191443" data-lng="80.181225">ரெட்ஹில்ஸ்</option>
+                    <option value="ZWL006232" data-lat="13.136635" data-lng="80.289535">ராயபுரம்</option>
+                    <option value="ZWL007171" data-lat="12.916570" data-lng="80.134348">சேலையூர்</option>
+                    <option value="ZWL004233" data-lat="12.921608" data-lng="80.233727">சோழிங்கநல்லூர்</option>                
+                    <option value="ZWL001516" data-lat="13.026256" data-lng="80.228120">தி.நகர்</option>
+                    <option value="ZWL001701" data-lat="12.934834" data-lng="80.101824">தாம்பரம்</option>
+                    <option value="ZWL006329" data-lat="12.863785" data-lng="79.947886">தண்டலம்</option>                
+                    <option value="ZWL004882" data-lat="12.878957" data-lng="80.070307">ஊரப்பாக்கம்</option>
+                    <option value="ZWL004431" data-lat="13.065160" data-lng="80.207917">வடபழனி</option>
+                    <option value="ZWL006156" data-lat="12.989300" data-lng="80.199988">வேளச்சேரி</option>
+                </select>
+            </div>
+        </center>
+    
+        <div class="details-container">
+            <div class="weather-details" id="weatherDetails">
+                <h4><span id="selectedLocality"></span></h4><hr>
+                <p id="disclaimer" style="font-size: 12px; font-style: italic;">வானிலை தரவு ஒவ்வொரு 5 நிமிடங்களுக்கு புதுப்பிக்கப்படுகிறது.</p>
+                <div id="weatherContent">தயவுசெய்து ஒரு பகுதியைத் தேர்ந்தெடுக்கவும்</div>
+            </div>
+    
+            <div class="col-lg-8 col-md-12">
+                <div id="map"></div>
+            </div>
+        </div>
+        <div style="text-align: left;font-size: 12px;">      
+            <em> சென்னை முழுவதும் நிறுவப்பட்டுள்ள வானிலை நிலையங்களின் நிலத்தடி நெட்வொர்க்கின் அடிப்படையில் <a href="https://www.weatherunion.com/">வெதர் யூனியனில்</a> இருந்து பெறப்பட்ட வானிலை தரவு.</em>
+        </div> 
+
+        <!-- Scroll Up Button -->
+        <button id="scrollUpBtn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Modal Structure -->
+        <div id="rainInfoModal" class="modal">
+            <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h4 style="text-align:left">மழையின் வகைப்பாடு (24 மணிநேரம்)</h4>
+            <table class="rainfall-table">
+                <thead>
+                <tr>
+                    <th>மழை அளவு (மிமீ)</th>
+                    <th>வகை</th>
+                </tr>
+                </thead>
+                <tbody id="rainfall-category-table">
+                <!-- Table rows will be generated dynamically by JavaScript -->
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+    // Open the modal
+    function openModal() {
+        document.getElementById("rainInfoModal").style.display = "flex";
+        populateRainfallTable();
+    }
+
+    // Close the modal
+    function closeModal() {
+        document.getElementById("rainInfoModal").style.display = "none";
+    }
+
+    // Populate the rainfall category table
+    function populateRainfallTable() {
+        const table = document.getElementById("rainfall-category-table");
+        table.innerHTML = ""; // Clear existing rows
+
+        const categories = [
+            { range: "0 mm", label: "மழை இல்லை" },
+            { range: "0.1 - 2.4 mm", label: "மிக லேசான மழை" },
+            { range: "2.5 - 15.5 mm", label: "லேசான மழை" },
+            { range: "15.6 - 64.4 mm", label: "மிதமான மழை" },
+            // { range: "35.6 - 64.4 mm", label: "சற்றே கனமான மழை" },
+            { range: "64.5 - 115.5 mm", label: "கன மழை" },
+            { range: "115.6 - 204.4 mm", label: "மிகவும் கன மழை" },
+            { range: "204.5+ mm", label: "அதி கன மழை" },
+        ];
+
+        categories.forEach(category => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${category.range}</td><td>${category.label}</td>`;
+            table.appendChild(row);
+        });
+    }
+
+    // Helper function to classify rainfall according to IMD standards
+    function getRainfallCategory(rainAmount) {
+        if (isNaN(rainAmount)) return "தகவல் இல்லை";
+        if (rainAmount === 0) return "மழை இல்லை";
+        if (rainAmount >= 0.1 && rainAmount <= 2.4) return "மிக லேசான மழை";
+        if (rainAmount >= 2.5 && rainAmount <= 15.5) return "லேசான மழை";
+        if (rainAmount >= 15.6 && rainAmount <= 64.4) return "மிதமான மழை";
+        // if (rainAmount >= 35.6 && rainAmount <= 64.4) return "சற்றே கனமான மழை";
+        if (rainAmount >= 64.5 && rainAmount <= 115.5) return "கன மழை";
+        if (rainAmount >= 115.6 && rainAmount <= 204.4) return "மிகவும் கன மழை";
+        return "அதி கன மழை"; // 204.4 mm க்கும் அதிகமாக உள்ள நிலைகளுக்கு
+    }
+
+    // Initialize the map
+const map = L.map('map').setView([13.060471, 80.255887], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+}).addTo(map);
+
+let marker;
+let currentPopup = null;
+function fetchWeatherData(localityId, lat, lng, localityName) {
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8B1XnkzVFKQVx0MOEmxmwBJLsZWLmib6VvKtVIJmHN2qglXhWa_a0mJY-1ZCNH8q8c8U6-73ftz9a/pub?gid=0&single=true&output=csv';
+
+    fetch(sheetUrl)
+        .then(response => response.text())
+        .then(data => {
+            const lines = data.split('\n').map(line => line.split(',').map(cell => cell.trim()));
+            const headers = lines[0];
+            const weatherData = lines.slice(1);
+
+            const localityIndex = headers.indexOf('Locality');
+            const temperatureIndex = headers.indexOf('Temperature (°C)');
+            const humidityIndex = headers.indexOf('Humidity (%)');
+            const windSpeedIndex = headers.indexOf('Wind Speed (m/s)');
+            const rainIntensityIndex = headers.indexOf('Rain Intensity (mm/h)');
+            const rainAccumulationIndex = headers.indexOf('Rain Accumulation (mm)');
+            const lastFetchedIndex = headers.indexOf('Last Fetched');
+            
+            let found = false;
+
+            for (const row of weatherData) {
+                if (row[localityIndex] === localityId) {
+                    found = true;
+                    const rainAccumulation = parseFloat(row[rainAccumulationIndex]);
+                    const rainIntensity = parseFloat(row[rainIntensityIndex]);
+                    const rainfallCategory = getRainfallCategory(rainAccumulation);
+                    const rainIntensityStatus = parseFloat(row[rainIntensityIndex]);
+                    const temperature = parseFloat(row[temperatureIndex]);
+
+
+                    let rainDescription;
+                    if (rainIntensity == 0) {
+                    rainDescription = 'மழை-இல்லை'; 
+                    } else if (rainIntensity > 0 && rainIntensity <= 10) {
+                        rainDescription = 'மென்மையான மழை';
+                    } else if (rainIntensity > 10.1 && rainIntensity <= 20) {
+                        rainDescription = 'மிதமான மழை';
+                    } else if (rainIntensity > 20.1 && rainIntensity <= 30) {
+                        rainDescription = 'பலத்த மழை';
+                    } else if (rainIntensity > 30.1 && rainIntensity <= 50) {
+                        rainDescription = 'மிகப்  பலத்த மழை';
+                    } else if (rainIntensity > 50.1 && rainIntensity <= 100) {
+                        rainDescription = 'கன மழை';
+                    }
+                    // Set rain or no rain status
+                    const rainStatus = rainIntensityStatus > 0 ? 'மழை' : 'மழை-இல்லை';
+                    const weatherIcon = rainStatus === 'Rain' 
+                                    ? '<i class="fas fa-cloud-showers-heavy"></i>' 
+                                    : '';  // Use sun icon for "No-Rain"
+
+
+                    // Define location for marker
+                    const location = {
+                        name: localityName,
+                        coords: [lat, lng]
+                    };
+
+                    // Create the rain marker HTML
+                    const rainMarkerHtml = `
+                        <div class="rain-pluck-card ${rainStatus.toLowerCase()}" onclick="showRainInfo(${JSON.stringify(location)}, ${rainIntensity},'${rainDescription}')">
+                            <div><i class="fas fa-thermometer-half"></i> ${temperature}°C</div>
+                        </div>
+                    `;
+
+                    // Create the rain marker icon using the custom HTML
+                    const rainIcon = L.divIcon({
+                        html: rainMarkerHtml,
+                        className: 'rain-icon',
+                        iconSize: [100, 60]
+                    });
+
+                    // Remove the old marker if it exists, then add the new one
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                    marker = L.marker([lat, lng], { icon: rainIcon }).addTo(map);
+                    map.setView([lat, lng], 13);
+
+                    showRainInfo(location, rainIntensity, rainDescription); 
+
+                    // Add click event to show detailed content with rain intensity when clicked
+                    marker.on('click', function() {
+                        showRainInfo(location, rainIntensity, rainDescription);
+                    });
+
+                    // Update weather details in the content section
+                    const weatherContent = `
+                            <div class="weather-content">
+                                <span style="margin-right: 15px;"> <i class="fas fa-thermometer-half"></i>&nbsp;&nbsp;வெப்பநிலை: ${row[temperatureIndex]}°C</span><br><br>                            
+                                <span style="margin-right: 15px;"> <i class="fas fa-tint"></i>&nbsp;&nbsp;ஈரப்பதம்: ${row[humidityIndex]}%</span><br><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-wind"></i>&nbsp;&nbsp;காற்றின் வேகம்: ${row[windSpeedIndex]} m/s</span><br><br>
+                                <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;மழைக் குவிப்பு: ${rainAccumulation} mm<br><br>
+                                <span style="margin-right: 15px;"> <i class="far fa-clock"></i>&nbsp;&nbsp;புதுப்பிக்கப்பட்ட நேரம்: ${row[lastFetchedIndex]}</span>
+                            </div>
+                        `;
+                        // <span style="margin-right: 15px;"> <i class="fas fa-cloud-showers-heavy"></i>&nbsp;&nbsp;<strong> ${rainAccumulation} மி.மீ.</strong> மழை 12:00 மணி முதல் தற்போது வரை பதிவாகியுள்ளது, இது <strong>${rainfallCategory} <i class="fas fa-info-circle info-icon" onclick="openModal()"></i> </strong> &nbsp;என வகைப்படுத்தப்பட்டுள்ளது.<br><br>
+
+                    document.getElementById('weatherContent').innerHTML = weatherContent;
+                    document.getElementById('selectedLocality').innerText = localityName;
+                    break;
+                }
+            }
+
+            if (!found) {
+                document.getElementById('weatherContent').innerHTML = 'தரவுகளில் இடம் காணப்படவில்லை.';
+            }
+
+            document.getElementById('weatherDetails').style.display = 'block';
+            document.getElementById('map').style.display = 'block';
+            document.getElementById('disclaimer').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            document.getElementById('weatherContent').innerHTML = 'தரவுகளில் காணப்படவில்லை.';
+        });
+}
+
+function showRainInfo(location, rainIntensity, rainDescription) {
+    if (currentPopup) {
+        map.closePopup(currentPopup);
+    }
+
+    // Add a 100ms delay before displaying the popup
+    setTimeout(() => {
+        const popupContent = `
+            <div class="popup-content">
+                <p><strong>${location.name}</strong></p>
+                
+
+            </div>
+        `;
+        // <p>மழையின் தீவிரம்: <strong>${rainIntensity} மி.மீ</strong></p>
+        // <p><strong>${rainDescription}</strong></p>
+
+        // Display the popup with an offset to position it above the rain status
+        currentPopup = L.popup({ 
+            closeButton: true,        
+            offset: [0, -25]  // Offset to position the popup above rain status
+        })
+            .setLatLng(location.coords)
+            .setContent(popupContent)
+            .openOn(map);
+    }, 100); // Delay of 100ms
+}
+
+
+// Event listener for locality selection
+document.getElementById('localitySelect').addEventListener('change', function () {
+    const selectedOption = this.options[this.selectedIndex];
+    const localityId = selectedOption.value;
+    const lat = selectedOption.getAttribute('data-lat');
+    const lng = selectedOption.getAttribute('data-lng');
+    const localityName = selectedOption.textContent;
+
+    if (localityId === 'Choose a locality') {
+        document.getElementById('weatherDetails').style.display = 'none';
+        document.getElementById('map').style.display = 'none';
+        document.getElementById('disclaimer').style.display = 'none';
+    } else {
+        fetchWeatherData(localityId, lat, lng, localityName);
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Automatically load Nungambakkam data on page load
+    const defaultOption = localitySelect.querySelector('option[value="ZWL005190"]');
+    localitySelect.value = defaultOption.value;
+    fetchWeatherData(defaultOption.value, parseFloat(defaultOption.getAttribute('data-lat')), parseFloat(defaultOption.getAttribute('data-lng')), defaultOption.text);
+});
+    
+    
+    // Remove default Kilpauk selection on page load
+    window.onload = function() {
+        document.getElementById('map').style.display = 'none';
+        document.getElementById('weatherDetails').style.display = 'none';
+        document.getElementById('disclaimer').style.display = 'none';
+    };
+
+    // Scroll to top function
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show scroll-up button on scroll
+    window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+            100) {
+                document.getElementById('scrollUpBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollUpBtn').style.display = 'none';
+            }
+        };
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-5" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about-ta.html">News of சென்னை பற்றி</a> | <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">வாட்ஸ்அப் சேனலில் </a> சேரவும் | 
+            <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, 
+            <a href="https://x.com/newsofchennai">Twitter</a>, 
+            <a href="https://bsky.app/profile/newsofchennai.bsky.social">Bluesky</a>, 
+            <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & 
+            <a href="https://www.facebook.com/newsofchennai">Facebook</a> இல் பின்தொடரவும் | தொடர்புக்கு - newsofchennai@pm.me  | <a href="credits-ta.html"> உரிமம் மற்றும் மறுப்பு</a>  | விளம்பரம், விளம்பரங்கள் இல்லை
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,1 +1,307 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>News of Chennai has moved</title><link rel="canonical" href="https://newsofchennai.pages.dev/helplines/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=https://newsofchennai.pages.dev/helplines/"><script>location.replace("https://newsofchennai.pages.dev/helplines/"+location.hash)</script></head><body style="font-family:system-ui,sans-serif;padding:24px"><p>News of Chennai has moved to <a href="https://newsofchennai.pages.dev/helplines/">https://newsofchennai.pages.dev/helplines/</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <title>Medical Emergency</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome CSS -->
+    <style>
+        /* body {
+            
+        } */
+        /* .content {
+            margin: 2rem 0;
+        } */
+        /* .table-responsive {
+            margin-top: 2rem;
+        } */
+        th, td {
+            text-align: center; /* Center-align text in table */
+        }
+        /* th {
+            background-color: #f8f8f8;
+        } */
+        .dark-mode .table {
+            color: white; 
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff; /* Background color for the scroll button */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            font-size: 18px;
+            display: none; /* Hidden by default */
+            cursor: pointer;
+            z-index: 1000; /* On top of other content */
+        }
+        .scroll-to-top:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        @media (min-width: 768px) { /* Adjust the breakpoint as needed */
+            .banner-img {
+                width: 80%; /* Set the desired width for desktop view */
+                max-width: 800px; /* Optional: Set a max width */
+            }
+        }
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+        .table, .content {
+            font-size: 12px;
+        }
+        h3, h2{
+            font-size: 1.3rem;
+        }
+        .card-body {
+            padding: 0;
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Banner Image -->
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <!-- Top Ribbon -->
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="medical-emergency-ta.html" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+        <!-- Helpline Table Section -->
+        <div class="content">
+            <!-- <p style="font-size: 18px;font-weight:bold;text-align: center;">Medical Emergency - Helpline Numbers</p> -->
+            <h5 class="page-heading"><i class="fa-solid fa-briefcase-medical" aria-hidden="true"></i> Medical Emergency</h5>
+
+            <div class="card-body">
+                <a href="tel:108" class="btn btn-danger btn-block mb-2 ">
+                    <i class="fa-solid fa-square-phone mr-2"></i> Call 108 Ambulance
+                </a>
+                <a href="tel:104" class="col-12 btn btn-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call 104 TN Medical Helpline
+                </a>
+               <!--  <a href="tel:04428194630" class="col-12 btn btn-outline-danger btn-custom mb-2" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-square-phone mr-2" aria-hidden="true"></i> Call St. John's Ambulance
+                </a>                 -->
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:1066" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Apollo Hospital
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:044-46242424" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Global Hospital
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:105757" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> Chettinad Hospital
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:044-49334933" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-square-phone" aria-hidden="true"></i> MGM Malar Hospital
+                        </a>
+                    </div>
+                </div>
+                <hr>
+                <div style="font-size: 14px; line-height: 1.6; text-align: left;">
+                    <p><strong>Government Hospitals</strong></p>
+                    <ul style="padding-left: 20px; list-style-position: outside;">
+                        <li>Government General Hospital | <a href="tel:04425305000">04425305000</a></li>
+                        <li>Government Kilpauk Hospital | <a href="tel:04428364951">04428364951</a></li>
+                        <li>Government Royapettah Hospital | <a href="tel:04428483051">04428483051</a></li>
+                        <li>Government Stanley Hospital | <a href="tel:04425281347">04425281347</a></li>
+                        <li>Kasturba Hospital for Women | <a href="tel:04428545449">04428545449</a></li>
+                        <li>Institute of Child Health &amp; Hospital | <a href="tel:04428191135">04428191135</a></li>
+                        <li>Government Hospital for Women &amp; Children | <a href="tel:04428191982">04428191982</a></li>
+                    </ul>                    
+                </div>
+                <hr>
+                <button type="button" class="btn alt alert-dark w-100 btn-custom" style="text-align: center;font-size: 14px;">
+                    <p><strong>Air Ambulance Services</strong></p>
+                    <span>Activation takes about 2 - 12 hours | Subject to availability and weather conditions</span>
+                </button><br><br>
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:+919710940000" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-helicopter" aria-hidden="true"></i> Aero Care
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <a href="tel:+919701111156" class="btn btn-primary w-100 btn-custom">
+                            <i class="fa-solid fa-helicopter" aria-hidden="true"></i> ICATT
+                        </a>
+                    </div>
+                </div>
+                <div style="font-size: 14px; line-height: 1.6; text-align: left;">
+                    <p><strong>Types of Ambulance</strong></p>
+                    <ul style="padding-left: 20px; list-style-position: outside;">
+                        <li>Patient Transport Ambulance</li>
+                        <li>Basic Life Support Ambulance</li>
+                        <li>Advanced Life Support Ambulance</li>
+                        <li>Air Ambulance (Helicopter / Aeroplane)</li>
+                    </ul>
+                </div>
+                <hr>
+            <!-- <p class="small font-italic">Last Updated - 30 Oct'24 01:21 AM </p>    -->
+            </div>               
+            <!-- <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Government Ambulance</td>
+                            <td><a href="tel:108">108</a></td>
+                        </tr>
+                        <tr>
+                            <td>TN Medical Helpline</td>
+                            <td><a href="tel:104">104</a></td>
+                        </tr>
+                        <tr>
+                            <td>St. John’s Ambulance</td>
+                            <td><a href="tel:04428194630">04428194630</a></td>
+                        </tr>
+                        <tr>
+                            <td>Apollo Hospital</td>
+                            <td><a href="tel:1066">1066</a></td>
+                        </tr>
+                        <tr>
+                            <td>Global Hospital</td>
+                            <td><a href="tel:04446242424">04446242424</a></td>
+                        </tr>
+                        <tr>
+                            <td>Chettinad Hospital</td>
+                            <td><a href="tel:105757">105757</a></td>
+                        </tr>
+                        <tr>
+                            <td>MGM Malar Hospital</td>
+                            <td><a href="tel:04449334933">04449334933</a></td>
+                        </tr>
+                        <tr>
+                            <td>Government General Hospital</td>
+                            <td><a href="tel:04425305000">04425305000</a></td>
+                        </tr>
+                        <tr>
+                            <td>Government Kilpauk Hospital</td>
+                            <td><a href="tel:04428364951">04428364951</a></td>
+                        </tr>
+                        <tr>
+                            <td>Government Royapettah Hospital</td>
+                            <td><a href="tel:04428483051">04428483051</a></td>
+                        </tr>
+                        <tr>
+                            <td>Government Stanley Hospital</td>
+                            <td><a href="tel:04425281347">04425281347</a></td>
+                        </tr>
+                        <tr>
+                            <td>Kasturba Hospital for Women</td>
+                            <td><a href="tel:04428545449">04428545449</a></td>
+                        </tr>
+                        <tr>
+                            <td>Institute of Child Health & Hospital</td>
+                            <td><a href="tel:04428191135">04428191135</a></td>
+                        </tr>
+                        <tr>
+                            <td>Government Hospital for Women & Children</td>
+                            <td><a href="tel:04428191982">04428191982</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div> -->
+            <p style="text-align: left; font-size: 12px;font-style: italic;">*Last updated: This list was collated and verified by News of Chennai on November 06 12:10 AM AM</p>
+        </div>
+
+        <!-- CPR Information Section -->
+        <div class="content">
+            <h2>How to Perform CPR & Use AED</h2>
+            <p><strong>Warning:</strong> Call <a href="tel:108">108</a> / Ambulance before doing CPR</p>
+            <p>CPR or Cardiopulmonary Resuscitation is a simple first-aid process to revive a person who has stopped breathing. Use CPR when an adult is not breathing or when they are only gasping occasionally, and when they are not responding to questions or taps on the shoulder.</p>
+            <p>This can happen due to a heart attack, a stroke, electrocution, drowning, or poisoning. In these situations, their heart stops beating. CPR can help restart their breathing and heartbeat.</p>
+
+            <div class="text-center mb-4">
+                <img src="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/lg8rylY1M5lhl0asGKvJ/pub/EbnKbMRCVPrnWB7kaSqU.png" alt="CPR Steps" class="img-fluid">
+            </div>
+            <div class="text-center mb-4">
+                <img src="https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/lg8rylY1M5lhl0asGKvJ/pub/4YY3Jp8AQF6PPt12oiaD.jpeg" alt="AED Usage" class="img-fluid">
+            </div>
+
+            <h3>How to Use a Defibrillator (AED) - Watch Here</h3>
+            <p>For detailed guidance on using a defibrillator (AED), you can refer to the following resources:</p>
+            <a href="https://www.youtube.com/results?search_query=how+to+use+aed" target="_blank" class="btn btn-primary">Watch AED Tutorial</a>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Show scroll to top button when scrolled down
+        window.onscroll = function() {
+            var button = document.querySelector('.scroll-to-top');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        };
+
+        // Function to scroll to top
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 12px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://bsky.app/profile/newsofchennai.bsky.social">Bluesky</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+</body>
+</html>

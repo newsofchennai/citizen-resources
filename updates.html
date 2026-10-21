@@ -1,1 +1,180 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>News of Chennai has moved</title><link rel="canonical" href="https://newsofchennai.pages.dev/updates/"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=https://newsofchennai.pages.dev/updates/"><script>location.replace("https://newsofchennai.pages.dev/updates/"+location.hash)</script></head><body style="font-family:system-ui,sans-serif;padding:24px"><p>News of Chennai has moved to <a href="https://newsofchennai.pages.dev/updates/">https://newsofchennai.pages.dev/updates/</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chennai Air Quality</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Scroll-up button styles */
+        #scrollUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 999;
+        }
+        
+        .image-container {
+            display: flex; /* Enable Flexbox */
+            flex-direction: column; /* Align images vertically (one after another) */
+            justify-content: center; /* Center images horizontally */
+            align-items: center; /* Center images vertically */
+            gap: 10px; /* Add spacing between images */
+            min-height: 100vh; /* Full container height for vertical centering */
+        }
+
+        .tumblr-img {
+            width: 500px; /* Fixed width for uniform size in desktop */
+            
+            object-fit: cover; /* Ensures images fill the defined size without distortion */
+            display: block;
+            margin-bottom: 10px; /* Adds space between images */
+        }
+
+        @media (max-width: 768px) {
+            .tumblr-img {
+                max-width: 100%;
+                height: auto; /* Maintain aspect ratio on mobile */
+            }
+        }
+
+        .loader {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #555;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <div class="text-center">
+            <a href="index.html">
+                <img id="banner-image" src="NOC2024-v2-white.png" alt="Banner" class="img-fluid banner-img" />
+            </a>
+            <div class="top-ribbon">
+                <a href="index.html" class="btn icon-circle" aria-label="Home">
+                    <i class="fas fa-home"></i>
+                </a>
+                <a href="#" class="btn icon-circle" style="white-space: nowrap;">தமிழ் பதிப்பு</i>
+                </a>
+                <button class="btn icon-circle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <!-- <a class="btn icon-circle" href="https://www.instagram.com/newsofchennai/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn icon-circle" href="https://www.facebook.com/newsofchennai" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a class="btn icon-circle" href="https://x.com/newsofchennai" target="_blank"><i class="fab fa-twitter"></i></a> -->                
+            </div>
+        </div>
+        <div>
+            <img class="rotating-globe" src="globe.gif" 
+                 alt="rotating globe" loading="lazy" width="12" height="12" decoding="async">
+            <span class="date-time" id="date-time"></span>
+        </div> 
+        <hr>
+        <div class="image-container" id="imageContainer">
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+            </div>
+            <!-- Images will be dynamically loaded here -->
+        </div>
+        <!-- Scroll Up Button -->
+        <button id="scrollUpBtn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+    <script>
+    // Show scroll-up button on scroll
+    const scrollUpBtn = document.getElementById("scrollUpBtn");
+        window.onscroll = function() {
+            if (window.scrollY > 200) scrollUpBtn.style.display = "block";
+            else scrollUpBtn.style.display = "none";
+        };
+    scrollUpBtn.onclick = function() { window.scrollTo({top: 0, behavior: 'smooth'}); };
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop >
+        100) {
+            document.getElementById('scrollUpBtn').style.display = 'block';
+        } else {
+            document.getElementById('scrollUpBtn').style.display = 'none';
+        }
+    };
+    function loadTumblrImages(folderPath, maxImages) {
+    const container = document.getElementById("imageContainer");
+    const loader = document.getElementById("loader");
+    const images = []; // Array to store preloaded images
+    let loadedCount = 0; // Counter to track loaded images
+
+    loader.style.display = "block"; // Ensure the loader is displayed initially
+
+    for (let i = maxImages; i >= 1; i--) {
+        const tumblrImg = new Image();
+        tumblrImg.src = `${folderPath}/${i}.png`;
+        tumblrImg.alt = `Image ${i}`;
+        tumblrImg.classList.add("tumblr-img");
+
+        tumblrImg.onload = () => {
+            images.push(tumblrImg);
+            loadedCount++;
+            checkAllImagesLoaded();
+        };
+
+        tumblrImg.onerror = () => {
+            console.log(`Image ${i}.png not found.`);
+            loadedCount++;
+            checkAllImagesLoaded();
+        };
+    }
+
+    function checkAllImagesLoaded() {
+        if (loadedCount === maxImages) {
+            loader.style.display = "none"; // Hide the loader
+            images
+                .sort((a, b) => b.alt.split(" ")[1] - a.alt.split(" ")[1]) // Sort by descending image number
+                .forEach(img => {
+                    container.appendChild(img);
+                });
+        }
+    }
+}
+
+// Call the function to load images
+loadTumblrImages("tumblr", 50);
+    </script>
+    <script src="script.js"></script>
+    <footer class="text-center mt-3" style="font-size: 14px;">
+        <hr>
+        <p> <a href="about.html">About News of Chennai</a> | Join our <a href="https://whatsapp.com/channel/0029VaAue85AzNc3O13E7Q2l">WhatsApp Channel</a> | Follow on <a href="https://www.instagram.com/newsofchennai/">Instagram</a>, <a href="https://x.com/newsofchennai">Twitter</a>, <a href="https://bsky.app/profile/newsofchennai.bsky.social">Bluesky</a>, <a href="https://www.linkedin.com/company/newsofchennai/">LinkedIn</a> & <a href="https://www.facebook.com/newsofchennai">Facebook</a> | Contact - newsofchennai@pm.me | <a href="credits.html">Credits & Disclaimer</a> | No ads, No Promotions</p>
+    </footer>
+</body>
+</html>
